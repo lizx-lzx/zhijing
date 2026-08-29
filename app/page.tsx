@@ -169,12 +169,16 @@ export default function Home() {
   const [completed, setCompleted] = useState(false);
 
   useEffect(() => {
-    const profile = window.localStorage.getItem("zhijing-learning-profile");
-    const savedCompleted = window.localStorage.getItem(
-      "zhijing-sample-completed",
-    );
-    setHasProfile(Boolean(profile));
-    setCompleted(savedCompleted === "true");
+    const frame = window.requestAnimationFrame(() => {
+      const profile = window.localStorage.getItem("zhijing-learning-profile");
+      const savedCompleted = window.localStorage.getItem(
+        "zhijing-sample-completed",
+      );
+      setHasProfile(Boolean(profile));
+      setCompleted(savedCompleted === "true");
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   const currentQuestion = questions[questionIndex];
@@ -645,8 +649,8 @@ export default function Home() {
                     <span className="recommend-label"><Sparkles size={14} /> 已调用个人 Skill</span>
                   </div>
                   <div className="recipe-choices">
-                    <div><label>这次的目标</label><div>{recipeGoals.map((item) => <button key={item} className={goal === item ? "active" : ""} onClick={() => setGoal(item)}>{item}</button>)}</div></div>
-                    <div><label>现在有多少时间</label><div>{recipeTimes.map((item) => <button key={item} className={time === item ? "active" : ""} onClick={() => setTime(item)}>{item}</button>)}</div></div>
+                    <fieldset><legend>这次的目标</legend><div>{recipeGoals.map((item) => <button key={item} className={goal === item ? "active" : ""} onClick={() => setGoal(item)}>{item}</button>)}</div></fieldset>
+                    <fieldset><legend>现在有多少时间</legend><div>{recipeTimes.map((item) => <button key={item} className={time === item ? "active" : ""} onClick={() => setTime(item)}>{item}</button>)}</div></fieldset>
                   </div>
                   <div className="recommended-recipe">
                     <span className="recipe-orb"><Route size={22} /></span>
@@ -663,11 +667,11 @@ export default function Home() {
             {!sourceReady && (
               <section className="workspace-lower">
                 {completed && (
-                  <article className="continue-card" onClick={() => setView("learning")}>
+                  <button type="button" className="continue-card" onClick={() => setView("learning")}>
                     <div className="continue-thumb"><Route size={26} /></div>
                     <div><small>最近学习</small><h3>人生样本库｜个性化学习版本</h3><p>图解＋案例 · 已完成</p></div>
                     <span><CheckCircle2 size={17} /> 已学完</span>
-                  </article>
+                  </button>
                 )}
                 <div className="mini-process">
                   <div><span>1</span><strong>交付内容</strong><small>一篇你真正想懂的文章</small></div>

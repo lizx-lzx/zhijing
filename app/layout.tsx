@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { headers } from "next/headers";
 import "./globals.css";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH?.trim() ?? "";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -31,13 +33,15 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: "知径｜先认识你，再为你讲知识",
       description: "一套会先理解你的个性化学习平台。",
-      images: [{ url: `${origin}/og.png`, width: 1672, height: 941 }],
+      images: [
+        { url: `${origin}${basePath}/og.png`, width: 1672, height: 941 },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: "知径｜先认识你，再为你讲知识",
       description: "一套会先理解你的个性化学习平台。",
-      images: [`${origin}/og.png`],
+      images: [`${origin}${basePath}/og.png`],
     },
   };
 }

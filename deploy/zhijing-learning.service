@@ -1,0 +1,19 @@
+[Unit]
+Description=Zhijing personalized learning prototype
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/apps/zhijing/current
+Environment=NODE_ENV=production
+Environment=PORT=4329
+Environment=NEXT_PUBLIC_BASE_PATH=/zhijing
+ExecStart=/home/ubuntu/opt/node-v24.19.0-linux-x64/bin/node /home/ubuntu/apps/zhijing/current/node_modules/vinext/dist/cli.js start --hostname 127.0.0.1 --port 4329
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=20
+
+[Install]
+WantedBy=multi-user.target

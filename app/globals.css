@@ -209,7 +209,7 @@ a { color: inherit; text-decoration: none; }
 .analyzing-line span { width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--primary-soft); border-top-color: var(--primary); animation: spin .7s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .workspace-lower { margin-top: 28px; }
-.continue-card { background: white; border: 1px solid var(--line); border-radius: 16px; padding: 14px; display: grid; grid-template-columns: 58px 1fr auto; align-items: center; gap: 14px; cursor: pointer; margin-bottom: 18px; }
+.continue-card { width: 100%; background: white; border: 1px solid var(--line); border-radius: 16px; padding: 14px; display: grid; grid-template-columns: 58px 1fr auto; align-items: center; gap: 14px; cursor: pointer; margin-bottom: 18px; text-align: left; }
 .continue-thumb { width: 58px; height: 58px; border-radius: 13px; background: var(--primary-soft); color: var(--primary); display: grid; place-items: center; }
 .continue-card small, .continue-card h3, .continue-card p { margin: 0; }
 .continue-card small { color: var(--muted); font-size: 10px; }
@@ -237,8 +237,9 @@ a { color: inherit; text-decoration: none; }
 .recipe-heading h2 { font-family: var(--font-editorial); margin: 7px 0 0; font-size: 24px; }
 .recommend-label { display: inline-flex; gap: 6px; align-items: center; padding: 7px 9px; border-radius: 999px; color: var(--primary); background: var(--primary-soft); font-size: 10px; white-space: nowrap; }
 .recipe-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; padding: 23px 0; }
-.recipe-choices label { display: block; color: var(--muted); font-size: 10px; margin-bottom: 9px; }
-.recipe-choices > div > div { display: flex; gap: 6px; flex-wrap: wrap; }
+.recipe-choices fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.recipe-choices legend { display: block; color: var(--muted); font-size: 10px; margin-bottom: 9px; padding: 0; }
+.recipe-choices fieldset > div { display: flex; gap: 6px; flex-wrap: wrap; }
 .recipe-choices button, .mode-switch button { border: 1px solid var(--line); background: var(--paper); border-radius: 9px; padding: 7px 10px; color: var(--muted); cursor: pointer; font-size: 11px; }
 .recipe-choices button.active, .mode-switch button.active { border-color: #b8c1f1; background: var(--primary-soft); color: var(--primary-dark); }
 .recommended-recipe { border-top: 1px solid var(--line); padding-top: 21px; display: grid; grid-template-columns: 46px 1fr auto; align-items: center; gap: 14px; }
