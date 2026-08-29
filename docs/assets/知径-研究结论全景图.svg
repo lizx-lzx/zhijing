@@ -1,0 +1,223 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1500" viewBox="0 0 1920 1500" role="img" aria-labelledby="title desc">
+  <title id="title">知径研究结论全景图</title>
+  <desc id="desc">展示个性化学习平台的研究底线、核心产品链路、知乎接入边界、服务器能力、效果验证和下一步。</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#24314D" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrowIndigo" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#4C5FB8"/>
+    </marker>
+    <marker id="arrowMuted" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#6E7787"/>
+    </marker>
+    <style>
+      .font { font-family: "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif; }
+      .ink { fill: #19233A; }
+      .muted { fill: #5E687A; }
+      .title { font-size: 58px; font-weight: 750; letter-spacing: 1px; }
+      .subtitle { font-size: 28px; font-weight: 450; }
+      .section { font-size: 32px; font-weight: 720; }
+      .cardTitle { font-size: 31px; font-weight: 720; }
+      .body { font-size: 25px; font-weight: 450; }
+      .small { font-size: 22px; font-weight: 520; }
+      .chip { font-size: 21px; font-weight: 680; }
+      .arrowLabel { font-size: 20px; font-weight: 650; fill: #4C5FB8; }
+    </style>
+  </defs>
+
+  <rect width="1920" height="1500" fill="#F7F4EC"/>
+  <circle cx="1765" cy="72" r="180" fill="#E7EAF8" opacity="0.75"/>
+  <circle cx="65" cy="1440" r="250" fill="#E6F1EA" opacity="0.80"/>
+
+  <!-- Header -->
+  <g class="font">
+    <text x="80" y="96" class="title ink">知径｜研究结论全景图</text>
+    <text x="82" y="145" class="subtitle muted">不是匹配一种“学习类型”，而是为此刻的这个人编排一条可验证的理解路径</text>
+
+    <rect x="1415" y="54" width="425" height="92" rx="24" fill="#FFFFFF" stroke="#D9DCE7" stroke-width="2"/>
+    <circle cx="1460" cy="88" r="11" fill="#3E8B67"/>
+    <text x="1483" y="96" class="chip ink">研究与方案：已完成</text>
+    <circle cx="1460" cy="122" r="11" fill="#6674C8"/>
+    <text x="1483" y="130" class="chip ink">真实学习闭环：未开始</text>
+  </g>
+
+  <!-- Research boundaries -->
+  <g class="font">
+    <text x="80" y="222" class="section ink">研究后的三条底线</text>
+
+    <g filter="url(#shadow)">
+      <rect x="80" y="255" width="550" height="194" rx="28" fill="#FFFFFF" stroke="#C9CFF0" stroke-width="3"/>
+      <rect x="80" y="255" width="12" height="194" rx="6" fill="#596AC2"/>
+      <rect x="116" y="285" width="112" height="36" rx="18" fill="#E8EBFA"/>
+      <text x="172" y="311" text-anchor="middle" class="chip" fill="#4354AF">不定型</text>
+      <text x="116" y="362" class="cardTitle ink">偏好 ≠ 学习类型</text>
+      <text x="116" y="403" class="body muted">可以记录图、故事、音频偏好</text>
+      <text x="116" y="437" class="body muted">不能把人固定成“视觉型”</text>
+    </g>
+
+    <g filter="url(#shadow)">
+      <rect x="685" y="255" width="550" height="194" rx="28" fill="#FFFFFF" stroke="#BFDCCB" stroke-width="3"/>
+      <rect x="685" y="255" width="12" height="194" rx="6" fill="#3E8B67"/>
+      <rect x="721" y="285" width="112" height="36" rx="18" fill="#E5F2EA"/>
+      <text x="777" y="311" text-anchor="middle" class="chip" fill="#2F7554">强依据</text>
+      <text x="721" y="362" class="cardTitle ink">先验知识决定支架</text>
+      <text x="721" y="403" class="body muted">陌生主题：更多解释与例子</text>
+      <text x="721" y="437" class="body muted">熟悉主题：减少重复与干预</text>
+    </g>
+
+    <g filter="url(#shadow)">
+      <rect x="1290" y="255" width="550" height="194" rx="28" fill="#FFFFFF" stroke="#E7D2A8" stroke-width="3"/>
+      <rect x="1290" y="255" width="12" height="194" rx="6" fill="#D29033"/>
+      <rect x="1326" y="285" width="112" height="36" rx="18" fill="#FBF0D9"/>
+      <text x="1382" y="311" text-anchor="middle" class="chip" fill="#9A651E">真互动</text>
+      <text x="1326" y="362" class="cardTitle ink">互动必须生成信息</text>
+      <text x="1326" y="403" class="body muted">复述、判断、应用才算参与</text>
+      <text x="1326" y="437" class="body muted">点击、动画和停留不等于学会</text>
+    </g>
+  </g>
+
+  <!-- Core engine -->
+  <g class="font">
+    <text x="80" y="520" class="section ink">知径真正的产品核心</text>
+    <text x="1840" y="520" text-anchor="end" class="small muted">媒体只有在更清楚地表达关系时才出现</text>
+
+    <!-- contextual inputs -->
+    <rect x="1112" y="548" width="360" height="47" rx="23" fill="#FBF0D9" stroke="#E7D2A8" stroke-width="2"/>
+    <text x="1292" y="579" text-anchor="middle" class="small" fill="#8A5A19">本次目标 · 熟悉度 · 时间 · 设备</text>
+    <path d="M1292 595 L1292 624" stroke="#D29033" stroke-width="4"/>
+    <polygon points="1292,640 1280,620 1304,620" fill="#D29033"/>
+
+    <!-- nodes -->
+    <g filter="url(#shadow)">
+      <rect x="80" y="640" width="295" height="174" rx="28" fill="#FFFFFF" stroke="#C9CFF0" stroke-width="3"/>
+      <circle cx="125" cy="684" r="22" fill="#596AC2"/>
+      <text x="125" y="693" text-anchor="middle" class="chip" fill="#FFFFFF">1</text>
+      <text x="112" y="741" class="cardTitle ink">一次短问卷</text>
+      <text x="112" y="780" class="body muted">＋微型双版本体验</text>
+    </g>
+
+    <path d="M375 727 L415 727" stroke="#4C5FB8" stroke-width="5"/>
+    <polygon points="435,727 413,714 413,740" fill="#4C5FB8"/>
+    <text x="400" y="704" text-anchor="middle" class="arrowLabel">生成初稿</text>
+
+    <g filter="url(#shadow)">
+      <rect x="435" y="640" width="295" height="174" rx="28" fill="#F0F2FC" stroke="#596AC2" stroke-width="4"/>
+      <circle cx="480" cy="684" r="22" fill="#596AC2"/>
+      <text x="480" y="693" text-anchor="middle" class="chip" fill="#FFFFFF">2</text>
+      <text x="467" y="741" class="cardTitle ink">个人学习 Skill</text>
+      <text x="467" y="780" class="body muted">可见 · 可改 · 带置信度</text>
+    </g>
+
+    <path d="M730 670 C845 590, 1035 590, 1128 660" fill="none" stroke="#596AC2" stroke-width="5"/>
+    <polygon points="1145,670 1122,668 1137,648" fill="#596AC2"/>
+    <rect x="860" y="580" width="145" height="38" rx="19" fill="#F7F4EC"/>
+    <text x="932" y="607" text-anchor="middle" class="arrowLabel">个性约束</text>
+
+    <g filter="url(#shadow)">
+      <rect x="790" y="640" width="295" height="174" rx="28" fill="#FFFFFF" stroke="#BFDCCB" stroke-width="3"/>
+      <circle cx="835" cy="684" r="22" fill="#3E8B67"/>
+      <text x="835" y="693" text-anchor="middle" class="chip" fill="#FFFFFF">3</text>
+      <text x="822" y="741" class="cardTitle ink">文章知识模型</text>
+      <text x="822" y="780" class="body muted">知识单元 · 关系 · 来源锚点</text>
+    </g>
+
+    <path d="M1085 727 L1125 727" stroke="#4C5FB8" stroke-width="5"/>
+    <polygon points="1145,727 1123,714 1123,740" fill="#4C5FB8"/>
+    <text x="1110" y="704" text-anchor="middle" class="arrowLabel">知识输入</text>
+
+    <g filter="url(#shadow)">
+      <rect x="1145" y="640" width="295" height="174" rx="28" fill="#FFFFFF" stroke="#D4D8E3" stroke-width="3"/>
+      <circle cx="1190" cy="684" r="22" fill="#6E7787"/>
+      <text x="1190" y="693" text-anchor="middle" class="chip" fill="#FFFFFF">4</text>
+      <text x="1177" y="741" class="cardTitle ink">学习配方</text>
+      <text x="1177" y="780" class="body muted">入口 · 顺序 · 支架 · 互动</text>
+    </g>
+
+    <path d="M1440 727 L1480 727" stroke="#4C5FB8" stroke-width="5"/>
+    <polygon points="1500,727 1478,714 1478,740" fill="#4C5FB8"/>
+    <text x="1465" y="704" text-anchor="middle" class="arrowLabel">生成作品</text>
+
+    <g filter="url(#shadow)">
+      <rect x="1500" y="640" width="340" height="174" rx="28" fill="#FFFFFF" stroke="#D4D8E3" stroke-width="3"/>
+      <circle cx="1545" cy="684" r="22" fill="#6E7787"/>
+      <text x="1545" y="693" text-anchor="middle" class="chip" fill="#FFFFFF">5</text>
+      <text x="1532" y="741" class="cardTitle ink">学习作品</text>
+      <text x="1532" y="780" class="body muted">文字＋关系图＋轻互动</text>
+    </g>
+
+    <!-- source input -->
+    <rect x="790" y="842" width="415" height="54" rx="27" fill="#E5F2EA" stroke="#BFDCCB" stroke-width="2"/>
+    <text x="997" y="877" text-anchor="middle" class="small" fill="#2F7554">文章正文 → 结构化，并保留原文锚点</text>
+    <path d="M937 842 L937 832" stroke="#3E8B67" stroke-width="4"/>
+    <polygon points="937,814 925,834 949,834" fill="#3E8B67"/>
+
+    <!-- assessment -->
+    <rect x="1370" y="842" width="470" height="70" rx="26" fill="#E8EBFA" stroke="#C9CFF0" stroke-width="2"/>
+    <text x="1605" y="872" text-anchor="middle" class="small" fill="#4354AF">即时应用题 → 约 72 小时后迁移题</text>
+    <text x="1605" y="900" text-anchor="middle" class="small" fill="#4354AF">学习证据，不用“看完了”冒充</text>
+    <path d="M1670 814 L1670 828" stroke="#596AC2" stroke-width="4"/>
+    <polygon points="1670,842 1658,822 1682,822" fill="#596AC2"/>
+
+    <!-- feedback loop -->
+    <path d="M1370 878 C1180 972, 790 972, 580 822" fill="none" stroke="#6E7787" stroke-width="4" stroke-dasharray="12 10" marker-end="url(#arrowMuted)"/>
+    <rect x="775" y="924" width="420" height="42" rx="21" fill="#F7F4EC"/>
+    <text x="985" y="952" text-anchor="middle" class="small muted">重复证据＋用户确认后，才更新 Skill</text>
+  </g>
+
+  <!-- Reality constraints -->
+  <g class="font">
+    <text x="80" y="1028" class="section ink">三个真实边界</text>
+
+    <g filter="url(#shadow)">
+      <rect x="80" y="1062" width="550" height="215" rx="28" fill="#FFFFFF" stroke="#E7D2A8" stroke-width="3"/>
+      <rect x="112" y="1091" width="142" height="38" rx="19" fill="#FBF0D9"/>
+      <text x="183" y="1118" text-anchor="middle" class="chip" fill="#9A651E">受限｜知乎</text>
+      <text x="112" y="1165" class="cardTitle ink">链接直抓现在不可用</text>
+      <text x="112" y="1205" class="body muted">实测两篇 403，robots 禁止通用抓取</text>
+      <text x="112" y="1243" class="body" fill="#8A5A19">现在粘贴正文｜生产走官方 API</text>
+    </g>
+
+    <g filter="url(#shadow)">
+      <rect x="685" y="1062" width="550" height="215" rx="28" fill="#FFFFFF" stroke="#BFDCCB" stroke-width="3"/>
+      <rect x="717" y="1091" width="182" height="38" rx="19" fill="#E5F2EA"/>
+      <text x="808" y="1118" text-anchor="middle" class="chip" fill="#2F7554">可承载｜4 核 8G</text>
+      <text x="717" y="1165" class="cardTitle ink">核心后端可以落地</text>
+      <text x="717" y="1205" class="body muted">Web · API · PostgreSQL · 1–2 Worker</text>
+      <text x="717" y="1243" class="body" fill="#2F7554">大模型、TTS、视频使用外部服务</text>
+    </g>
+
+    <g filter="url(#shadow)">
+      <rect x="1290" y="1062" width="550" height="215" rx="28" fill="#FFFFFF" stroke="#C9CFF0" stroke-width="3"/>
+      <rect x="1322" y="1091" width="174" height="38" rx="19" fill="#E8EBFA"/>
+      <text x="1409" y="1118" text-anchor="middle" class="chip" fill="#4354AF">待验证｜有效性</text>
+      <text x="1322" y="1165" class="cardTitle ink">喜欢、完成 ≠ 学会</text>
+      <text x="1322" y="1205" class="body muted">先验证即时理解，再验证延迟迁移</text>
+      <text x="1322" y="1243" class="body" fill="#4354AF">对照应是正常质量的结构化摘要</text>
+    </g>
+  </g>
+
+  <!-- Next step -->
+  <g class="font">
+    <rect x="80" y="1320" width="1760" height="103" rx="30" fill="#283665" filter="url(#shadow)"/>
+    <rect x="110" y="1346" width="135" height="48" rx="24" fill="#6674C8"/>
+    <text x="177" y="1378" text-anchor="middle" class="chip" fill="#FFFFFF">下一步</text>
+    <text x="280" y="1379" class="cardTitle" fill="#FFFFFF">冻结 5 份 Schema → 一篇真实文章 → 黄金结构 → 生成配方 → 页面真实渲染 → 来源审计</text>
+  </g>
+
+  <!-- Legend -->
+  <g class="font">
+    <circle cx="92" cy="1462" r="10" fill="#3E8B67"/>
+    <text x="114" y="1470" class="small ink">绿色＝已完成或当前可承载</text>
+    <circle cx="460" cy="1462" r="10" fill="#596AC2"/>
+    <text x="482" y="1470" class="small ink">蓝色＝下一条主路径</text>
+    <circle cx="755" cy="1462" r="10" fill="#D29033"/>
+    <text x="777" y="1470" class="small ink">琥珀＝当前受限</text>
+    <circle cx="1025" cy="1462" r="10" fill="#6E7787"/>
+    <text x="1047" y="1470" class="small ink">灰色＝未开始</text>
+    <path d="M1310 1462 L1370 1462" stroke="#4C5FB8" stroke-width="4" marker-end="url(#arrowIndigo)"/>
+    <text x="1395" y="1470" class="small ink">实线＝输入到输出</text>
+    <path d="M1645 1462 L1705 1462" stroke="#6E7787" stroke-width="4" stroke-dasharray="10 8" marker-end="url(#arrowMuted)"/>
+    <text x="1730" y="1470" class="small ink">虚线＝验证反馈</text>
+  </g>
+</svg>
