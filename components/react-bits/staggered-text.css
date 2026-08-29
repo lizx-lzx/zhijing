@@ -1,0 +1,13 @@
+.staggered-text {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.staggered-text.staggered-text--block {
+  display: block;
+}
+
+.staggered-text.staggered-text--flex {
+  display: flex;
+  flex-wrap: wrap;
+}

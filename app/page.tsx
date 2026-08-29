@@ -26,6 +26,10 @@ import {
   WandSparkles,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import ParallaxPills, {
+  type ParallaxPillItem,
+} from "@/components/react-bits/parallax-pills";
+import StaggeredText from "@/components/react-bits/staggered-text";
 
 type View =
   | "landing"
@@ -129,6 +133,65 @@ const sampleUrl =
 
 const recipeGoals = ["快速看懂", "形成结构", "深入掌握", "学会应用"];
 const recipeTimes = ["5 分钟", "15 分钟", "不限制"];
+
+const heroLearningPills: ParallaxPillItem[] = [
+  {
+    label: "问题进入",
+    background: "#fff3dc",
+    color: "#895b18",
+    x: 19,
+    y: 12,
+    width: 25,
+    rotate: -3,
+    parallax: 0.65,
+  },
+  {
+    label: "全局地图",
+    background: "#e7ebff",
+    color: "#3f50bc",
+    x: 73,
+    y: 11,
+    width: 25,
+    rotate: 2,
+    parallax: 0.85,
+  },
+  {
+    label: "关系图解",
+    background: "#ffffff",
+    color: "#1d1f24",
+    x: 9,
+    y: 52,
+    width: 23,
+    rotate: -2,
+    parallax: 1.1,
+  },
+  {
+    label: "主动回忆",
+    background: "#e7f3ed",
+    color: "#356b53",
+    x: 28,
+    y: 89,
+    width: 26,
+    rotate: 2,
+    parallax: 0.75,
+  },
+  {
+    label: "应用推演",
+    background: "#4f63d8",
+    color: "#ffffff",
+    x: 79,
+    y: 88,
+    width: 27,
+    rotate: -2,
+    parallax: 1,
+  },
+];
+
+const heroBackgroundPills = [
+  { background: "#edf0ff", x: 2, y: 20, width: 18, rotate: -3 },
+  { background: "#f8e9cf", x: 96, y: 29, width: 20, rotate: 4 },
+  { background: "#e6f0ea", x: 96, y: 70, width: 18, rotate: -2 },
+];
 
 function Brand({ compact = false }: { compact?: boolean }) {
   return (
@@ -310,10 +373,16 @@ export default function Home() {
               <br />
               再为你<span>讲知识。</span>
             </h1>
-            <p>
-              用一次轻量适配，形成专属于你的学习方式。以后每一篇文章，
-              都会按你更容易进入、理解和应用的路径重新展开。
-            </p>
+            <StaggeredText
+              as="p"
+              text="用一次轻量适配，形成专属于你的学习方式。以后每一篇文章，都会按你更容易进入、理解和应用的路径重新展开。"
+              segmentBy="lines"
+              delay={28}
+              duration={0.5}
+              direction="bottom"
+              blur={false}
+              respectReducedMotion
+            />
             <div className="hero-actions">
               <button className="button button-primary button-large" onClick={beginProfile}>
                 开始了解我的学习方式 <ArrowRight size={18} />
@@ -329,6 +398,22 @@ export default function Home() {
           <div className="hero-visual" aria-label="个性化学习方式预览">
             <div className="orb orb-one" />
             <div className="orb orb-two" />
+            <ParallaxPills
+              className="hero-learning-pills"
+              pills={heroLearningPills}
+              backgroundPills={heroBackgroundPills}
+              height="100%"
+              pillHeight={40}
+              pillRadius={13}
+              fontSize={12}
+              fontWeight={700}
+              parallaxStrength={11}
+              entryStagger={0.06}
+              entryDamping={17}
+              entryDistance={115}
+              hingeChance={0}
+              disableEmptyPills={false}
+            />
             <div className="profile-card main-profile-card">
               <div className="card-kicker">
                 <BrainCircuit size={17} /> 你的学习方式初稿
@@ -342,21 +427,21 @@ export default function Home() {
                 <div><MessageCircle size={16} /><span>轻量互动</span><strong>适中</strong></div>
               </div>
             </div>
-            <div className="floating-card floating-top">
-              <span className="mini-icon amber"><Lightbulb size={16} /></span>
-              <div><small>进入方式</small><strong>先看真实问题</strong></div>
-            </div>
-            <div className="floating-card floating-bottom">
-              <span className="mini-icon green"><Route size={16} /></span>
-              <div><small>今日配方</small><strong>图解＋案例 · 12 分钟</strong></div>
-            </div>
           </div>
         </section>
 
         <section className="how-it-works container">
           <div className="section-heading">
             <span>不是换一种格式</span>
-            <h2>而是为你重建一条理解路径</h2>
+            <StaggeredText
+              as="h2"
+              text="而是为你重建一条理解路径"
+              segmentBy="chars"
+              delay={36}
+              duration={0.48}
+              direction="bottom"
+              respectReducedMotion
+            />
           </div>
           <div className="steps-grid">
             <article>

@@ -24,3 +24,7 @@ npm run build
 ## 服务器部署
 
 生产环境使用独立 systemd 服务监听 `127.0.0.1:4329`，由 Nginx 暴露在 `https://app.chainvalley.top/zhijing/`。配置模板在 `deploy/`。
+
+## ReactBits
+
+首页动效组件位于 `components/react-bits/`，来源于用户已授权的 ReactBits Starter 私有源码仓库，并已按“知径”的颜色、节奏和响应式布局完成适配。`components.json` 保留 CollectUI registry 配置，授权 Key 只允许放在被 Git 忽略的 `.env.local`。

@@ -14,10 +14,13 @@
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "drizzle-orm": "0.45.2",
     "lucide-react": "^0.468.0",
+    "motion": "^13.1.1",
     "react": "19.2.6",
-    "react-dom": "19.2.6"
+    "react-dom": "19.2.6",
+    "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.37.1",
