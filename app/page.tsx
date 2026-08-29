@@ -131,6 +131,11 @@ const questions: Question[] = [
 const sampleUrl =
   "https://zhuanlan.zhihu.com/p/2009319586063992724";
 
+const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const videoSampleUrl = `${publicBasePath}/demo/web-animation-sample.mp4`;
+const videoSamplePoster = `${publicBasePath}/demo/web-animation-sample.jpg`;
+const videoSampleCaptions = `${publicBasePath}/demo/web-animation-sample.vtt`;
+
 const heroLearningPills: ParallaxPillItem[] = [
   {
     label: "问题进入",
@@ -362,16 +367,16 @@ export default function Home() {
         <section className="hero container">
           <div className="hero-copy">
             <Pill>
-              <Sparkles size={14} /> 为每个人重新组织知识
+              <Sparkles size={14} /> 一次问卷，以后自动适配
             </Pill>
             <h1>
-              先认识你，
+              贴一篇文章，
               <br />
-              再为你<span>讲知识。</span>
+              得到你的<span>学习版本。</span>
             </h1>
             <StaggeredText
               as="p"
-              text="用一次轻量适配，形成专属于你的学习方式。以后每一篇文章，都会按你更容易进入、理解和应用的路径重新展开。"
+              text="第一次来，用几分钟形成个人学习 Skill。以后输入内容，平台会自动生成视频讲解、互动网页、图解与文字重点。"
               segmentBy="lines"
               delay={28}
               duration={0.5}
@@ -384,7 +389,7 @@ export default function Home() {
                 开始了解我的学习方式 <ArrowRight size={18} />
               </button>
               <button className="button button-quiet button-large" onClick={openArticleCase}>
-                直接查看文章案例 <Play size={17} />
+                看一个完整案例 <Play size={17} />
               </button>
             </div>
           </div>
@@ -426,7 +431,7 @@ export default function Home() {
           <div className="section-heading">
             <StaggeredText
               as="h2"
-              text="而是为你重建一条理解路径"
+              text="平台只替你做三件事"
               segmentBy="chars"
               delay={36}
               duration={0.48}
@@ -437,18 +442,18 @@ export default function Home() {
           <div className="steps-grid">
             <article>
               <span>01</span><BrainCircuit size={22} />
-              <h3>认识你的方式</h3>
-              <p>结合简短问卷和真实 Style 体验，形成可修改的个人学习 Skill。</p>
+              <h3>记住你怎样学</h3>
+              <p>问卷只做一次，形成你的个人学习 Skill。</p>
             </article>
             <article>
               <span>02</span><Link2 size={22} />
-              <h3>交给我们一篇内容</h3>
-              <p>第一阶段支持知乎公开文章，后续再扩展更多来源。</p>
+              <h3>理解你给的内容</h3>
+              <p>先从知乎文章开始，拆出观点、关系与来源边界。</p>
             </article>
             <article>
               <span>03</span><WandSparkles size={22} />
-              <h3>开始你的学习版本</h3>
-              <p>知识顺序、解释方式、媒体和互动共同组成一件完整学习作品。</p>
+              <h3>交付一套学习作品</h3>
+              <p>视频、互动网页、图解和文字一起生成，不再让你自己整理。</p>
             </article>
           </div>
         </section>
@@ -767,11 +772,12 @@ export default function Home() {
         <aside className="lesson-nav">
           <span className="lesson-label">学习路径</span>
           <nav>
-            <a className="active" href="#question"><span>01</span>从一个情境进入</a>
-            <a href="#map"><span>02</span>看懂核心循环</a>
-            <a href="#impact"><span>03</span>拆开三层冲击</a>
-            <a href="#boundary"><span>04</span>分清事实与推演</a>
-            <a href="#apply"><span>05</span>带回自己的问题</a>
+            <a className="active" href="#question"><span>01</span>先看文章问题</a>
+            <a href="#video"><span>02</span>视频讲解形式</a>
+            <a href="#map"><span>03</span>看懂核心循环</a>
+            <a href="#impact"><span>04</span>拆开三层冲击</a>
+            <a href="#boundary"><span>05</span>分清事实与推演</a>
+            <a href="#apply"><span>06</span>带回自己的问题</a>
           </nav>
           <div className="lesson-progress"><span>案例成品</span><strong>{completed ? "已完成" : "可直接学习"}</strong><div><i style={{ width: completed ? "100%" : "72%" }} /></div></div>
         </aside>
@@ -793,8 +799,37 @@ export default function Home() {
             </div>
           </header>
 
+          <section className="lesson-section video-learning-section" id="video">
+            <div className="section-number">02 · 视频讲解</div>
+            <div className="video-section-heading">
+              <div>
+                <h2>网页动画可以直接成为学习视频</h2>
+                <p>下面是“一键网页动画”已经产出的真实知识视频，用来展示这个平台会调用的画面、配音与节奏能力。</p>
+              </div>
+              <span>能力样片 · 非本篇成片</span>
+            </div>
+            <div className="embedded-video-card">
+              <video controls preload="metadata" poster={videoSamplePoster} playsInline>
+                <source src={videoSampleUrl} type="video/mp4" />
+                <track kind="captions" src={videoSampleCaptions} srcLang="zh-CN" label="中文字幕" default />
+                你的浏览器暂时无法播放这个视频。
+              </video>
+              <div className="video-caption">
+                <div><Play size={18} /><span><strong>真实生成结果</strong><small>网页动画源经过配音、字幕、声音与渲染后导出</small></span></div>
+                <p>正式接线后，这里将换成当前文章按照你的个人学习 Skill 生成的视频，而不是固定样片。</p>
+              </div>
+            </div>
+            <div className="video-output-flow" aria-label="个性化视频生成流程">
+              <div><span>1</span><strong>学习 Skill 定讲法</strong></div>
+              <ChevronRight size={16} />
+              <div><span>2</span><strong>网页动画定画面</strong></div>
+              <ChevronRight size={16} />
+              <div><span>3</span><strong>流水线生成视频</strong></div>
+            </div>
+          </section>
+
           <section className="lesson-section story-entry">
-            <div className="section-number">01 · 情境进入</div>
+            <div className="section-number">补充 · 情境进入</div>
             <h2>一家公司做对了每个决定，为什么最后可能让所有人更难？</h2>
             <div className="story-case">
               <div className="story-case-copy">
@@ -812,7 +847,7 @@ export default function Home() {
           </section>
 
           <section className="lesson-section" id="map">
-            <div className="section-number">02 · 核心反馈循环</div>
+            <div className="section-number">03 · 核心反馈循环</div>
             <h2>整篇长文，其实围绕这一圈在转</h2>
             <p>每一个环节单独看都可能成立，真正需要判断的是：这些环节会不会以作者设想的速度连接起来。</p>
             <div className="causal-loop-grid">
@@ -827,7 +862,7 @@ export default function Home() {
           </section>
 
           <section className="lesson-section" id="impact">
-            <div className="section-number">03 · 三层冲击</div>
+            <div className="section-number">04 · 三层冲击</div>
             <h2>作者把同一个技术变化推向了三个不同系统</h2>
             <div className="impact-grid">
               <article><span><FileText size={20} /></span><small>产业</small><h3>SaaS 与中间商</h3><p>内部开发变便宜，Agent 又降低比较和交易成本，原先依赖信息差、流程和入口的商业模式受到挤压。</p></article>
@@ -837,7 +872,7 @@ export default function Home() {
           </section>
 
           <section className="lesson-section" id="boundary">
-            <div className="section-number">04 · 来源边界</div>
+            <div className="section-number">05 · 来源边界</div>
             <h2>不能把一篇有感染力的推演，误读成已经发生的未来</h2>
             <div className="claim-grid">
               <article className="claim-fact"><span>原文陈述</span><h3>作者引用的现实材料</h3><p>模型发布、就业影响估算、劳动力份额和私人信贷规模等。案例保留原文身份，但没有逐项完成外部事实核验。</p></article>
@@ -848,7 +883,7 @@ export default function Home() {
           </section>
 
           <section className="lesson-section application-section" id="apply">
-            <div className="section-number">05 · 带回自己</div>
+            <div className="section-number">06 · 带回自己</div>
             <h2>不需要先相信“五年”，也可以立刻检查四件事</h2>
             <div className="application-cards">
               <article><span>01</span><h3>拆开自己的工作价值</h3><p>分清信息处理、现实操作、责任承担、信任关系和资源所有权各占多少。</p></article>
