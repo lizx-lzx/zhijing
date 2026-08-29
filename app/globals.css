@@ -240,17 +240,36 @@ a { color: inherit; text-decoration: none; }
 .lesson-progress div { grid-column: 1 / -1; height: 4px; background: var(--line); border-radius: 999px; overflow: hidden; }
 .lesson-progress i { display: block; height: 100%; background: var(--primary); border-radius: inherit; transition: width .4s ease; }
 .lesson-content { min-width: 0; }
-.prototype-notice { display: flex; align-items: flex-start; gap: 9px; background: var(--amber-soft); color: #74531f; border: 1px solid #f0ddb9; padding: 12px 14px; border-radius: 12px; font-size: 10px; line-height: 1.55; }
-.prototype-notice svg { flex: 0 0 auto; }
+.prototype-notice, .case-source-notice { display: flex; align-items: flex-start; gap: 9px; background: var(--amber-soft); color: #74531f; border: 1px solid #f0ddb9; padding: 12px 14px; border-radius: 12px; font-size: 10px; line-height: 1.55; }
+.prototype-notice svg, .case-source-notice svg { flex: 0 0 auto; margin-top: 1px; }
+.case-source-notice { background: var(--green-soft); color: #315f4b; border-color: #cce3d7; }
 .lesson-hero { padding: 56px 0 50px; border-bottom: 1px solid var(--line); }
 .lesson-meta { display: flex; gap: 7px; flex-wrap: wrap; }
 .lesson-meta span { color: var(--primary); background: var(--primary-soft); border-radius: 7px; padding: 5px 7px; font-size: 9px; }
 .lesson-hero h1 { font-family: var(--font-editorial); font-size: clamp(36px, 4.4vw, 52px); line-height: 1.35; letter-spacing: -.025em; margin: 21px 0 18px; }
 .lesson-hero p { color: var(--muted); font-size: 16px; line-height: 1.85; margin: 0; max-width: 700px; }
+.source-link { display: inline-flex; align-items: center; gap: 6px; color: var(--primary); font-size: 11px; font-weight: 700; margin-top: 18px; }
+.source-link:hover { color: var(--primary-dark); }
+.skill-route-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 30px; padding: 13px 14px; background: rgba(255,255,255,.72); border: 1px solid var(--line); border-radius: 14px; }
+.skill-route-strip span { display: inline-flex; align-items: center; gap: 7px; color: var(--primary); font-size: 11px; font-weight: 750; margin-right: 3px; }
+.skill-route-strip strong { font-size: 10px; color: var(--muted); background: var(--paper); border-radius: 8px; padding: 6px 8px; }
 .lesson-section { padding: 55px 0; border-bottom: 1px solid var(--line); }
 .section-number { color: var(--primary); font-size: 10px; font-weight: 750; letter-spacing: .12em; margin-bottom: 12px; }
 .lesson-section h2 { font-family: var(--font-editorial); font-size: 29px; line-height: 1.45; margin: 0 0 12px; }
 .lesson-section > p, .section-title-row p { color: var(--muted); line-height: 1.8; font-size: 14px; }
+.story-case { display: grid; grid-template-columns: 1.05fr .95fr; gap: 14px; margin: 26px 0 18px; }
+.story-case-copy { position: relative; overflow: hidden; background: var(--ink); color: white; border-radius: 19px; padding: 27px; }
+.story-case-copy::after { content: "AI"; position: absolute; right: -6px; bottom: -29px; font-size: 102px; font-weight: 850; color: rgba(255,255,255,.045); letter-spacing: -.08em; }
+.story-label { display: inline-flex; color: #b9c5ff; background: rgba(255,255,255,.08); padding: 6px 8px; border-radius: 8px; font-size: 9px; font-weight: 750; }
+.story-case-copy p { position: relative; z-index: 1; font-family: var(--font-editorial); font-size: 15px; line-height: 1.9; margin: 20px 0 0; }
+.story-decisions { display: grid; gap: 9px; }
+.story-decisions > div { display: grid; align-content: center; min-height: 96px; background: white; border: 1px solid var(--line); border-radius: 15px; padding: 15px 17px; }
+.story-decisions small, .story-decisions strong, .story-decisions span { display: block; }
+.story-decisions small { color: var(--primary); font-size: 9px; font-weight: 750; }
+.story-decisions strong { font-size: 13px; margin: 5px 0; }
+.story-decisions span { color: var(--muted); font-size: 10px; }
+.story-decisions .story-result { background: var(--amber-soft); border-color: #f0dcb6; }
+.story-decisions .story-result small { color: #96651d; }
 .learning-map { display: grid; grid-template-columns: 1fr 20px 1fr 20px 1fr 20px 1fr; align-items: center; gap: 7px; margin: 28px 0; }
 .learning-map > div { min-height: 148px; background: white; border: 1px solid var(--line); border-radius: 15px; padding: 15px; }
 .learning-map > div.highlight { border-color: #b8c1f1; background: var(--primary-soft); }
@@ -264,6 +283,42 @@ a { color: inherit; text-decoration: none; }
 .insight-callout svg { flex: 0 0 auto; }
 .insight-callout small { font-size: 9px; font-weight: 750; }
 .insight-callout p { color: #694b1c; font-size: 12px; line-height: 1.7; margin: 4px 0 0; }
+.causal-loop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 26px 0 12px; counter-reset: loop; }
+.causal-loop-grid > div { position: relative; min-height: 126px; padding: 18px; background: white; border: 1px solid var(--line); border-radius: 16px; }
+.causal-loop-grid > div::after { content: "→"; position: absolute; right: -9px; top: 50%; z-index: 2; width: 18px; height: 18px; display: grid; place-items: center; border-radius: 50%; background: var(--paper); color: #a8aaa5; font-size: 12px; transform: translateY(-50%); }
+.causal-loop-grid > div:nth-child(3)::after, .causal-loop-grid > div:last-child::after { content: "↴"; right: 18px; top: auto; bottom: -12px; transform: none; }
+.causal-loop-grid span, .causal-loop-grid strong { display: block; }
+.causal-loop-grid span { color: var(--primary); font-size: 9px; font-weight: 800; letter-spacing: .08em; }
+.causal-loop-grid strong { font-size: 13px; margin: 13px 0 6px; }
+.causal-loop-grid p { color: var(--muted); font-size: 10px; line-height: 1.55; margin: 0; }
+.causal-loop-grid .loop-return { background: var(--primary-soft); border-color: #cdd4fb; }
+.loop-thesis { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 12px; padding: 15px 17px; border-radius: 14px; color: white; background: var(--primary); }
+.loop-thesis span { color: #dbe0ff; font-size: 9px; }
+.loop-thesis strong { font-family: var(--font-editorial); font-size: 18px; }
+.loop-thesis p { color: #eef0ff; font-size: 11px; line-height: 1.55; margin: 0; }
+.impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; margin-top: 24px; }
+.impact-grid article { background: white; border: 1px solid var(--line); border-radius: 17px; padding: 20px; }
+.impact-grid article > span { width: 38px; height: 38px; display: grid; place-items: center; color: var(--primary); background: var(--primary-soft); border-radius: 11px; margin-bottom: 25px; }
+.impact-grid small { color: var(--primary); font-size: 9px; font-weight: 750; }
+.impact-grid h3 { font-size: 14px; line-height: 1.4; margin: 6px 0 9px; }
+.impact-grid p { color: var(--muted); font-size: 10px; line-height: 1.7; margin: 0; }
+.claim-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 24px; }
+.claim-grid article { min-height: 180px; padding: 20px; border-radius: 17px; border: 1px solid var(--line); background: white; }
+.claim-grid article > span { display: inline-flex; padding: 5px 7px; border-radius: 7px; font-size: 9px; font-weight: 800; }
+.claim-grid h3 { font-size: 14px; margin: 18px 0 8px; }
+.claim-grid p { color: var(--muted); font-size: 10px; line-height: 1.72; margin: 0; }
+.claim-fact > span { color: #34694f; background: var(--green-soft); }
+.claim-inference > span { color: var(--primary-dark); background: var(--primary-soft); }
+.claim-forecast > span { color: #995b52; background: #f5e8e5; }
+.claim-advice > span { color: #8b5d18; background: var(--amber-soft); }
+.application-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 24px; }
+.application-cards article { position: relative; background: white; border: 1px solid var(--line); border-radius: 16px; padding: 20px 20px 18px 58px; }
+.application-cards article > span { position: absolute; left: 18px; top: 19px; width: 25px; height: 25px; display: grid; place-items: center; border-radius: 8px; color: var(--primary); background: var(--primary-soft); font-size: 9px; font-weight: 800; }
+.application-cards h3 { font-size: 13px; margin: 0 0 8px; }
+.application-cards p { color: var(--muted); font-size: 10px; line-height: 1.65; margin: 0; }
+.closing-card { margin-top: 12px; padding: 22px; border-radius: 17px; background: var(--green-soft); border: 1px solid #cfe2d8; }
+.closing-card small { color: var(--green); font-size: 9px; font-weight: 800; }
+.closing-card p { font-family: var(--font-editorial); font-size: 16px; line-height: 1.85; margin: 8px 0 0; color: #315f4b; }
 .section-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
 .section-title-row > div:first-child { max-width: 520px; }
 .section-title-row p { margin: 0; }
@@ -352,6 +407,13 @@ a { color: inherit; text-decoration: none; }
   .learning-layout { padding-top: 26px; }
   .lesson-hero { padding-top: 38px; }
   .lesson-hero h1 { font-size: 35px; }
+  .skill-route-strip { align-items: flex-start; }
+  .skill-route-strip span { width: 100%; }
+  .story-case, .impact-grid, .claim-grid, .application-cards { grid-template-columns: 1fr; }
+  .causal-loop-grid { grid-template-columns: 1fr 1fr; }
+  .causal-loop-grid > div:nth-child(3)::after { content: "→"; right: -9px; top: 50%; bottom: auto; transform: translateY(-50%); }
+  .causal-loop-grid > div:nth-child(2n)::after { content: "↴"; right: 18px; top: auto; bottom: -12px; transform: none; }
+  .loop-thesis { grid-template-columns: 1fr; gap: 5px; }
   .learning-map { grid-template-columns: 1fr; }
   .learning-map > svg { transform: rotate(90deg); margin: 0 auto; }
   .section-title-row { flex-direction: column; }
@@ -360,6 +422,14 @@ a { color: inherit; text-decoration: none; }
   .narrative-block { padding: 25px; }
   .lesson-finish { grid-template-columns: 48px 1fr; }
   .lesson-finish .button { grid-column: 1 / -1; width: 100%; }
+}
+
+@media (max-width: 460px) {
+  .causal-loop-grid { grid-template-columns: 1fr; }
+  .causal-loop-grid > div::after, .causal-loop-grid > div:nth-child(3)::after, .causal-loop-grid > div:nth-child(2n)::after { content: "↓"; right: 18px; top: auto; bottom: -14px; transform: none; }
+  .causal-loop-grid > div:last-child::after { display: none; }
+  .story-case-copy { padding: 22px; }
+  .claim-grid article { min-height: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {

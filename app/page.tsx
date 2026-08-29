@@ -129,10 +129,7 @@ const questions: Question[] = [
 ];
 
 const sampleUrl =
-  "https://zhuanlan.zhihu.com/p/2037864292129530950";
-
-const recipeGoals = ["快速看懂", "形成结构", "深入掌握", "学会应用"];
-const recipeTimes = ["5 分钟", "15 分钟", "不限制"];
+  "https://zhuanlan.zhihu.com/p/2009319586063992724";
 
 const heroLearningPills: ParallaxPillItem[] = [
   {
@@ -222,12 +219,6 @@ export default function Home() {
   const [sourceReady, setSourceReady] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [goal, setGoal] = useState("形成结构");
-  const [time, setTime] = useState("15 分钟");
-  const [explanationMode, setExplanationMode] = useState<"map" | "story">(
-    "map",
-  );
-  const [knowledgeAnswer, setKnowledgeAnswer] = useState("");
   const [completed, setCompleted] = useState(false);
 
   useEffect(() => {
@@ -245,6 +236,7 @@ export default function Home() {
 
   const currentQuestion = questions[questionIndex];
   const progress = Math.round(((questionIndex + 1) / questions.length) * 72);
+  const isCaseArticle = articleUrl.includes("2009319586063992724");
 
   const skillTraits = useMemo(
     () => [
@@ -283,6 +275,13 @@ export default function Home() {
     setStyleChoice("");
     setStyleAnswer("");
     setView("questionnaire");
+  }
+
+  function openArticleCase() {
+    setArticleUrl(sampleUrl);
+    setSourceReady(true);
+    setView("learning");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function chooseAnswer(value: string) {
@@ -383,6 +382,9 @@ export default function Home() {
             <div className="hero-actions">
               <button className="button button-primary button-large" onClick={beginProfile}>
                 开始了解我的学习方式 <ArrowRight size={18} />
+              </button>
+              <button className="button button-quiet button-large" onClick={openArticleCase}>
+                直接查看文章案例 <Play size={17} />
               </button>
             </div>
           </div>
@@ -705,27 +707,23 @@ export default function Home() {
                   <span className="source-icon"><FileText size={21} /></span>
                   <div>
                     <small>知乎专栏 · 公开文章</small>
-                    <h3>{articleUrl.includes("2037864292129530950") ? "人生样本库｜知乎 Hackathon 2026 项目推荐" : "你提供的知乎文章"}</h3>
-                    <p>原型已识别链接。真实正文、作者与来源锚点将在内容接口接入后读取。</p>
-                    <div><span>预计原文阅读 18 分钟</span><span>知识型长文</span></div>
+                    <h3>{isCaseArticle ? "窗口期可能只剩五年" : "你提供的知乎文章"}</h3>
+                    <p>{isCaseArticle ? "本次案例已根据原文拆出观点、因果链、预测与行动建议。" : "自动抓取尚未接入；当前可以先查看已经完成的案例文章。"}</p>
+                    <div><span>{isCaseArticle ? "20+ 个章节" : "等待内容接口"}</span><span>{isCaseArticle ? "AI 经济情景推演" : "知乎公开文章"}</span></div>
                   </div>
                   <CheckCircle2 className="source-check" size={22} />
                 </article>
 
                 <section className="recipe-panel">
                   <div className="recipe-heading">
-                    <div><span>本次学习条件</span><h2>只需要告诉我这一次想怎么学</h2></div>
+                    <div><span>一次性交付</span><h2>{isCaseArticle ? "个人 Skill 已经替你完成编排" : "先查看已经完成的文章案例"}</h2></div>
                     <span className="recommend-label"><Sparkles size={14} /> 已调用个人 Skill</span>
-                  </div>
-                  <div className="recipe-choices">
-                    <fieldset><legend>这次的目标</legend><div>{recipeGoals.map((item) => <button key={item} className={goal === item ? "active" : ""} onClick={() => setGoal(item)}>{item}</button>)}</div></fieldset>
-                    <fieldset><legend>现在有多少时间</legend><div>{recipeTimes.map((item) => <button key={item} className={time === item ? "active" : ""} onClick={() => setTime(item)}>{item}</button>)}</div></fieldset>
                   </div>
                   <div className="recommended-recipe">
                     <span className="recipe-orb"><Route size={22} /></span>
-                    <div><small>为你推荐的学习配方</small><h3>真实问题进入＋关系图解＋一次应用推演</h3><p>{time === "5 分钟" ? "约 5 分钟，先建立最小可用理解。" : "约 12 分钟，重点形成全文结构并理解关键关系。"}</p></div>
-                    <button className="button button-primary button-large" onClick={startLearning} disabled={isGenerating}>
-                      {isGenerating ? "正在搭建学习路径…" : "按这个方式开始"}
+                    <div><small>{isCaseArticle ? "为你生成的学习成品" : "当前可查看的演示"}</small><h3>情境进入＋因果链图解＋来源边界＋应用清单</h3><p>约 5 分钟，直接获得完整结果，不再追加提问。</p></div>
+                    <button className="button button-primary button-large" onClick={isCaseArticle ? startLearning : openArticleCase} disabled={isGenerating}>
+                      {isGenerating ? "正在生成学习成品…" : isCaseArticle ? "查看完整结果" : "载入案例文章"}
                       {!isGenerating && <ArrowRight size={18} />}
                     </button>
                   </div>
@@ -738,7 +736,7 @@ export default function Home() {
                 {completed && (
                   <button type="button" className="continue-card" onClick={() => setView("learning")}>
                     <div className="continue-thumb"><Route size={26} /></div>
-                    <div><small>最近学习</small><h3>人生样本库｜个性化学习版本</h3><p>图解＋案例 · 已完成</p></div>
+                    <div><small>最近学习</small><h3>窗口期可能只剩五年｜个性化学习版本</h3><p>情境＋因果图 · 已完成</p></div>
                     <span><CheckCircle2 size={17} /> 已学完</span>
                   </button>
                 )}
@@ -760,7 +758,7 @@ export default function Home() {
       <header className="learning-topbar">
         <Brand />
         <div className="learning-top-actions">
-          <span><Clock3 size={15} /> 预计 12 分钟</span>
+          <span><Clock3 size={15} /> 约 5 分钟</span>
           <button className="button button-quiet" onClick={() => setView("workspace")}><ArrowLeft size={16} /> 返回工作台</button>
         </div>
       </header>
@@ -769,93 +767,101 @@ export default function Home() {
         <aside className="lesson-nav">
           <span className="lesson-label">学习路径</span>
           <nav>
-            <a className="active" href="#question"><span>01</span>先看真正的问题</a>
-            <a href="#map"><span>02</span>建立整体关系</a>
-            <a href="#explain"><span>03</span>换一种方式理解</a>
-            <a href="#apply"><span>04</span>做一次应用判断</a>
+            <a className="active" href="#question"><span>01</span>从一个情境进入</a>
+            <a href="#map"><span>02</span>看懂核心循环</a>
+            <a href="#impact"><span>03</span>拆开三层冲击</a>
+            <a href="#boundary"><span>04</span>分清事实与推演</a>
+            <a href="#apply"><span>05</span>带回自己的问题</a>
           </nav>
-          <div className="lesson-progress"><span>学习进度</span><strong>{completed ? "100%" : "35%"}</strong><div><i style={{ width: completed ? "100%" : "35%" }} /></div></div>
+          <div className="lesson-progress"><span>案例成品</span><strong>{completed ? "已完成" : "可直接学习"}</strong><div><i style={{ width: completed ? "100%" : "72%" }} /></div></div>
         </aside>
 
         <article className="lesson-content">
-          <div className="prototype-notice">
+          <div className="case-source-notice">
             <ShieldCheck size={17} />
-            <span><strong>交互原型说明：</strong>下面演示学习路径和个性化呈现；尚未接入知乎正文解析，示例文字不代表原文内容。</span>
+            <span><strong>真实文章案例：</strong>内容根据知乎原文拆解；作者的现实材料、因果推断、未来预测和行动建议将分别标记。本案例未逐项核验文中所有数字。</span>
           </div>
 
           <header className="lesson-hero" id="question">
-            <div className="lesson-meta"><span>你的学习版本</span><span>形成结构</span><span>图解＋案例</span></div>
-            <h1>真正稀缺的，可能不是更多信息，而是一条适合自己的理解路径。</h1>
-            <p>先不急着进入细节。我们用一张地图看清：一段原始内容，怎样转化成一次真正发生的学习。</p>
+            <div className="lesson-meta"><span>案例学习成品</span><span>学会应用</span><span>情境＋图解</span><span>不强制提问</span></div>
+            <h1>AI 越成功，经济反而可能越危险？</h1>
+            <p>文章担心的不是 AI 失败，而是它成功得太快：企业效率迅速提高，但就业、购买力和制度调整可能跟不上。</p>
+            <a className="source-link" href={sampleUrl} target="_blank" rel="noreferrer"><Link2 size={15} /> 查看知乎原文</a>
+            <div className="skill-route-strip">
+              <span><BrainCircuit size={17} /> 本次个人 Skill</span>
+              <strong>故事进入</strong><strong>视频式节奏</strong><strong>直接讲清</strong><strong>应用收束</strong>
+            </div>
           </header>
 
-          <section className="lesson-section" id="map">
-            <div className="section-number">01 · 整体关系</div>
-            <h2>先把四个关键环节放在同一张图上</h2>
-            <p>阅读只解决“内容出现过”，学习还需要让信息经过选择、组织和应用，最后进入自己的认知结构。</p>
-            <div className="learning-map">
-              <div><span><FileText size={21} /></span><small>输入</small><strong>原始内容</strong><p>文章的事实、观点与关系</p></div>
-              <ChevronRight size={20} />
-              <div className="highlight"><span><BrainCircuit size={21} /></span><small>适配</small><strong>个人 Skill</strong><p>决定怎样进入和解释</p></div>
-              <ChevronRight size={20} />
-              <div><span><Route size={21} /></span><small>编排</small><strong>学习配方</strong><p>顺序、媒体、互动与节奏</p></div>
-              <ChevronRight size={20} />
-              <div><span><Lightbulb size={21} /></span><small>形成</small><strong>个人理解</strong><p>能够复述、判断或应用</p></div>
+          <section className="lesson-section story-entry">
+            <div className="section-number">01 · 情境进入</div>
+            <h2>一家公司做对了每个决定，为什么最后可能让所有人更难？</h2>
+            <div className="story-case">
+              <div className="story-case-copy">
+                <span className="story-label">想象 2027 年的一次预算会议</span>
+                <p>公司发现，几名员工借助 AI，几个星期就能完成过去需要购买昂贵 SaaS、再配一支团队才能完成的工作。</p>
+                <p>于是它取消软件订阅、减少岗位，用 AI 保持产出。对这家公司来说，每一步都合理。</p>
+              </div>
+              <div className="story-decisions">
+                <div><small>决定一</small><strong>砍掉软件合同</strong><span>降低采购成本</span></div>
+                <div><small>决定二</small><strong>减少部分岗位</strong><span>保持利润空间</span></div>
+                <div className="story-result"><small>所有公司一起做</small><strong>局部理性变成整体压力</strong><span>收入、消费与企业营收同时收缩</span></div>
+              </div>
             </div>
-            <div className="insight-callout"><Lightbulb size={21} /><div><small>此处的关键</small><p>个性化并不只是换成视频或图片，而是改变知识出现的顺序、解释的方法和用户参与的位置。</p></div></div>
+            <div className="insight-callout"><Lightbulb size={21} /><div><small>先抓住文章真正的问题</small><p>作者讨论的不是“AI 会不会成功”，而是技术成功后，社会能不能及时接住被改变的就业、收入和责任结构。</p></div></div>
           </section>
 
-          <section className="lesson-section" id="explain">
-            <div className="section-number">02 · 换一种方式</div>
-            <div className="section-title-row">
-              <div><h2>同一个关系，也可以用另一条路进入</h2><p>你的 Skill 默认推荐图解。你仍然可以只为当前片段切换方式。</p></div>
-              <div className="mode-switch" role="group" aria-label="解释模式">
-                <button className={explanationMode === "map" ? "active" : ""} onClick={() => setExplanationMode("map")}><Map size={15} /> 图解模式</button>
-                <button className={explanationMode === "story" ? "active" : ""} onClick={() => setExplanationMode("story")}><BookOpen size={15} /> 故事模式</button>
-              </div>
+          <section className="lesson-section" id="map">
+            <div className="section-number">02 · 核心反馈循环</div>
+            <h2>整篇长文，其实围绕这一圈在转</h2>
+            <p>每一个环节单独看都可能成立，真正需要判断的是：这些环节会不会以作者设想的速度连接起来。</p>
+            <div className="causal-loop-grid">
+              <div><span>01</span><strong>AI 能力提高</strong><p>认知工作的边际成本下降</p></div>
+              <div><span>02</span><strong>企业降本</strong><p>减少软件采购与部分人力</p></div>
+              <div><span>03</span><strong>岗位和收入减少</strong><p>白领消费能力开始下降</p></div>
+              <div><span>04</span><strong>企业营收承压</strong><p>需求收缩传回产业端</p></div>
+              <div><span>05</span><strong>信贷与资产承压</strong><p>房贷、科技信贷出现风险</p></div>
+              <div className="loop-return"><span>06</span><strong>继续投入 AI</strong><p>为了利润再次提高自动化</p></div>
             </div>
-            {explanationMode === "map" ? (
-              <div className="concept-layers page-enter">
-                <div><span>看见</span><p>先发现文章讨论了哪些关键对象。</p></div>
-                <div><span>连接</span><p>再看对象之间是因果、对比还是条件关系。</p></div>
-                <div><span>转化</span><p>最后把关系带回自己的问题，形成可以使用的理解。</p></div>
-              </div>
-            ) : (
-              <div className="narrative-block page-enter">
-                <span className="quote-mark">“</span>
-                <p>想象两个人拿到同一张城市地图。一个人要赶去机场，另一个人想找一间安静书店。地图没有改变，但真正有用的路线完全不同。学习也是这样：内容是同一份，路线需要根据人的目的重新生成。</p>
-              </div>
-            )}
+            <div className="loop-thesis"><span>关键概念</span><strong>合成谬误</strong><p>每个参与者分别做出的合理选择，叠加后可能产生一个对整体不利的结果。</p></div>
+          </section>
+
+          <section className="lesson-section" id="impact">
+            <div className="section-number">03 · 三层冲击</div>
+            <h2>作者把同一个技术变化推向了三个不同系统</h2>
+            <div className="impact-grid">
+              <article><span><FileText size={20} /></span><small>产业</small><h3>SaaS 与中间商</h3><p>内部开发变便宜，Agent 又降低比较和交易成本，原先依赖信息差、流程和入口的商业模式受到挤压。</p></article>
+              <article><span><BrainCircuit size={20} /></span><small>家庭</small><h3>白领、消费与房贷</h3><p>如果高收入认知岗位先受冲击，消费下降会被储蓄和借贷暂时掩盖，随后才传导到住房与企业收入。</p></article>
+              <article><span><ShieldCheck size={20} /></span><small>社会</small><h3>智能溢价与人的价值</h3><p>当一般认知能力不再稀缺，人类的相对价值可能转向责任、信任、真实关系和必须进入现场的能力。</p></article>
+            </div>
+          </section>
+
+          <section className="lesson-section" id="boundary">
+            <div className="section-number">04 · 来源边界</div>
+            <h2>不能把一篇有感染力的推演，误读成已经发生的未来</h2>
+            <div className="claim-grid">
+              <article className="claim-fact"><span>原文陈述</span><h3>作者引用的现实材料</h3><p>模型发布、就业影响估算、劳动力份额和私人信贷规模等。案例保留原文身份，但没有逐项完成外部事实核验。</p></article>
+              <article className="claim-inference"><span>作者推断</span><h3>可能出现的作用机制</h3><p>AI 压缩 SaaS、中间商和部分白领岗位；劳动收入下降进一步削弱需求。</p></article>
+              <article className="claim-forecast"><span>情景预测</span><h3>2030 年压力情景</h3><p>两位数失业率、信贷链断裂、科技城市房价下跌以及具体年份，都不是已经确定的事实。</p></article>
+              <article className="claim-advice"><span>作者建议</span><h3>行动和投资判断</h3><p>使用 AI、积累资产、现金缓冲以及关于指数和 BTC 的表达，属于作者立场，不是平台的个性化投资建议。</p></article>
+            </div>
           </section>
 
           <section className="lesson-section application-section" id="apply">
-            <div className="section-number">03 · 一次应用判断</div>
-            <h2>下面哪一种，才真正改变了学习路径？</h2>
-            <div className="application-options">
-              {["把同一份摘要换成更漂亮的配色", "根据用户目标重排内容，并改变例子和互动", "同时生成视频、音频和十张图片"].map((answer) => (
-                <button key={answer} className={knowledgeAnswer === answer ? "selected" : ""} onClick={() => setKnowledgeAnswer(answer)}>
-                  <span className="radio-dot">{knowledgeAnswer === answer && <Check size={14} />}</span>{answer}
-                </button>
-              ))}
+            <div className="section-number">05 · 带回自己</div>
+            <h2>不需要先相信“五年”，也可以立刻检查四件事</h2>
+            <div className="application-cards">
+              <article><span>01</span><h3>拆开自己的工作价值</h3><p>分清信息处理、现实操作、责任承担、信任关系和资源所有权各占多少。</p></article>
+              <article><span>02</span><h3>完成一个 AI 工作流</h3><p>不是多聊几次，而是让真实任务经过输入、AI 处理、人工判断，最终形成可交付结果。</p></article>
+              <article><span>03</span><h3>减少单点脆弱性</h3><p>不要让收入只依赖一个岗位、一种技能或一个客户；现金、作品和关系都属于缓冲。</p></article>
+              <article><span>04</span><h3>建立必须由人承担的价值</h3><p>持续积累责任、信誉、现场判断和长期关系，而不只是在速度上与机器竞争。</p></article>
             </div>
-            {knowledgeAnswer && (
-              <div className={`learning-feedback ${knowledgeAnswer.includes("重排内容") ? "correct" : "gentle"}`}>
-                {knowledgeAnswer.includes("重排内容")
-                  ? "是的。媒体只是手段，学习顺序、解释关系和参与方式的变化才构成真正的个性化。"
-                  : "这更多改变了外观或媒体数量，还没有真正改变用户怎样建立理解。"}
-              </div>
-            )}
-          </section>
-
-          <section className="source-boundary">
-            <div><span className="source-dot original" /><strong>原文依据</strong><p>真实版本会显示对应段落与来源位置。</p></div>
-            <div><span className="source-dot ai" /><strong>AI 解释</strong><p>类比、图解与重组内容会明确标记。</p></div>
-            <div><span className="source-dot extra" /><strong>外部补充</strong><p>只有经过核验并说明来源后才会加入。</p></div>
+            <div className="closing-card"><small>真正值得带走的判断</small><p>这篇文章的价值不在于精确预言哪一年会发生危机，而在于提醒我们观察：技术效率、劳动收入与制度适应之间，是否正在出现速度差。</p></div>
           </section>
 
           <footer className="lesson-finish">
             <span className="finish-icon"><CheckCircle2 size={28} /></span>
-            <div><small>本次学习收束</small><h2>你已经建立了这段内容的第一层结构。</h2><p>下一步可以完成学习，或换一种方式重新理解其中某一部分。</p></div>
+            <div><small>本次学习收束</small><h2>你已经看懂文章的核心机制，也知道哪些只是作者推演。</h2><p>完整结果已经一次性交付，不需要继续回答问题。</p></div>
             <button className="button button-primary button-large" onClick={completeLearning}>
               {completed ? "本次学习已完成" : "完成本次学习"} <Check size={18} />
             </button>
