@@ -200,7 +200,6 @@ function Brand({ compact = false }: { compact?: boolean }) {
       {!compact && (
         <span className="brand-copy">
           <strong>知径</strong>
-          <small>个性化学习平台</small>
         </span>
       )}
     </div>
@@ -354,12 +353,10 @@ export default function Home() {
       <main className="site-shell landing-page page-enter">
         <nav className="public-nav container">
           <Brand />
-          {hasProfile ? (
+          {hasProfile && (
             <button className="button button-quiet" onClick={() => setView("workspace")}>
               进入我的工作台 <ArrowRight size={16} />
             </button>
-          ) : (
-            <span className="nav-note">一次建档，以后直接学习</span>
           )}
         </nav>
 
@@ -387,11 +384,6 @@ export default function Home() {
               <button className="button button-primary button-large" onClick={beginProfile}>
                 开始了解我的学习方式 <ArrowRight size={18} />
               </button>
-              <span><Clock3 size={15} /> 大约 3 分钟，只需完成一次</span>
-            </div>
-            <div className="trust-row">
-              <span><ShieldCheck size={17} /> 不贴固定类型标签</span>
-              <span><RefreshCcw size={17} /> 随时可以重新适配</span>
             </div>
           </div>
 
@@ -417,14 +409,12 @@ export default function Home() {
             <div className="profile-card main-profile-card">
               <div className="card-kicker">
                 <BrainCircuit size={17} /> 你的学习方式初稿
-                <span>v1</span>
               </div>
               <h3>整体地图先行，情境帮助进入</h3>
-              <p>面对抽象内容，先让关系可见，再逐层展开解释。</p>
               <div className="trait-list">
-                <div><Map size={16} /><span>全局结构</span><strong>优先</strong></div>
-                <div><Layers3 size={16} /><span>图文配合</span><strong>主要</strong></div>
-                <div><MessageCircle size={16} /><span>轻量互动</span><strong>适中</strong></div>
+                <div><Map size={16} /><span>全局结构</span></div>
+                <div><Layers3 size={16} /><span>图文配合</span></div>
+                <div><MessageCircle size={16} /><span>轻量互动</span></div>
               </div>
             </div>
           </div>
@@ -432,7 +422,6 @@ export default function Home() {
 
         <section className="how-it-works container">
           <div className="section-heading">
-            <span>不是换一种格式</span>
             <StaggeredText
               as="h2"
               text="而是为你重建一条理解路径"
@@ -479,10 +468,6 @@ export default function Home() {
           <button className="back-button" onClick={previousQuestion} aria-label="返回上一题">
             <ArrowLeft size={18} />
           </button>
-          <div className="question-meta">
-            <span>{currentQuestion.eyebrow}</span>
-            <strong>{questionIndex + 1} / {questions.length}</strong>
-          </div>
           <h1>{currentQuestion.title}</h1>
           <p className="question-hint">{currentQuestion.hint}</p>
           <div className="option-grid">
@@ -496,13 +481,12 @@ export default function Home() {
                   aria-pressed={selected}
                 >
                   <span className="radio-dot">{selected && <Check size={14} />}</span>
-                  <span><strong>{option.label}</strong><small>{option.detail}</small></span>
+                  <span><strong>{option.label}</strong></span>
                 </button>
               );
             })}
           </div>
           <div className="question-footer">
-            <span>没有标准答案，选择更接近你的那一个。</span>
             <button
               className="button button-primary"
               onClick={nextQuestion}
