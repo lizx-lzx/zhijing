@@ -44,7 +44,23 @@ type Question = {
   eyebrow: string;
   title: string;
   hint: string;
-  options: Array<{ label: string; detail: string }>;
+  options: Array<{ value: string; label: string; detail: string }>;
+};
+
+type SkillRule = {
+  id: string;
+  label: string;
+  instruction: string;
+  evidence: "问卷回答" | "微型体验" | "平台底线";
+};
+
+type PersonalLearningSkill = {
+  version: 2;
+  headline: string;
+  summary: string;
+  labels: Record<string, string>;
+  rules: SkillRule[];
+  adjustments: string[];
 };
 
 const questions: Question[] = [
@@ -54,11 +70,11 @@ const questions: Question[] = [
     title: "你现在处于哪个年龄阶段？",
     hint: "只用于调整语言、案例和信息密度，不会判断你的能力。",
     options: [
-      { label: "18—21 岁", detail: "正在建立自己的知识坐标" },
-      { label: "22—29 岁", detail: "学习常与工作、表达和成长相连" },
-      { label: "30—39 岁", detail: "更重视效率、结构和实际应用" },
-      { label: "40 岁以上", detail: "更看重经验连接与长期价值" },
-      { label: "暂不透露", detail: "保持通用的成人学习表达" },
+      { value: "18-21", label: "18—21 岁", detail: "使用成人表达，不预设职业经验" },
+      { value: "22-29", label: "22—29 岁", detail: "使用通用的成人学习表达" },
+      { value: "30-39", label: "30—39 岁", detail: "使用通用的成人学习表达" },
+      { value: "40-plus", label: "40 岁以上", detail: "使用通用的成人学习表达" },
+      { value: "private", label: "暂不透露", detail: "不根据年龄调整内容" },
     ],
   },
   {
@@ -67,66 +83,238 @@ const questions: Question[] = [
     title: "读完一篇重要内容后，你最希望得到什么？",
     hint: "选择你最常见的目标，具体学习时仍然可以临时改变。",
     options: [
-      { label: "快速看懂", detail: "尽快抓住问题和结论" },
-      { label: "形成结构", detail: "看见概念之间怎样连接" },
-      { label: "记住重点", detail: "留下可以回忆的关键抓手" },
-      { label: "学会应用", detail: "能够把知识带回真实问题" },
-      { label: "讲给别人", detail: "形成自己的表达和判断" },
+      { value: "quick", label: "快速看懂", detail: "尽快抓住问题和结论" },
+      { value: "structure", label: "形成结构", detail: "看见概念之间怎样连接" },
+      { value: "remember", label: "记住重点", detail: "留下可以回忆的关键抓手" },
+      { value: "apply", label: "学会应用", detail: "能够把知识带回真实问题" },
+      { value: "explain", label: "讲给别人", detail: "形成自己的表达和判断" },
     ],
   },
   {
     id: "entry",
     eyebrow: "进入方式",
-    title: "面对一个陌生主题，你更愿意从哪里开始？",
-    hint: "没有正确答案，我们在寻找更自然的第一步。",
+    title: "面对陌生内容，怎样开始最容易让你进入状态？",
+    hint: "这里记录的是默认入口，不会把你固定成某种学习类型。",
     options: [
-      { label: "先看全局地图", detail: "先知道全貌，再进入细节" },
-      { label: "先看真实案例", detail: "从具体的人与事情开始" },
-      { label: "先听一个故事", detail: "通过情境和情绪建立感觉" },
-      { label: "先带着问题", detail: "在寻找答案的过程中理解" },
-      { label: "先把定义说清", detail: "从准确概念逐步展开" },
+      { value: "map", label: "先看一张全局图", detail: "先知道全貌，再进入细节" },
+      { value: "story", label: "先听一个故事或案例", detail: "通过人物、情境和情绪建立感觉" },
+      { value: "video", label: "先看一段短视频", detail: "通过画面、声音和节奏快速进入" },
+      { value: "question", label: "先抛出一个核心问题", detail: "在寻找答案的过程中理解" },
+      { value: "text", label: "先读一段清晰文字", detail: "从结论和定义逐步展开" },
+      { value: "adaptive", label: "交给系统判断", detail: "根据内容本身选择最合适的入口" },
     ],
   },
   {
-    id: "medium",
-    eyebrow: "表达媒介",
-    title: "哪种形式最容易让你愿意继续学下去？",
-    hint: "这是默认入口，不代表以后只使用这一种形式。",
+    id: "support",
+    eyebrow: "理解支架",
+    title: "遇到难懂的地方，哪种帮助对你最有用？",
+    hint: "平台会优先用它换一种方式解释，而不是重复原话。",
     options: [
-      { label: "图文与关系图", detail: "把抽象结构变得可见" },
-      { label: "短视频讲解", detail: "用画面、声音和节奏带入" },
-      { label: "音频陪伴", detail: "适合走路、通勤或放松时听" },
-      { label: "互动推演", detail: "通过选择和反馈逐步理解" },
-      { label: "清晰的文字", detail: "安静、准确地深入阅读" },
+      { value: "plain", label: "换成大白话", detail: "减少术语，保留核心关系" },
+      { value: "analogy", label: "给一个熟悉的类比", detail: "把新概念接到已有经验上" },
+      { value: "case", label: "补一个真实案例", detail: "从具体情境回到抽象概念" },
+      { value: "diagram", label: "画出因果或关系", detail: "把隐藏结构变得可见" },
+      { value: "steps", label: "拆成具体步骤", detail: "一次只处理一个动作或判断" },
+      { value: "counterexample", label: "看反例和常见误区", detail: "通过边界理解概念" },
     ],
   },
   {
     id: "interaction",
     eyebrow: "参与程度",
     title: "学习过程中，你希望平台怎样与你互动？",
-    hint: "提问不是强制考试，只用来帮助你停下来形成理解。",
+    hint: "无论选择哪一种，平台都会先生成完整内容，不强迫你等待回答。",
     options: [
-      { label: "直接讲清楚", detail: "尽量少打断我的思路" },
-      { label: "偶尔确认一下", detail: "每个阶段一个轻问题" },
-      { label: "边学边回答", detail: "用反馈帮我发现盲区" },
-      { label: "一起推演", detail: "像和一个思考伙伴对话" },
+      { value: "direct", label: "直接完整讲清楚", detail: "练习放在最后，不打断正文" },
+      { value: "optional", label: "最后给我一个可选练习", detail: "需要时再确认是否理解" },
+      { value: "checkpoint", label: "中间留一个思考点", detail: "不回答也能继续学习" },
+      { value: "dialogue", label: "让我参与推演", detail: "把关键判断做成可选互动" },
     ],
   },
   {
     id: "avoid",
     eyebrow: "避免事项",
     title: "哪种情况最容易让你中途退出？",
-    hint: "平台会把它作为优先避免的条件。",
+    hint: "只选最明显的一项，它会作为比普通偏好更优先的限制。",
     options: [
-      { label: "连续大段文字", detail: "看了一会儿就失去注意力" },
-      { label: "信息密度太高", detail: "还没消化就不断出现新概念" },
-      { label: "解释节奏太慢", detail: "一直没有进入真正的问题" },
-      { label: "内容过度抽象", detail: "缺少例子、画面和现实连接" },
-      { label: "频繁被提问", detail: "互动太多反而打断理解" },
-      { label: "形式太花哨", detail: "注意力被效果带离内容" },
+      { value: "long-text", label: "连续大段文字", detail: "看了一会儿就失去注意力" },
+      { value: "dense", label: "信息密度太高", detail: "还没消化就不断出现新概念" },
+      { value: "slow", label: "解释节奏太慢", detail: "一直没有进入真正的问题" },
+      { value: "abstract", label: "内容过度抽象", detail: "缺少例子、画面和现实连接" },
+      { value: "questions", label: "频繁被提问", detail: "互动太多反而打断理解" },
+      { value: "flashy", label: "形式太花哨", detail: "注意力被效果带离内容" },
     ],
   },
 ];
+
+const optionLabels = Object.fromEntries(
+  questions.flatMap((question) =>
+    question.options.map((option) => [
+      `${question.id}:${option.value}`,
+      option.label,
+    ]),
+  ),
+);
+
+const goalRules: Record<string, { headline: string; instruction: string }> = {
+  quick: {
+    headline: "先抓住结论",
+    instruction: "先交付核心问题、结论和必要依据；压缩可选背景，不压缩关键逻辑。",
+  },
+  structure: {
+    headline: "建立完整结构",
+    instruction: "先呈现知识地图，再按前置、因果、对比和例证关系展开。",
+  },
+  remember: {
+    headline: "留下记忆抓手",
+    instruction: "控制关键点数量，用组块、线索和文末可选回忆帮助保持。",
+  },
+  apply: {
+    headline: "最后能够应用",
+    instruction: "解释核心原理后给出真实用法、判断步骤和一个新的迁移情境。",
+  },
+  explain: {
+    headline: "形成自己的表达",
+    instruction: "组织成可以转述的观点链，并在文末提供可选的讲述提纲。",
+  },
+};
+
+const entryRules: Record<string, { headline: string; instruction: string }> = {
+  map: {
+    headline: "全局关系先行",
+    instruction: "先用一张简洁关系图交代全貌，再进入局部解释。",
+  },
+  story: {
+    headline: "从情境和故事进入",
+    instruction: "先用真实情境建立动机和感受，随后明确抽象概念与关系。",
+  },
+  video: {
+    headline: "用短视频快速进入",
+    instruction: "内容存在过程、空间或因果变化时优先短视频；否则使用更轻的图文入口，不强行视频化。",
+  },
+  question: {
+    headline: "带着核心问题进入",
+    instruction: "先提出真正需要解决的问题，再让后续信息逐步回答它。",
+  },
+  text: {
+    headline: "清晰文字直接进入",
+    instruction: "先用短段落说清结论、定义和边界，再补充关系与例子。",
+  },
+  adaptive: {
+    headline: "入口由内容决定",
+    instruction: "根据内容是概念、关系、步骤、案例还是争议，选择最能表达核心结构的入口。",
+  },
+};
+
+const supportRules: Record<string, string> = {
+  plain: "遇到高术语密度时换成大白话，但保留原有逻辑和来源边界。",
+  analogy: "遇到新概念时先给一个熟悉类比，并明确类比在哪些地方不成立。",
+  case: "遇到抽象论述时补一个具体案例，再把案例重新抽象成规则。",
+  diagram: "遇到多角色、因果或层级关系时优先画图，不继续堆叠文字。",
+  steps: "遇到程序或复杂判断时拆成连续步骤，每步只引入一个新动作。",
+  counterexample: "概念边界不清时使用反例和常见误区，说明为什么不成立。",
+};
+
+const interactionRules: Record<string, string> = {
+  direct: "一次性交付完整学习内容；正文不设置强制问题，练习只放在最后。",
+  optional: "一次性交付完整学习内容；文末提供一个可跳过的理解或应用题。",
+  checkpoint: "完整内容保持可连续阅读；核心转折处最多放一个可跳过的思考点。",
+  dialogue: "把关键判断做成可选推演，但必须允许用户不回答并继续查看完整内容。",
+};
+
+const avoidRules: Record<string, string> = {
+  "long-text": "避免连续长段落；按完整意思切块，并用标题、图解或例子承担结构。",
+  dense: "限制每个学习块的新概念数量；先消化核心关系，再展开次要信息。",
+  slow: "删除不改变理解的铺垫；尽早呈现核心问题和知识收益。",
+  abstract: "抽象观点必须连接至少一个具体情境、案例或可观察结果。",
+  questions: "不在正文中连续提问；所有练习默认可跳过。",
+  flashy: "动画只表达关系变化；关闭装饰性运动、无意义粒子和高频转场。",
+};
+
+function answerLabel(questionId: string, value?: string) {
+  if (!value) return "交给系统判断";
+  return optionLabels[`${questionId}:${value}`] ?? value;
+}
+
+function buildPersonalLearningSkill(
+  answers: Record<string, string>,
+  styleChoice: "map" | "story" | "",
+  styleAnswer: string,
+): PersonalLearningSkill {
+  const goal = goalRules[answers.goal] ?? goalRules.structure;
+  const entry = entryRules[answers.entry] ?? entryRules.adaptive;
+  const support = supportRules[answers.support] ?? supportRules.diagram;
+  let interaction = interactionRules[answers.interaction] ?? interactionRules.optional;
+  const avoid = avoidRules[answers.avoid] ?? avoidRules.dense;
+  const adjustments: string[] = [];
+
+  if (answers.avoid === "questions" && ["checkpoint", "dialogue"].includes(answers.interaction)) {
+    interaction = interactionRules.optional;
+    adjustments.push("你同时选择了参与互动和避免频繁提问，因此互动被收束到文末一次可选练习。");
+  }
+  if (answers.avoid === "flashy" && answers.entry === "video") {
+    adjustments.push("视频保留为入口，但只使用克制转场和表达关系所必需的动画。");
+  }
+  if (answers.avoid === "long-text" && answers.entry === "text") {
+    adjustments.push("文字仍作为入口，但改为短段落，并用结构图承担全局关系。");
+  }
+  if (styleChoice === "map" && answers.entry !== "map") {
+    adjustments.push("问卷入口偏好与体验结果不同：保留你愿意开始的形式，同时用关系图固定核心结构。");
+  }
+  if (styleChoice === "story" && answers.entry !== "story") {
+    adjustments.push("问卷入口偏好与体验结果不同：保留原入口，同时用短情境帮助概念落地。");
+  }
+  if (styleAnswer && styleAnswer !== "个人获益，但长期共同受损") {
+    adjustments.push("本次理解题没有命中核心关系，因此不会强化固定偏好；生成时会补充第二种解释支架。");
+  }
+
+  const rules: SkillRule[] = [
+    {
+      id: "age-boundary",
+      label: "年龄只调整表达",
+      instruction:
+        answers.age === "18-21"
+          ? "使用清晰的成人语言，不预设用户已经拥有长期职业经验；不得据此判断能力。"
+          : "使用清晰的成人语言，只调整案例语境与信息密度；不得据年龄判断能力。",
+      evidence: "平台底线",
+    },
+    { id: "goal", label: goal.headline, instruction: goal.instruction, evidence: "问卷回答" },
+    { id: "entry", label: entry.headline, instruction: entry.instruction, evidence: "问卷回答" },
+    { id: "support", label: "卡住时换一种解释", instruction: support, evidence: "问卷回答" },
+    { id: "interaction", label: "控制互动打断", instruction: interaction, evidence: "问卷回答" },
+    { id: "avoid", label: `优先避免${answerLabel("avoid", answers.avoid)}`, instruction: avoid, evidence: "问卷回答" },
+    {
+      id: "style-evidence",
+      label: styleChoice === "story" ? "情境帮助进入" : "关系帮助理解",
+      instruction:
+        styleChoice === "story"
+          ? "微型体验中更愿意沿情境进入；故事必须在随后收束成明确概念和关系。"
+          : "微型体验中更愿意沿关系图进入；关系图只保留决定理解的节点。",
+      evidence: "微型体验",
+    },
+    {
+      id: "one-shot",
+      label: "默认一次性交付",
+      instruction: "不再逐篇强制追问熟悉度；用概览、必要前置、核心解释和可展开深入层组成同一份完整作品。",
+      evidence: "平台底线",
+    },
+  ];
+
+  return {
+    version: 2,
+    headline: `${entry.headline}，${goal.headline}`,
+    summary: `先按“${answerLabel("entry", answers.entry)}”组织入口；遇到难点时优先“${answerLabel("support", answers.support)}”；${interaction}同时优先避免${answerLabel("avoid", answers.avoid)}。`,
+    labels: {
+      age: answerLabel("age", answers.age),
+      goal: answerLabel("goal", answers.goal),
+      entry: answerLabel("entry", answers.entry),
+      support: answerLabel("support", answers.support),
+      interaction: answerLabel("interaction", answers.interaction),
+      avoid: answerLabel("avoid", answers.avoid),
+    },
+    rules,
+    adjustments,
+  };
+}
 
 const sampleUrl =
   "https://zhuanlan.zhihu.com/p/2009319586063992724";
@@ -242,35 +430,39 @@ export default function Home() {
   const currentQuestion = questions[questionIndex];
   const progress = Math.round(((questionIndex + 1) / questions.length) * 72);
   const isCaseArticle = articleUrl.includes("2009319586063992724");
+  const personalSkill = useMemo(
+    () => buildPersonalLearningSkill(answers, styleChoice, styleAnswer),
+    [answers, styleChoice, styleAnswer],
+  );
 
   const skillTraits = useMemo(
     () => [
       {
         icon: Map,
-        label: "知识入口",
-        value: answers.entry || "先看全局地图",
-        detail: styleChoice === "story" ? "情境辅助进入" : "关系优先呈现",
+        label: "默认入口",
+        value: personalSkill.labels.entry,
+        detail: styleChoice === "story" ? "情境辅助进入" : "关系辅助理解",
       },
       {
-        icon: Layers3,
-        label: "主要表达",
-        value: answers.medium || "图文与关系图",
-        detail: "媒体服务于内容结构",
+        icon: Lightbulb,
+        label: "卡住时",
+        value: personalSkill.labels.support,
+        detail: "换一种解释，不重复原话",
       },
       {
         icon: Gauge,
-        label: "理解节奏",
-        value: answers.goal || "形成结构",
-        detail: "中等颗粒度，逐层展开",
+        label: "学习结果",
+        value: personalSkill.labels.goal,
+        detail: "决定内容怎样收束",
       },
       {
         icon: MessageCircle,
         label: "参与方式",
-        value: answers.interaction || "偶尔确认一下",
-        detail: "不强制答题或复述",
+        value: personalSkill.labels.interaction,
+        detail: "完整内容始终可以直接查看",
       },
     ],
-    [answers, styleChoice],
+    [personalSkill, styleChoice],
   );
 
   function beginProfile() {
@@ -316,7 +508,12 @@ export default function Home() {
   function saveProfile() {
     window.localStorage.setItem(
       "zhijing-learning-profile",
-      JSON.stringify({ answers, styleChoice, styleAnswer, version: 1 }),
+      JSON.stringify({
+        questionnaire: answers,
+        experience: { styleChoice, styleAnswer },
+        skill: personalSkill,
+        version: 2,
+      }),
     );
     setHasProfile(true);
     setView("workspace");
@@ -479,12 +676,12 @@ export default function Home() {
           <p className="question-hint">{currentQuestion.hint}</p>
           <div className="option-grid">
             {currentQuestion.options.map((option) => {
-              const selected = answers[currentQuestion.id] === option.label;
+              const selected = answers[currentQuestion.id] === option.value;
               return (
                 <button
                   className={`option-card ${selected ? "selected" : ""}`}
-                  key={option.label}
-                  onClick={() => chooseAnswer(option.label)}
+                  key={option.value}
+                  onClick={() => chooseAnswer(option.value)}
                   aria-pressed={selected}
                 >
                   <span className="radio-dot">{selected && <Check size={14} />}</span>
@@ -600,7 +797,7 @@ export default function Home() {
       <main className="result-shell page-enter">
         <header className="onboarding-header container-wide">
           <Brand />
-          <span>个人学习 Skill · v1</span>
+          <span>个人学习 Skill · 初稿</span>
         </header>
         <section className="result-wrap container-wide">
           <div className="result-intro">
@@ -612,12 +809,10 @@ export default function Home() {
 
           <div className="skill-summary-card">
             <div className="skill-summary-head">
-              <div><small>核心策略</small><h2>整体关系先行，具体情境帮助进入</h2></div>
-              <span className="version-badge">Skill v1</span>
+              <div><small>核心策略</small><h2>{personalSkill.headline}</h2></div>
+              <span className="version-badge">Skill v2</span>
             </div>
-            <p className="skill-lead">
-              面对陌生和抽象内容时，先给你一张可见的知识地图，再用案例连接现实；默认保持中等节奏，避免{answers.avoid || "连续的大段说明"}。
-            </p>
+            <p className="skill-lead">{personalSkill.summary}</p>
             <div className="skill-traits">
               {skillTraits.map(({ icon: Icon, label, value, detail }) => (
                 <article key={label}>
@@ -628,6 +823,12 @@ export default function Home() {
                 </article>
               ))}
             </div>
+            {personalSkill.adjustments.length > 0 && (
+              <div className="skill-adjustment">
+                <strong>系统已经处理一处偏好冲突</strong>
+                <p>{personalSkill.adjustments[0]}</p>
+              </div>
+            )}
             <div className="evidence-row">
               <span><CheckCircle2 size={17} /> 来自 6 项问卷回答</span>
               <span><CheckCircle2 size={17} /> 已结合 1 次实际 Style 体验</span>

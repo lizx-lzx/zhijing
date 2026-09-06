@@ -147,6 +147,9 @@ a { color: inherit; text-decoration: none; }
 .skill-traits small { color: var(--muted); font-size: 11px; }
 .skill-traits strong { font-size: 14px; margin: 6px 0; }
 .skill-traits p { color: var(--muted); font-size: 11px; margin: 0; }
+.skill-adjustment { margin-top: 18px; padding: 14px 16px; border-radius: 14px; background: var(--amber-soft); color: #6f4d18; }
+.skill-adjustment strong { display: block; font-size: 13px; }
+.skill-adjustment p { margin: 5px 0 0; line-height: 1.55; font-size: 13px; }
 .evidence-row { border-top: 1px solid var(--line); margin-top: 25px; padding-top: 20px; display: flex; flex-wrap: wrap; gap: 24px; color: var(--muted); font-size: 12px; }
 .evidence-row span { display: inline-flex; align-items: center; gap: 7px; }
 .evidence-row svg { color: var(--green); }

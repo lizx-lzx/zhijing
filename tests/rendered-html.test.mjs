@@ -1,11 +1,6 @@
 import assert from "node:assert/strict";
-import { access, readFile, readdir } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
-
-const developmentPreviewMeta =
-  /<meta(?=[^>]*\bname=["']codex-preview["'])(?=[^>]*\bcontent=["']development["'])[^>]*>/i;
-const templateRoot = new URL("../", import.meta.url);
-const previewRoot = new URL("../app/_sites-preview/", import.meta.url);
 
 async function render() {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -28,64 +23,54 @@ async function render() {
   );
 }
 
-test("server-renders the starter loading skeleton", async () => {
+test("server-renders the Zhijing landing page", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, developmentPreviewMeta);
-  assert.match(html, /<title>Your site is taking shape<\/title>/i);
-  assert.match(html, /Building your site/);
-  assert.match(html, /Your site is taking shape/);
-  assert.match(
-    html,
-    /Your first version will appear here automatically when it’s ready\./,
-  );
-  assert.doesNotMatch(html, /Codex/);
-  assert.match(html, /react-loading-skeleton/);
-  assert.match(html, /role="status"/);
+  assert.match(html, /<html lang="zh-CN">/);
+  assert.match(html, /<title>知径｜先认识你，再为你讲知识<\/title>/);
+  assert.match(html, /一次问卷，以后自动适配/);
+  assert.match(html, /开始了解我的学习方式/);
+  assert.match(html, /看一个完整案例/);
+  assert.doesNotMatch(html, /Your site is taking shape|Building your site/);
 });
 
-test("keeps the loading skeleton scoped and disposable", async () => {
-  const [preview, css, page, layout, packageJson, files] = await Promise.all([
-    readFile(new URL("SkeletonPreview.tsx", previewRoot), "utf8"),
-    readFile(new URL("preview.css", previewRoot), "utf8"),
+test("keeps the questionnaire tied to executable Skill rules", async () => {
+  const [page, design] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../package.json", import.meta.url), "utf8"),
-    readdir(previewRoot),
+    readFile(
+      new URL("../docs/04-问卷与个人学习Skill映射-v0.2.md", import.meta.url),
+      "utf8",
+    ),
   ]);
 
-  assert.deepEqual(files.sort(), ["SkeletonPreview.tsx", "preview.css"]);
-  assert.match(preview, /from "react-loading-skeleton"/);
-  assert.match(preview, /baseColor="#eceae7"/);
-  assert.match(preview, /highlightColor="#f9f8f6"/);
-  assert.match(preview, /duration=\{2\.8\}/);
-  assert.match(preview, /sites-skeleton-search-placeholder/);
-  assert.match(packageJson, /"react-loading-skeleton": "3\.5\.0"/);
-
-  const shellIndex = preview.indexOf('className="sites-skeleton-shell"');
-  const statusIndex = preview.indexOf('className="sites-skeleton-status"');
-  assert.ok(shellIndex >= 0 && statusIndex > shellIndex);
-  assert.match(css, /position:\s*fixed/);
-  assert.match(css, /inset:\s*0/);
-  assert.match(css, /opacity:\s*0\.52/);
-  assert.match(css, /prefers-reduced-motion:\s*reduce/);
-  assert.doesNotMatch(css, /#020617|canvas|pets|progress/i);
-  assert.doesNotMatch(
-    preview,
-    /loading-spinner|status-mark|status-progress|canvas|cookie|random/i,
+  const questionsBlock = page.slice(
+    page.indexOf("const questions"),
+    page.indexOf("const optionLabels"),
   );
+  const questionIds = [...questionsBlock.matchAll(/id: "(age|goal|entry|support|interaction|avoid)"/g)]
+    .map((match) => match[1]);
+  assert.deepEqual(questionIds, [
+    "age",
+    "goal",
+    "entry",
+    "support",
+    "interaction",
+    "avoid",
+  ]);
 
-  assert.match(page, /export const metadata:\s*Metadata/);
-  assert.match(page, /"codex-preview": "development"/);
-  assert.match(page, /<SkeletonPreview \/>/);
-  assert.match(layout, /title:\s*"Starter Project"/);
-  assert.doesNotMatch(layout, /codex-preview|_sites-preview|themeColor|\bViewport\b/);
-  assert.doesNotMatch(css, /(^|\s)(html|body)\s*\{/m);
+  assert.match(page, /function buildPersonalLearningSkill/);
+  assert.match(page, /questionnaire: answers/);
+  assert.match(page, /skill: personalSkill/);
+  assert.match(page, /version: 2/);
+  assert.match(page, /answers\.avoid === "questions"/);
+  assert.match(page, /answers\.avoid === "flashy" && answers\.entry === "video"/);
+  assert.match(page, /不再逐篇强制追问熟悉度/);
+  assert.doesNotMatch(page, /answers\.medium/);
 
-  await assert.rejects(
-    access(new URL("public/_sites-preview", templateRoot)),
-  );
+  assert.match(design, /6 道单选题/);
+  assert.match(design, /每个答案都至少改变一条生成规则/);
+  assert.match(design, /问卷产生的整个 Skill 都只能叫“初稿”/);
 });
