@@ -1,0 +1,180 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { spawn } from "node:child_process";
+import { once } from "node:events";
+import { mkdtemp, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import net from "node:net";
+import { buildProfile } from "../lib/domain.ts";
+
+test("HTTP contract: persistence, isolation, CSRF, recovery and honest failure", async (t) => {
+  const temp = await mkdtemp(path.join(tmpdir(), "zhijing-api-test-"));
+  const finder = net.createServer();
+  finder.listen(0, "127.0.0.1");
+  await once(finder, "listening");
+  const port = finder.address().port;
+  await new Promise((r) => finder.close(r));
+  let child;
+  async function start() {
+    child = spawn(process.execPath, ["server/index.mjs"], {
+      cwd: process.cwd(),
+      env: {
+        ...process.env,
+        ZH_API_PORT: String(port),
+        ZH_DATA_DIR: temp,
+        ZH_MODEL_KEY: "",
+        ZH_ENV_SOURCE: "",
+        ZH_ENV_FILE: path.join(temp, "absent.env"),
+        NODE_ENV: "test",
+      },
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+    let logs = "";
+    child.stderr.on("data", (d) => (logs += d));
+    for (let i = 0; i < 60; i++) {
+      try {
+        const r = await fetch(`http://127.0.0.1:${port}/api/health`);
+        if (r.ok) return;
+      } catch {
+        /* The child may not have bound its listener yet. */
+      }
+      await new Promise((r) => setTimeout(r, 100));
+    }
+    throw new Error(logs || "server did not start");
+  }
+  async function stop() {
+    const done = once(child, "exit");
+    child.kill("SIGTERM");
+    await done;
+  }
+  function client() {
+    let cookie = "";
+    return async (route, method = "GET", body, headers = {}) => {
+      const r = await fetch(`http://127.0.0.1:${port}/api${route}`, {
+        method,
+        headers: {
+          Cookie: cookie,
+          ...(body ? { "Content-Type": "application/json" } : {}),
+          ...headers,
+        },
+        body: body ? JSON.stringify(body) : undefined,
+      });
+      const set = r.headers.get("set-cookie");
+      if (set) {
+        assert.match(set, /HttpOnly/);
+        assert.match(set, /SameSite=Lax/);
+        cookie = set.split(";")[0];
+      }
+      return { status: r.status, data: await r.json() };
+    };
+  }
+  try {
+    await start();
+    const a = client(),
+      b = client();
+    assert.equal((await a("/me")).data.profile, null);
+    assert.equal((await b("/me")).data.profile, null);
+    const profile = buildProfile({
+      entry: "story",
+      primary: "reading",
+      avoid: ["questions"],
+    });
+    await t.test("profile is persisted and private", async () => {
+      assert.equal((await a("/profile", "PUT", { profile })).status, 200);
+      assert.equal((await a("/me")).data.profile.answers.entry, "story");
+      assert.equal((await b("/me")).data.profile, null);
+    });
+    await t.test("cross-origin writes fail", async () => {
+      assert.equal(
+        (
+          await a(
+            "/profile",
+            "PUT",
+            { profile },
+            { Origin: "https://evil.example" },
+          )
+        ).status,
+        403,
+      );
+    });
+    await t.test("unsafe source URL and insufficient text fail", async () => {
+      assert.equal(
+        (await a("/sources", "POST", { url: "http://localhost:4330/api/me" }))
+          .status,
+        400,
+      );
+      assert.equal((await a("/sources", "POST", { text: "不足" })).status, 400);
+    });
+    const source = (await a("/sources/sample", "POST", {})).data.source;
+    await t.test(
+      "another user cannot generate from an owned source",
+      async () => {
+        assert.equal(
+          (await b("/lessons", "POST", { sourceId: source.id })).status,
+          404,
+        );
+      },
+    );
+    const job = (await a("/lessons", "POST", { sourceId: source.id })).data
+      .lesson;
+    await t.test(
+      "private result, export and media endpoints are isolated",
+      async () => {
+        for (const suffix of [
+          "",
+          "/export.json",
+          "/player",
+          "/media/video.mp4",
+        ])
+          assert.equal((await b("/lessons/" + job.id + suffix)).status, 404);
+      },
+    );
+    await t.test(
+      "missing model produces a saved, retryable failure instead of a fake result",
+      async () => {
+        let result;
+        for (let i = 0; i < 40; i++) {
+          result = (await a("/lessons/" + job.id)).data.lesson;
+          if (result.status === "failed") break;
+          await new Promise((r) => setTimeout(r, 100));
+        }
+        assert.equal(result.status, "failed");
+        assert.equal(result.result, null);
+        assert.ok(result.error.length > 0);
+        assert.equal(result.source.id, source.id);
+      },
+    );
+    const code = (await a("/recovery", "POST", {})).data.code;
+    const c = client();
+    await t.test(
+      "recovery transfers access only with the correct secret",
+      async () => {
+        assert.equal(
+          (await c("/recovery/restore", "POST", { code: "wrong" })).status,
+          403,
+        );
+        assert.equal(
+          (await c("/recovery/restore", "POST", { code })).status,
+          200,
+        );
+        assert.equal((await c("/lessons/" + job.id)).status, 200);
+      },
+    );
+    await stop();
+    await start();
+    await t.test(
+      "profile, session, source and job survive a restart",
+      async () => {
+        assert.equal((await a("/me")).data.profile.answers.entry, "story");
+        assert.equal(
+          (await a("/lessons/" + job.id)).data.lesson.source.id,
+          source.id,
+        );
+      },
+    );
+  } finally {
+    if (child && child.exitCode === null) await stop();
+    await rm(temp, { recursive: true, force: true });
+  }
+});

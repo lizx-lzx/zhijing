@@ -1,0 +1,28 @@
+[Unit]
+Description=Zhijing private learning API and media queue
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/apps/zhijing/current
+Environment=NODE_ENV=production
+Environment=PATH=/home/ubuntu/opt/node-v24.19.0-linux-x64/bin:/usr/local/bin:/usr/bin:/bin
+EnvironmentFile=/home/ubuntu/apps/zhijing/private/zhijing.env
+ExecStart=/home/ubuntu/opt/node-v24.19.0-linux-x64/bin/node /home/ubuntu/apps/zhijing/current/server/index.mjs
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=25
+KillMode=control-group
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+MemoryMax=2G
+CPUQuota=200%
+TasksMax=384
+
+[Install]
+WantedBy=multi-user.target

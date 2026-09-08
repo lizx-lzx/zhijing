@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { headers } from "next/headers";
 import "./globals.css";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH?.trim() ?? "";
@@ -16,20 +15,13 @@ const geistMono = Geist_Mono({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const requestHeaders = await headers();
-  const host =
-    requestHeaders.get("x-forwarded-host") ??
-    requestHeaders.get("host") ??
-    "localhost:3000";
-  const protocol =
-    requestHeaders.get("x-forwarded-proto") ??
-    (host.startsWith("localhost") ? "http" : "https");
-  const origin = `${protocol}://${host}`;
+  const origin =
+    process.env.ZH_PUBLIC_ORIGIN ||
+    (basePath ? "https://app.chainvalley.top" : "http://localhost:3000");
 
   return {
     title: "知径｜先认识你，再为你讲知识",
-    description:
-      "通过一次个人学习适配，把文章重新组织成更适合你的学习路径。",
+    description: "通过一次个人学习适配，把文章重新组织成更适合你的学习路径。",
     openGraph: {
       title: "知径｜先认识你，再为你讲知识",
       description: "一套会先理解你的个性化学习平台。",

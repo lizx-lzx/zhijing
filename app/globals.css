@@ -1,10 +1,11 @@
 @import "tailwindcss";
+@import "./product.css";
 
 :root {
   --paper: #f7f7f2;
   --surface: #ffffff;
   --ink: #1d1f24;
-  --muted: #6f716f;
+  --muted: #636870;
   --primary: #4f63d8;
   --primary-dark: #3f50bc;
   --primary-soft: #e7ebff;
