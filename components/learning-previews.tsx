@@ -50,13 +50,7 @@ export function BookChart() {
   );
 }
 
-export function MediaPreview({
-  medium,
-  compact = false,
-}: {
-  medium: Medium;
-  compact?: boolean;
-}) {
+export function MediaPreview({ medium }: { medium: Medium }) {
   const Icon = {
     video: MonitorPlay,
     reading: BookOpen,
@@ -64,10 +58,7 @@ export function MediaPreview({
     animation: MousePointer2,
   }[medium];
   return (
-    <span
-      className={`z-format-preview z-format-${medium}${compact ? " compact" : ""}`}
-      aria-hidden="true"
-    >
+    <span className={`z-format-preview z-format-${medium}`} aria-hidden="true">
       <span className="z-format-caption">
         <Icon size={18} />
         {medium === "audio" ? "不看屏幕，也能听懂" : "平均数 ≠ 大多数人"}
@@ -90,16 +81,6 @@ export function MediaPreview({
       ) : (
         <BookChart />
       )}
-      <span className="z-format-foot">
-        {
-          {
-            video: "画面 + 讲解 + 字幕",
-            reading: "一张图，把关系看清",
-            audio: "独立讲稿 · 自己掌握速度",
-            animation: "逐章展开 · 随时停下",
-          }[medium]
-        }
-      </span>
     </span>
   );
 }
@@ -115,7 +96,7 @@ export function EntryPreview({ entry }: { entry: string }) {
             <br />
             怎么又没到平均水平？”
           </span>
-          <span className="z-preview-note">从小林的困惑开始 · 虚构情境</span>
+          <span className="z-preview-note">虚构情境</span>
         </>
       ) : entry === "analysis" ? (
         <>
@@ -143,7 +124,6 @@ export function EntryPreview({ entry }: { entry: string }) {
         <>
           <Sparkles size={26} />
           <span>看内容，再选讲法</span>
-          <span className="z-auto-options">故事 / 结论 / 全貌 / 问题</span>
         </>
       )}
     </span>

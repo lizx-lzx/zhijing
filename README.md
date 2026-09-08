@@ -72,6 +72,7 @@ ZH_PUBLIC_UI_URL=https://app.chainvalley.top/zhijing/ node scripts/public-ui-smo
 - [系统级多形式交付与验收](docs/07-系统级多形式交付.md)
 - [视觉化入门与图片资产](docs/08-视觉化入门与图片资产.md)
 - [页面动效与减少动态设置](docs/09-页面动效.md)
+- [界面减法与保留边界](docs/10-界面减法.md)
 - [OpenMAIC 单篇讲解试作：实现、边界与复现](experiments/openmaic-preview/README.md)
 - [知乎文章《窗口期可能只剩五年》：完整学习作品](experiments/openmaic-preview/lessons/window-five-years/README.md)
 

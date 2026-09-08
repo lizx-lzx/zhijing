@@ -36,20 +36,6 @@
   aspect-ratio: 3/2;
   object-fit: contain;
 }
-.z-learning-hero figcaption {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 14px 24px;
-  padding: 0 20px 22px;
-  color: #3d4b72;
-  font-size: 0.9375rem;
-}
-.z-learning-hero figcaption span {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
 .z-welcome-copy > .z-revisit-note {
   margin: 18px 0 0;
   font-size: 0.875rem;
@@ -82,19 +68,12 @@
   font-size: 0.875rem;
   font-variant-numeric: tabular-nums;
 }
-.z-journey-strip strong,
-.z-journey-strip small {
+.z-journey-strip strong {
   display: block;
 }
 .z-journey-strip strong {
   font-size: 0.9375rem;
   font-weight: 600;
-}
-.z-journey-strip small {
-  color: var(--muted);
-  font-size: 0.875rem;
-  line-height: 1.6;
-  margin-top: 7px;
 }
 .z-example-link {
   display: flex;
@@ -127,8 +106,7 @@
   min-width: 0;
 }
 .z-example-link strong,
-.z-example-link small,
-.z-example-link > span > span {
+.z-example-link small {
   display: block;
 }
 .z-example-link strong {
@@ -136,8 +114,7 @@
   line-height: 1.5;
   margin: 5px 0;
 }
-.z-example-link small,
-.z-example-link > span > span {
+.z-example-link small {
   font-size: 0.875rem;
   color: var(--muted);
 }
@@ -207,11 +184,6 @@
   display: block;
   height: 118px;
   width: 100%;
-}
-.z-format-foot {
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: #5b6882;
 }
 .z-format-video {
   background: #edf0fd;
@@ -340,10 +312,6 @@
   font-weight: 600;
   line-height: 1;
 }
-.z-auto-options {
-  font-size: 0.875rem;
-  color: #65738d;
-}
 .z-pace-preview {
   display: flex;
   flex-wrap: wrap;
@@ -367,32 +335,6 @@
 .z-pace-preview > span:last-child {
   background: #6678ca;
   color: white;
-}
-.z-profile-visual {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
-  align-items: center;
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 20px;
-  margin-bottom: 24px;
-}
-.z-profile-visual h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 10px 0;
-}
-.z-profile-visual p {
-  font-size: 1rem;
-  color: var(--muted);
-  line-height: 1.8;
-}
-.z-current-profile > .z-format-preview {
-  margin-bottom: 22px;
-  display: flex;
-  background: #ffffffb0;
 }
 .z-sample > .z-sample-graphic {
   max-width: 180px;
@@ -456,9 +398,6 @@
   .z-journey-strip {
     justify-content: space-between;
   }
-  .z-current-profile > .z-format-preview {
-    display: none;
-  }
 }
 @media (max-width: 700px) {
   .z-lesson-card {
@@ -479,9 +418,6 @@
     max-width: 520px;
     margin: 0 auto;
   }
-  .z-learning-hero figcaption {
-    padding-bottom: 18px;
-  }
   .z-welcome-bottom {
     margin-top: 28px;
   }
@@ -493,19 +429,6 @@
     padding: 7px 9px;
     border-radius: 8px;
     background: #eaf0fc;
-  }
-  .z-journey-strip small {
-    margin-top: 3px;
-  }
-  .z-profile-visual {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  .z-profile-visual > div {
-    padding: 0 4px;
-  }
-  .z-profile-visual p {
-    margin-bottom: 0;
   }
   .z-visual-choices {
     grid-template-columns: 1fr;
@@ -525,8 +448,7 @@
     padding: 10px;
     min-height: 140px;
   }
-  .z-format-caption,
-  .z-format-foot {
+  .z-format-caption {
     line-height: 1.5;
   }
   .z-visual-choices .z-format-caption {

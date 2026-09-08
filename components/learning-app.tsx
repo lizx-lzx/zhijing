@@ -244,7 +244,7 @@ export default function LearningApp() {
         >
           <Brand />
         </button>
-        {profile && view !== "welcome" ? (
+        {profile && view !== "welcome" && (
           <nav aria-label="主要导航">
             <button
               className={view === "workspace" ? "active" : ""}
@@ -274,8 +274,6 @@ export default function LearningApp() {
               我的学法
             </button>
           </nav>
-        ) : (
-          <span className="z-top-note">你的个人学习空间</span>
         )}
         <button
           className="z-motion-toggle"

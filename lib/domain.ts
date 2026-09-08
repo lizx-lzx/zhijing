@@ -179,7 +179,7 @@ export const questions: Question[] = [
     id: "age",
     group: "认识你的学习习惯",
     title: "先告诉我，你的年龄阶段",
-    help: "只帮助选择合适的表达和例子，不判断你的能力。",
+    help: "仅用于选择表达和例子，不判断能力。",
     options: options([
       ["18-21", "18—21 岁"],
       ["22-29", "22—29 岁"],
@@ -192,7 +192,7 @@ export const questions: Question[] = [
     id: "goal",
     group: "认识你的学习习惯",
     title: "这次来，你最想获得什么？",
-    help: "比如一篇讲 AI、心理学或职场经验的文章。先选一个默认方向，以后可以临时改。",
+    help: "比如一篇讲 AI、心理学或职场经验的文章。",
     options: options([
       ["understand", "先看懂它", "知道它在说什么、为什么。"],
       ["structure", "理清来龙去脉", "把概念、原因和结果联系起来。"],
@@ -205,7 +205,7 @@ export const questions: Question[] = [
     id: "primary",
     group: "认识你的学习习惯",
     title: "你更愿意用哪种形式开始？",
-    help: "选一个主要形式，也可以加选其他形式。之后随时切换。",
+    help: "选一个为主，其他可加选。",
     options: options([
       ["video", "讲解视频", "画面、配音和字幕一起讲。"],
       ["reading", "图文", "自己掌握速度，边看文字边看图。"],
@@ -217,7 +217,6 @@ export const questions: Question[] = [
     id: "entry",
     group: "找到更容易看懂的讲法",
     title: "同一个知识，你更想听哪种开头？",
-    help: "不用判断自己属于什么类型，选更愿意继续看的那种。",
     options: options([
       [
         "story",
@@ -242,7 +241,7 @@ export const questions: Question[] = [
     id: "support",
     group: "找到更容易看懂的讲法",
     title: "讲到难点时，怎样帮你更好？",
-    help: "可以多选，也可以直接下一步。",
+    help: "可多选，也可跳过。",
     multiple: true,
     options: options([
       ["plain", "换成大白话", "先解释术语，再继续。"],
@@ -267,7 +266,7 @@ export const questions: Question[] = [
     id: "interaction",
     group: "按你舒服的节奏来",
     title: "要不要留一点参与空间？",
-    help: "无论选哪项，完整内容都会直接给你，不答题也能看完。",
+    help: "参与自愿，不答题也能看完。",
     options: options([
       ["none", "直接讲给我听", "不中途提问；练习放在折叠区。"],
       ["end", "最后试一下", "看完后，自愿做一两道小题。"],
@@ -283,7 +282,7 @@ export const questions: Question[] = [
     id: "avoid",
     group: "按你舒服的节奏来",
     title: "你希望我们特别照顾哪些地方？",
-    help: "可多选、全选，或者先不选。没有选中的，也会保持清晰好读。",
+    help: "可多选、全选，也可跳过。",
     multiple: true,
     options: options([
       ["long", "文字短一些"],

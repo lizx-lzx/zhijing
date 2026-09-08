@@ -7,12 +7,7 @@ import {
   Download,
   FileText,
   Headphones,
-  MonitorPlay,
-  Play,
   List,
-  Network,
-  Layers,
-  Lightbulb,
 } from "lucide-react";
 import type { Lesson, Medium, StudyMode } from "../lib/domain";
 import {
@@ -25,14 +20,14 @@ import {
 } from "./learning-ui";
 import { useStudyState } from "./use-study-state";
 
-const modes: { id: StudyMode; label: string; icon: typeof FileText }[] = [
-  { id: "video", label: "讲解视频", icon: MonitorPlay },
-  { id: "reading", label: "完整图文", icon: FileText },
-  { id: "diagrams", label: "逐章图解", icon: Layers },
-  { id: "audio", label: "独立听读", icon: Headphones },
-  { id: "overview", label: "全文关系", icon: Network },
-  { id: "practice", label: "互动复习", icon: Lightbulb },
-  { id: "animation", label: "网页讲解", icon: Play },
+const modes: { id: StudyMode; label: string }[] = [
+  { id: "video", label: "讲解视频" },
+  { id: "reading", label: "完整图文" },
+  { id: "diagrams", label: "逐章图解" },
+  { id: "audio", label: "独立听读" },
+  { id: "overview", label: "全文关系" },
+  { id: "practice", label: "互动复习" },
+  { id: "animation", label: "网页讲解" },
 ];
 const clock = (t = 0) =>
   `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
@@ -333,36 +328,34 @@ export function LessonView({
           返回学习库
         </button>
         <div className="z-lesson-title">
-          <span className="z-kicker">
-            {lesson.source?.mode === "sample"
-              ? "知径体验文章 · 虚构示例"
-              : "你的学习作品"}
-          </span>
+          {lesson.source?.mode === "sample" && (
+            <span className="z-kicker">体验文章 · 虚构示例</span>
+          )}
           <h1>{result?.title || lesson.title}</h1>
           {result?.lead && <p>{result.lead}</p>}
         </div>
       </header>
       {result && (
         <div className="z-lesson-toolbar z-container">
-          <div
-            className="z-medium-tabs z-all-formats"
-            role="group"
-            aria-label="学习形式"
-          >
-            {modes
-              .filter((m) => study || !["overview", "practice"].includes(m.id))
-              .map((m) => (
-                <button
-                  type="button"
-                  key={m.id}
-                  aria-pressed={medium === m.id}
-                  onClick={() => switchMedium(m.id)}
-                >
-                  <m.icon size={17} />
-                  {m.label}
-                </button>
-              ))}
-          </div>
+          <label className="z-format-switch">
+            <span>切换形式</span>
+            <select
+              aria-label="学习形式"
+              value={medium}
+              onChange={(e) => switchMedium(e.target.value as StudyMode)}
+            >
+              {modes
+                .filter(
+                  (m) => study || !["overview", "practice"].includes(m.id),
+                )
+                .map((m) => (
+                  <option key={m.id} value={m.id}>
+                    {m.label}
+                  </option>
+                ))}
+            </select>
+            <ChevronDown size={16} aria-hidden="true" />
+          </label>
           <div className="z-study-tools">
             <button
               type="button"
@@ -598,7 +591,6 @@ export function LessonView({
                   title="个性化网页讲解"
                   sandbox="allow-scripts allow-same-origin allow-downloads"
                 />
-                <p>可逐章阅读；图解与本篇知识和讲稿一致。</p>
                 {!lesson.media.trackReady && !legacyReady && (
                   <button
                     className="button button-quiet"
@@ -1117,7 +1109,6 @@ export function LessonView({
             setDialog(null);
           }}
         >
-          <p className="z-help">保存在这份作品中，不影响你的学习 Skill。</p>
           <textarea
             className="z-study-notes"
             aria-label="我的学习笔记"

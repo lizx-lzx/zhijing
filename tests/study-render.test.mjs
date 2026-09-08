@@ -3,9 +3,10 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import { parseHTML } from "linkedom";
 import { createServer } from "vite";
 import react from "@vitejs/plugin-react";
-import { buildProfile } from "../lib/domain.ts";
+import { buildProfile, questions } from "../lib/domain.ts";
 import { entryRoute } from "../lib/entry-route.ts";
 import { pageMotionEnabled } from "../lib/motion-policy.ts";
 import { stat, readFile } from "node:fs/promises";
@@ -73,6 +74,12 @@ test("welcome, preference examples and private library covers use real visual as
     assert.match(html, /learning-paths-v1.webp/);
     assert.match(html, /原有作品保留/);
     assert.match(html, /找到我的学法/);
+    assert.match(html, /8 题 · 约 2 分钟 · 随时可改/);
+    assert.match(html, /成品示例/);
+    assert.doesNotMatch(
+      html,
+      /让长文更容易开始|看示例，不用给自己分类|按你的节奏，随时继续|<figcaption/,
+    );
     assert.ok(
       (await stat("public/images/learning-paths-v1.webp")).size < 100000,
     );
@@ -112,6 +119,128 @@ test("welcome, preference examples and private library covers use real visual as
       }),
     );
     assert.match(pending, /learning-paths-v1.webp/);
+  } finally {
+    await server.close();
+  }
+});
+test("concise settings preserve the full questionnaire and explicit save boundaries", async () => {
+  const server = await createServer({
+    configFile: false,
+    plugins: [react()],
+    server: { middlewareMode: true },
+    appType: "custom",
+  });
+  try {
+    const { SkillEditor, Onboarding } = await server.ssrLoadModule(
+      "/components/learning-onboarding.tsx",
+    );
+    const { Workbench, LearningLibrary } = await server.ssrLoadModule(
+      "/components/learning-workbench.tsx",
+    );
+    const profile = buildProfile({
+      primary: "video",
+      extras: ["reading", "audio"],
+    });
+    const before = JSON.stringify(profile);
+    const html = renderToStaticMarkup(
+      createElement(SkillEditor, {
+        profile,
+        existing: true,
+        onSave() {},
+        onBack() {},
+        onRetake() {},
+      }),
+    );
+    const { document } = parseHTML(html);
+    assert.equal(
+      document.querySelector(".z-profile-summary").children.length,
+      3,
+    );
+    assert.equal(
+      document.querySelector(".z-profile-rules").hasAttribute("open"),
+      false,
+    );
+    assert.equal(
+      document.querySelectorAll(".z-rule").length,
+      profile.rules.length,
+    );
+    assert.equal(document.querySelectorAll(".z-profile-visual").length, 0);
+    for (const copy of [
+      "保存后生效",
+      "保存并开始学习",
+      "查看与编辑学习规则",
+      "下载 Skill",
+      "重新做问卷",
+    ])
+      assert.ok(html.includes(copy), copy);
+
+    const workbench = renderToStaticMarkup(
+      createElement(Workbench, {
+        profile,
+        lessons: [],
+        onOpen() {},
+        onGenerated() {},
+        onProfile() {},
+        onLibrary() {},
+      }),
+    );
+    const work = parseHTML(workbench).document;
+    const settings = work.querySelector(".z-temporary");
+    assert.equal(settings.hasAttribute("open"), false);
+    assert.equal(settings.querySelectorAll("select").length, 4);
+    assert.match(
+      settings.querySelector("summary").textContent,
+      /讲解视频.*图文.*音频/,
+    );
+    assert.equal(work.querySelectorAll(".z-current-profile").length, 0);
+    assert.equal(
+      work.querySelectorAll(".z-composer .z-format-preview").length,
+      0,
+    );
+    for (const copy of [
+      "只影响这次",
+      "不改变已保存的学法",
+      "修改长期学法",
+      "有权使用",
+      "AI 服务处理",
+      "同时生成全部形式",
+    ])
+      assert.ok(workbench.includes(copy), copy);
+    assert.equal(
+      JSON.stringify(profile),
+      before,
+      "view rendering does not mutate the saved profile",
+    );
+
+    const questionnaire = renderToStaticMarkup(
+      createElement(Onboarding, {
+        initial: profile.answers,
+        onSave() {},
+        onCancel() {},
+      }),
+    );
+    assert.equal(questions.length, 8);
+    assert.equal(questions.filter((q) => q.multiple).length, 2);
+    assert.match(questionnaire, /随时可改/);
+    const goals = questions.find((q) => q.id === "goal");
+    assert.match(
+      goals.options.find((o) => o.value === "remember").detail,
+      /过几天/,
+    );
+    assert.match(
+      goals.options.find((o) => o.value === "apply").detail,
+      /实际问题/,
+    );
+    assert.match(
+      questions.find((q) => q.id === "interaction").help,
+      /不答题也能看完/,
+    );
+
+    const library = renderToStaticMarkup(
+      createElement(LearningLibrary, { lessons: [], onOpen() {}, onAdd() {} }),
+    );
+    assert.equal((library.match(/自动保存在这里/g) || []).length, 1);
+    assert.match(library, /按标题搜索作品/);
   } finally {
     await server.close();
   }
@@ -213,7 +342,15 @@ test("main product renders all seven study modes from a single private lesson", 
       assert.ok(html.includes(expected), mode);
       assert.ok(html.includes("我的笔记"));
       assert.ok(html.includes("导出"));
-      assert.ok(html.includes('aria-pressed="true"'));
+      const select = parseHTML(html).document.querySelector(
+        'select[aria-label="学习形式"]',
+      );
+      assert.equal(select.querySelectorAll("option").length, 7);
+      assert.equal(select.querySelector("option[selected]").value, mode);
+      assert.equal(
+        parseHTML(html).document.querySelectorAll(".z-medium-tabs").length,
+        0,
+      );
       assert.doesNotMatch(html, /×\s*OpenMAIC/);
     }
     const legacy = structuredClone(lesson);
@@ -228,6 +365,15 @@ test("main product renders all seven study modes from a single private lesson", 
       }),
     );
     assert.ok(html.includes("生成新版，保留原版"));
+    const select = parseHTML(html).document.querySelector(
+      'select[aria-label="学习形式"]',
+    );
+    assert.equal(select.querySelectorAll("option").length, 5);
+    assert.equal(
+      select.querySelector("option[selected]").value,
+      "video",
+      "new works use the preferred first format",
+    );
   } finally {
     await server.close();
   }

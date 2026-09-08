@@ -266,11 +266,8 @@ try {
   );
   await page.getByRole("button", { name: "保存并开始学习" }).click();
   await snapshot(page, "workspace-empty");
-  await page.getByRole("button", { name: "临时调整" }).click();
-  assert.equal(
-    await page.locator("#temporary-learning-settings").getAttribute("open"),
-    "",
-  );
+  await page.locator(".z-temporary > summary").click();
+  assert.equal(await page.locator(".z-temporary").getAttribute("open"), "");
   await page
     .getByRole("navigation")
     .getByRole("button", { name: "学习库" })
@@ -281,6 +278,7 @@ try {
     .getByRole("button", { name: "我的学法" })
     .click();
   await snapshot(page, "skill-existing");
+  await page.locator(".z-profile-rules > summary").click();
   const rule = page
     .locator(".z-rule")
     .filter({ has: page.getByText("修改这条", { exact: true }) })
@@ -342,7 +340,7 @@ try {
     Math.abs((await p.locator("video").evaluate((v) => v.currentTime)) - 20) <
       1,
   );
-  await p.getByRole("button", { name: "完整图文", exact: true }).click();
+  await p.getByRole("combobox", { name: "学习形式" }).selectOption("reading");
   await snapshot(p, "lesson-reading");
   await p.getByRole("button", { name: "查看对应原文" }).first().click();
   await p.getByRole("dialog").waitFor();
@@ -369,9 +367,9 @@ try {
     await p.locator(".z-chapter-nav button[aria-current='step']").textContent(),
     `02${content.chapters[1].title}`,
   );
-  await p.getByRole("button", { name: "独立听读", exact: true }).click();
+  await p.getByRole("combobox", { name: "学习形式" }).selectOption("audio");
   await snapshot(p, "lesson-audio", [1440, 390, 320]);
-  await p.getByRole("button", { name: "网页讲解", exact: true }).click();
+  await p.getByRole("combobox", { name: "学习形式" }).selectOption("animation");
   await snapshot(p, "lesson-animation", [1440, 390, 320]);
   await p.getByRole("button", { name: "返回学习库" }).click();
   await p

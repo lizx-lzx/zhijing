@@ -2,13 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRef } from "react";
 import type { PointerEvent } from "react";
-import {
-  ArrowRight,
-  BookOpen,
-  Headphones,
-  MonitorPlay,
-  Play,
-} from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 import StaggeredText from "./react-bits/staggered-text";
 import { base } from "./learning-ui";
 
@@ -51,7 +45,6 @@ export function Welcome({
     <main className="z-container z-welcome-visual">
       <section className="z-welcome-intro">
         <div className="z-welcome-copy">
-          <span className="z-kicker">让长文更容易开始</span>
           <StaggeredText
             as="h1"
             text={"知识不必难读。\n换成你的讲法。"}
@@ -64,11 +57,7 @@ export function Welcome({
             to={{ opacity: 1, y: 0 }}
             respectReducedMotion
           />
-          <p>
-            一篇文章，可以看、可以听，
-            <br />
-            也可以一步步弄明白。
-          </p>
+          <p>把文章变成适合你的图文、音频或视频。</p>
           <button
             className="button button-primary button-large"
             onClick={onStart}
@@ -85,9 +74,7 @@ export function Welcome({
           )}
           <span className="z-welcome-meta">8 题 · 约 2 分钟 · 随时可改</span>
           {returning && (
-            <p className="z-revisit-note">
-              可以从头体验；原有作品保留，学法保存后才更新。
-            </p>
+            <p className="z-revisit-note">原有作品保留，学法保存后才更新。</p>
           )}
         </div>
         <figure
@@ -103,20 +90,6 @@ export function Welcome({
             fetchPriority="high"
             alt="一张长文沿着纸带，变成视频画面、图文读本和听读音频"
           />
-          <figcaption>
-            <span>
-              <MonitorPlay size={18} />
-              看讲解
-            </span>
-            <span>
-              <BookOpen size={18} />
-              读图文
-            </span>
-            <span>
-              <Headphones size={18} />
-              听内容
-            </span>
-          </figcaption>
         </figure>
       </section>
       <section className="z-welcome-bottom" aria-label="从偏好到学习作品">
@@ -124,22 +97,19 @@ export function Welcome({
           <li>
             <span>01</span>
             <div>
-              <strong>选你喜欢的讲法</strong>
-              <small>看示例，不用给自己分类</small>
+              <strong>选学法</strong>
             </div>
           </li>
           <li>
             <span>02</span>
             <div>
-              <strong>放进一篇文章</strong>
-              <small>知乎链接或粘贴正文</small>
+              <strong>放入文章</strong>
             </div>
           </li>
           <li>
             <span>03</span>
             <div>
-              <strong>开始你的学习</strong>
-              <small>按你的节奏，随时继续</small>
+              <strong>开始学习</strong>
             </div>
           </li>
         </ol>
@@ -158,9 +128,8 @@ export function Welcome({
             <Play size={18} aria-hidden="true" />
           </span>
           <span>
-            <small>先看一份成品 · 示例偏好</small>
+            <small>成品示例</small>
             <strong>窗口期可能只剩五年</strong>
-            <span>视频 / 图解 / 听读</span>
           </span>
           <ArrowRight size={19} />
         </a>

@@ -107,7 +107,7 @@
   [data-motion="on"] .z-welcome-copy > :not(h1),
   [data-motion="on"] .z-welcome-bottom,
   [data-motion="on"] .z-page-heading,
-  [data-motion="on"] .z-profile-visual {
+  [data-motion="on"] .z-profile-summary {
     animation: zSurfaceIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
   [data-motion="on"] .z-welcome-copy > p {

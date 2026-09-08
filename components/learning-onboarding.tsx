@@ -4,6 +4,7 @@ import {
   ArrowLeft,
   ArrowRight,
   Check,
+  ChevronDown,
   Download,
   ShieldCheck,
 } from "lucide-react";
@@ -15,7 +16,7 @@ import {
 } from "../lib/domain";
 import type { Answers, Medium, Profile } from "../lib/domain";
 import { api, endpoint, ErrorNotice, Spinner } from "./learning-ui";
-import { ChoicePreview, MediaPreview } from "./learning-previews";
+import { ChoicePreview } from "./learning-previews";
 
 export function SkillEditor({
   profile,
@@ -54,17 +55,7 @@ export function SkillEditor({
   return (
     <main className="z-container-small z-profile">
       <div className="z-page-heading">
-        <span className="z-kicker">个人学习 Skill</span>
         <h1>{existing ? "我的学法" : "你的学法，准备好了"}</h1>
-        <p>{draft.summary}</p>
-      </div>
-      <div className="z-profile-visual">
-        <MediaPreview medium={draft.answers.primary} />
-        <div>
-          <span className="z-kicker">你的主要形式 · 呈现示意</span>
-          <h2>{mediaLabels[draft.answers.primary]}</h2>
-          <p>先用你愿意开始的方式，再把内容讲清楚。</p>
-        </div>
       </div>
       <div className="z-profile-summary">
         {(["primary", "entry", "pace"] as const).map((key, i) => (
@@ -82,54 +73,58 @@ export function SkillEditor({
       </div>
       <div className="z-profile-banner">
         <ShieldCheck size={20} />
-        <span>不是能力测评。修改后点保存，才会改变以后的讲法。</span>
+        <span>按偏好定制，不是能力测评。保存后生效。</span>
       </div>
-      <div className="z-rule-list">
-        {draft.rules.map((r) => (
-          <details
-            key={r.id}
-            className="z-rule"
-            open={editing === r.id ? true : undefined}
-          >
-            <summary>
-              <span>{r.title}</span>
-              <span className="z-rule-open">查看规则</span>
-            </summary>
-            <div className="z-rule-content">
-              <p className="z-rule-evidence">依据：{r.evidence}</p>
-              {editing === r.id ? (
-                <textarea
-                  aria-label={`编辑${r.title}`}
-                  value={r.instruction}
-                  maxLength={1500}
-                  onChange={(e) =>
-                    setDraft({
-                      ...draft,
-                      rules: draft.rules.map((rule) =>
-                        rule.id === r.id
-                          ? { ...rule, instruction: e.target.value }
-                          : rule,
-                      ),
-                    })
-                  }
-                />
-              ) : (
-                <p>{r.instruction}</p>
-              )}
-              {["entry", "goal", "support", "pace", "personal"].includes(
-                r.id,
-              ) && (
-                <button
-                  className="z-text-link"
-                  onClick={() => setEditing(editing === r.id ? null : r.id)}
-                >
-                  {editing === r.id ? "收起编辑" : "修改这条"}
-                </button>
-              )}
-            </div>
-          </details>
-        ))}
-      </div>
+      <details className="z-detail z-profile-rules">
+        <summary>查看与编辑学习规则</summary>
+        <p>{draft.summary}</p>
+        <div className="z-rule-list">
+          {draft.rules.map((r) => (
+            <details
+              key={r.id}
+              className="z-rule"
+              open={editing === r.id ? true : undefined}
+            >
+              <summary>
+                <span>{r.title}</span>
+                <ChevronDown size={16} aria-hidden="true" />
+              </summary>
+              <div className="z-rule-content">
+                <p className="z-rule-evidence">依据：{r.evidence}</p>
+                {editing === r.id ? (
+                  <textarea
+                    aria-label={`编辑${r.title}`}
+                    value={r.instruction}
+                    maxLength={1500}
+                    onChange={(e) =>
+                      setDraft({
+                        ...draft,
+                        rules: draft.rules.map((rule) =>
+                          rule.id === r.id
+                            ? { ...rule, instruction: e.target.value }
+                            : rule,
+                        ),
+                      })
+                    }
+                  />
+                ) : (
+                  <p>{r.instruction}</p>
+                )}
+                {["entry", "goal", "support", "pace", "personal"].includes(
+                  r.id,
+                ) && (
+                  <button
+                    className="z-text-link"
+                    onClick={() => setEditing(editing === r.id ? null : r.id)}
+                  >
+                    {editing === r.id ? "收起编辑" : "修改这条"}
+                  </button>
+                )}
+              </div>
+            </details>
+          ))}
+        </div>
+      </details>
       <ErrorNotice message={error} />
       {existing && (
         <div className="z-profile-tools">
@@ -238,7 +233,7 @@ export function Onboarding({
     <main className="z-onboarding z-container-small">
       <div className="z-question-meta">
         <span>
-          第 {step + 1} / {questions.length} 题 · 约 2 分钟
+          第 {step + 1} / {questions.length} 题
         </span>
         <strong>随时可改</strong>
       </div>
@@ -275,7 +270,7 @@ export function Onboarding({
         <h1>{q.title}</h1>
         {q.help && <p className="z-help">{q.help}</p>}
         {["primary", "entry"].includes(q.id) && (
-          <span className="z-preview-caption">呈现示意 · 看看哪种更想继续</span>
+          <span className="z-preview-caption">呈现示意</span>
         )}
         <div
           className={`z-choices${["primary", "entry", "pace"].includes(q.id) ? " z-visual-choices" : ""}`}
@@ -321,7 +316,13 @@ export function Onboarding({
                   </span>
                   <span>
                     <strong>{option.label}</strong>
-                    {option.detail && <small>{option.detail}</small>}
+                    {option.detail && (
+                      <small
+                        className={q.id === "entry" ? "sr-only" : undefined}
+                      >
+                        {option.detail}
+                      </small>
+                    )}
                   </span>
                 </span>
               </button>
