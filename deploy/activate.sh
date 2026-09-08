@@ -7,9 +7,10 @@ previous=$(readlink -f "$app/current")
 test "$previous" = "$app/releases/20260829-145102-b28d351"
 test -s "$release/dist/server/index.js"
 test -s "$previous/deploy/zhijing-location.conf"
+cmp -s "$previous/deploy/zhijing-location.conf" /etc/nginx/snippets/zhijing-location.conf
 test ! -e "$app/current-next"
 rollback() {
-  sudo systemctl stop zhijing-api.service || true
+  sudo systemctl disable --now zhijing-api.service || true
   sudo ln -s "$previous" "$app/current-rollback"
   sudo mv -Tf "$app/current-rollback" "$app/current"
   sudo install -m 644 "$previous/deploy/zhijing-location.conf" /etc/nginx/snippets/zhijing-location.conf
@@ -33,6 +34,13 @@ for attempt in $(seq 1 15); do
 done
 test "$healthy" = true
 sudo systemctl reload nginx
-curl -fsS --max-time 20 https://app.chainvalley.top/zhijing/api/health
+# A successful HUP returns before new nginx workers have taken over all listeners.
+# Poll the public route instead of treating the first old-worker 404 as a failed release.
+public_healthy=false
+for attempt in $(seq 1 15); do
+  if curl -fsS --max-time 10 https://app.chainvalley.top/zhijing/api/health; then public_healthy=true; break; fi
+  sleep 2
+done
+test "$public_healthy" = true
 trap - ERR
 printf '\nNew Zhijing release active; previous release retained.\n'
