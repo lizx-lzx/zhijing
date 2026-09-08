@@ -6,6 +6,93 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { createServer } from "vite";
 import react from "@vitejs/plugin-react";
 import { buildProfile } from "../lib/domain.ts";
+import { entryRoute } from "../lib/entry-route.ts";
+import { stat } from "node:fs/promises";
+
+test("welcome entry is non-destructive and takes precedence over a resume link", () => {
+  const id = "a".repeat(32);
+  assert.deepEqual(entryRoute(true, `?start=welcome&lesson=${id}`), {
+    view: "welcome",
+    lesson: null,
+  });
+  assert.deepEqual(entryRoute(true, `?lesson=${id}`), {
+    view: "workspace",
+    lesson: id,
+  });
+  assert.deepEqual(entryRoute(false, `?lesson=${id}`), {
+    view: "welcome",
+    lesson: null,
+  });
+  assert.equal(entryRoute(true, "?lesson=../other").lesson, null);
+  assert.equal(entryRoute(true, "").view, "workspace");
+});
+
+test("welcome, preference examples and private library covers use real visual assets", async () => {
+  const server = await createServer({
+    configFile: false,
+    plugins: [react()],
+    server: { middlewareMode: true },
+    appType: "custom",
+  });
+  try {
+    const { Welcome } = await server.ssrLoadModule(
+      "/components/learning-welcome.tsx",
+    );
+    const { ChoicePreview } = await server.ssrLoadModule(
+      "/components/learning-previews.tsx",
+    );
+    const { LessonCard } = await server.ssrLoadModule(
+      "/components/learning-workbench.tsx",
+    );
+    const html = renderToStaticMarkup(
+      createElement(Welcome, { onStart() {}, returning: true }),
+    );
+    assert.match(html, /learning-paths-v1.webp/);
+    assert.match(html, /原有作品保留/);
+    assert.match(html, /找到我的学法/);
+    assert.ok(
+      (await stat("public/images/learning-paths-v1.webp")).size < 100000,
+    );
+    for (const [question, values] of Object.entries({
+      primary: ["video", "reading", "audio", "animation"],
+      entry: ["story", "analysis", "map", "question", "adaptive"],
+      pace: ["compact", "balanced", "gentle"],
+    })) {
+      for (const value of values) {
+        const preview = renderToStaticMarkup(
+          createElement(ChoicePreview, { question, value }),
+        );
+        assert.match(preview, /class="z-(format|entry|pace)-preview/);
+        if (question === "pace") assert.match(preview, /结论/);
+        assert.match(preview, /aria-hidden="true"/);
+        assert.doesNotMatch(preview, /<button|<audio|<video/);
+      }
+    }
+    const lesson = {
+      id: "a".repeat(32),
+      formats: ["video"],
+      status: "ready",
+      media: { videoReady: true },
+      createdAt: "2026-09-08T00:00:00Z",
+      title: "用户自己的文章",
+    };
+    const card = renderToStaticMarkup(
+      createElement(LessonCard, { lesson, onOpen() {} }),
+    );
+    assert.ok(card.includes(`/lessons/${lesson.id}/media/poster.jpg`));
+    assert.ok(card.includes("用户自己的文章"));
+    assert.doesNotMatch(card, /平均数|读书量/);
+    const pending = renderToStaticMarkup(
+      createElement(LessonCard, {
+        lesson: { ...lesson, media: {} },
+        onOpen() {},
+      }),
+    );
+    assert.match(pending, /learning-paths-v1.webp/);
+  } finally {
+    await server.close();
+  }
+});
 test("main product renders all seven study modes from a single private lesson", async () => {
   const server = await createServer({
     configFile: false,

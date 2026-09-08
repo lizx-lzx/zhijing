@@ -15,6 +15,7 @@ import {
 } from "../lib/domain";
 import type { Answers, Medium, Profile } from "../lib/domain";
 import { api, endpoint, ErrorNotice, Spinner } from "./learning-ui";
+import { ChoicePreview, MediaPreview } from "./learning-previews";
 
 export function SkillEditor({
   profile,
@@ -56,6 +57,14 @@ export function SkillEditor({
         <span className="z-kicker">个人学习 Skill</span>
         <h1>{existing ? "我的学法" : "你的学法，准备好了"}</h1>
         <p>{draft.summary}</p>
+      </div>
+      <div className="z-profile-visual">
+        <MediaPreview medium={draft.answers.primary} />
+        <div>
+          <span className="z-kicker">你的主要形式 · 呈现示意</span>
+          <h2>{mediaLabels[draft.answers.primary]}</h2>
+          <p>先用你愿意开始的方式，再把内容讲清楚。</p>
+        </div>
       </div>
       <div className="z-profile-summary">
         {(["primary", "entry", "pace"] as const).map((key, i) => (
@@ -265,7 +274,13 @@ export function Onboarding({
       <section key={step} className="z-question">
         <h1>{q.title}</h1>
         {q.help && <p className="z-help">{q.help}</p>}
-        <div className="z-choices" data-multiple={!!q.multiple}>
+        {["primary", "entry"].includes(q.id) && (
+          <span className="z-preview-caption">呈现示意 · 看看哪种更想继续</span>
+        )}
+        <div
+          className={`z-choices${["primary", "entry", "pace"].includes(q.id) ? " z-visual-choices" : ""}`}
+          data-multiple={!!q.multiple}
+        >
           {q.options.map((option) => {
             const value = answers[q.id];
             const selected = q.multiple
@@ -299,12 +314,15 @@ export function Onboarding({
                   })
                 }
               >
-                <span className="z-check">
-                  {selected && <Check size={16} />}
-                </span>
-                <span>
-                  <strong>{option.label}</strong>
-                  {option.detail && <small>{option.detail}</small>}
+                <ChoicePreview question={q.id} value={option.value} />
+                <span className="z-choice-label">
+                  <span className="z-check">
+                    {selected && <Check size={16} />}
+                  </span>
+                  <span>
+                    <strong>{option.label}</strong>
+                    {option.detail && <small>{option.detail}</small>}
+                  </span>
                 </span>
               </button>
             );

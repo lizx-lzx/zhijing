@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./product.css";
 @import "./study.css";
+@import "./visual-learning.css";
 
 :root {
   --paper: #f6f7fb;

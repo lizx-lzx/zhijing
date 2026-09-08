@@ -1,17 +1,10 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
-import {
-  ArrowRight,
-  Check,
-  Library,
-  Play,
-  Plus,
-  Settings2,
-  Sparkles,
-} from "lucide-react";
+import { Check, Library, Plus, Settings2 } from "lucide-react";
 import type { Answers, Lesson, Profile } from "../lib/domain";
 import { defaultAnswers, normalizeAnswers } from "../lib/domain";
-import StaggeredText from "./react-bits/staggered-text";
+import { entryRoute } from "../lib/entry-route";
+import { Welcome } from "./learning-welcome";
 import {
   api,
   base,
@@ -33,6 +26,7 @@ export default function LearningApp() {
     [lessons, setLessons] = useState<Lesson[]>([]),
     [lesson, setLesson] = useState<Lesson | null>(null);
   const [legacy, setLegacy] = useState<Answers | null>(null),
+    [freshQuestionnaire, setFreshQuestionnaire] = useState(false),
     [busy, setBusy] = useState(""),
     [error, setError] = useState(""),
     [notice, setNotice] = useState("");
@@ -61,9 +55,10 @@ export default function LearningApp() {
         setProfile(data.profile);
         setLessons(data.lessons);
         setHasRecovery(data.hasRecovery);
-        setView(data.profile ? "workspace" : "welcome");
-        const resume = new URL(window.location.href).searchParams.get("lesson");
-        if (data.profile && resume && /^[a-f0-9]{32}$/.test(resume)) {
+        const route = entryRoute(!!data.profile, window.location.search);
+        setView(route.view);
+        const resume = route.lesson;
+        if (resume) {
           try {
             const found = await api<{ lesson: Lesson }>(`/lessons/${resume}`);
             if (active) {
@@ -129,6 +124,8 @@ export default function LearningApp() {
     if (next !== "learning") {
       const url = new URL(window.location.href);
       url.searchParams.delete("lesson");
+      if (next === "welcome") url.searchParams.set("start", "welcome");
+      else url.searchParams.delete("start");
       window.history.replaceState(null, "", url);
     }
     setView(next);
@@ -143,6 +140,7 @@ export default function LearningApp() {
   function generated(l: Lesson) {
     const url = new URL(window.location.href);
     url.searchParams.set("lesson", l.id);
+    url.searchParams.delete("start");
     window.history.replaceState(null, "", url);
     setLesson(l);
     go("learning");
@@ -154,6 +152,7 @@ export default function LearningApp() {
       const data = await api<{ lesson: Lesson }>(`/lessons/${id}`);
       const url = new URL(window.location.href);
       url.searchParams.set("lesson", id);
+      url.searchParams.delete("start");
       window.history.replaceState(null, "", url);
       setLesson(data.lesson);
       go("learning");
@@ -214,19 +213,21 @@ export default function LearningApp() {
       </main>
     );
   return (
-    <div className={`z-app${profile ? " z-signed-in" : ""}`}>
+    <div
+      className={`z-app${profile && view !== "welcome" ? " z-signed-in" : ""}`}
+    >
       <a className="z-skip-link" href="#learning-content">
         跳到主要内容
       </a>
       <header className="z-top">
         <button
           className="z-brand-button"
-          onClick={() => go(profile ? "workspace" : "welcome")}
+          onClick={() => go("welcome")}
           aria-label="知径首页"
         >
           <Brand />
         </button>
-        {profile ? (
+        {profile && view !== "welcome" ? (
           <nav aria-label="主要导航">
             <button
               className={view === "workspace" ? "active" : ""}
@@ -287,83 +288,32 @@ export default function LearningApp() {
           </div>
         )}
         {view === "welcome" && (
-          <main className="z-welcome z-container">
-            <div className="z-welcome-copy">
-              <span className="z-kicker">让长文更容易开始</span>
-              <StaggeredText
-                as="h1"
-                text={"知识不必难读。\n换成你的讲法。"}
-                segmentBy="lines"
-                blur={false}
-                delay={60}
-                duration={0.25}
-                from={{ opacity: 1, y: 8 }}
-                to={{ opacity: 1, y: 0 }}
-                respectReducedMotion
-              />
-              <p>一次了解你的偏好，以后把文章变成适合你的视频、图文或音频。</p>
-              <button
-                className="button button-primary button-large"
-                onClick={() => go("questionnaire")}
-              >
-                {legacy ? "接着上次的偏好" : "找到我的学法"}
-                <ArrowRight size={18} />
-              </button>
-              <span className="z-welcome-meta">
-                8 题 · 约 2 分钟 · 随时可改
-              </span>
-              <ol className="z-welcome-steps" aria-label="使用流程">
-                <li>
-                  <span>01</span>了解偏好
-                </li>
-                <li>
-                  <span>02</span>放入文章
-                </li>
-                <li>
-                  <span>03</span>开始学习
-                </li>
-              </ol>
-            </div>
-            <div className="z-welcome-card">
-              <div className="z-card-cap">
-                <Sparkles size={19} />
-                <span>先看看，一篇文章可以变成什么</span>
-              </div>
-              <a
-                className="z-featured-lesson"
-                href={`${base}/demo/zhihu-window-20260908/?ui=4244aa2`}
-              >
-                <div
-                  className="z-featured-cover"
-                  style={{
-                    backgroundImage: `url(${base}/demo/zhihu-window-20260908/media/poster.jpg)`,
-                  }}
-                >
-                  <span>
-                    <Play size={22} fill="currentColor" />
-                    查看成品
-                  </span>
-                </div>
-                <div className="z-featured-copy">
-                  <span>知乎长文学习版 · 6 分 49 秒</span>
-                  <h2>窗口期可能只剩五年</h2>
-                  <p>视频、10 张图解、音频与笔记</p>
-                  <strong>
-                    打开这份学习作品 <ArrowRight size={18} />
-                  </strong>
-                </div>
-              </a>
-              <p className="z-featured-note">
-                使用示例偏好的单篇作品，内容含作者推演。
-              </p>
-            </div>
-          </main>
+          <Welcome
+            returning={!!profile}
+            onContinue={() => go("workspace")}
+            onStart={() => {
+              setFreshQuestionnaire(true);
+              go("questionnaire");
+            }}
+          />
         )}
         {view === "questionnaire" && (
           <Onboarding
-            initial={profile?.answers || legacy || defaultAnswers}
+            initial={
+              freshQuestionnaire
+                ? defaultAnswers
+                : profile?.answers || legacy || defaultAnswers
+            }
             onSave={saved}
-            onCancel={() => go(profile ? "profile" : "welcome")}
+            onCancel={() =>
+              go(
+                freshQuestionnaire
+                  ? "welcome"
+                  : profile
+                    ? "profile"
+                    : "welcome",
+              )
+            }
           />
         )}
         {view === "profile" && profile && (
@@ -373,7 +323,10 @@ export default function LearningApp() {
             existing
             onSave={saved}
             onBack={() => go("workspace")}
-            onRetake={() => go("questionnaire")}
+            onRetake={() => {
+              setFreshQuestionnaire(false);
+              go("questionnaire");
+            }}
           />
         )}
         {view === "workspace" && profile && (

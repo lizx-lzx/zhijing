@@ -1,4 +1,6 @@
 "use client";
+/* Private posters require the visitor cookie; do not route through an image proxy. */
+/* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
 import {
   ArrowRight,
@@ -13,7 +15,8 @@ import {
 } from "lucide-react";
 import type { Answers, Lesson, Profile, Source } from "../lib/domain";
 import { mediaLabels, questions } from "../lib/domain";
-import { api, ErrorNotice, Spinner } from "./learning-ui";
+import { api, base, endpoint, ErrorNotice, Spinner } from "./learning-ui";
+import { BookChart, MediaPreview } from "./learning-previews";
 
 export function LessonCard({
   lesson,
@@ -22,6 +25,7 @@ export function LessonCard({
   lesson: Lesson;
   onOpen: () => void;
 }) {
+  const [posterFailed, setPosterFailed] = useState(false);
   const statuses: Record<string, string> = {
     queued: "排队中",
     working: "正在制作",
@@ -39,7 +43,19 @@ export function LessonCard({
   return (
     <button className="z-lesson-card" onClick={onOpen}>
       <div className={`z-card-art z-card-art-${lesson.formats[0]}`}>
-        <Icon size={30} />
+        <img
+          src={
+            lesson.media.videoReady && !posterFailed
+              ? endpoint(`/lessons/${lesson.id}/media/poster.jpg`)
+              : `${base}/images/learning-paths-v1.webp`
+          }
+          alt=""
+          loading="lazy"
+          width={640}
+          height={360}
+          onError={() => setPosterFailed(true)}
+        />
+        <Icon size={24} className="z-card-medium-icon" />
         <span>{lesson.formats.map((f) => mediaLabels[f]).join(" / ")}</span>
       </div>
       <div className="z-lesson-card-body">
@@ -400,6 +416,10 @@ export function Workbench({
           </p>
         </section>
         <aside className="z-current-profile">
+          <MediaPreview
+            medium={overrides.primary || profile.answers.primary}
+            compact
+          />
           <span>这次默认</span>
           <h2>我的学习配方</h2>
           <p>
@@ -470,6 +490,9 @@ export function Workbench({
         </aside>
       </div>
       <section className="z-sample">
+        <div className="z-sample-graphic">
+          <BookChart />
+        </div>
         <div>
           <h3>手边没有文章？</h3>
           <p>用一篇“平均数”短文试试你的学法。</p>
