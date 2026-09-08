@@ -45,32 +45,42 @@ export function validateStudy(data, lesson, source) {
       },
       mapped,
     );
+  let rejectedConnections = 0;
   const connections = list(data.overview?.connections)
     .slice(0, 24)
-    .map((r) => {
+    .flatMap((r) => {
+      const aliases = {
+        cause: "causal",
+        comparison: "contrast",
+        compare: "contrast",
+        conditional: "condition",
+      };
+      const type = aliases[r?.type] || r?.type;
+      const refs = [...new Set(list(r?.sourceIds))];
       if (
+        !r ||
         !chapters.has(r.from) ||
         !chapters.has(r.to) ||
         r.from === r.to ||
-        !["condition", "contrast", "sequence", "related"].includes(r.type) ||
-        !text(r.label, 100)
-      )
-        fail(
-          "overview.connections",
-          {
-            chapterIds: [...chapters.keys()],
-            types: ["condition", "contrast", "sequence", "related"],
-            rule: "from/to 必须是不同的真实章节编号；label必填；type只能选一个枚举",
-          },
-          { from: r.from, to: r.to, type: r.type, label: r.label },
-        );
-      return {
-        from: r.from,
-        to: r.to,
-        type: r.type,
-        label: text(r.label, 100),
-        sourceIds: sourceIds(r.sourceIds),
-      };
+        !["condition", "contrast", "sequence", "related", "causal"].includes(
+          type,
+        ) ||
+        !text(r.label, 100) ||
+        !refs.length ||
+        refs.some((id) => !sources.has(id))
+      ) {
+        rejectedConnections++;
+        return [];
+      }
+      return [
+        {
+          from: r.from,
+          to: r.to,
+          type,
+          label: text(r.label, 100),
+          sourceIds: refs,
+        },
+      ];
     });
   const glossary = list(data.glossary)
     .slice(0, 12)
@@ -138,6 +148,10 @@ export function validateStudy(data, lesson, source) {
     .slice(0, 12)
     .map((b) => text(b, 700))
     .filter(Boolean);
+  if (rejectedConnections)
+    boundaries.push(
+      `系统提示：${rejectedConnections} 条候选章节联系未通过编号、来源或关系类型检查，因此未展示。全文分组仍覆盖全部章节。`,
+    );
   if (!scenarios.length && !text(data.practiceNote, 500))
     fail(
       "practiceNote",

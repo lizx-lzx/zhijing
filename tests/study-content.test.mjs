@@ -202,6 +202,15 @@ test("study schema covers every chapter once, pins valid references and labels t
   );
   assert.equal(value.scenarios[0].fictional, true);
   assert.equal(value.scenarios[0].options[0].id, "o1");
+  const unsupportedEdge = structuredClone(raw);
+  unsupportedEdge.overview.connections[0].to = "not-a-chapter";
+  const bounded = validateStudy(unsupportedEdge, lesson, source);
+  assert.equal(bounded.overview.connections.length, 0);
+  assert.match(bounded.boundaries.at(-1), /候选章节联系未通过/);
+  assert.equal(
+    bounded.overview.groups.flatMap((g) => g.chapterIds).length,
+    lesson.chapters.length,
+  );
   const missing = structuredClone(raw);
   missing.overview.groups[1].chapterIds = ["s2"];
   assert.throws(() => validateStudy(missing, lesson, source));
