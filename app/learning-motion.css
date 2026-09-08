@@ -1,0 +1,280 @@
+/* One opt-out governs page effects. Media players are deliberately excluded. */
+.z-motion-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--muted);
+  background: white;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+.z-motion-toggle[aria-pressed="true"] {
+  color: var(--primary-dark);
+  background: #f1f4ff;
+}
+.z-motion-toggle:disabled {
+  cursor: default;
+  opacity: 0.75;
+}
+.z-signed-in .z-motion-toggle {
+  margin-top: auto;
+}
+.z-signed-in .z-account {
+  margin-top: 10px;
+}
+.z-learning-hero {
+  --hero-x: 0deg;
+  --hero-y: 0deg;
+}
+
+@keyframes zSurfaceIn {
+  from {
+    opacity: 0.6;
+    translate: 0 16px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes zChoiceIn {
+  from {
+    opacity: 0.55;
+    translate: 0 9px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes zHeroFloat {
+  0%,
+  100% {
+    transform: translateY(2px) scale(0.985);
+  }
+  50% {
+    transform: translateY(-7px) scale(1);
+  }
+}
+@keyframes zCheckPop {
+  0% {
+    transform: scale(0.78);
+  }
+  65% {
+    transform: scale(1.14);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes zWaveBreath {
+  0%,
+  100% {
+    transform: scaleY(0.55);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+@keyframes zBarGrow {
+  from {
+    transform: scaleY(0.18);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes zNodeFocus {
+  0%,
+  70%,
+  100% {
+    background: white;
+    transform: translateY(0);
+  }
+  25%,
+  45% {
+    background: #dfe7ff;
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-motion="on"] .z-welcome-copy > :not(h1),
+  [data-motion="on"] .z-welcome-bottom,
+  [data-motion="on"] .z-page-heading,
+  [data-motion="on"] .z-profile-visual {
+    animation: zSurfaceIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  [data-motion="on"] .z-welcome-copy > p {
+    animation-delay: 0.08s;
+  }
+  [data-motion="on"] .z-welcome-copy > .button {
+    animation-delay: 0.16s;
+  }
+  [data-motion="on"] .z-welcome-copy > .z-welcome-meta {
+    animation-delay: 0.23s;
+  }
+  [data-motion="on"] .z-welcome-bottom {
+    animation-delay: 0.24s;
+  }
+  [data-motion="on"] .z-learning-hero {
+    transform: perspective(900px) rotateX(var(--hero-y)) rotateY(var(--hero-x));
+    transition:
+      transform 0.35s ease-out,
+      box-shadow 0.35s ease-out;
+  }
+  [data-motion="on"] .z-learning-hero img {
+    animation: zHeroFloat 6s ease-in-out infinite;
+  }
+  [data-motion="on"] .z-learning-hero figcaption > span {
+    animation: zChoiceIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  [data-motion="on"] .z-learning-hero figcaption > span:nth-child(2) {
+    animation-delay: 0.12s;
+  }
+  [data-motion="on"] .z-learning-hero figcaption > span:nth-child(3) {
+    animation-delay: 0.24s;
+  }
+  [data-motion="on"] .z-question {
+    animation: zSurfaceIn 0.26s ease-out;
+  }
+  [data-motion="on"] .z-question .z-choice {
+    animation: zChoiceIn 0.32s ease-out backwards;
+  }
+  [data-motion="on"] .z-question .z-choice:nth-child(2) {
+    animation-delay: 0.035s;
+  }
+  [data-motion="on"] .z-question .z-choice:nth-child(3) {
+    animation-delay: 0.07s;
+  }
+  [data-motion="on"] .z-question .z-choice:nth-child(4) {
+    animation-delay: 0.105s;
+  }
+  [data-motion="on"] .z-question .z-choice:nth-child(5) {
+    animation-delay: 0.14s;
+  }
+  [data-motion="on"] .z-question .z-choice:nth-child(6) {
+    animation-delay: 0.175s;
+  }
+  [data-motion="on"] .z-choice,
+  [data-motion="on"] .z-lesson-card,
+  [data-motion="on"] .z-example-link,
+  [data-motion="on"] .button,
+  [data-motion="on"] .z-groups button {
+    transition:
+      transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.22s ease,
+      border-color 0.18s ease,
+      background 0.18s ease;
+  }
+  [data-motion="on"] .z-choice.selected .z-check svg {
+    animation: zCheckPop 0.28s ease-out;
+  }
+  [data-motion="on"] .z-progress > span {
+    transition: width 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  [data-motion="on"] .button:not(:disabled):active,
+  [data-motion="on"] .z-choice:not(:disabled):active {
+    transform: scale(0.985);
+  }
+  [data-motion="on"]
+    .z-choice:is(:hover, :focus-visible, .selected)
+    .z-waveform
+    > span {
+    animation: zWaveBreath 1.7s ease-in-out infinite;
+  }
+  [data-motion="on"] .z-waveform > span:nth-child(2n) {
+    animation-delay: -0.4s !important;
+  }
+  [data-motion="on"] .z-waveform > span:nth-child(3n) {
+    animation-delay: -0.9s !important;
+  }
+  [data-motion="on"] .z-waveform > span:nth-child(5n) {
+    animation-delay: -1.2s !important;
+  }
+  [data-motion="on"] .z-choice:is(:hover, :focus-visible) .z-demo-bar {
+    animation: zBarGrow 0.55s ease-out both;
+    transform-box: fill-box;
+    transform-origin: center bottom;
+  }
+  [data-motion="on"]
+    .z-choice:is(:hover, :focus-visible, .selected)
+    .z-mini-map
+    > span {
+    animation: zNodeFocus 3.6s ease-in-out infinite;
+  }
+  [data-motion="on"] .z-mini-map > span:nth-child(2) {
+    animation-delay: -2.4s !important;
+  }
+  [data-motion="on"] .z-mini-map > span:nth-child(3) {
+    animation-delay: -1.2s !important;
+  }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  [data-motion="on"] .z-choice:not(:disabled):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 22px #4c62a518;
+  }
+  [data-motion="on"] .z-lesson-card:hover,
+  [data-motion="on"] .z-example-link:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px #33477317;
+  }
+  [data-motion="on"] .button-primary:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px #4c5fe82b;
+  }
+  [data-motion="on"] .z-learning-hero:hover {
+    box-shadow: 0 18px 40px #4a72a218;
+  }
+}
+/* CSS and ReactBits must both settle immediately; never hide essential text. */
+[data-motion="off"] *,
+[data-motion="off"] *::before,
+[data-motion="off"] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+[data-motion="off"] .z-learning-hero,
+[data-motion="off"] .z-learning-hero img,
+[data-motion="off"] .staggered-text span {
+  transform: none !important;
+  translate: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .z-learning-hero,
+  .z-learning-hero img,
+  .staggered-text span {
+    transform: none !important;
+    translate: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+  }
+}
+@media (max-width: 700px) {
+  .z-top {
+    gap: 10px;
+  }
+  .z-motion-toggle {
+    width: 40px;
+    min-height: 40px;
+    padding: 8px;
+    flex-shrink: 0;
+  }
+  .z-motion-toggle span {
+    display: none;
+  }
+  .z-signed-in .z-motion-toggle {
+    margin: 0 0 0 auto;
+  }
+  .z-signed-in .z-account {
+    margin: 0;
+  }
+}

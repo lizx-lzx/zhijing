@@ -1,9 +1,11 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
-import { Check, Library, Plus, Settings2 } from "lucide-react";
+import { Check, Library, Pause, Play, Plus, Settings2 } from "lucide-react";
+import { useReducedMotion } from "motion/react";
 import type { Answers, Lesson, Profile } from "../lib/domain";
 import { defaultAnswers, normalizeAnswers } from "../lib/domain";
 import { entryRoute } from "../lib/entry-route";
+import { pageMotionEnabled } from "../lib/motion-policy";
 import { Welcome } from "./learning-welcome";
 import {
   api,
@@ -19,6 +21,20 @@ import { LearningLibrary, Workbench } from "./learning-workbench";
 import { LessonView } from "./learning-lesson";
 
 export default function LearningApp() {
+  const reducedMotion = useReducedMotion();
+  const [motionPaused, setMotionPaused] = useState(false);
+  const [pageVisible, setPageVisible] = useState(true);
+  const motionEnabled = pageMotionEnabled(
+    motionPaused,
+    !!reducedMotion,
+    pageVisible,
+  );
+  useEffect(() => {
+    const update = () => setPageVisible(document.visibilityState !== "hidden");
+    update();
+    document.addEventListener("visibilitychange", update);
+    return () => document.removeEventListener("visibilitychange", update);
+  }, []);
   const [boot, setBoot] = useState(true),
     [bootError, setBootError] = useState("");
   const [view, setView] = useState("welcome"),
@@ -215,6 +231,7 @@ export default function LearningApp() {
   return (
     <div
       className={`z-app${profile && view !== "welcome" ? " z-signed-in" : ""}`}
+      data-motion={motionEnabled ? "on" : "off"}
     >
       <a className="z-skip-link" href="#learning-content">
         跳到主要内容
@@ -260,6 +277,32 @@ export default function LearningApp() {
         ) : (
           <span className="z-top-note">你的个人学习空间</span>
         )}
+        <button
+          className="z-motion-toggle"
+          type="button"
+          aria-label="页面动效"
+          aria-pressed={!motionPaused && !reducedMotion}
+          disabled={!!reducedMotion}
+          title={
+            reducedMotion
+              ? "跟随系统的减少动态效果设置"
+              : "只影响页面动效，不影响音视频播放"
+          }
+          onClick={() => setMotionPaused((value) => !value)}
+        >
+          {!motionPaused && !reducedMotion ? (
+            <Pause size={17} />
+          ) : (
+            <Play size={17} />
+          )}
+          <span>
+            {reducedMotion
+              ? "已减少动态"
+              : motionPaused
+                ? "开启动效"
+                : "暂停动效"}
+          </span>
+        </button>
         <button
           className="z-account"
           onClick={() => {

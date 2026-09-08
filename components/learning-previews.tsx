@@ -20,6 +20,7 @@ export function BookChart() {
       {[2, 2, 3, 3, 20].map((value, i) => (
         <g key={i}>
           <rect
+            className="z-demo-bar"
             x={32 + i * 46}
             y={88 - value * 3.1}
             width="25"

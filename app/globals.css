@@ -2,6 +2,7 @@
 @import "./product.css";
 @import "./study.css";
 @import "./visual-learning.css";
+@import "./learning-motion.css";
 
 :root {
   --paper: #f6f7fb;

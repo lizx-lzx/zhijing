@@ -7,7 +7,30 @@ import { createServer } from "vite";
 import react from "@vitejs/plugin-react";
 import { buildProfile } from "../lib/domain.ts";
 import { entryRoute } from "../lib/entry-route.ts";
-import { stat } from "node:fs/promises";
+import { pageMotionEnabled } from "../lib/motion-policy.ts";
+import { stat, readFile } from "node:fs/promises";
+
+test("page motion can stop independently of saved profiles and media playback", async () => {
+  for (const paused of [true, false])
+    for (const reduced of [true, false])
+      for (const visible of [true, false])
+        assert.equal(
+          pageMotionEnabled(paused, reduced, visible),
+          !paused && !reduced && visible,
+        );
+  const css = await readFile("app/learning-motion.css", "utf8");
+  assert.match(css, /prefers-reduced-motion: reduce/);
+  assert.match(css, /\[data-motion="off"\]/);
+  assert.match(css, /animation:\s*none !important/);
+  assert.match(css, /opacity:\s*1 !important/);
+  const source = await readFile("components/learning-app.tsx", "utf8");
+  assert.match(source, /visibilitychange/);
+  assert.match(source, /aria-label="页面动效"/);
+  assert.doesNotMatch(
+    await readFile("components/learning-welcome.tsx", "utf8"),
+    /requestAnimationFrame|setInterval/,
+  );
+});
 
 test("welcome entry is non-destructive and takes precedence over a resume link", () => {
   const id = "a".repeat(32);

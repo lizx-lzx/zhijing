@@ -1,5 +1,7 @@
 /* Static WebP is pre-optimized; serve directly without an image transformation service. */
 /* eslint-disable @next/next/no-img-element */
+import { useRef } from "react";
+import type { PointerEvent } from "react";
 import {
   ArrowRight,
   BookOpen,
@@ -19,6 +21,32 @@ export function Welcome({
   onContinue?: () => void;
   returning?: boolean;
 }) {
+  const heroRef = useRef<HTMLElement>(null);
+  function moveHero(event: PointerEvent<HTMLElement>) {
+    const hero = heroRef.current;
+    if (
+      !hero ||
+      event.pointerType !== "mouse" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      hero.closest('[data-motion="off"]')
+    )
+      return;
+    const bounds = hero.getBoundingClientRect();
+    const x = Math.max(
+      -1,
+      Math.min(1, ((event.clientX - bounds.left) / bounds.width) * 2 - 1),
+    );
+    const y = Math.max(
+      -1,
+      Math.min(1, ((event.clientY - bounds.top) / bounds.height) * 2 - 1),
+    );
+    hero.style.setProperty("--hero-x", `${x * 1.7}deg`);
+    hero.style.setProperty("--hero-y", `${-y * 1.7}deg`);
+  }
+  function resetHero() {
+    heroRef.current?.style.setProperty("--hero-x", "0deg");
+    heroRef.current?.style.setProperty("--hero-y", "0deg");
+  }
   return (
     <main className="z-container z-welcome-visual">
       <section className="z-welcome-intro">
@@ -29,9 +57,10 @@ export function Welcome({
             text={"知识不必难读。\n换成你的讲法。"}
             segmentBy="lines"
             blur={false}
-            delay={60}
-            duration={0.25}
-            from={{ opacity: 1, y: 8 }}
+            delay={140}
+            duration={0.65}
+            easing={[0.22, 1, 0.36, 1]}
+            from={{ opacity: 1, y: 20 }}
             to={{ opacity: 1, y: 0 }}
             respectReducedMotion
           />
@@ -61,7 +90,12 @@ export function Welcome({
             </p>
           )}
         </div>
-        <figure className="z-learning-hero">
+        <figure
+          className="z-learning-hero"
+          ref={heroRef}
+          onPointerMove={moveHero}
+          onPointerLeave={resetHero}
+        >
           <img
             src={`${base}/images/learning-paths-v1.webp`}
             width={1536}
