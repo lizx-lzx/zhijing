@@ -68,3 +68,9 @@ npm run build
 主站发布时应额外保留这份静态目录；它不在现有发布包源码中。撤下试作只需把这个精确子目录移出静态映射，不影响正式产品。
 
 上游：https://github.com/THU-MAIC/OpenMAIC 。依赖锁定见 package-lock.json。构建包体积存在非阻断的分块提示；为单篇试作暂未扩展性能工程。
+
+## 页面品牌
+
+2026-09-08 按用户要求移除页面上的联名标识，两份演示页都只显示「知径」。技术来源记录与 `THIRD-PARTY-NOTICES.txt` 原许可保留，不作为产品联名。实现提交 `f457b48`。
+
+两份公网页面均已验证：可见文字无 OpenMAIC、开源说明可下载且原版权声明仍在、视频元数据正常（408.8 / 164.8 秒）、390px 无横向溢出、无页面错误。记录位于主项目 `test-results/branding-f457b48/report.json`。只更新静态页面及其源码，不重启服务或重制媒体；旧入口备份在服务器 `/home/ubuntu/zhijing-ui-history/branding-f457b48/`，旧哈希资源保留。
