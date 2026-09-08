@@ -35,6 +35,10 @@ const choose = async (index) => {
 try {
   await fs.mkdir(new URL("render/", root), { recursive: true });
   await page.goto(url, { waitUntil: "networkidle" });
+  assert.doesNotMatch(await page.locator("body").innerText(), /OpenMAIC/i);
+  assert.ok(
+    await page.getByRole("link", { name: "开源说明", exact: true }).isVisible(),
+  );
   await page.waitForFunction(
     () => document.querySelector("video")?.readyState >= 2,
   );

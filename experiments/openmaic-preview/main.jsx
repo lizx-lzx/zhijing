@@ -637,7 +637,7 @@ function App() {
           </StudyDialog>
         )}
         <footer>
-          知径 × OpenMAIC · 单篇学习作品，尚未替换正式网站的通用生成流程。
+          知径 · 单篇学习作品，尚未替换正式网站的通用生成流程。
           <a href="./THIRD-PARTY-NOTICES.txt">开源说明</a>
         </footer>
       </main>
