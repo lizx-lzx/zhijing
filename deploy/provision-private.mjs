@@ -50,6 +50,8 @@ const values = {
   ZH_MAX_DAILY_JOBS: "40",
   ZH_MAX_IP_JOBS: "12",
   ZH_MAX_USER_JOBS: "8",
+  ZH_CHROMIUM:
+    "/home/ubuntu/apps/zhijing/private/browser/chrome-headless-shell-linux64/chrome-headless-shell",
 };
 for (const v of Object.values(values))
   if (typeof v !== "string" || /[\r\n"\\]/.test(v))
