@@ -1,0 +1,2250 @@
+{
+  "title": "人均六本，为什么四个人都没达到？",
+  "source": "平均数为什么不一定代表大多数人？\n\n假设一个五人读书组记录了一个月的阅读量，分别是 1、2、2、3、22 本。这是为了讲清统计概念而设计的虚构数据，不是实际调查。\n\n把五个人的阅读量相加，得到 30 本。除以五个人，人均就是 6 本。这个平均数没有算错，它回答的是：如果把总阅读量平均分给每个人，每个人会分到多少？\n\n但如果读了两本书的小林看到“人均六本”，就认为自己远远落后于大多数人，这个判断就有问题。五个人中有四个人都没有达到六本。平均数不一定等于多数人的实际水平。\n\n原因在于，22 这个较大的数对总量有明显影响。平均数使用了所有数值，所以会受到特别大或特别小的数的影响。这不是平均数的缺陷，而是它的性质。对总量、人均成本和总体变化等问题，这个性质仍然有用。\n\n再看中位数。把五个数从小到大排列为 1、2、2、3、22，中间第三个数是 2。中位数描述排序后的中间位置。如果人数是偶数，通常取中间两个数的平均数作为中位数。\n\n中位数并不告诉我们所有人的具体情况。这里两个人都读了两本，还有人读一本、三本、二十二本。只看中位数仍然会丢掉分布信息，也不能据此评价每个人学习的质量。\n\n因此，看统计数字时，先问它要回答什么问题。问一共读了多少，答案是三十本；问人均读了多少，是六本；想了解一个通常水平，可以结合中位数两本与完整分布一起判断。\n\n这个方法也提醒我们：读到工资、消费、学习时间等统计信息时，要区分平均值、中间位置、样本范围和分布。不过，不同数据的收集方式会影响结论，不能把这个五人虚构案例直接当作现实人群的证据。",
+  "profile": {
+    "version": 3,
+    "name": "故事引入的讲解视频",
+    "summary": "用生活困惑开场，配合准确图表，节奏适中，先帮你理解核心概念。",
+    "answers": {
+      "age": "private",
+      "goal": "understand",
+      "primary": "video",
+      "extras": [],
+      "entry": "story",
+      "support": [],
+      "pace": "balanced",
+      "interaction": "none",
+      "avoid": [],
+      "note": "先用生活里的困惑引入。用准确的图表帮助理解，画面少字，不打断提问。"
+    },
+    "rules": [
+      {
+        "id": "medium",
+        "title": "以讲解视频为主",
+        "instruction": "主载体为讲解视频。不强迫用户逐篇重新选择形式。各载体共用同一知识结构、来源和结论。",
+        "evidence": "你选择的主要形式"
+      },
+      {
+        "id": "entry",
+        "title": "先听一个故事",
+        "instruction": "先用具体人物的处境、感受或矛盾引入，再揭示背后的概念和因果。虚构必须明示，不篡改原文。",
+        "evidence": "你选择的讲法"
+      },
+      {
+        "id": "goal",
+        "title": "先看懂它",
+        "instruction": "以看懂中心问题、结论和必要依据为目标，不追求细节。",
+        "evidence": "你的默认目标"
+      },
+      {
+        "id": "support",
+        "title": "难点用具体解释",
+        "instruction": "根据难点选择例子、步骤或图解，不只换措辞重复原话。",
+        "evidence": "系统默认，可修改"
+      },
+      {
+        "id": "pace",
+        "title": "适中就好",
+        "instruction": "每章一个核心点，必要例子和依据相邻，不堆砌背景。",
+        "evidence": "你选择的节奏"
+      },
+      {
+        "id": "interaction",
+        "title": "直接讲给我听",
+        "instruction": "所有章节一次性可见；练习折叠，不在中间打断。",
+        "evidence": "互动选择与避免项"
+      },
+      {
+        "id": "avoid",
+        "title": "保持清晰克制",
+        "instruction": "没有明确避免项，默认清晰、适量、可暂停。",
+        "evidence": "平台默认"
+      },
+      {
+        "id": "boundary",
+        "title": "保留来源，不给你贴标签",
+        "instruction": "使用清晰的成人表达；年龄不用于推断能力。区分作者观点、预测与事实；AI解释和虚构例子需标识。一次性交付完整内容；长期规则只经用户确认更新。",
+        "evidence": "平台底线"
+      },
+      {
+        "id": "personal",
+        "title": "你补充的习惯",
+        "instruction": "先用生活里的困惑引入。用准确的图表帮助理解，画面少字，不打断提问。",
+        "evidence": "你亲自补充，可编辑"
+      }
+    ],
+    "engine": "ai"
+  },
+  "skill": "---\nname: personal-learning\ndescription: 当将用户提供的知识内容制作成学习作品时使用；普通问答、没有来源的创作不使用。\nversion: 3\n---\n\n# 故事引入的讲解视频\n\n用生活困惑开场，配合准确图表，节奏适中，先帮你理解核心概念。\n\n## 输入与输出\n\n输入为带段落编号的原文，输出为来源可追溯、一次性交付的个人学习作品。没有原文时停止，不编造。\n\n## 学习规则\n\n### 以讲解视频为主\n\n主载体为讲解视频。不强迫用户逐篇重新选择形式。各载体共用同一知识结构、来源和结论。\n\n依据：你选择的主要形式\n\n### 先听一个故事\n\n先用具体人物的处境、感受或矛盾引入，再揭示背后的概念和因果。虚构必须明示，不篡改原文。\n\n依据：你选择的讲法\n\n### 先看懂它\n\n以看懂中心问题、结论和必要依据为目标，不追求细节。\n\n依据：你的默认目标\n\n### 难点用具体解释\n\n根据难点选择例子、步骤或图解，不只换措辞重复原话。\n\n依据：系统默认，可修改\n\n### 适中就好\n\n每章一个核心点，必要例子和依据相邻，不堆砌背景。\n\n依据：你选择的节奏\n\n### 直接讲给我听\n\n所有章节一次性可见；练习折叠，不在中间打断。\n\n依据：互动选择与避免项\n\n### 保持清晰克制\n\n没有明确避免项，默认清晰、适量、可暂停。\n\n依据：平台默认\n\n### 保留来源，不给你贴标签\n\n使用清晰的成人表达；年龄不用于推断能力。区分作者观点、预测与事实；AI解释和虚构例子需标识。一次性交付完整内容；长期规则只经用户确认更新。\n\n依据：平台底线\n\n### 你补充的习惯\n\n先用生活里的困惑引入。用准确的图表帮助理解，画面少字，不打断提问。\n\n依据：你亲自补充，可编辑\n\n## 验收\n\n核心观点与来源一致；讲解入口、组织顺序和支架执行上述规则；练习可跳过；生成失败必须如实说明。偏好不是经过验证的能力诊断。\n",
+  "scenes": [
+    {
+      "id": "scene-1",
+      "outlineId": "scene_1",
+      "stageId": "zhijing-openmaic-sample",
+      "type": "slide",
+      "title": "小林的困惑",
+      "order": 1,
+      "content": {
+        "type": "slide",
+        "canvas": {
+          "id": "BYrmZW8P1d-yR7CaoFhpL",
+          "viewportSize": 1000,
+          "viewportRatio": 0.5625,
+          "theme": {
+            "backgroundColor": "#ffffff",
+            "themeColors": [
+              "#5b9bd5",
+              "#ed7d31",
+              "#a5a5a5",
+              "#ffc000",
+              "#4472c4"
+            ],
+            "fontColor": "#333333",
+            "fontName": "Microsoft YaHei",
+            "outline": {
+              "color": "#d14424",
+              "width": 2,
+              "style": "solid"
+            },
+            "shadow": {
+              "h": 0,
+              "v": 0,
+              "blur": 10,
+              "color": "#000000"
+            }
+          },
+          "elements": [
+            {
+              "id": "title",
+              "type": "text",
+              "left": 45,
+              "top": 25,
+              "width": 900,
+              "height": 76.55,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:39px;font-weight:650;text-align:left\">小林的困惑</p>"
+            },
+            {
+              "id": "subtitle",
+              "type": "text",
+              "left": 48,
+              "top": 92,
+              "width": 895,
+              "height": 56.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">小林读2本，人均6本，他真落后吗？</p>"
+            },
+            {
+              "id": "grid-0",
+              "type": "shape",
+              "left": 200,
+              "top": 170,
+              "width": 1,
+              "height": 250,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#d7dfeb",
+              "fixedRatio": false
+            },
+            {
+              "id": "tick-0",
+              "type": "text",
+              "left": 176,
+              "top": 421,
+              "width": 50,
+              "height": 50.45,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:21px;font-weight:400;text-align:center\">0</p>"
+            },
+            {
+              "id": "grid-5",
+              "type": "shape",
+              "left": 330,
+              "top": 170,
+              "width": 1,
+              "height": 250,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#d7dfeb",
+              "fixedRatio": false
+            },
+            {
+              "id": "tick-5",
+              "type": "text",
+              "left": 306,
+              "top": 421,
+              "width": 50,
+              "height": 50.45,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:21px;font-weight:400;text-align:center\">5</p>"
+            },
+            {
+              "id": "grid-10",
+              "type": "shape",
+              "left": 460,
+              "top": 170,
+              "width": 1,
+              "height": 250,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#d7dfeb",
+              "fixedRatio": false
+            },
+            {
+              "id": "tick-10",
+              "type": "text",
+              "left": 436,
+              "top": 421,
+              "width": 50,
+              "height": 50.45,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:21px;font-weight:400;text-align:center\">10</p>"
+            },
+            {
+              "id": "grid-15",
+              "type": "shape",
+              "left": 590,
+              "top": 170,
+              "width": 1,
+              "height": 250,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#d7dfeb",
+              "fixedRatio": false
+            },
+            {
+              "id": "tick-15",
+              "type": "text",
+              "left": 566,
+              "top": 421,
+              "width": 50,
+              "height": 50.45,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:21px;font-weight:400;text-align:center\">15</p>"
+            },
+            {
+              "id": "grid-20",
+              "type": "shape",
+              "left": 720,
+              "top": 170,
+              "width": 1,
+              "height": 250,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#d7dfeb",
+              "fixedRatio": false
+            },
+            {
+              "id": "tick-20",
+              "type": "text",
+              "left": 696,
+              "top": 421,
+              "width": 50,
+              "height": 50.45,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:21px;font-weight:400;text-align:center\">20</p>"
+            },
+            {
+              "id": "grid-25",
+              "type": "shape",
+              "left": 850,
+              "top": 170,
+              "width": 1,
+              "height": 250,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#d7dfeb",
+              "fixedRatio": false
+            },
+            {
+              "id": "tick-25",
+              "type": "text",
+              "left": 826,
+              "top": 421,
+              "width": 50,
+              "height": 50.45,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:21px;font-weight:400;text-align:center\">25</p>"
+            },
+            {
+              "id": "label-0",
+              "type": "text",
+              "left": 55,
+              "top": 165,
+              "width": 130,
+              "height": 56.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">成员1</p>"
+            },
+            {
+              "id": "bar-0",
+              "type": "shape",
+              "left": 200,
+              "top": 177,
+              "width": 26,
+              "height": 30,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#555bd6",
+              "fixedRatio": false,
+              "dataValue": 1,
+              "dataScale": 26
+            },
+            {
+              "id": "value-0",
+              "type": "text",
+              "left": 230,
+              "top": 165,
+              "width": 70,
+              "height": 56.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:600;text-align:left\">1</p>"
+            },
+            {
+              "id": "label-1",
+              "type": "text",
+              "left": 55,
+              "top": 217,
+              "width": 130,
+              "height": 56.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">小林</p>"
+            },
+            {
+              "id": "bar-1",
+              "type": "shape",
+              "left": 200,
+              "top": 229,
+              "width": 52,
+              "height": 30,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#555bd6",
+              "fixedRatio": false,
+              "dataValue": 2,
+              "dataScale": 26
+            },
+            {
+              "id": "value-1",
+              "type": "text",
+              "left": 256,
+              "top": 217,
+              "width": 70,
+              "height": 56.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:600;text-align:left\">2</p>"
+            },
+            {
+              "id": "label-2",
+              "type": "text",
+              "left": 55,
+              "top": 269,
+              "width": 130,
+              "height": 56.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">成员3</p>"
+            },
+            {
+              "id": "bar-2",
+              "type": "shape",
+              "left": 200,
+              "top": 281,
+              "width": 52,
+              "height": 30,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#555bd6",
+              "fixedRatio": false,
+              "dataValue": 2,
+              "dataScale": 26
+            },
+            {
+              "id": "value-2",
+              "type": "text",
+              "left": 256,
+              "top": 269,
+              "width": 70,
+              "height": 56.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:600;text-align:left\">2</p>"
+            },
+            {
+              "id": "label-3",
+              "type": "text",
+              "left": 55,
+              "top": 321,
+              "width": 130,
+              "height": 56.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">成员4</p>"
+            },
+            {
+              "id": "bar-3",
+              "type": "shape",
+              "left": 200,
+              "top": 333,
+              "width": 78,
+              "height": 30,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#555bd6",
+              "fixedRatio": false,
+              "dataValue": 3,
+              "dataScale": 26
+            },
+            {
+              "id": "value-3",
+              "type": "text",
+              "left": 282,
+              "top": 321,
+              "width": 70,
+              "height": 56.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:600;text-align:left\">3</p>"
+            },
+            {
+              "id": "label-4",
+              "type": "text",
+              "left": 55,
+              "top": 373,
+              "width": 130,
+              "height": 56.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">成员5</p>"
+            },
+            {
+              "id": "bar-4",
+              "type": "shape",
+              "left": 200,
+              "top": 385,
+              "width": 572,
+              "height": 30,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#dc663b",
+              "fixedRatio": false,
+              "dataValue": 22,
+              "dataScale": 26
+            },
+            {
+              "id": "value-4",
+              "type": "text",
+              "left": 776,
+              "top": 373,
+              "width": 70,
+              "height": 56.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:600;text-align:left\">22</p>"
+            },
+            {
+              "id": "mean-dash-171",
+              "type": "shape",
+              "left": 356,
+              "top": 171,
+              "width": 2,
+              "height": 8,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false
+            },
+            {
+              "id": "mean-dash-187",
+              "type": "shape",
+              "left": 356,
+              "top": 187,
+              "width": 2,
+              "height": 8,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false
+            },
+            {
+              "id": "mean-dash-203",
+              "type": "shape",
+              "left": 356,
+              "top": 203,
+              "width": 2,
+              "height": 8,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false
+            },
+            {
+              "id": "mean-dash-219",
+              "type": "shape",
+              "left": 356,
+              "top": 219,
+              "width": 2,
+              "height": 8,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false
+            },
+            {
+              "id": "mean-dash-235",
+              "type": "shape",
+              "left": 356,
+              "top": 235,
+              "width": 2,
+              "height": 8,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false
+            },
+            {
+              "id": "mean-dash-251",
+              "type": "shape",
+              "left": 356,
+              "top": 251,
+              "width": 2,
+              "height": 8,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false
+            },
+            {
+              "id": "mean-dash-267",
+              "type": "shape",
+              "left": 356,
+              "top": 267,
+              "width": 2,
+              "height": 8,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false
+            },
+            {
+              "id": "mean-dash-283",
+              "type": "shape",
+              "left": 356,
+              "top": 283,
+              "width": 2,
+              "height": 8,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false
+            },
+            {
+              "id": "mean-dash-299",
+              "type": "shape",
+              "left": 356,
+              "top": 299,
+              "width": 2,
+              "height": 8,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false
+            },
+            {
+              "id": "mean-dash-315",
+              "type": "shape",
+              "left": 356,
+              "top": 315,
+              "width": 2,
+              "height": 8,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false
+            },
+            {
+              "id": "mean-dash-331",
+              "type": "shape",
+              "left": 356,
+              "top": 331,
+              "width": 2,
+              "height": 8,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false
+            },
+            {
+              "id": "mean-dash-347",
+              "type": "shape",
+              "left": 356,
+              "top": 347,
+              "width": 2,
+              "height": 8,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false
+            },
+            {
+              "id": "mean-dash-363",
+              "type": "shape",
+              "left": 356,
+              "top": 363,
+              "width": 2,
+              "height": 8,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false
+            },
+            {
+              "id": "mean-dash-379",
+              "type": "shape",
+              "left": 356,
+              "top": 379,
+              "width": 2,
+              "height": 8,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false
+            },
+            {
+              "id": "mean-dash-395",
+              "type": "shape",
+              "left": 356,
+              "top": 395,
+              "width": 2,
+              "height": 8,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false
+            },
+            {
+              "id": "mean-dash-411",
+              "type": "shape",
+              "left": 356,
+              "top": 411,
+              "width": 2,
+              "height": 8,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false
+            },
+            {
+              "id": "mean-dash-427",
+              "type": "shape",
+              "left": 356,
+              "top": 427,
+              "width": 2,
+              "height": 8,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false
+            },
+            {
+              "id": "mean-label",
+              "type": "text",
+              "left": 320,
+              "top": 130,
+              "width": 230,
+              "height": 53.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#139d8c",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:600;text-align:left\">平均 6 本</p>"
+            },
+            {
+              "id": "unit",
+              "type": "text",
+              "left": 768,
+              "top": 472,
+              "width": 180,
+              "height": 51.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:22px;font-weight:400;text-align:left\">阅读量 / 本</p>"
+            },
+            {
+              "id": "fiction",
+              "type": "text",
+              "left": 744,
+              "top": 510,
+              "width": 225,
+              "height": 46.099999999999994,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:18px;font-weight:400;text-align:right\">虚构读书组数据</p>"
+            }
+          ],
+          "background": {
+            "type": "solid",
+            "color": "#f8fafc"
+          }
+        }
+      },
+      "actions": [
+        {
+          "id": "action_PMJD3yQh",
+          "type": "spotlight",
+          "elementId": "title"
+        },
+        {
+          "id": "action_OoqipZAB",
+          "type": "speech",
+          "text": "小林这个月只读了两本书，可读书小组公布的人均阅读量是六本。他一下子觉得自己落后了。可事实真是这样吗？"
+        },
+        {
+          "id": "action_lGK3Uoyb",
+          "type": "spotlight",
+          "elementId": "bar-4"
+        },
+        {
+          "id": "action_TqxxZE6D",
+          "type": "speech",
+          "text": "看这组虚构数据：五个人分别读了一、二、二、三和二十二本。注意，只有一位成员读了二十二本，其余四人都在三本以下。"
+        },
+        {
+          "id": "action_oF0Klszq",
+          "type": "spotlight",
+          "elementId": "mean-label"
+        },
+        {
+          "id": "action_w8dpcWwr",
+          "type": "speech",
+          "text": "把总数三十本平均分给五人，人均确实是六本。可五个人里有四个都没到六本，平均数并不代表多数人的水平。"
+        },
+        {
+          "id": "action_hrp0iikC",
+          "type": "spotlight",
+          "elementId": "subtitle"
+        },
+        {
+          "id": "action_1JoavT7p",
+          "type": "speech",
+          "text": "问题就出在二十二本这个偏大的数上，它把平均值拉高了。所以小林真正该问的是：平均数到底在回答什么问题？"
+        }
+      ],
+      "createdAt": 1788847498446,
+      "updatedAt": 1788847498446
+    },
+    {
+      "id": "scene-2",
+      "outlineId": "scene_2",
+      "stageId": "zhijing-openmaic-sample",
+      "type": "slide",
+      "title": "平均数的含义",
+      "order": 2,
+      "content": {
+        "type": "slide",
+        "canvas": {
+          "id": "z_zOPMrgKWmAh1yDDPAKD",
+          "viewportSize": 1000,
+          "viewportRatio": 0.5625,
+          "theme": {
+            "backgroundColor": "#ffffff",
+            "themeColors": [
+              "#5b9bd5",
+              "#ed7d31",
+              "#a5a5a5",
+              "#ffc000",
+              "#4472c4"
+            ],
+            "fontColor": "#333333",
+            "fontName": "Microsoft YaHei",
+            "outline": {
+              "color": "#d14424",
+              "width": 2,
+              "style": "solid"
+            },
+            "shadow": {
+              "h": 0,
+              "v": 0,
+              "blur": 10,
+              "color": "#000000"
+            }
+          },
+          "elements": [
+            {
+              "id": "title",
+              "type": "text",
+              "left": 45,
+              "top": 25,
+              "width": 900,
+              "height": 76.55,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:39px;font-weight:650;text-align:left\">平均数的含义</p>"
+            },
+            {
+              "id": "subtitle",
+              "type": "text",
+              "left": 48,
+              "top": 92,
+              "width": 895,
+              "height": 56.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">总量30本均分5人，人均6本，但4人未达</p>"
+            },
+            {
+              "id": "original-label",
+              "type": "text",
+              "left": 50,
+              "top": 130,
+              "width": 360,
+              "height": 54.8,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:24px;font-weight:400;text-align:left\">每个人实际读到的</p>"
+            },
+            {
+              "id": "shared-label",
+              "type": "text",
+              "left": 540,
+              "top": 130,
+              "width": 405,
+              "height": 54.8,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:24px;font-weight:400;text-align:left\">把总量平均分给每个人</p>"
+            },
+            {
+              "id": "before-baseline",
+              "type": "shape",
+              "left": 65,
+              "top": 414,
+              "width": 335,
+              "height": 2,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#d7dfeb",
+              "fixedRatio": false
+            },
+            {
+              "id": "before-bar-0",
+              "type": "shape",
+              "left": 85,
+              "top": 404.8,
+              "width": 37,
+              "height": 9.2,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#555bd6",
+              "fixedRatio": false,
+              "dataValue": 1,
+              "dataScale": 9.2
+            },
+            {
+              "id": "before-value-0",
+              "type": "text",
+              "left": 73,
+              "top": 359.8,
+              "width": 64,
+              "height": 54.8,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:24px;font-weight:600;text-align:center\">1</p>"
+            },
+            {
+              "id": "before-bar-1",
+              "type": "shape",
+              "left": 147,
+              "top": 395.6,
+              "width": 37,
+              "height": 18.4,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#555bd6",
+              "fixedRatio": false,
+              "dataValue": 2,
+              "dataScale": 9.2
+            },
+            {
+              "id": "before-value-1",
+              "type": "text",
+              "left": 135,
+              "top": 350.6,
+              "width": 64,
+              "height": 54.8,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:24px;font-weight:600;text-align:center\">2</p>"
+            },
+            {
+              "id": "before-bar-2",
+              "type": "shape",
+              "left": 209,
+              "top": 395.6,
+              "width": 37,
+              "height": 18.4,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#555bd6",
+              "fixedRatio": false,
+              "dataValue": 2,
+              "dataScale": 9.2
+            },
+            {
+              "id": "before-value-2",
+              "type": "text",
+              "left": 197,
+              "top": 350.6,
+              "width": 64,
+              "height": 54.8,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:24px;font-weight:600;text-align:center\">2</p>"
+            },
+            {
+              "id": "before-bar-3",
+              "type": "shape",
+              "left": 271,
+              "top": 386.4,
+              "width": 37,
+              "height": 27.599999999999998,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#555bd6",
+              "fixedRatio": false,
+              "dataValue": 3,
+              "dataScale": 9.2
+            },
+            {
+              "id": "before-value-3",
+              "type": "text",
+              "left": 259,
+              "top": 341.4,
+              "width": 64,
+              "height": 54.8,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:24px;font-weight:600;text-align:center\">3</p>"
+            },
+            {
+              "id": "before-bar-4",
+              "type": "shape",
+              "left": 333,
+              "top": 211.60000000000002,
+              "width": 37,
+              "height": 202.39999999999998,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#dc663b",
+              "fixedRatio": false,
+              "dataValue": 22,
+              "dataScale": 9.2
+            },
+            {
+              "id": "before-value-4",
+              "type": "text",
+              "left": 321,
+              "top": 166.60000000000002,
+              "width": 64,
+              "height": 54.8,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:24px;font-weight:600;text-align:center\">22</p>"
+            },
+            {
+              "id": "after-baseline",
+              "type": "shape",
+              "left": 540,
+              "top": 414,
+              "width": 335,
+              "height": 2,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#d7dfeb",
+              "fixedRatio": false
+            },
+            {
+              "id": "after-bar-0",
+              "type": "shape",
+              "left": 560,
+              "top": 358.8,
+              "width": 37,
+              "height": 55.199999999999996,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false,
+              "dataValue": 6,
+              "dataScale": 9.2
+            },
+            {
+              "id": "after-value-0",
+              "type": "text",
+              "left": 548,
+              "top": 313.8,
+              "width": 64,
+              "height": 54.8,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:24px;font-weight:600;text-align:center\">6</p>"
+            },
+            {
+              "id": "after-bar-1",
+              "type": "shape",
+              "left": 622,
+              "top": 358.8,
+              "width": 37,
+              "height": 55.199999999999996,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false,
+              "dataValue": 6,
+              "dataScale": 9.2
+            },
+            {
+              "id": "after-value-1",
+              "type": "text",
+              "left": 610,
+              "top": 313.8,
+              "width": 64,
+              "height": 54.8,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:24px;font-weight:600;text-align:center\">6</p>"
+            },
+            {
+              "id": "after-bar-2",
+              "type": "shape",
+              "left": 684,
+              "top": 358.8,
+              "width": 37,
+              "height": 55.199999999999996,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false,
+              "dataValue": 6,
+              "dataScale": 9.2
+            },
+            {
+              "id": "after-value-2",
+              "type": "text",
+              "left": 672,
+              "top": 313.8,
+              "width": 64,
+              "height": 54.8,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:24px;font-weight:600;text-align:center\">6</p>"
+            },
+            {
+              "id": "after-bar-3",
+              "type": "shape",
+              "left": 746,
+              "top": 358.8,
+              "width": 37,
+              "height": 55.199999999999996,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false,
+              "dataValue": 6,
+              "dataScale": 9.2
+            },
+            {
+              "id": "after-value-3",
+              "type": "text",
+              "left": 734,
+              "top": 313.8,
+              "width": 64,
+              "height": 54.8,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:24px;font-weight:600;text-align:center\">6</p>"
+            },
+            {
+              "id": "after-bar-4",
+              "type": "shape",
+              "left": 808,
+              "top": 358.8,
+              "width": 37,
+              "height": 55.199999999999996,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#139d8c",
+              "fixedRatio": false,
+              "dataValue": 6,
+              "dataScale": 9.2
+            },
+            {
+              "id": "after-value-4",
+              "type": "text",
+              "left": 796,
+              "top": 313.8,
+              "width": 64,
+              "height": 54.8,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:24px;font-weight:600;text-align:center\">6</p>"
+            },
+            {
+              "id": "arrow",
+              "type": "text",
+              "left": 435,
+              "top": 270,
+              "width": 75,
+              "height": 86.7,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:46px;font-weight:400;text-align:center\">→</p>"
+            },
+            {
+              "id": "formula",
+              "type": "text",
+              "left": 165,
+              "top": 457,
+              "width": 650,
+              "height": 66.4,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#139d8c",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:32px;font-weight:600;text-align:center\">30 本 ÷ 5 人 = 6 本 / 人</p>"
+            },
+            {
+              "id": "unit",
+              "type": "text",
+              "left": 58,
+              "top": 182,
+              "width": 355,
+              "height": 49,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:20px;font-weight:400;text-align:left\">柱高同一比例 · 单位：本</p>"
+            },
+            {
+              "id": "fiction",
+              "type": "text",
+              "left": 744,
+              "top": 510,
+              "width": 225,
+              "height": 46.099999999999994,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:18px;font-weight:400;text-align:right\">虚构读书组数据</p>"
+            }
+          ],
+          "background": {
+            "type": "solid",
+            "color": "#f8fafc"
+          }
+        }
+      },
+      "actions": [
+        {
+          "id": "action_uGRTIbQz",
+          "type": "spotlight",
+          "elementId": "before-bar-4"
+        },
+        {
+          "id": "action_629wETUY",
+          "type": "speech",
+          "text": "先看左边，五个人的实际阅读量：1、2、2、3，最后这个22。注意，它是虚构数据，只为讲清概念。"
+        },
+        {
+          "id": "action_v_b0C-si",
+          "type": "spotlight",
+          "elementId": "formula"
+        },
+        {
+          "id": "action_epYCo___",
+          "type": "speech",
+          "text": "把五个数相加得30本，再除以5人，人均6本。这个算式回答的是：如果把总量平均分给每个人，每人分到多少。"
+        },
+        {
+          "id": "action_gyBurjp_",
+          "type": "spotlight",
+          "elementId": "after-bar-0"
+        },
+        {
+          "id": "action_f3Wv9FnU",
+          "type": "speech",
+          "text": "看右边，平均分摊后每人都是6本。可问题来了——五个人里其实有四个都没达到6本。"
+        },
+        {
+          "id": "action_4ks-kvtQ",
+          "type": "spotlight",
+          "elementId": "before-bar-4"
+        },
+        {
+          "id": "action_qFX150Qk",
+          "type": "speech",
+          "text": "原因就在22这个偏大的数上，它把总量拉高了。平均数用了所有数值，所以会被特别大或特别小的数影响。这不是平均数的错误，而是它的性质——在算总量、人均成本这类问题时，它依然很有用。"
+        }
+      ],
+      "createdAt": 1788847501649,
+      "updatedAt": 1788847501649
+    },
+    {
+      "id": "scene-3",
+      "outlineId": "scene_3",
+      "stageId": "zhijing-openmaic-sample",
+      "type": "slide",
+      "title": "中位数的位置",
+      "order": 3,
+      "content": {
+        "type": "slide",
+        "canvas": {
+          "id": "70BpEDwuIYIjTHKjtvSDf",
+          "viewportSize": 1000,
+          "viewportRatio": 0.5625,
+          "theme": {
+            "backgroundColor": "#ffffff",
+            "themeColors": [
+              "#5b9bd5",
+              "#ed7d31",
+              "#a5a5a5",
+              "#ffc000",
+              "#4472c4"
+            ],
+            "fontColor": "#333333",
+            "fontName": "Microsoft YaHei",
+            "outline": {
+              "color": "#d14424",
+              "width": 2,
+              "style": "solid"
+            },
+            "shadow": {
+              "h": 0,
+              "v": 0,
+              "blur": 10,
+              "color": "#000000"
+            }
+          },
+          "elements": [
+            {
+              "id": "title",
+              "type": "text",
+              "left": 45,
+              "top": 25,
+              "width": 900,
+              "height": 76.55,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:39px;font-weight:650;text-align:left\">中位数的位置</p>"
+            },
+            {
+              "id": "subtitle",
+              "type": "text",
+              "left": 48,
+              "top": 92,
+              "width": 895,
+              "height": 56.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">排序后中间是2本，但会忽略分布信息</p>"
+            },
+            {
+              "id": "rank-label",
+              "type": "text",
+              "left": 55,
+              "top": 143,
+              "width": 870,
+              "height": 60.6,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:28px;font-weight:400;text-align:left\">按大小排序，找中间位置</p>"
+            },
+            {
+              "id": "position-0",
+              "type": "shape",
+              "left": 80,
+              "top": 225,
+              "width": 142,
+              "height": 132,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#e9edf6",
+              "fixedRatio": false
+            },
+            {
+              "id": "rank-number-0",
+              "type": "text",
+              "left": 85,
+              "top": 238,
+              "width": 132,
+              "height": 91.05,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:49px;font-weight:600;text-align:center\">1</p>"
+            },
+            {
+              "id": "rank-order-0",
+              "type": "text",
+              "left": 77,
+              "top": 359,
+              "width": 148,
+              "height": 54.8,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:24px;font-weight:400;text-align:center\">第 1 位</p>"
+            },
+            {
+              "id": "position-1",
+              "type": "shape",
+              "left": 244,
+              "top": 225,
+              "width": 142,
+              "height": 132,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#e9edf6",
+              "fixedRatio": false
+            },
+            {
+              "id": "rank-number-1",
+              "type": "text",
+              "left": 249,
+              "top": 238,
+              "width": 132,
+              "height": 91.05,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:49px;font-weight:600;text-align:center\">2</p>"
+            },
+            {
+              "id": "rank-order-1",
+              "type": "text",
+              "left": 241,
+              "top": 359,
+              "width": 148,
+              "height": 54.8,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:24px;font-weight:400;text-align:center\">第 2 位</p>"
+            },
+            {
+              "id": "position-2",
+              "type": "shape",
+              "left": 408,
+              "top": 225,
+              "width": 142,
+              "height": 132,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#e0f3ed",
+              "fixedRatio": false
+            },
+            {
+              "id": "rank-number-2",
+              "type": "text",
+              "left": 413,
+              "top": 238,
+              "width": 132,
+              "height": 91.05,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#139d8c",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:49px;font-weight:600;text-align:center\">2</p>"
+            },
+            {
+              "id": "rank-order-2",
+              "type": "text",
+              "left": 405,
+              "top": 359,
+              "width": 148,
+              "height": 54.8,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:24px;font-weight:400;text-align:center\">第 3 位</p>"
+            },
+            {
+              "id": "position-3",
+              "type": "shape",
+              "left": 572,
+              "top": 225,
+              "width": 142,
+              "height": 132,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#e9edf6",
+              "fixedRatio": false
+            },
+            {
+              "id": "rank-number-3",
+              "type": "text",
+              "left": 577,
+              "top": 238,
+              "width": 132,
+              "height": 91.05,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:49px;font-weight:600;text-align:center\">3</p>"
+            },
+            {
+              "id": "rank-order-3",
+              "type": "text",
+              "left": 569,
+              "top": 359,
+              "width": 148,
+              "height": 54.8,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:24px;font-weight:400;text-align:center\">第 4 位</p>"
+            },
+            {
+              "id": "position-4",
+              "type": "shape",
+              "left": 736,
+              "top": 225,
+              "width": 142,
+              "height": 132,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#e9edf6",
+              "fixedRatio": false
+            },
+            {
+              "id": "rank-number-4",
+              "type": "text",
+              "left": 741,
+              "top": 238,
+              "width": 132,
+              "height": 91.05,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:49px;font-weight:600;text-align:center\">22</p>"
+            },
+            {
+              "id": "rank-order-4",
+              "type": "text",
+              "left": 733,
+              "top": 359,
+              "width": 148,
+              "height": 54.8,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:24px;font-weight:400;text-align:center\">第 5 位</p>"
+            },
+            {
+              "id": "median-label",
+              "type": "text",
+              "left": 240,
+              "top": 429,
+              "width": 520,
+              "height": 66.4,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#139d8c",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:32px;font-weight:600;text-align:center\">中位数 = 2 本</p>"
+            },
+            {
+              "id": "rank-note",
+              "type": "text",
+              "left": 215,
+              "top": 482,
+              "width": 580,
+              "height": 51.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:22px;font-weight:400;text-align:center\">格子表示排序位置，不是数值距离</p>"
+            },
+            {
+              "id": "fiction",
+              "type": "text",
+              "left": 744,
+              "top": 510,
+              "width": 225,
+              "height": 46.099999999999994,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:18px;font-weight:400;text-align:right\">虚构读书组数据</p>"
+            }
+          ],
+          "background": {
+            "type": "solid",
+            "color": "#f8fafc"
+          }
+        }
+      },
+      "actions": [
+        {
+          "id": "action_2hgkiLkx",
+          "type": "spotlight",
+          "elementId": "title"
+        },
+        {
+          "id": "action_GmGGpvl5",
+          "type": "speech",
+          "text": "刚才平均数被22拉高到6本，那换个角度看，把五个数按大小排好，1、2、2、3、22。"
+        },
+        {
+          "id": "action_Ctx03Izp",
+          "type": "spotlight",
+          "elementId": "position-2"
+        },
+        {
+          "id": "action_sBuQzFvt",
+          "type": "speech",
+          "text": "中间第三个数是2本，这就是中位数，它描述排序后的中间位置。"
+        },
+        {
+          "id": "action_tE7J-Fl9",
+          "type": "spotlight",
+          "elementId": "median-label"
+        },
+        {
+          "id": "action_Q7LM5TaS",
+          "type": "speech",
+          "text": "注意，这里两个人都读2本，但也有人读1本、3本甚至22本。中位数只给一个中间值，会丢掉完整的分布信息。"
+        },
+        {
+          "id": "action_r-FNhr2V",
+          "type": "spotlight",
+          "elementId": "rank-note"
+        },
+        {
+          "id": "action_5h9fcY_1",
+          "type": "speech",
+          "text": "所以中位数代表排序后的中间水平，不等于多数人的水平，也不能替代看完整分布。这是虚构读书组数据。"
+        }
+      ],
+      "createdAt": 1788847504475,
+      "updatedAt": 1788847504475
+    },
+    {
+      "id": "scene-4",
+      "outlineId": "scene_4",
+      "stageId": "zhijing-openmaic-sample",
+      "type": "slide",
+      "title": "先问要回答什么",
+      "order": 4,
+      "content": {
+        "type": "slide",
+        "canvas": {
+          "id": "Y8Q0-xGOwZnrQ7tyEigee",
+          "viewportSize": 1000,
+          "viewportRatio": 0.5625,
+          "theme": {
+            "backgroundColor": "#ffffff",
+            "themeColors": [
+              "#5b9bd5",
+              "#ed7d31",
+              "#a5a5a5",
+              "#ffc000",
+              "#4472c4"
+            ],
+            "fontColor": "#333333",
+            "fontName": "Microsoft YaHei",
+            "outline": {
+              "color": "#d14424",
+              "width": 2,
+              "style": "solid"
+            },
+            "shadow": {
+              "h": 0,
+              "v": 0,
+              "blur": 10,
+              "color": "#000000"
+            }
+          },
+          "elements": [
+            {
+              "id": "title",
+              "type": "text",
+              "left": 45,
+              "top": 25,
+              "width": 900,
+              "height": 76.55,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:39px;font-weight:650;text-align:left\">先问要回答什么</p>"
+            },
+            {
+              "id": "subtitle",
+              "type": "text",
+              "left": 48,
+              "top": 92,
+              "width": 895,
+              "height": 56.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">总量30本，人均6本，中位数2本，各答各问</p>"
+            },
+            {
+              "id": "row-0",
+              "type": "shape",
+              "left": 60,
+              "top": 166,
+              "width": 880,
+              "height": 74,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#edf1f7",
+              "fixedRatio": false
+            },
+            {
+              "id": "question-0",
+              "type": "text",
+              "left": 78,
+              "top": 173,
+              "width": 410,
+              "height": 59.15,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:27px;font-weight:400;text-align:left\">一共读了多少？</p>"
+            },
+            {
+              "id": "metric-0",
+              "type": "text",
+              "left": 520,
+              "top": 174,
+              "width": 170,
+              "height": 57.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:400;text-align:left\">总量</p>"
+            },
+            {
+              "id": "answer-0",
+              "type": "text",
+              "left": 705,
+              "top": 165,
+              "width": 200,
+              "height": 75.1,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#139d8c",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:38px;font-weight:600;text-align:left\">30 本</p>"
+            },
+            {
+              "id": "row-1",
+              "type": "shape",
+              "left": 60,
+              "top": 252,
+              "width": 880,
+              "height": 74,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#f8fafc",
+              "fixedRatio": false
+            },
+            {
+              "id": "question-1",
+              "type": "text",
+              "left": 78,
+              "top": 259,
+              "width": 410,
+              "height": 59.15,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:27px;font-weight:400;text-align:left\">平均每人分到多少？</p>"
+            },
+            {
+              "id": "metric-1",
+              "type": "text",
+              "left": 520,
+              "top": 260,
+              "width": 170,
+              "height": 57.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:400;text-align:left\">平均数</p>"
+            },
+            {
+              "id": "answer-1",
+              "type": "text",
+              "left": 705,
+              "top": 251,
+              "width": 200,
+              "height": 75.1,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#555bd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:38px;font-weight:600;text-align:left\">6 本</p>"
+            },
+            {
+              "id": "row-2",
+              "type": "shape",
+              "left": 60,
+              "top": 338,
+              "width": 880,
+              "height": 74,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#edf1f7",
+              "fixedRatio": false
+            },
+            {
+              "id": "question-2",
+              "type": "text",
+              "left": 78,
+              "top": 345,
+              "width": 410,
+              "height": 59.15,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:27px;font-weight:400;text-align:left\">排序后中间是多少？</p>"
+            },
+            {
+              "id": "metric-2",
+              "type": "text",
+              "left": 520,
+              "top": 346,
+              "width": 170,
+              "height": 57.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:400;text-align:left\">中位数</p>"
+            },
+            {
+              "id": "answer-2",
+              "type": "text",
+              "left": 705,
+              "top": 337,
+              "width": 200,
+              "height": 75.1,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#139d8c",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:38px;font-weight:600;text-align:left\">2 本</p>"
+            },
+            {
+              "id": "boundary",
+              "type": "text",
+              "left": 74,
+              "top": 440,
+              "width": 860,
+              "height": 60.6,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#18253d",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:28px;font-weight:600;text-align:left\">看典型水平，还要结合完整分布。</p>"
+            },
+            {
+              "id": "context",
+              "type": "text",
+              "left": 74,
+              "top": 482,
+              "width": 860,
+              "height": 53.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">读了几本，也不等于学习质量。</p>"
+            },
+            {
+              "id": "fiction",
+              "type": "text",
+              "left": 744,
+              "top": 510,
+              "width": 225,
+              "height": 46.099999999999994,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#63728b",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:18px;font-weight:400;text-align:right\">虚构读书组数据</p>"
+            }
+          ],
+          "background": {
+            "type": "solid",
+            "color": "#f8fafc"
+          }
+        }
+      },
+      "actions": [
+        {
+          "id": "action_hPZQ3a7G",
+          "type": "spotlight",
+          "elementId": "title"
+        },
+        {
+          "id": "action__LwPY4Ek",
+          "type": "speech",
+          "text": "回到小林最初的困惑，答案其实取决于问什么。问一共读了多少，看总量三十本；问人均分到多少，看平均数六本。"
+        },
+        {
+          "id": "action_lLJjN569",
+          "type": "spotlight",
+          "elementId": "row-2"
+        },
+        {
+          "id": "action_Fei4i86V",
+          "type": "speech",
+          "text": "想知道排序后的中间水平，才看中位数两本。三个数字各答各的问题，没有谁对谁错。"
+        },
+        {
+          "id": "action_iraInSqi",
+          "type": "spotlight",
+          "elementId": "boundary"
+        },
+        {
+          "id": "action_uhdwwlSH",
+          "type": "speech",
+          "text": "所以读统计时，先问它要回答什么问题，再结合完整分布判断典型水平。这套五人数据是虚构的，不能直接当作现实证据。"
+        }
+      ],
+      "createdAt": 1788847507038,
+      "updatedAt": 1788847507038
+    }
+  ],
+  "review": {
+    "passed": true,
+    "issues": [],
+    "note": "核对数据1/2/2/3/22、总量30、均值6、中位数2、四人不到均值均正确；虚构性已声明；平均数计算无误；中位数不能替代完整分布已说明；未重复免责声明不判失败；图形数据由程序核对，图表值未被讲稿改变；无实质错误。"
+  },
+  "statisticalPlan": {
+    "dataset": {
+      "values": [
+        1,
+        2,
+        2,
+        3,
+        22
+      ],
+      "unit": "本",
+      "labels": [
+        "成员1",
+        "小林",
+        "成员3",
+        "成员4",
+        "成员5"
+      ]
+    },
+    "frames": [
+      {
+        "view": "distribution",
+        "title": "小林的困惑",
+        "subtitle": "小林读2本，人均6本，他真落后吗？"
+      },
+      {
+        "view": "pool",
+        "title": "平均数的含义",
+        "subtitle": "总量30本均分5人，人均6本，但4人未达"
+      },
+      {
+        "view": "rank",
+        "title": "中位数的位置",
+        "subtitle": "排序后中间是2本，但会忽略分布信息"
+      },
+      {
+        "view": "summary",
+        "title": "先问要回答什么",
+        "subtitle": "总量30本，人均6本，中位数2本，各答各问"
+      }
+    ]
+  },
+  "provenance": {
+    "generatedAt": "2026-09-08T06:05:09.174Z",
+    "sourceHash": "f004a528c4011f7c97734ee746adcf83a147854377051cd900e5c7b903d39281",
+    "model": "deepseek-v4-flash",
+    "generation": "@openmaic/generation@0.3.6",
+    "renderer": "@openmaic/renderer@0.1.6",
+    "geometry": "Host-computed statistical Slide DSL, after freeform chart generation failed proportional checks",
+    "editorialReview": "Source label Xiao Lin bound to 2; corrected one generated wording typo from 五本数 to 五个数 before voice synthesis.",
+    "mode": "One pre-generated sample, not the production pipeline",
+    "calls": [
+      {
+        "fingerprint": "b006521099ef5cff89b93ca45e09e6151658244491abd644775c89e21f3bd236",
+        "usage": {
+          "prompt_tokens": 5625,
+          "completion_tokens": 610,
+          "total_tokens": 6235,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 5625
+        },
+        "cached": true
+      },
+      {
+        "fingerprint": "0fd15640793255ce072cda49fa263f9377af262eb7eb0b01788941d16cbb6e87",
+        "usage": {
+          "prompt_tokens": 4775,
+          "completion_tokens": 249,
+          "total_tokens": 5024,
+          "prompt_tokens_details": {
+            "cached_tokens": 1792
+          },
+          "prompt_cache_hit_tokens": 1792,
+          "prompt_cache_miss_tokens": 2983
+        },
+        "elapsedMs": 3742
+      },
+      {
+        "fingerprint": "1b8af2a6be3278c919e63350b41477d0a38ff9ac936b3ce62d808b39fc72e3c2",
+        "usage": {
+          "prompt_tokens": 4539,
+          "completion_tokens": 271,
+          "total_tokens": 4810,
+          "prompt_tokens_details": {
+            "cached_tokens": 1792
+          },
+          "prompt_cache_hit_tokens": 1792,
+          "prompt_cache_miss_tokens": 2747
+        },
+        "elapsedMs": 3198
+      },
+      {
+        "fingerprint": "280e7d9dcb137d6b4bc13033facaa2f4dbb2406d94aeaecb75a50b8e01c351c4",
+        "usage": {
+          "prompt_tokens": 4389,
+          "completion_tokens": 230,
+          "total_tokens": 4619,
+          "prompt_tokens_details": {
+            "cached_tokens": 1920
+          },
+          "prompt_cache_hit_tokens": 1920,
+          "prompt_cache_miss_tokens": 2469
+        },
+        "elapsedMs": 2822
+      },
+      {
+        "fingerprint": "f5cb178a203d74bf61267e63e1846f40a82ad482ad3df78679c359182ac844cb",
+        "usage": {
+          "prompt_tokens": 4289,
+          "completion_tokens": 180,
+          "total_tokens": 4469,
+          "prompt_tokens_details": {
+            "cached_tokens": 1920
+          },
+          "prompt_cache_hit_tokens": 1920,
+          "prompt_cache_miss_tokens": 2369
+        },
+        "elapsedMs": 2560
+      }
+    ]
+  }
+}

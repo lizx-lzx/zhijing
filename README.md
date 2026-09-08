@@ -59,5 +59,6 @@ ZH_ACCEPTANCE_URL=https://app.chainvalley.top/zhijing/api node scripts/public-sm
 - [开发思路与源码导航](docs/02-开发思路、最终方案与源码导航.md)
 - [研究依据](docs/03-研究结论与下一阶段落地方案.md)
 - [本版实施与验收](docs/05-完整产品实施与验收.md)
+- [OpenMAIC 单篇讲解试作：实现、边界与复现](experiments/openmaic-preview/README.md)
 
 原型阶段和旧候选保存在 Git。ReactBits 原组件与 CollectUI registry 沿用；授权 Key 不进入源码。

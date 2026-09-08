@@ -1,0 +1,24 @@
+{
+  "name": "zhijing-openmaic-preview",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 4360 --strictPort",
+    "build": "vite build",
+    "generate": "node generate.mjs",
+    "test": "node --test preview.test.mjs"
+  },
+  "dependencies": {
+    "@openmaic/generation": "0.3.6",
+    "@openmaic/renderer": "0.1.6",
+    "echarts": "6.1.0",
+    "motion": "13.1.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.2.1",
+    "tailwindcss": "4.2.1",
+    "vite": "8.2.2"
+  }
+}

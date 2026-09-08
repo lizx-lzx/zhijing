@@ -13,6 +13,7 @@ const eslintConfig = defineConfig([
     "dist/**",
     "out/**",
     "build/**",
+    "public/demo/openmaic-20260908/**",
     "next-env.d.ts",
   ]),
   eslint.configs.recommended,

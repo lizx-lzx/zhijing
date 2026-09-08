@@ -1,0 +1,157 @@
+{
+  "duration": 164.79999999999998,
+  "fingerprint": "17908a606dda095d38472bec",
+  "voiceReady": true,
+  "segments": [
+    {
+      "scene": 0,
+      "text": "小林这个月只读了两本书，可读书小组公布的人均阅读量是六本。他一下子觉得自己落后了。可事实真是这样吗？",
+      "effect": {
+        "type": "spotlight",
+        "elementId": "title"
+      },
+      "start": 0,
+      "end": 10.56
+    },
+    {
+      "scene": 0,
+      "text": "看这组虚构数据：五个人分别读了一、二、二、三和二十二本。注意，只有一位成员读了二十二本，其余四人都在三本以下。",
+      "effect": {
+        "type": "spotlight",
+        "elementId": "bar-4"
+      },
+      "start": 10.56,
+      "end": 21.28
+    },
+    {
+      "scene": 0,
+      "text": "把总数三十本平均分给五人，人均确实是六本。可五个人里有四个都没到六本，平均数并不代表多数人的水平。",
+      "effect": {
+        "type": "spotlight",
+        "elementId": "mean-label"
+      },
+      "start": 21.28,
+      "end": 32.480000000000004
+    },
+    {
+      "scene": 0,
+      "text": "问题就出在二十二本这个偏大的数上，它把平均值拉高了。所以小林真正该问的是：平均数到底在回答什么问题？",
+      "effect": {
+        "type": "spotlight",
+        "elementId": "subtitle"
+      },
+      "start": 32.480000000000004,
+      "end": 42.720000000000006
+    },
+    {
+      "scene": 1,
+      "text": "先看左边，五个人的实际阅读量：1、2、2、3，最后这个22。注意，它是虚构数据，只为讲清概念。",
+      "effect": {
+        "type": "spotlight",
+        "elementId": "before-bar-4"
+      },
+      "start": 42.720000000000006,
+      "end": 58.24000000000001
+    },
+    {
+      "scene": 1,
+      "text": "把五个数相加得30本，再除以5人，人均6本。这个算式回答的是：如果把总量平均分给每个人，每人分到多少。",
+      "effect": {
+        "type": "spotlight",
+        "elementId": "formula"
+      },
+      "start": 58.24000000000001,
+      "end": 68.48
+    },
+    {
+      "scene": 1,
+      "text": "看右边，平均分摊后每人都是6本。可问题来了——五个人里其实有四个都没达到6本。",
+      "effect": {
+        "type": "spotlight",
+        "elementId": "after-bar-0"
+      },
+      "start": 68.48,
+      "end": 77.44
+    },
+    {
+      "scene": 1,
+      "text": "原因就在22这个偏大的数上，它把总量拉高了。平均数用了所有数值，所以会被特别大或特别小的数影响。这不是平均数的错误，而是它的性质——在算总量、人均成本这类问题时，它依然很有用。",
+      "effect": {
+        "type": "spotlight",
+        "elementId": "before-bar-4"
+      },
+      "start": 77.44,
+      "end": 92.32
+    },
+    {
+      "scene": 2,
+      "text": "刚才平均数被22拉高到6本，那换个角度看，把五个数按大小排好，1、2、2、3、22。",
+      "effect": {
+        "type": "spotlight",
+        "elementId": "title"
+      },
+      "start": 92.32,
+      "end": 106.08
+    },
+    {
+      "scene": 2,
+      "text": "中间第三个数是2本，这就是中位数，它描述排序后的中间位置。",
+      "effect": {
+        "type": "spotlight",
+        "elementId": "position-2"
+      },
+      "start": 106.08,
+      "end": 112.96
+    },
+    {
+      "scene": 2,
+      "text": "注意，这里两个人都读2本，但也有人读1本、3本甚至22本。中位数只给一个中间值，会丢掉完整的分布信息。",
+      "effect": {
+        "type": "spotlight",
+        "elementId": "median-label"
+      },
+      "start": 112.96,
+      "end": 124.96
+    },
+    {
+      "scene": 2,
+      "text": "所以中位数代表排序后的中间水平，不等于多数人的水平，也不能替代看完整分布。这是虚构读书组数据。",
+      "effect": {
+        "type": "spotlight",
+        "elementId": "rank-note"
+      },
+      "start": 124.96,
+      "end": 133.6
+    },
+    {
+      "scene": 3,
+      "text": "回到小林最初的困惑，答案其实取决于问什么。问一共读了多少，看总量三十本；问人均分到多少，看平均数六本。",
+      "effect": {
+        "type": "spotlight",
+        "elementId": "title"
+      },
+      "start": 133.6,
+      "end": 146.88
+    },
+    {
+      "scene": 3,
+      "text": "想知道排序后的中间水平，才看中位数两本。三个数字各答各的问题，没有谁对谁错。",
+      "effect": {
+        "type": "spotlight",
+        "elementId": "row-2"
+      },
+      "start": 146.88,
+      "end": 154.07999999999998
+    },
+    {
+      "scene": 3,
+      "text": "所以读统计时，先问它要回答什么问题，再结合完整分布判断典型水平。这套五人数据是虚构的，不能直接当作现实证据。",
+      "effect": {
+        "type": "spotlight",
+        "elementId": "boundary"
+      },
+      "start": 154.07999999999998,
+      "end": 164.79999999999998
+    }
+  ]
+}
