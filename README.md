@@ -31,6 +31,7 @@ ZH_UI_URL=http://localhost:3000 node scripts/ui-acceptance.mjs  # 已启动网�
 npm run test:acceptance     # 真实模型对照，会产生用量
 ZH_TEST_VIDEO=1 npm run test:acceptance  # 包含真实视频
 ZH_ACCEPTANCE_URL=https://app.chainvalley.top/zhijing/api node scripts/public-smoke.mjs
+ZH_PUBLIC_UI_URL=https://app.chainvalley.top/zhijing/ node scripts/public-ui-smoke.mjs # 真实网页流程，仅生成一份图文，会产生模型用量
 ```
 
 真实测试报告写入被 Git 忽略的 test-results/；不输出会话、恢复码或供应商密钥。差异化测试控制同一原文、主形式、节奏，只改变讲解入口。测试通过不能证明学习效果提升。

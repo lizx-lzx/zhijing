@@ -7,7 +7,7 @@ import { buildProfile } from "../lib/domain.ts";
 
 const origin = process.env.ZH_UI_URL || "http://127.0.0.1:4370";
 const basePath = new URL(origin).pathname.replace(/\/$/, "");
-const out = "test-results/platform-ui";
+const out = process.env.ZH_UI_OUTPUT || "test-results/platform-ui";
 await fs.mkdir(out, { recursive: true });
 const profile = buildProfile({
   primary: "video",
@@ -393,6 +393,7 @@ try {
     JSON.stringify(
       {
         kind: "UI fixtures, not AI efficacy or real generation",
+        url: origin,
         at: new Date().toISOString(),
         results,
       },
