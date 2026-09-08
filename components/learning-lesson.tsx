@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
   Check,
@@ -9,6 +9,7 @@ import {
   Headphones,
   MonitorPlay,
   Play,
+  List,
 } from "lucide-react";
 import type { Lesson, Medium } from "../lib/domain";
 import { mediaLabels } from "../lib/domain";
@@ -46,6 +47,13 @@ export function LessonView({
     [focus, setFocus] = useState<string[]>([]),
     [quiz, setQuiz] = useState<Record<number, number>>({}),
     [feedback, setFeedback] = useState<boolean | null>(null);
+  const [chapterOpen, setChapterOpen] = useState(false),
+    [activeChapter, setActiveChapter] = useState(0),
+    [transcriptOpen, setTranscriptOpen] = useState(false),
+    [connectionError, setConnectionError] = useState("");
+  const video = useRef<HTMLVideoElement>(null),
+    audio = useRef<HTMLAudioElement>(null),
+    playbackTime = useRef(0);
   const pending = ["queued", "working"].includes(lesson.status);
   useEffect(() => {
     let active = true;
@@ -53,11 +61,13 @@ export function LessonView({
       try {
         const d = await api<{ lesson: Lesson }>(`/lessons/${initial.id}`);
         if (active) {
+          setConnectionError("");
           setLesson(d.lesson);
           if (!["queued", "working"].includes(d.lesson.status)) onUpdate();
         }
       } catch {
-        /* Network interruptions do not discard the saved job. */
+        if (active && pending)
+          setConnectionError("连接暂时中断，正在重连。任务已保存。");
       }
     }
     void poll();
@@ -71,6 +81,98 @@ export function LessonView({
       clearInterval(t);
     };
   }, [initial.id, pending]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (medium !== "reading") return;
+    let frame = 0;
+    const update = () => {
+      if (frame || document.querySelector("dialog[open]")) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        const threshold =
+          (document.querySelector(".z-lesson-toolbar")?.getBoundingClientRect()
+            .bottom || 0) + 32;
+        let current = 0;
+        document.querySelectorAll(".z-chapter").forEach((el, i) => {
+          if (el.getBoundingClientRect().top <= threshold) current = i;
+        });
+        setActiveChapter(current);
+      });
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", update);
+      cancelAnimationFrame(frame);
+    };
+  }, [medium]);
+  function selectChapter(index: number) {
+    setActiveChapter(index);
+    setChapterOpen(false);
+    const at = lesson.media.scenes?.[index]?.start;
+    if (
+      (medium === "video" || medium === "audio") &&
+      at !== undefined &&
+      lesson.media.status === "ready"
+    ) {
+      playbackTime.current = at;
+      const player = medium === "video" ? video.current : audio.current;
+      if (player) player.currentTime = at;
+    } else setMedium("reading");
+    requestAnimationFrame(() => {
+      const target =
+        (medium === "video" || medium === "audio") &&
+        at !== undefined &&
+        lesson.media.status === "ready"
+          ? document.querySelector(".z-media-surface, .z-audio-surface")
+          : document.getElementById(
+              `chapter-${lesson.result?.chapters[index]?.id}`,
+            );
+      if (target)
+        window.scrollTo({
+          top: Math.max(
+            0,
+            window.scrollY +
+              target.getBoundingClientRect().top -
+              (document.querySelector(".z-lesson-toolbar")?.clientHeight || 0) -
+              20,
+          ),
+          behavior: "instant",
+        });
+    });
+  }
+  function trackMedia(time: number) {
+    playbackTime.current = time;
+    const index = lesson.media.scenes?.findIndex(
+      (s) => time >= s.start && time < s.end,
+    );
+    if (index !== undefined && index >= 0) setActiveChapter(index);
+  }
+  function switchMedium(next: Medium) {
+    video.current?.pause();
+    audio.current?.pause();
+    if (medium === "reading") {
+      playbackTime.current = lesson.media.scenes?.[activeChapter]?.start || 0;
+    }
+    setMedium(next);
+    requestAnimationFrame(() => {
+      const target =
+        next === "reading"
+          ? document.getElementById(
+              `chapter-${lesson.result?.chapters[activeChapter]?.id}`,
+            )
+          : document.querySelector(".z-learning-main");
+      if (target && window.scrollY > 180)
+        window.scrollTo({
+          top: Math.max(
+            0,
+            window.scrollY +
+              target.getBoundingClientRect().top -
+              (document.querySelector(".z-lesson-toolbar")?.clientHeight || 0) -
+              20,
+          ),
+          behavior: "instant",
+        });
+    });
+  }
   async function retry() {
     setBusy(true);
     setError("");
@@ -123,7 +225,9 @@ export function LessonView({
           <h1>{result?.title || lesson.title}</h1>
           {result?.lead && <p>{result.lead}</p>}
         </div>
-        <div className="z-lesson-toolbar">
+      </header>
+      {result && (
+        <div className="z-lesson-toolbar z-container">
           <div className="z-medium-tabs" role="group" aria-label="学习形式">
             {(["video", "animation", "reading", "audio"] as Medium[])
               .filter(
@@ -138,7 +242,7 @@ export function LessonView({
                   <button
                     aria-pressed={medium === m}
                     key={m}
-                    onClick={() => setMedium(m)}
+                    onClick={() => switchMedium(m)}
                   >
                     <Icon size={17} />
                     {mediaLabels[m]}
@@ -146,6 +250,15 @@ export function LessonView({
                 );
               })}
           </div>
+          <button
+            className="z-mobile-directory"
+            type="button"
+            onClick={() => setChapterOpen(true)}
+            aria-label="打开章节目录"
+          >
+            <List size={18} />
+            目录
+          </button>
           {result && (
             <details className="z-export">
               <summary>
@@ -184,9 +297,15 @@ export function LessonView({
             </details>
           )}
         </div>
+      )}
+      <div className="z-container">
         <ErrorNotice message={error} />
         {pending && (
           <section className="z-job-progress" role="status">
+            <span className="z-kicker">正在为你制作</span>
+            <h2>
+              {result ? "图文已就绪，其他形式正在准备" : "把文章整理成你的讲法"}
+            </h2>
             <div>
               <Spinner text={lesson.stage} />
               <span>{lesson.progress}%</span>
@@ -200,6 +319,12 @@ export function LessonView({
                 ? "图文已经就绪，可以先看。"
                 : "完成后会出现在你的学习库。"}
             </p>
+            {connectionError && (
+              <p className="z-connection-error">{connectionError}</p>
+            )}
+            <button className="button button-quiet" onClick={onBack}>
+              先回学习库
+            </button>
           </section>
         )}
         {lesson.status === "failed" && (
@@ -233,20 +358,22 @@ export function LessonView({
             </button>
           </div>
         )}
-      </header>
+      </div>
       {result && (
         <div className="z-container z-learning-layout">
           <aside className="z-chapter-nav">
-            <span>本篇内容</span>
+            <span>章节目录 · {result.chapters.length}</span>
             {result.chapters.map((chapter, i) => (
-              <a
+              <button
+                type="button"
                 key={chapter.id}
-                href={`#chapter-${chapter.id}`}
-                onClick={() => setMedium("reading")}
+                className={activeChapter === i ? "active" : ""}
+                aria-current={activeChapter === i ? "step" : undefined}
+                onClick={() => selectChapter(i)}
               >
                 <small>{String(i + 1).padStart(2, "0")}</small>
                 {chapter.title}
-              </a>
+              </button>
             ))}
             <button className="z-text-link" onClick={() => showSource()}>
               查看原文与来源
@@ -257,12 +384,22 @@ export function LessonView({
               (lesson.media.status === "ready" ? (
                 <section className="z-media-surface">
                   <video
+                    ref={video}
                     key={lesson.id}
                     controls
                     playsInline
                     preload="metadata"
                     poster={endpoint(`/lessons/${lesson.id}/media/poster.jpg`)}
                     aria-label={result.title}
+                    onTimeUpdate={(e) =>
+                      trackMedia(e.currentTarget.currentTime)
+                    }
+                    onLoadedMetadata={(e) => {
+                      e.currentTarget.currentTime = Math.min(
+                        playbackTime.current,
+                        e.currentTarget.duration || 0,
+                      );
+                    }}
                   >
                     <source
                       src={endpoint(`/lessons/${lesson.id}/media/video.mp4`)}
@@ -281,7 +418,13 @@ export function LessonView({
                 <div className="z-media-wait">
                   <MonitorPlay size={36} />
                   <h2>{pending ? "视频正在制作" : "视频尚未准备好"}</h2>
-                  <p>下方的图文内容已经可以阅读。</p>
+                  <p>图文已经准备好，可以先读。</p>
+                  <button
+                    className="button button-quiet"
+                    onClick={() => switchMedium("reading")}
+                  >
+                    切到图文先看
+                  </button>
                 </div>
               ))}
             {medium === "audio" &&
@@ -290,9 +433,19 @@ export function LessonView({
                   <Headphones size={36} />
                   <h2>用耳朵听懂这一篇</h2>
                   <audio
+                    ref={audio}
                     controls
                     preload="metadata"
                     src={endpoint(`/lessons/${lesson.id}/media/audio.m4a`)}
+                    onTimeUpdate={(e) =>
+                      trackMedia(e.currentTarget.currentTime)
+                    }
+                    onLoadedMetadata={(e) => {
+                      e.currentTarget.currentTime = Math.min(
+                        playbackTime.current,
+                        e.currentTarget.duration || 0,
+                      );
+                    }}
                   >
                     <track
                       kind="captions"
@@ -307,7 +460,13 @@ export function LessonView({
                 <div className="z-media-wait">
                   <Headphones size={32} />
                   <h2>{pending ? "配音正在制作" : "配音尚未准备好"}</h2>
-                  <p>可以先阅读下方图文。</p>
+                  <p>图文已经准备好，可以先读。</p>
+                  <button
+                    className="button button-quiet"
+                    onClick={() => switchMedium("reading")}
+                  >
+                    切到图文先看
+                  </button>
                 </div>
               ))}
             {medium === "animation" && (
@@ -329,7 +488,20 @@ export function LessonView({
                 ))}
               </ul>
             </details>
+            {medium !== "reading" && (
+              <button
+                type="button"
+                className="z-reading-toggle"
+                aria-expanded={transcriptOpen}
+                onClick={() => setTranscriptOpen((v) => !v)}
+              >
+                <FileText size={18} />
+                {transcriptOpen ? "收起配套图文" : "展开配套图文与来源"}
+                <ChevronDown size={16} />
+              </button>
+            )}
             <div
+              hidden={medium !== "reading" && !transcriptOpen}
               className={medium === "reading" ? "z-reading" : "z-transcript"}
             >
               <div className="z-section-title">
@@ -366,7 +538,7 @@ export function LessonView({
                       className="z-source-button"
                       onClick={() => showSource(chapter.sourceIds)}
                     >
-                      依据：{chapter.sourceIds.join("、")}
+                      查看对应原文
                     </button>
                     <a
                       href={endpoint(`/lessons/${lesson.id}/diagram/${index}`)}
@@ -462,6 +634,23 @@ export function LessonView({
             </section>
           </div>
         </div>
+      )}
+      {chapterOpen && result && (
+        <Modal title="章节目录" onClose={() => setChapterOpen(false)}>
+          <nav className="z-directory-dialog" aria-label="选择章节">
+            {result.chapters.map((c, i) => (
+              <button
+                type="button"
+                key={c.id}
+                aria-current={activeChapter === i ? "step" : undefined}
+                onClick={() => selectChapter(i)}
+              >
+                <span>{String(i + 1).padStart(2, "0")}</span>
+                {c.title}
+              </button>
+            ))}
+          </nav>
+        </Modal>
       )}
       {sourceOpen && lesson.source && (
         <Modal title="原文与来源" onClose={() => setSourceOpen(false)}>

@@ -3,17 +3,15 @@ import { useCallback, useEffect, useState } from "react";
 import {
   ArrowRight,
   Check,
-  FileText,
-  Headphones,
   Library,
-  MonitorPlay,
   Play,
   Plus,
   Settings2,
   Sparkles,
 } from "lucide-react";
 import type { Answers, Lesson, Profile } from "../lib/domain";
-import { defaultAnswers, mediaLabels, normalizeAnswers } from "../lib/domain";
+import { defaultAnswers, normalizeAnswers } from "../lib/domain";
+import StaggeredText from "./react-bits/staggered-text";
 import {
   api,
   base,
@@ -193,7 +191,10 @@ export default function LearningApp() {
       </main>
     );
   return (
-    <div className="z-app">
+    <div className={`z-app${profile ? " z-signed-in" : ""}`}>
+      <a className="z-skip-link" href="#learning-content">
+        跳到主要内容
+      </a>
       <header className="z-top">
         <button
           className="z-brand-button"
@@ -206,6 +207,7 @@ export default function LearningApp() {
           <nav aria-label="主要导航">
             <button
               className={view === "workspace" ? "active" : ""}
+              aria-current={view === "workspace" ? "page" : undefined}
               onClick={() => go("workspace")}
             >
               <Plus size={17} />
@@ -213,6 +215,7 @@ export default function LearningApp() {
             </button>
             <button
               className={view === "library" ? "active" : ""}
+              aria-current={view === "library" ? "page" : undefined}
               onClick={() => {
                 void refresh();
                 go("library");
@@ -223,6 +226,7 @@ export default function LearningApp() {
             </button>
             <button
               className={view === "profile" ? "active" : ""}
+              aria-current={view === "profile" ? "page" : undefined}
               onClick={() => go("profile")}
             >
               <Settings2 size={17} />
@@ -230,7 +234,7 @@ export default function LearningApp() {
             </button>
           </nav>
         ) : (
-          <span className="z-top-note">一次了解，以后自动适配</span>
+          <span className="z-top-note">你的个人学习空间</span>
         )}
         <button
           className="z-account"
@@ -242,187 +246,205 @@ export default function LearningApp() {
           保存与恢复
         </button>
       </header>
-      {notice && (
-        <div className="z-toast" role="status">
-          <Check size={18} />
-          {notice}
-        </div>
-      )}
-      {busy && !account && (
-        <div className="z-global-busy" role="status">
-          <Spinner text={busy} />
-        </div>
-      )}
-      {error && !account && (
-        <div className="z-container">
-          <ErrorNotice message={error} />
-        </div>
-      )}
-      {view === "welcome" && (
-        <main className="z-welcome z-container">
-          <div className="z-welcome-copy">
-            <span className="z-kicker">从不想读，到愿意懂</span>
-            <h1>
-              知识不必难读。
-              <br />
-              <span className="z-accent">换成你的讲法。</span>
-            </h1>
+      <div className="z-main-area" id="learning-content">
+        {notice && (
+          <div className="z-toast" role="status">
+            <Check size={18} />
+            {notice}
+          </div>
+        )}
+        {busy && !account && (
+          <div className="z-global-busy" role="status">
+            <Spinner text={busy} />
+          </div>
+        )}
+        {error && !account && (
+          <div className="z-container">
+            <ErrorNotice message={error} />
+          </div>
+        )}
+        {view === "welcome" && (
+          <main className="z-welcome z-container">
+            <div className="z-welcome-copy">
+              <span className="z-kicker">让长文更容易开始</span>
+              <StaggeredText
+                as="h1"
+                text={"知识不必难读。\n换成你的讲法。"}
+                segmentBy="lines"
+                blur={false}
+                delay={60}
+                duration={0.25}
+                from={{ opacity: 1, y: 8 }}
+                to={{ opacity: 1, y: 0 }}
+                respectReducedMotion
+              />
+              <p>一次了解你的偏好，以后把文章变成适合你的视频、图文或音频。</p>
+              <button
+                className="button button-primary button-large"
+                onClick={() => go("questionnaire")}
+              >
+                {legacy ? "接着上次的偏好" : "找到我的学法"}
+                <ArrowRight size={18} />
+              </button>
+              <span className="z-welcome-meta">
+                8 题 · 约 2 分钟 · 随时可改
+              </span>
+              <ol className="z-welcome-steps" aria-label="使用流程">
+                <li>
+                  <span>01</span>了解偏好
+                </li>
+                <li>
+                  <span>02</span>放入文章
+                </li>
+                <li>
+                  <span>03</span>开始学习
+                </li>
+              </ol>
+            </div>
+            <div className="z-welcome-card">
+              <div className="z-card-cap">
+                <Sparkles size={19} />
+                <span>先看看，一篇文章可以变成什么</span>
+              </div>
+              <a
+                className="z-featured-lesson"
+                href={`${base}/demo/zhihu-window-20260908/?ui=4244aa2`}
+              >
+                <div
+                  className="z-featured-cover"
+                  style={{
+                    backgroundImage: `url(${base}/demo/zhihu-window-20260908/media/poster.jpg)`,
+                  }}
+                >
+                  <span>
+                    <Play size={22} fill="currentColor" />
+                    查看成品
+                  </span>
+                </div>
+                <div className="z-featured-copy">
+                  <span>知乎长文学习版 · 6 分 49 秒</span>
+                  <h2>窗口期可能只剩五年</h2>
+                  <p>视频、10 张图解、音频与笔记</p>
+                  <strong>
+                    打开这份学习作品 <ArrowRight size={18} />
+                  </strong>
+                </div>
+              </a>
+              <p className="z-featured-note">
+                使用示例偏好的单篇作品，内容含作者推演。
+              </p>
+            </div>
+          </main>
+        )}
+        {view === "questionnaire" && (
+          <Onboarding
+            initial={profile?.answers || legacy || defaultAnswers}
+            onSave={saved}
+            onCancel={() => go(profile ? "profile" : "welcome")}
+          />
+        )}
+        {view === "profile" && profile && (
+          <SkillEditor
+            key={profile.updatedAt}
+            profile={profile}
+            existing
+            onSave={saved}
+            onBack={() => go("workspace")}
+            onRetake={() => go("questionnaire")}
+          />
+        )}
+        {view === "workspace" && profile && (
+          <Workbench
+            profile={profile}
+            lessons={lessons}
+            onOpen={(id) => void open(id)}
+            onGenerated={generated}
+            onProfile={() => go("profile")}
+            onLibrary={() => go("library")}
+          />
+        )}
+        {view === "library" && (
+          <LearningLibrary
+            lessons={lessons}
+            onOpen={(id) => void open(id)}
+            onAdd={() => go("workspace")}
+          />
+        )}
+        {view === "learning" && lesson && (
+          <LessonView
+            key={lesson.id}
+            initial={lesson}
+            onBack={() => {
+              void refresh();
+              go("library");
+            }}
+            onUpdate={() => void refresh()}
+            notify={setNotice}
+          />
+        )}
+        {account && (
+          <Modal title="把学习带到下一台设备" onClose={() => setAccount(false)}>
             <p>
-              告诉我们你的学习习惯。以后给一篇文章，
-              <br className="z-desktop" />
-              就能拿到适合你的视频、图文或音频。
+              偏好与作品已保存在服务器。恢复码是你的私人钥匙，换浏览器或清除
+              Cookie 后，用它找回内容。
             </p>
-            <button
-              className="button button-primary button-large"
-              onClick={() => go("questionnaire")}
-            >
-              {legacy ? "接着上次的偏好" : "开始了解我的学习方式"}
-              <ArrowRight size={18} />
-            </button>
-            <span className="z-welcome-meta">
-              8 个简短问题 · 约 2 分钟 · 随时可改
-            </span>
-          </div>
-          <div className="z-welcome-card">
-            <div className="z-card-cap">
-              <Sparkles size={19} />
-              <span>你的学习方式</span>
-            </div>
-            <h2>
-              同一篇内容，
-              <br />
-              可以有不同的入口。
-            </h2>
-            <div className="z-path-example">
-              <span>喜欢故事</span>
-              <i>→</i>
-              <strong>先走进一个情境</strong>
-            </div>
-            <div className="z-path-example">
-              <span>喜欢分析</span>
-              <i>→</i>
-              <strong>先看到结论与依据</strong>
-            </div>
-            <div className="z-media-row">
-              {[MonitorPlay, FileText, Headphones, Play].map((Icon, i) => (
-                <span key={i}>
-                  <Icon size={19} />
-                  {Object.values(mediaLabels)[i]}
-                </span>
-              ))}
-            </div>
-            <p>不是给你贴标签，是让知识更容易靠近你。</p>
-          </div>
-        </main>
-      )}
-      {view === "questionnaire" && (
-        <Onboarding
-          initial={profile?.answers || legacy || defaultAnswers}
-          onSave={saved}
-          onCancel={() => go(profile ? "profile" : "welcome")}
-        />
-      )}
-      {view === "profile" && profile && (
-        <SkillEditor
-          key={profile.updatedAt}
-          profile={profile}
-          existing
-          onSave={saved}
-          onBack={() => go("workspace")}
-          onRetake={() => go("questionnaire")}
-        />
-      )}
-      {view === "workspace" && profile && (
-        <Workbench
-          profile={profile}
-          lessons={lessons}
-          onOpen={(id) => void open(id)}
-          onGenerated={generated}
-          onProfile={() => go("profile")}
-          onLibrary={() => go("library")}
-        />
-      )}
-      {view === "library" && (
-        <LearningLibrary
-          lessons={lessons}
-          onOpen={(id) => void open(id)}
-          onAdd={() => go("workspace")}
-        />
-      )}
-      {view === "learning" && lesson && (
-        <LessonView
-          key={lesson.id}
-          initial={lesson}
-          onBack={() => {
-            void refresh();
-            go("library");
-          }}
-          onUpdate={() => void refresh()}
-          notify={setNotice}
-        />
-      )}
-      {account && (
-        <Modal title="把学习带到下一台设备" onClose={() => setAccount(false)}>
-          <p>
-            偏好与作品已保存在服务器。恢复码是你的私人钥匙，换浏览器或清除
-            Cookie 后，用它找回内容。
-          </p>
-          {recovery ? (
-            <div className="z-recovery">
-              <label>
-                请私下保存，不要发给别人
-                <input
-                  readOnly
-                  value={recovery}
-                  onFocus={(e) => e.target.select()}
-                />
-              </label>
+            {recovery ? (
+              <div className="z-recovery">
+                <label>
+                  请私下保存，不要发给别人
+                  <input
+                    readOnly
+                    value={recovery}
+                    onFocus={(e) => e.target.select()}
+                  />
+                </label>
+                <button
+                  className="button button-primary"
+                  onClick={() =>
+                    downloadText(
+                      "知径-私人恢复码.txt",
+                      `知径：${window.location.origin}${base}/\n私人恢复码：${recovery}\n请勿分享。持有码的人可访问你的学习内容。`,
+                    )
+                  }
+                >
+                  下载保存恢复码
+                </button>
+              </div>
+            ) : (
               <button
                 className="button button-primary"
-                onClick={() =>
-                  downloadText(
-                    "知径-私人恢复码.txt",
-                    `知径：${window.location.origin}${base}/\n私人恢复码：${recovery}\n请勿分享。持有码的人可访问你的学习内容。`,
-                  )
-                }
+                disabled={!!busy}
+                onClick={() => void makeRecovery()}
               >
-                下载保存恢复码
+                {hasRecovery ? "生成新恢复码（旧码会失效）" : "生成我的恢复码"}
               </button>
-            </div>
-          ) : (
+            )}
+            <hr />
+            <h3>已有恢复码？</h3>
+            <label className="z-field-label">
+              恢复码
+              <input
+                value={restore}
+                onChange={(e) => setRestore(e.target.value)}
+                placeholder="粘贴以前保存的恢复码"
+                autoComplete="off"
+              />
+            </label>
+            <ErrorNotice message={error} />
             <button
-              className="button button-primary"
-              disabled={!!busy}
-              onClick={() => void makeRecovery()}
+              className="button button-quiet"
+              disabled={!!busy || !restore.trim()}
+              onClick={() => void restoreAccount()}
             >
-              {hasRecovery ? "生成新恢复码（旧码会失效）" : "生成我的恢复码"}
+              {busy ? <Spinner text={busy} /> : "恢复我的学习库"}
             </button>
-          )}
-          <hr />
-          <h3>已有恢复码？</h3>
-          <label className="z-field-label">
-            恢复码
-            <input
-              value={restore}
-              onChange={(e) => setRestore(e.target.value)}
-              placeholder="粘贴以前保存的恢复码"
-              autoComplete="off"
-            />
-          </label>
-          <ErrorNotice message={error} />
-          <button
-            className="button button-quiet"
-            disabled={!!busy || !restore.trim()}
-            onClick={() => void restoreAccount()}
-          >
-            {busy ? <Spinner text={busy} /> : "恢复我的学习库"}
-          </button>
-        </Modal>
-      )}
-      <footer className="z-footer z-container">
-        <span>知径 · 让知识按你的方式展开</span>
-        <span>AI 辅助理解，不替代来源核验</span>
-      </footer>
+          </Modal>
+        )}
+        <footer className="z-footer z-container">
+          <span>知径</span>
+          <span>AI 辅助理解 · 重要判断请核对原文</span>
+        </footer>
+      </div>
     </div>
   );
 }

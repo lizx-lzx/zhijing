@@ -106,11 +106,29 @@ export function Modal({
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     const dialog = ref.current;
+    const previous = document.body.style.overflow;
+    const trigger = document.activeElement;
     dialog?.showModal();
-    return () => dialog?.close();
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+      dialog?.close();
+      queueMicrotask(() => {
+        if (trigger instanceof HTMLElement && trigger.isConnected)
+          trigger.focus({ preventScroll: true });
+      });
+    };
   }, []);
   return (
-    <dialog ref={ref} className="z-modal" aria-label={title} onCancel={onClose}>
+    <dialog
+      ref={ref}
+      className="z-modal"
+      aria-label={title}
+      onCancel={(event) => {
+        event.preventDefault();
+        onClose();
+      }}
+    >
       <div className="z-modal-top">
         <h2>{title}</h2>
         <button aria-label="关闭" onClick={onClose}>

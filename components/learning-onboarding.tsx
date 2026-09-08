@@ -53,56 +53,90 @@ export function SkillEditor({
   return (
     <main className="z-container-small z-profile">
       <div className="z-page-heading">
-        <span className="z-kicker">
-          {existing ? "属于你的讲解说明书" : "为你整理的初稿"}
-        </span>
-        <h1>{draft.name}</h1>
+        <span className="z-kicker">个人学习 Skill</span>
+        <h1>{existing ? "我的学法" : "你的学法，准备好了"}</h1>
         <p>{draft.summary}</p>
+      </div>
+      <div className="z-profile-summary">
+        {(["primary", "entry", "pace"] as const).map((key, i) => (
+          <div key={key}>
+            <span>{["偏好的形式", "讲解入口", "学习节奏"][i]}</span>
+            <strong>
+              {
+                questions
+                  .find((q) => q.id === key)
+                  ?.options.find((o) => o.value === draft.answers[key])?.label
+              }
+            </strong>
+          </div>
+        ))}
       </div>
       <div className="z-profile-banner">
         <ShieldCheck size={20} />
-        <span>这是偏好，不是能力测评。改动只有在你保存后才生效。</span>
+        <span>不是能力测评。修改后点保存，才会改变以后的讲法。</span>
       </div>
       <div className="z-rule-list">
         {draft.rules.map((r) => (
-          <section key={r.id} className="z-rule">
-            <div>
-              <span>{r.evidence}</span>
-              <h3>{r.title}</h3>
+          <details
+            key={r.id}
+            className="z-rule"
+            open={editing === r.id ? true : undefined}
+          >
+            <summary>
+              <span>{r.title}</span>
+              <span className="z-rule-open">查看规则</span>
+            </summary>
+            <div className="z-rule-content">
+              <p className="z-rule-evidence">依据：{r.evidence}</p>
+              {editing === r.id ? (
+                <textarea
+                  aria-label={`编辑${r.title}`}
+                  value={r.instruction}
+                  maxLength={1500}
+                  onChange={(e) =>
+                    setDraft({
+                      ...draft,
+                      rules: draft.rules.map((rule) =>
+                        rule.id === r.id
+                          ? { ...rule, instruction: e.target.value }
+                          : rule,
+                      ),
+                    })
+                  }
+                />
+              ) : (
+                <p>{r.instruction}</p>
+              )}
+              {["entry", "goal", "support", "pace", "personal"].includes(
+                r.id,
+              ) && (
+                <button
+                  className="z-text-link"
+                  onClick={() => setEditing(editing === r.id ? null : r.id)}
+                >
+                  {editing === r.id ? "收起编辑" : "修改这条"}
+                </button>
+              )}
             </div>
-            {editing === r.id ? (
-              <textarea
-                aria-label={`编辑${r.title}`}
-                value={r.instruction}
-                maxLength={1500}
-                onChange={(e) =>
-                  setDraft({
-                    ...draft,
-                    rules: draft.rules.map((rule) =>
-                      rule.id === r.id
-                        ? { ...rule, instruction: e.target.value }
-                        : rule,
-                    ),
-                  })
-                }
-              />
-            ) : (
-              <p>{r.instruction}</p>
-            )}
-            {["entry", "goal", "support", "pace", "personal"].includes(
-              r.id,
-            ) && (
-              <button
-                className="z-text-link"
-                onClick={() => setEditing(editing === r.id ? null : r.id)}
-              >
-                {editing === r.id ? "收起编辑" : "修改这条"}
-              </button>
-            )}
-          </section>
+          </details>
         ))}
       </div>
       <ErrorNotice message={error} />
+      {existing && (
+        <div className="z-profile-tools">
+          <button
+            className="button button-quiet"
+            onClick={onRetake}
+            disabled={busy}
+          >
+            重新做问卷
+          </button>
+          <a className="button button-quiet" href={endpoint("/profile/export")}>
+            <Download size={16} />
+            下载 Skill
+          </a>
+        </div>
+      )}
       <div className="z-profile-actions">
         <button
           className="button button-quiet"
@@ -120,20 +154,6 @@ export function SkillEditor({
           {busy ? <Spinner text="正在保存" /> : "保存并开始学习"}
           <ArrowRight size={17} />
         </button>
-        {existing && (
-          <>
-            <button className="button button-quiet" onClick={onRetake}>
-              重新做问卷
-            </button>
-            <a
-              className="button button-quiet"
-              href={endpoint("/profile/export")}
-            >
-              <Download size={16} />
-              下载 Skill
-            </a>
-          </>
-        )}
       </div>
       {existing && (
         <details
@@ -209,9 +229,9 @@ export function Onboarding({
     <main className="z-onboarding z-container-small">
       <div className="z-question-meta">
         <span>
-          第 {step + 1} / {questions.length} 题
+          第 {step + 1} / {questions.length} 题 · 约 2 分钟
         </span>
-        <strong>可以随时改，不用一次选准</strong>
+        <strong>随时可改</strong>
       </div>
       <div
         className="z-progress"
@@ -226,16 +246,26 @@ export function Onboarding({
       <div className="z-groups">
         {["认识你的学习习惯", "找到更容易看懂的讲法", "按你舒服的节奏来"].map(
           (g, i) => (
-            <span className={q.group === g ? "active" : ""} key={g}>
-              {i + 1} · {g}
-            </span>
+            <button
+              type="button"
+              disabled={busy}
+              className={q.group === g ? "active" : ""}
+              aria-current={q.group === g ? "step" : undefined}
+              key={g}
+              onClick={() =>
+                setStep(questions.findIndex((item) => item.group === g))
+              }
+            >
+              <span>{i + 1}</span>
+              {["学习习惯", "理解方式", "学习节奏"][i]}
+            </button>
           ),
         )}
       </div>
       <section key={step} className="z-question">
         <h1>{q.title}</h1>
         {q.help && <p className="z-help">{q.help}</p>}
-        <div className="z-choices">
+        <div className="z-choices" data-multiple={!!q.multiple}>
           {q.options.map((option) => {
             const value = answers[q.id];
             const selected = q.multiple
@@ -245,6 +275,7 @@ export function Onboarding({
             return (
               <button
                 key={option.value}
+                disabled={busy}
                 className={`z-choice ${selected ? "selected" : ""}`}
                 aria-pressed={selected}
                 onClick={() =>
@@ -289,6 +320,7 @@ export function Onboarding({
                   <label key={m}>
                     <input
                       type="checkbox"
+                      disabled={busy}
                       checked={answers.extras.includes(m)}
                       onChange={(e) =>
                         setAnswers((a) => ({
@@ -309,6 +341,7 @@ export function Onboarding({
           <label className="z-note-label">
             还有什么想告诉我们？（选填）
             <textarea
+              disabled={busy}
               maxLength={600}
               value={answers.note}
               onChange={(e) =>

@@ -27,6 +27,7 @@ npm run dev
 
 ```sh
 npm test                   # 单元 / HTTP、类型、规范、构建和生产页面测试
+ZH_UI_URL=http://localhost:3000 node scripts/ui-acceptance.mjs  # 已启动网页；隔离 UI 测试，不调用模型
 npm run test:acceptance     # 真实模型对照，会产生用量
 ZH_TEST_VIDEO=1 npm run test:acceptance  # 包含真实视频
 ZH_ACCEPTANCE_URL=https://app.chainvalley.top/zhijing/api node scripts/public-smoke.mjs
@@ -59,6 +60,7 @@ ZH_ACCEPTANCE_URL=https://app.chainvalley.top/zhijing/api node scripts/public-sm
 - [开发思路与源码导航](docs/02-开发思路、最终方案与源码导航.md)
 - [研究依据](docs/03-研究结论与下一阶段落地方案.md)
 - [本版实施与验收](docs/05-完整产品实施与验收.md)
+- [整个平台 UI 更新与验收](docs/06-整个平台UI更新与验收.md)
 - [OpenMAIC 单篇讲解试作：实现、边界与复现](experiments/openmaic-preview/README.md)
 - [知乎文章《窗口期可能只剩五年》：完整学习作品](experiments/openmaic-preview/lessons/window-five-years/README.md)
 

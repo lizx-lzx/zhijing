@@ -4,6 +4,9 @@ import {
   ArrowRight,
   FileText,
   Library,
+  Headphones,
+  MonitorPlay,
+  Play,
   Plus,
   ShieldCheck,
   Upload,
@@ -26,16 +29,27 @@ export function LessonCard({
     partial: "图文可看 · 音视频待重试",
     failed: "制作未完成",
   };
+  const Icon =
+    {
+      video: MonitorPlay,
+      reading: FileText,
+      audio: Headphones,
+      animation: Play,
+    }[lesson.formats[0]] || FileText;
   return (
     <button className="z-lesson-card" onClick={onOpen}>
       <div className={`z-card-art z-card-art-${lesson.formats[0]}`}>
-        <FileText size={30} />
+        <Icon size={30} />
         <span>{lesson.formats.map((f) => mediaLabels[f]).join(" / ")}</span>
       </div>
       <div className="z-lesson-card-body">
         <span className="z-card-date">
-          {new Date(lesson.createdAt).toLocaleDateString("zh-CN")} ·{" "}
-          {lesson.completed ? "已学完" : statuses[lesson.status]}
+          {new Date(lesson.createdAt).toLocaleDateString("zh-CN")}
+          <span
+            className={`z-status z-status-${lesson.completed ? "completed" : lesson.status}`}
+          >
+            {lesson.completed ? "已学完" : statuses[lesson.status]}
+          </span>
         </span>
         <h3>{lesson.title}</h3>
         <span className="z-card-action">
@@ -60,9 +74,18 @@ export function LearningLibrary({
   return (
     <main className="z-container z-library">
       <div className="z-page-heading">
-        <span className="z-kicker">你的内容会留在这里</span>
-        <h1>学习库</h1>
-        <p>重看、继续，或者换一种讲法再学一遍。</p>
+        <div className="z-heading-row">
+          <h1>学习库</h1>
+          <button className="button button-primary" onClick={onAdd}>
+            <Plus size={17} />
+            添加内容
+          </button>
+        </div>
+        <p>
+          {lessons.length
+            ? `最近的 ${lessons.length} 份学习作品`
+            : "生成的作品会自动留在这里。"}
+        </p>
       </div>
       {lessons.length ? (
         <div className="z-library-grid">
@@ -137,9 +160,9 @@ export function Workbench({
   return (
     <main className="z-container z-workspace">
       <div className="z-page-heading">
-        <span className="z-kicker">今天想弄懂什么？</span>
-        <h1>把文章交给我。</h1>
-        <p>已记住你的讲法，这次不用再选。</p>
+        <span className="z-kicker">开始学习</span>
+        <h1>今天想读懂什么？</h1>
+        <p>放入一篇文章，按你的学法整理。</p>
       </div>
       <div className="z-workspace-grid">
         <section className="z-composer">
@@ -211,6 +234,33 @@ export function Workbench({
               </span>
             </div>
           )}
+          <div className="z-composer-recipe">
+            <span>
+              本次以{" "}
+              <strong>
+                {mediaLabels[overrides.primary || profile.answers.primary]}
+              </strong>{" "}
+              为主
+            </span>
+            <button
+              className="z-text-link"
+              type="button"
+              onClick={() => {
+                const panel = document.getElementById(
+                  "temporary-learning-settings",
+                ) as HTMLDetailsElement | null;
+                if (panel) {
+                  panel.open = true;
+                  panel.scrollIntoView({
+                    block: "center",
+                    behavior: "instant",
+                  });
+                }
+              }}
+            >
+              临时调整
+            </button>
+          </div>
           <ErrorNotice message={error} />
           <div className="z-compose-bottom">
             <span>
@@ -229,7 +279,7 @@ export function Workbench({
                 <Spinner text={busy} />
               ) : (
                 <>
-                  生成我的学习内容
+                  开始生成
                   <ArrowRight size={18} />
                 </>
               )}
@@ -242,8 +292,24 @@ export function Workbench({
         </section>
         <aside className="z-current-profile">
           <span>这次默认</span>
-          <h2>{profile.name}</h2>
-          <p>{profile.summary}</p>
+          <h2>我的学习配方</h2>
+          <p>
+            {
+              questions
+                .find((q) => q.id === "entry")
+                ?.options.find(
+                  (o) => o.value === (overrides.entry || profile.answers.entry),
+                )?.label
+            }{" "}
+            ·{" "}
+            {
+              questions
+                .find((q) => q.id === "pace")
+                ?.options.find(
+                  (o) => o.value === (overrides.pace || profile.answers.pace),
+                )?.label
+            }
+          </p>
           <div className="z-media-row">
             <span>{mediaLabels[profile.answers.primary]}为主</span>
             {profile.answers.extras.map((m) => (
@@ -253,7 +319,10 @@ export function Workbench({
           <button className="z-text-link" onClick={onProfile}>
             修改长期学法 <ArrowRight size={15} />
           </button>
-          <details className="z-detail z-temporary">
+          <details
+            className="z-detail z-temporary"
+            id="temporary-learning-settings"
+          >
             <summary>只调整这一次</summary>
             <p>不改变已保存的学法。</p>
             {questions
@@ -291,9 +360,8 @@ export function Workbench({
       </div>
       <section className="z-sample">
         <div>
-          <span className="z-kicker">还没准备好文章？</span>
-          <h3>用“平均数”体验一次真正的生成。</h3>
-          <p>同一篇体验文章，按照你的规则重新制作。</p>
+          <h3>手边没有文章？</h3>
+          <p>用一篇“平均数”短文试试你的学法。</p>
         </div>
         <button
           className="button button-quiet"
