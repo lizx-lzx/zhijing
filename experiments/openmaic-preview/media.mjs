@@ -4,6 +4,8 @@ import { spawn } from "node:child_process";
 import { once } from "node:events";
 import { fileURLToPath } from "node:url";
 import { pathToFileURL } from "node:url";
+import { editionPaths } from "./paths.mjs";
+const { root: lessonRoot } = editionPaths();
 const runtime = process.env.ZH_RUNTIME_ROOT
   ? pathToFileURL(`${process.env.ZH_RUNTIME_ROOT.replace(/\/$/, "")}/`)
   : new URL("../../", import.meta.url);
@@ -16,10 +18,11 @@ const { produceMedia, mediaDir, probe } = await import(
 );
 
 const lesson = JSON.parse(
-  await fs.readFile(new URL("./lesson.json", import.meta.url), "utf8"),
+  await fs.readFile(new URL("lesson.json", lessonRoot), "utf8"),
 );
-const dest = new URL("./public/media/", import.meta.url);
+const dest = new URL("public/media/", lessonRoot);
 await fs.mkdir(dest, { recursive: true });
+await fs.mkdir(new URL("render/", lessonRoot), { recursive: true });
 const segments = [];
 for (let i = 0; i < lesson.scenes.length; i++) {
   let effect = null;
@@ -29,8 +32,13 @@ for (let i = 0; i < lesson.scenes.length; i++) {
     else segments.push({ scene: i, text: action.text, effect });
   }
 }
+const chapterVoice = lesson.mediaPolicy?.voiceUnit === "chapter";
 const fingerprint = createHash("sha256")
-  .update(JSON.stringify(segments))
+  .update(
+    JSON.stringify(
+      chapterVoice ? { voiceUnit: "chapter", segments } : segments,
+    ),
+  )
   .digest("hex")
   .slice(0, 24);
 const id = `openmaic-preview-${fingerprint}`;
@@ -38,30 +46,62 @@ const mediaPath = mediaDir(id);
 if (process.argv[2] === "voice") {
   // Reuse the existing provider adapter and validated cache, one voice clip per
   // speech action. Visual cues align to actual clip boundaries, not text length.
+  const voiceUnits = chapterVoice
+    ? lesson.scenes.map((s, i) => ({
+        scene: i,
+        text: segments
+          .filter((v) => v.scene === i)
+          .map((v) => v.text)
+          .join("\n\n"),
+      }))
+    : segments;
   const media = await produceMedia(
     id,
     {
       title: lesson.title,
-      chapters: segments.map((s, i) => ({
+      chapters: voiceUnits.map((s, i) => ({
         id: `s${i}`,
         title: lesson.scenes[s.scene].title,
         narration: s.text,
-        sourceIds: ["sample"],
-        fictional: true,
+        sourceIds: [lesson.scenes[s.scene].sourceAnchor?.section || "sample"],
+        fictional: !lesson.sourceMeta,
         visual: { type: "cards", items: [] },
       })),
     },
     ["audio"],
     (stage) => console.log(stage),
   );
+  const measured = chapterVoice
+    ? segments.map((s) => {
+        const peers = segments.filter((v) => v.scene === s.scene);
+        const order = peers.indexOf(s);
+        const total = peers.reduce((n, v) => n + v.text.length, 0);
+        const elapsed = peers
+          .slice(0, order)
+          .reduce((n, v) => n + v.text.length, 0);
+        const clip = media.scenes[s.scene];
+        const length = clip.end - clip.start;
+        return {
+          ...s,
+          start: clip.start + (length * elapsed) / total,
+          end:
+            order === peers.length - 1
+              ? clip.end
+              : clip.start + (length * (elapsed + s.text.length)) / total,
+        };
+      })
+    : segments.map((s, i) => ({ ...s, ...media.scenes[i] }));
   const timing = {
     duration: media.duration,
     fingerprint,
     voiceReady: true,
-    segments: segments.map((s, i) => ({ ...s, ...media.scenes[i] })),
+    alignment: chapterVoice
+      ? "chapters measured; intra-chapter segments proportional"
+      : "speech clips measured",
+    segments: measured,
   };
   await fs.writeFile(
-    new URL("./timing.json", import.meta.url),
+    new URL("timing.json", lessonRoot),
     JSON.stringify(timing, null, 2),
   );
   for (const file of ["audio.m4a", "captions.vtt"])
@@ -69,7 +109,7 @@ if (process.argv[2] === "voice") {
   console.log("VOICE_READY", media.duration, segments.length);
 } else if (process.argv[2] === "video") {
   const timing = JSON.parse(
-    await fs.readFile(new URL("./timing.json", import.meta.url), "utf8"),
+    await fs.readFile(new URL("timing.json", lessonRoot), "utf8"),
   );
   if (!timing.voiceReady || timing.fingerprint !== fingerprint)
     throw new Error("Voice and scene actions do not match");
@@ -171,7 +211,7 @@ if (process.argv[2] === "voice") {
     )
       throw new Error("Video/audio validation failed");
     await fs.writeFile(
-      new URL("./render/media-proof.json", import.meta.url),
+      new URL("render/media-proof.json", lessonRoot),
       JSON.stringify(info, null, 2),
     );
     console.log("VIDEO_READY", info.format.duration);

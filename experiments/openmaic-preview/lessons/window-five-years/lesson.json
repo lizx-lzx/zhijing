@@ -1,0 +1,4039 @@
+{
+  "title": "窗口期可能只剩五年",
+  "author": "riba2534",
+  "url": "https://zhuanlan.zhihu.com/p/2009319586063992724",
+  "context": "原文写作语境：2026 年 2 月",
+  "thesis": "AI 的能力红利，未必自动变成每个人的收入红利。",
+  "intro": "读懂作者如何从 AI 提效，一步步推到就业、消费、信贷与个人选择。",
+  "sourceNote": "依据你提供的知乎正文改编。2030 年危机与五年窗口是作者的情景推演，不是已发生的事实。",
+  "preference": [
+    "故事开场",
+    "先看关系再听解释",
+    "不中途提问"
+  ],
+  "source": "",
+  "sourceMeta": {
+    "title": "窗口期可能只剩五年",
+    "author": "riba2534",
+    "url": "https://zhuanlan.zhihu.com/p/2009319586063992724",
+    "context": "原文写作语境：2026 年 2 月",
+    "acquisition": "用户提供正文；未在线核验页面版本",
+    "hash": "2f6914e68ca23541775a39ab6d86d8292156da7dc38757809609e8280533f02f",
+    "publication": "发布改编讲解、必要短引及定位，不发布整篇原文"
+  },
+  "profile": {
+    "version": 3,
+    "name": "故事引入的讲解视频",
+    "summary": "用生活困惑开场，配合准确图表，节奏适中，先帮你理解核心概念。",
+    "answers": {
+      "age": "private",
+      "goal": "understand",
+      "primary": "video",
+      "extras": [],
+      "entry": "story",
+      "support": [],
+      "pace": "balanced",
+      "interaction": "none",
+      "avoid": [],
+      "note": "先用生活里的困惑引入。用准确的图表帮助理解，画面少字，不打断提问。"
+    },
+    "rules": [
+      {
+        "id": "medium",
+        "title": "以讲解视频为主",
+        "instruction": "主载体为讲解视频。不强迫用户逐篇重新选择形式。各载体共用同一知识结构、来源和结论。",
+        "evidence": "你选择的主要形式"
+      },
+      {
+        "id": "entry",
+        "title": "先听一个故事",
+        "instruction": "先用具体人物的处境、感受或矛盾引入，再揭示背后的概念和因果。虚构必须明示，不篡改原文。",
+        "evidence": "你选择的讲法"
+      },
+      {
+        "id": "goal",
+        "title": "先看懂它",
+        "instruction": "以看懂中心问题、结论和必要依据为目标，不追求细节。",
+        "evidence": "你的默认目标"
+      },
+      {
+        "id": "support",
+        "title": "难点用具体解释",
+        "instruction": "根据难点选择例子、步骤或图解，不只换措辞重复原话。",
+        "evidence": "系统默认，可修改"
+      },
+      {
+        "id": "pace",
+        "title": "适中就好",
+        "instruction": "每章一个核心点，必要例子和依据相邻，不堆砌背景。",
+        "evidence": "你选择的节奏"
+      },
+      {
+        "id": "interaction",
+        "title": "直接讲给我听",
+        "instruction": "所有章节一次性可见；练习折叠，不在中间打断。",
+        "evidence": "互动选择与避免项"
+      },
+      {
+        "id": "avoid",
+        "title": "保持清晰克制",
+        "instruction": "没有明确避免项，默认清晰、适量、可暂停。",
+        "evidence": "平台默认"
+      },
+      {
+        "id": "boundary",
+        "title": "保留来源，不给你贴标签",
+        "instruction": "使用清晰的成人表达；年龄不用于推断能力。区分作者观点、预测与事实；AI解释和虚构例子需标识。一次性交付完整内容；长期规则只经用户确认更新。",
+        "evidence": "平台底线"
+      },
+      {
+        "id": "personal",
+        "title": "你补充的习惯",
+        "instruction": "先用生活里的困惑引入。用准确的图表帮助理解，画面少字，不打断提问。",
+        "evidence": "你亲自补充，可编辑"
+      }
+    ],
+    "engine": "ai"
+  },
+  "skill": "---\nname: personal-learning\ndescription: 当将用户提供的知识内容制作成学习作品时使用；普通问答、没有来源的创作不使用。\nversion: 3\n---\n\n# 故事引入的讲解视频\n\n用生活困惑开场，配合准确图表，节奏适中，先帮你理解核心概念。\n\n## 输入与输出\n\n输入为带段落编号的原文，输出为来源可追溯、一次性交付的个人学习作品。没有原文时停止，不编造。\n\n## 学习规则\n\n### 以讲解视频为主\n\n主载体为讲解视频。不强迫用户逐篇重新选择形式。各载体共用同一知识结构、来源和结论。\n\n依据：你选择的主要形式\n\n### 先听一个故事\n\n先用具体人物的处境、感受或矛盾引入，再揭示背后的概念和因果。虚构必须明示，不篡改原文。\n\n依据：你选择的讲法\n\n### 先看懂它\n\n以看懂中心问题、结论和必要依据为目标，不追求细节。\n\n依据：你的默认目标\n\n### 难点用具体解释\n\n根据难点选择例子、步骤或图解，不只换措辞重复原话。\n\n依据：系统默认，可修改\n\n### 适中就好\n\n每章一个核心点，必要例子和依据相邻，不堆砌背景。\n\n依据：你选择的节奏\n\n### 直接讲给我听\n\n所有章节一次性可见；练习折叠，不在中间打断。\n\n依据：互动选择与避免项\n\n### 保持清晰克制\n\n没有明确避免项，默认清晰、适量、可暂停。\n\n依据：平台默认\n\n### 保留来源，不给你贴标签\n\n使用清晰的成人表达；年龄不用于推断能力。区分作者观点、预测与事实；AI解释和虚构例子需标识。一次性交付完整内容；长期规则只经用户确认更新。\n\n依据：平台底线\n\n### 你补充的习惯\n\n先用生活里的困惑引入。用准确的图表帮助理解，画面少字，不打断提问。\n\n依据：你亲自补充，可编辑\n\n## 验收\n\n核心观点与来源一致；讲解入口、组织顺序和支架执行上述规则；练习可跳过；生成失败必须如实说明。偏好不是经过验证的能力诊断。\n",
+  "scenes": [
+    {
+      "id": "paradox",
+      "outlineId": "paradox",
+      "stageId": "zhijing-article",
+      "type": "slide",
+      "title": "公司更强，你却更不安",
+      "order": 0,
+      "content": {
+        "type": "slide",
+        "canvas": {
+          "id": "qV_cnEsOp393NGeG9f6zQ",
+          "viewportSize": 1000,
+          "viewportRatio": 0.5625,
+          "theme": {
+            "backgroundColor": "#ffffff",
+            "themeColors": [
+              "#5b9bd5",
+              "#ed7d31",
+              "#a5a5a5",
+              "#ffc000",
+              "#4472c4"
+            ],
+            "fontColor": "#333333",
+            "fontName": "Microsoft YaHei",
+            "outline": {
+              "color": "#d14424",
+              "width": 2,
+              "style": "solid"
+            },
+            "shadow": {
+              "h": 0,
+              "v": 0,
+              "blur": 10,
+              "color": "#000000"
+            }
+          },
+          "elements": [
+            {
+              "id": "eyebrow",
+              "type": "text",
+              "left": 48,
+              "top": 23,
+              "width": 905,
+              "height": 45.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f4ba78",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:22px;font-weight:500;text-align:left\">01 / 10    思想实验 · 改编自 riba2534 的知乎文章</p>"
+            },
+            {
+              "id": "title",
+              "type": "text",
+              "left": 46,
+              "top": 67,
+              "width": 910,
+              "height": 74.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:42px;font-weight:650;text-align:left\">公司更强，你却更不安</p>"
+            },
+            {
+              "id": "subtitle",
+              "type": "text",
+              "left": 48,
+              "top": 130,
+              "width": 905,
+              "height": 50.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">同一项提效，为什么会有两种结果？</p>"
+            },
+            {
+              "id": "node-0",
+              "type": "shape",
+              "left": 50,
+              "top": 215,
+              "width": 420,
+              "height": 211,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-0",
+              "type": "shape",
+              "left": 50,
+              "top": 215,
+              "width": 4,
+              "height": 211,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#9cabff",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-0",
+              "type": "text",
+              "left": 68,
+              "top": 230,
+              "width": 388,
+              "height": 64.75,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:35px;font-weight:600;text-align:left\">企业账本</p>"
+            },
+            {
+              "id": "detail-0",
+              "type": "text",
+              "left": 68,
+              "top": 281,
+              "width": 388,
+              "height": 80.7,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">成本下降<br>利润改善</p>"
+            },
+            {
+              "id": "node-1",
+              "type": "shape",
+              "left": 515,
+              "top": 215,
+              "width": 420,
+              "height": 211,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-1",
+              "type": "shape",
+              "left": 515,
+              "top": 215,
+              "width": 4,
+              "height": 211,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#7cd6c4",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-1",
+              "type": "text",
+              "left": 533,
+              "top": 230,
+              "width": 388,
+              "height": 64.75,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:35px;font-weight:600;text-align:left\">家庭账本</p>"
+            },
+            {
+              "id": "detail-1",
+              "type": "text",
+              "left": 533,
+              "top": 281,
+              "width": 388,
+              "height": 80.7,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">岗位承压<br>收入不稳</p>"
+            },
+            {
+              "id": "arrow-contrast",
+              "type": "text",
+              "left": 469,
+              "top": 290,
+              "width": 50,
+              "height": 66.19999999999999,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:36px;font-weight:500;text-align:center\">≠</p>"
+            },
+            {
+              "id": "boundary",
+              "type": "text",
+              "left": 48,
+              "top": 501,
+              "width": 909,
+              "height": 43,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:20px;font-weight:400;text-align:left\">如果收益没有充分流向劳动者，两本账就可能分开。</p>"
+            }
+          ],
+          "background": {
+            "type": "solid",
+            "color": "#121e36"
+          }
+        }
+      },
+      "actions": [
+        {
+          "id": "paradox-cue-0",
+          "type": "highlight",
+          "elementId": "title"
+        },
+        {
+          "id": "paradox-speech-0",
+          "type": "speech",
+          "text": "设想你所在的公司宣布：人工智能让业务更高效了。你先替公司高兴，随后发现，下一轮要压缩的可能就是自己的岗位。这是用来理解文章的假设场景，不是一家公司的真实新闻。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "paradox-cue-1",
+          "type": "highlight",
+          "elementId": "node-0"
+        },
+        {
+          "id": "paradox-speech-1",
+          "type": "speech",
+          "text": "窗口期可能只剩五年，真正想问的不是人工智能能不能成功，而是：如果它成功了，公司的利润和普通人的收入，会不会走向不同方向？作者把这个矛盾推演到了二零三零年。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "paradox-cue-2",
+          "type": "highlight",
+          "elementId": "node-1"
+        },
+        {
+          "id": "paradox-speech-2",
+          "type": "speech",
+          "text": "所以，先别把五年当成倒计时。把它看成一条需要理解的条件链：技术提高效率，收益怎样分配，谁还能消费，风险又怎样传出去。接下来，我们顺着这条链走。",
+          "agentId": "teacher"
+        }
+      ],
+      "createdAt": 1788853553277,
+      "updatedAt": 1788853553277,
+      "sourceAnchor": {
+        "section": "公司更强，你却更不安",
+        "quote": "它不是在担心 AI 做不到，恰恰相反，它在担心 AI 真的做到之后会发生什么。",
+        "startLine": 23,
+        "endLine": 23
+      },
+      "takeaway": "文章的核心是收益分配与风险传导，不是精确预测哪一年失业。",
+      "reading": [
+        "作者从 2026 年春节的模型发布潮切入，把技术进展作为启动思想实验的背景。文章明确说未来日期可能更早或更晚。因此，后面的 2028、2029、2030 年都应放在假设场景里阅读，不能当作已经发生的经济新闻。",
+        "这条论证有一个关键转向：从一家企业是否获益，转向整个社会能否持续获得收入和购买力。理解这个转向，比记住模型名称和股价涨幅更重要。开头关于小公司岗位的场景是本学习作品补充的假设例子。"
+      ],
+      "premise": "AI 必须能够以合适的成本与可靠性替代足够多的工作任务，影响才会进一步传导。",
+      "kind": "思想实验"
+    },
+    {
+      "id": "business",
+      "outlineId": "business",
+      "stageId": "zhijing-article",
+      "type": "slide",
+      "title": "软件和中间环节先承压",
+      "order": 1,
+      "content": {
+        "type": "slide",
+        "canvas": {
+          "id": "cr1P_4AAGGUKde60rKIRz",
+          "viewportSize": 1000,
+          "viewportRatio": 0.5625,
+          "theme": {
+            "backgroundColor": "#ffffff",
+            "themeColors": [
+              "#5b9bd5",
+              "#ed7d31",
+              "#a5a5a5",
+              "#ffc000",
+              "#4472c4"
+            ],
+            "fontColor": "#333333",
+            "fontName": "Microsoft YaHei",
+            "outline": {
+              "color": "#d14424",
+              "width": 2,
+              "style": "solid"
+            },
+            "shadow": {
+              "h": 0,
+              "v": 0,
+              "blur": 10,
+              "color": "#000000"
+            }
+          },
+          "elements": [
+            {
+              "id": "eyebrow",
+              "type": "text",
+              "left": 48,
+              "top": 23,
+              "width": 905,
+              "height": 45.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f4ba78",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:22px;font-weight:500;text-align:left\">02 / 10    作者推演 · 改编自 riba2534 的知乎文章</p>"
+            },
+            {
+              "id": "title",
+              "type": "text",
+              "left": 46,
+              "top": 67,
+              "width": 910,
+              "height": 74.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:42px;font-weight:650;text-align:left\">软件和中间环节先承压</p>"
+            },
+            {
+              "id": "subtitle",
+              "type": "text",
+              "left": 48,
+              "top": 130,
+              "width": 905,
+              "height": 50.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">把“做得便宜”，变成客户的议价能力</p>"
+            },
+            {
+              "id": "node-0",
+              "type": "shape",
+              "left": 48,
+              "top": 198,
+              "width": 280,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-0",
+              "type": "shape",
+              "left": 48,
+              "top": 198,
+              "width": 4,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#9cabff",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-0",
+              "type": "text",
+              "left": 66,
+              "top": 213,
+              "width": 248,
+              "height": 51.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:600;text-align:left\">制作成本降低</p>"
+            },
+            {
+              "id": "detail-0",
+              "type": "text",
+              "left": 66,
+              "top": 264,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">内部自建成为选项</p>"
+            },
+            {
+              "id": "node-1",
+              "type": "shape",
+              "left": 357,
+              "top": 198,
+              "width": 280,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-1",
+              "type": "shape",
+              "left": 357,
+              "top": 198,
+              "width": 4,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#7cd6c4",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-1",
+              "type": "text",
+              "left": 375,
+              "top": 213,
+              "width": 248,
+              "height": 51.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:600;text-align:left\">客户重新议价</p>"
+            },
+            {
+              "id": "detail-1",
+              "type": "text",
+              "left": 375,
+              "top": 264,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">订阅收入可能下降</p>"
+            },
+            {
+              "id": "node-2",
+              "type": "shape",
+              "left": 666,
+              "top": 198,
+              "width": 280,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-2",
+              "type": "shape",
+              "left": 666,
+              "top": 198,
+              "width": 4,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#9cabff",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-2",
+              "type": "text",
+              "left": 684,
+              "top": 213,
+              "width": 248,
+              "height": 51.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:600;text-align:left\">再降成本</p>"
+            },
+            {
+              "id": "detail-2",
+              "type": "text",
+              "left": 684,
+              "top": 264,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">继续裁员或引入 AI</p>"
+            },
+            {
+              "id": "node-3",
+              "type": "shape",
+              "left": 48,
+              "top": 356,
+              "width": 280,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-3",
+              "type": "shape",
+              "left": 48,
+              "top": 356,
+              "width": 4,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#7cd6c4",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-3",
+              "type": "text",
+              "left": 66,
+              "top": 371,
+              "width": 248,
+              "height": 51.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:600;text-align:left\">Agent 代办</p>"
+            },
+            {
+              "id": "detail-3",
+              "type": "text",
+              "left": 66,
+              "top": 422,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">替用户比价与选购</p>"
+            },
+            {
+              "id": "node-4",
+              "type": "shape",
+              "left": 357,
+              "top": 356,
+              "width": 280,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-4",
+              "type": "shape",
+              "left": 357,
+              "top": 356,
+              "width": 4,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#9cabff",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-4",
+              "type": "text",
+              "left": 375,
+              "top": 371,
+              "width": 248,
+              "height": 51.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:600;text-align:left\">中间环节承压</p>"
+            },
+            {
+              "id": "detail-4",
+              "type": "text",
+              "left": 375,
+              "top": 422,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">信息差与切换成本减少</p>"
+            },
+            {
+              "id": "node-5",
+              "type": "shape",
+              "left": 666,
+              "top": 356,
+              "width": 280,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-5",
+              "type": "shape",
+              "left": 666,
+              "top": 356,
+              "width": 4,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#7cd6c4",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-5",
+              "type": "text",
+              "left": 684,
+              "top": 371,
+              "width": 248,
+              "height": 51.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:600;text-align:left\">价值重新分配</p>"
+            },
+            {
+              "id": "detail-5",
+              "type": "text",
+              "left": 684,
+              "top": 422,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">服务商需要新理由</p>"
+            },
+            {
+              "id": "arrow-0",
+              "type": "text",
+              "left": 322,
+              "top": 235,
+              "width": 50,
+              "height": 63.3,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:34px;font-weight:500;text-align:center\">→</p>"
+            },
+            {
+              "id": "arrow-1",
+              "type": "text",
+              "left": 631,
+              "top": 235,
+              "width": 50,
+              "height": 63.3,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:34px;font-weight:500;text-align:center\">→</p>"
+            },
+            {
+              "id": "arrow-2",
+              "type": "text",
+              "left": 322,
+              "top": 391,
+              "width": 50,
+              "height": 63.3,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:34px;font-weight:500;text-align:center\">→</p>"
+            },
+            {
+              "id": "arrow-3",
+              "type": "text",
+              "left": 631,
+              "top": 391,
+              "width": 50,
+              "height": 63.3,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:34px;font-weight:500;text-align:center\">→</p>"
+            },
+            {
+              "id": "boundary",
+              "type": "text",
+              "left": 48,
+              "top": 501,
+              "width": 909,
+              "height": 43,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:20px;font-weight:400;text-align:left\">两条压力路径：软件订阅，以及依赖信息差的中间环节。</p>"
+            }
+          ],
+          "background": {
+            "type": "solid",
+            "color": "#121e36"
+          }
+        }
+      },
+      "actions": [
+        {
+          "id": "business-cue-0",
+          "type": "highlight",
+          "elementId": "title"
+        },
+        {
+          "id": "business-speech-0",
+          "type": "speech",
+          "text": "第一条路径是软件订阅。作者设想，企业发现内部团队配合人工智能，可以替代一部分外购软件，于是要求降价。供应商收入承压，又通过裁员和自动化降成本，压力开始循环。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "business-cue-1",
+          "type": "highlight",
+          "elementId": "node-0"
+        },
+        {
+          "id": "business-speech-1",
+          "type": "speech",
+          "text": "第二条路径是中间环节。购物助手替人比价、切换服务，靠信息差或者用户嫌麻烦赚到的钱，就可能减少。文章把旅游、外卖、保险和支付，都放进了这条推演。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "business-cue-2",
+          "type": "highlight",
+          "elementId": "node-1"
+        },
+        {
+          "id": "business-speech-2",
+          "type": "speech",
+          "text": "这里要抓住机制，而不是记住谁一定倒下。复制功能不等于接管可靠服务；便宜也不等于用户愿意授权全部决策。能否接入、能否信任、谁来负责，都会影响这条链能走多远。",
+          "agentId": "teacher"
+        }
+      ],
+      "createdAt": 1788853553278,
+      "updatedAt": 1788853553278,
+      "sourceAnchor": {
+        "section": "软件和中间环节先承压",
+        "quote": "每家公司做出的都是对自己最理性的选择。但所有公司的选择叠在一起，就是一场踩踏。",
+        "startLine": 42,
+        "endLine": 42
+      },
+      "takeaway": "作者担心的，是客户议价与降本竞争相互强化。",
+      "reading": [
+        "SaaS 指通过订阅提供的软件服务。文章提出两个收入压力：客户可能改为内部自建；客户裁员又可能减少按人头购买的软件席位。供应商的降本行为，再把压力传回就业市场。",
+        "Agent 在本文中指能围绕目标调用工具、连续执行任务的 AI 助手。作者进一步设想它削弱旅游预订、外卖、自动续费、地产佣金、广告与会员锁定，并可能改变支付流量和结算路径。这些是作者对商业模式的推断，不是已经全面实现的结果。",
+        "学习时要补上每个箭头需要的条件：软件是否涉及运维、合规与售后；Agent 能否访问供应商接口；用户是否愿意让渡购买权限；支付、信用和纠纷责任由谁承担。原文的“品牌和广告全部失效”属于强推断，不能当成无条件规律。"
+      ],
+      "premise": "客户不仅有替代技术，还必须有迁移意愿、合法可用的接口和可接受的风险成本。",
+      "kind": "作者推演"
+    },
+    {
+      "id": "income",
+      "outlineId": "income",
+      "stageId": "zhijing-article",
+      "type": "slide",
+      "title": "产出，不等于购买力",
+      "order": 2,
+      "content": {
+        "type": "slide",
+        "canvas": {
+          "id": "9-V968RJBUgaGpFSyKRXP",
+          "viewportSize": 1000,
+          "viewportRatio": 0.5625,
+          "theme": {
+            "backgroundColor": "#ffffff",
+            "themeColors": [
+              "#5b9bd5",
+              "#ed7d31",
+              "#a5a5a5",
+              "#ffc000",
+              "#4472c4"
+            ],
+            "fontColor": "#333333",
+            "fontName": "Microsoft YaHei",
+            "outline": {
+              "color": "#d14424",
+              "width": 2,
+              "style": "solid"
+            },
+            "shadow": {
+              "h": 0,
+              "v": 0,
+              "blur": 10,
+              "color": "#000000"
+            }
+          },
+          "elements": [
+            {
+              "id": "eyebrow",
+              "type": "text",
+              "left": 48,
+              "top": 23,
+              "width": 905,
+              "height": 45.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f4ba78",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:22px;font-weight:500;text-align:left\">03 / 10    作者推演 · 改编自 riba2534 的知乎文章</p>"
+            },
+            {
+              "id": "title",
+              "type": "text",
+              "left": 46,
+              "top": 67,
+              "width": 910,
+              "height": 74.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:42px;font-weight:650;text-align:left\">产出，不等于购买力</p>"
+            },
+            {
+              "id": "subtitle",
+              "type": "text",
+              "left": 48,
+              "top": 130,
+              "width": 905,
+              "height": 50.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">作者称之为“幽灵 GDP”的分配矛盾</p>"
+            },
+            {
+              "id": "node-0",
+              "type": "shape",
+              "left": 48,
+              "top": 245,
+              "width": 280,
+              "height": 153,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-0",
+              "type": "shape",
+              "left": 48,
+              "top": 245,
+              "width": 4,
+              "height": 153,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#9cabff",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-0",
+              "type": "text",
+              "left": 66,
+              "top": 260,
+              "width": 248,
+              "height": 56.05,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:29px;font-weight:600;text-align:left\">AI 提高产出</p>"
+            },
+            {
+              "id": "detail-0",
+              "type": "text",
+              "left": 66,
+              "top": 311,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">能生产更多</p>"
+            },
+            {
+              "id": "node-1",
+              "type": "shape",
+              "left": 357,
+              "top": 245,
+              "width": 280,
+              "height": 153,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-1",
+              "type": "shape",
+              "left": 357,
+              "top": 245,
+              "width": 4,
+              "height": 153,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#7cd6c4",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-1",
+              "type": "text",
+              "left": 375,
+              "top": 260,
+              "width": 248,
+              "height": 56.05,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:29px;font-weight:600;text-align:left\">收益如何分配</p>"
+            },
+            {
+              "id": "detail-1",
+              "type": "text",
+              "left": 375,
+              "top": 311,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">工资、利润与价格</p>"
+            },
+            {
+              "id": "node-2",
+              "type": "shape",
+              "left": 666,
+              "top": 245,
+              "width": 280,
+              "height": 153,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-2",
+              "type": "shape",
+              "left": 666,
+              "top": 245,
+              "width": 4,
+              "height": 153,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#9cabff",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-2",
+              "type": "text",
+              "left": 684,
+              "top": 260,
+              "width": 248,
+              "height": 56.05,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:29px;font-weight:600;text-align:left\">家庭购买力</p>"
+            },
+            {
+              "id": "detail-2",
+              "type": "text",
+              "left": 684,
+              "top": 311,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">是否同步改善</p>"
+            },
+            {
+              "id": "arrow-0",
+              "type": "text",
+              "left": 322,
+              "top": 287,
+              "width": 50,
+              "height": 63.3,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:34px;font-weight:500;text-align:center\">→</p>"
+            },
+            {
+              "id": "arrow-1",
+              "type": "text",
+              "left": 631,
+              "top": 287,
+              "width": 50,
+              "height": 63.3,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:34px;font-weight:500;text-align:center\">→</p>"
+            },
+            {
+              "id": "boundary",
+              "type": "text",
+              "left": 48,
+              "top": 501,
+              "width": 909,
+              "height": 43,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:20px;font-weight:400;text-align:left\">中间这一环，决定企业提效能否转化为普遍受益。</p>"
+            }
+          ],
+          "background": {
+            "type": "solid",
+            "color": "#121e36"
+          }
+        }
+      },
+      "actions": [
+        {
+          "id": "income-cue-0",
+          "type": "highlight",
+          "elementId": "title"
+        },
+        {
+          "id": "income-speech-0",
+          "type": "speech",
+          "text": "现在把镜头从公司拉到整个经济。作者说的幽灵国内生产总值，指的是一种反差：产品更多、利润更高，但工资和岗位没有同步改善，普通人反而缩减消费。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "income-cue-1",
+          "type": "highlight",
+          "elementId": "node-0"
+        },
+        {
+          "id": "income-speech-1",
+          "type": "speech",
+          "text": "这里最值得记住的，不是这个新名词，而是产出和分配是两回事。假如收益集中流向资本，劳动收入又被压缩，企业可能发现：自己更能生产了，愿意付钱的客户却变少了。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "income-cue-2",
+          "type": "highlight",
+          "elementId": "node-1"
+        },
+        {
+          "id": "income-speech-2",
+          "type": "speech",
+          "text": "但这不是说生产率提高必然让社会更穷。降价、新需求、新岗位和公共分配，都可能改变结果。文章主要沿着其中一条压力路径推演，我们要看清它依赖的条件。",
+          "agentId": "teacher"
+        }
+      ],
+      "createdAt": 1788853553278,
+      "updatedAt": 1788853553278,
+      "sourceAnchor": {
+        "section": "产出，不等于购买力",
+        "quote": "产出是有的，但钱没有流到人手里",
+        "startLine": 75,
+        "endLine": 75
+      },
+      "takeaway": "先问创造了多少价值，再问价值通过什么渠道到达谁。",
+      "reading": [
+        "“幽灵 GDP”是文中的表达，不是本作品新增的统计指标。作者用它描述总量指标与个人生活体验的分离。不能仅凭 GDP 增长，就判断每个家庭的处境；也不能仅凭部分家庭受损，就断言总产出一定虚增。",
+        "原文给出劳动收入占比的长期数字，但粘贴正文没有明确地区、统计口径和原始出处。本作品不把这些数字画成已经核验的趋势图，也不把作者设想的加速幅度当作测算。"
+      ],
+      "premise": "替代造成的收入损失，持续超过降价、新收入、新就业和转移支付带来的补偿。",
+      "kind": "作者推演"
+    },
+    {
+      "id": "work",
+      "outlineId": "work",
+      "stageId": "zhijing-article",
+      "type": "slide",
+      "title": "岗位冲击，也有时间差",
+      "order": 3,
+      "content": {
+        "type": "slide",
+        "canvas": {
+          "id": "nROZiwhyxFjet2hXF870p",
+          "viewportSize": 1000,
+          "viewportRatio": 0.5625,
+          "theme": {
+            "backgroundColor": "#ffffff",
+            "themeColors": [
+              "#5b9bd5",
+              "#ed7d31",
+              "#a5a5a5",
+              "#ffc000",
+              "#4472c4"
+            ],
+            "fontColor": "#333333",
+            "fontName": "Microsoft YaHei",
+            "outline": {
+              "color": "#d14424",
+              "width": 2,
+              "style": "solid"
+            },
+            "shadow": {
+              "h": 0,
+              "v": 0,
+              "blur": 10,
+              "color": "#000000"
+            }
+          },
+          "elements": [
+            {
+              "id": "eyebrow",
+              "type": "text",
+              "left": 48,
+              "top": 23,
+              "width": 905,
+              "height": 45.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f4ba78",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:22px;font-weight:500;text-align:left\">04 / 10    作者判断 · 改编自 riba2534 的知乎文章</p>"
+            },
+            {
+              "id": "title",
+              "type": "text",
+              "left": 46,
+              "top": 67,
+              "width": 910,
+              "height": 74.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:42px;font-weight:650;text-align:left\">岗位冲击，也有时间差</p>"
+            },
+            {
+              "id": "subtitle",
+              "type": "text",
+              "left": 48,
+              "top": 130,
+              "width": 905,
+              "height": 50.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">数字任务与现场工作，面对的约束不同</p>"
+            },
+            {
+              "id": "node-0",
+              "type": "shape",
+              "left": 50,
+              "top": 215,
+              "width": 420,
+              "height": 211,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-0",
+              "type": "shape",
+              "left": 50,
+              "top": 215,
+              "width": 4,
+              "height": 211,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#9cabff",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-0",
+              "type": "text",
+              "left": 68,
+              "top": 230,
+              "width": 388,
+              "height": 64.75,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:35px;font-weight:600;text-align:left\">信息处理</p>"
+            },
+            {
+              "id": "detail-0",
+              "type": "text",
+              "left": 68,
+              "top": 281,
+              "width": 388,
+              "height": 80.7,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">软件、分析、内容<br>更直接面对模型能力</p>"
+            },
+            {
+              "id": "node-1",
+              "type": "shape",
+              "left": 515,
+              "top": 215,
+              "width": 420,
+              "height": 211,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-1",
+              "type": "shape",
+              "left": 515,
+              "top": 215,
+              "width": 4,
+              "height": 211,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#7cd6c4",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-1",
+              "type": "text",
+              "left": 533,
+              "top": 230,
+              "width": 388,
+              "height": 64.75,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:35px;font-weight:600;text-align:left\">现场执行</p>"
+            },
+            {
+              "id": "detail-1",
+              "type": "text",
+              "left": 533,
+              "top": 281,
+              "width": 388,
+              "height": 80.7,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">维修、照护、施工<br>还需要可靠的身体</p>"
+            },
+            {
+              "id": "arrow-contrast",
+              "type": "text",
+              "left": 469,
+              "top": 290,
+              "width": 50,
+              "height": 66.19999999999999,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:36px;font-weight:500;text-align:center\">≠</p>"
+            },
+            {
+              "id": "boundary",
+              "type": "text",
+              "left": 48,
+              "top": 501,
+              "width": 909,
+              "height": 43,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:20px;font-weight:400;text-align:left\">任务受到影响，不等于整个职业立刻消失。</p>"
+            }
+          ],
+          "background": {
+            "type": "solid",
+            "color": "#121e36"
+          }
+        }
+      },
+      "actions": [
+        {
+          "id": "work-cue-0",
+          "type": "highlight",
+          "elementId": "title"
+        },
+        {
+          "id": "work-speech-0",
+          "type": "speech",
+          "text": "作者认为，冲击会先进入处理信息的工作，再随着机器人发展进入物理世界。因此，写分析报告和现场修水管，面对的替代条件不一样。这是任务层面的差别，不是职业安全榜。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "work-cue-1",
+          "type": "highlight",
+          "elementId": "node-0"
+        },
+        {
+          "id": "work-speech-1",
+          "type": "speech",
+          "text": "文章还提醒，高收入岗位的收入下降，会通过消费、储蓄和房贷继续传导；工作带来的身份认同，也可能受到冲击。人有积蓄时，消费变化未必马上显现。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "work-cue-2",
+          "type": "highlight",
+          "elementId": "node-1"
+        },
+        {
+          "id": "work-speech-2",
+          "type": "speech",
+          "text": "一个关键数字要读准：国际货币基金组织估计，全球近百分之四十的就业可能受人工智能影响。影响包括替代，也包括增强工作能力，不意味着百分之四十的人会失业。",
+          "agentId": "teacher"
+        }
+      ],
+      "createdAt": 1788853553278,
+      "updatedAt": 1788853553278,
+      "sourceAnchor": {
+        "section": "岗位冲击，也有时间差",
+        "quote": "这只是时间差，不是豁免权。",
+        "startLine": 125,
+        "endLine": 125
+      },
+      "takeaway": "区分任务暴露、岗位替代、收入变化和实际失业，不能把它们画等号。",
+      "reading": [
+        "白领部分不只是裁员问题，还包含高薪消费、储蓄缓冲、职业身份与家庭负债。蓝领部分的重点则是模型能力与物理执行之间的时间差，以及手艺、现场服务和关系信任的价值。",
+        "作者对机器人落地年份、消费下降幅度、高收入群体贡献的比例给出了判断或数字，但本文没有逐项核验。作品保留风险机制，不把这些数字用于计算个人失业概率，也不拿年龄、学历或职业替用户下结论。"
+      ],
+      "premise": "岗位由多种任务构成，部署成本、责任要求和新增需求，会影响暴露是否转化为替代。",
+      "kind": "作者判断"
+    },
+    {
+      "id": "workflow",
+      "outlineId": "workflow",
+      "stageId": "zhijing-article",
+      "type": "slide",
+      "title": "知道工具，不等于用好",
+      "order": 4,
+      "content": {
+        "type": "slide",
+        "canvas": {
+          "id": "bzxCbTYr-qkqhLinoGC1a",
+          "viewportSize": 1000,
+          "viewportRatio": 0.5625,
+          "theme": {
+            "backgroundColor": "#ffffff",
+            "themeColors": [
+              "#5b9bd5",
+              "#ed7d31",
+              "#a5a5a5",
+              "#ffc000",
+              "#4472c4"
+            ],
+            "fontColor": "#333333",
+            "fontName": "Microsoft YaHei",
+            "outline": {
+              "color": "#d14424",
+              "width": 2,
+              "style": "solid"
+            },
+            "shadow": {
+              "h": 0,
+              "v": 0,
+              "blur": 10,
+              "color": "#000000"
+            }
+          },
+          "elements": [
+            {
+              "id": "eyebrow",
+              "type": "text",
+              "left": 48,
+              "top": 23,
+              "width": 905,
+              "height": 45.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f4ba78",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:22px;font-weight:500;text-align:left\">05 / 10    作者框架 · 改编自 riba2534 的知乎文章</p>"
+            },
+            {
+              "id": "title",
+              "type": "text",
+              "left": 46,
+              "top": 67,
+              "width": 910,
+              "height": 74.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:42px;font-weight:650;text-align:left\">知道工具，不等于用好</p>"
+            },
+            {
+              "id": "subtitle",
+              "type": "text",
+              "left": 48,
+              "top": 130,
+              "width": 905,
+              "height": 50.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">认知鸿沟，发生在同一间办公室里</p>"
+            },
+            {
+              "id": "node-0",
+              "type": "shape",
+              "left": 49,
+              "top": 285,
+              "width": 280,
+              "height": 155,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-0",
+              "type": "shape",
+              "left": 49,
+              "top": 285,
+              "width": 4,
+              "height": 155,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#9cabff",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-0",
+              "type": "text",
+              "left": 67,
+              "top": 300,
+              "width": 248,
+              "height": 57.5,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:30px;font-weight:600;text-align:left\">知道</p>"
+            },
+            {
+              "id": "detail-0",
+              "type": "text",
+              "left": 67,
+              "top": 351,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">认识工具名称</p>"
+            },
+            {
+              "id": "node-1",
+              "type": "shape",
+              "left": 358,
+              "top": 245,
+              "width": 280,
+              "height": 155,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-1",
+              "type": "shape",
+              "left": 358,
+              "top": 245,
+              "width": 4,
+              "height": 155,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#7cd6c4",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-1",
+              "type": "text",
+              "left": 376,
+              "top": 260,
+              "width": 248,
+              "height": 57.5,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:30px;font-weight:600;text-align:left\">会用</p>"
+            },
+            {
+              "id": "detail-1",
+              "type": "text",
+              "left": 376,
+              "top": 311,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">完成一次具体任务</p>"
+            },
+            {
+              "id": "node-2",
+              "type": "shape",
+              "left": 667,
+              "top": 205,
+              "width": 280,
+              "height": 155,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-2",
+              "type": "shape",
+              "left": 667,
+              "top": 205,
+              "width": 4,
+              "height": 155,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#9cabff",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-2",
+              "type": "text",
+              "left": 685,
+              "top": 220,
+              "width": 248,
+              "height": 57.5,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:30px;font-weight:600;text-align:left\">用得好</p>"
+            },
+            {
+              "id": "detail-2",
+              "type": "text",
+              "left": 685,
+              "top": 271,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">嵌入流程并验证结果</p>"
+            },
+            {
+              "id": "arrow-0",
+              "type": "text",
+              "left": 322,
+              "top": 289,
+              "width": 50,
+              "height": 63.3,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:34px;font-weight:500;text-align:center\">↗</p>"
+            },
+            {
+              "id": "arrow-1",
+              "type": "text",
+              "left": 631,
+              "top": 249,
+              "width": 50,
+              "height": 63.3,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:34px;font-weight:500;text-align:center\">↗</p>"
+            },
+            {
+              "id": "boundary",
+              "type": "text",
+              "left": 48,
+              "top": 501,
+              "width": 909,
+              "height": 43,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:20px;font-weight:400;text-align:left\">衡量变化，看完成质量、返工与成本，不只看生成速度。</p>"
+            }
+          ],
+          "background": {
+            "type": "solid",
+            "color": "#121e36"
+          }
+        }
+      },
+      "actions": [
+        {
+          "id": "workflow-cue-0",
+          "type": "highlight",
+          "elementId": "title"
+        },
+        {
+          "id": "workflow-speech-0",
+          "type": "speech",
+          "text": "作者接着把视角转回个人：知道工具、会用工具、把工具真正放进流程，是三件不同的事。他用超级个体描述少数人借助一套人工智能系统，承担过去需要团队配合的任务。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "workflow-cue-1",
+          "type": "highlight",
+          "elementId": "node-0"
+        },
+        {
+          "id": "workflow-speech-1",
+          "type": "speech",
+          "text": "把它换成一个假设例子：同样做周报，一个人只是让模型写几段话，另一个人把资料整理、事实核对、排版和复查连接起来。差别在完整工作流程，而不只在提示词。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "workflow-cue-2",
+          "type": "highlight",
+          "elementId": "node-1"
+        },
+        {
+          "id": "workflow-speech-2",
+          "type": "speech",
+          "text": "不过，文章所说的十倍到一百倍产出，不能当成人人适用的实测结果。真正可带走的方法是：在同样质量标准下，比较耗时、返工和费用，确认工具到底帮到了哪一步。",
+          "agentId": "teacher"
+        }
+      ],
+      "createdAt": 1788853553278,
+      "updatedAt": 1788853553278,
+      "sourceAnchor": {
+        "section": "知道工具，不等于用好",
+        "quote": "对于 AI 工具，存在三个截然不同的层级：",
+        "startLine": 134,
+        "endLine": 134
+      },
+      "takeaway": "用得好，是能稳定交付并检验结果，不是拥有更多工具。",
+      "reading": [
+        "文章认为，早期使用者的优势会随着工具普及而缩小，这构成“五年窗口”判断的一部分。它没有提供足以精确计算窗口长度的模型，因此可以把它理解为行动的紧迫感，而不是已知期限。",
+        "本文给出的周报例子是教学假设。它补充了一把可操作的尺子：从接收资料到最终交付，比较完整任务的总成本，包含查错、审核、等待和返工。只比较生成一段文字或一段代码的速度，容易夸大整体效率。"
+      ],
+      "premise": "效率提升必须在具体任务、模型版本、质量标准和完整成本下测量。",
+      "kind": "作者框架"
+    },
+    {
+      "id": "credit",
+      "outlineId": "credit",
+      "stageId": "zhijing-article",
+      "type": "slide",
+      "title": "收入变化，会穿过金融系统",
+      "order": 5,
+      "content": {
+        "type": "slide",
+        "canvas": {
+          "id": "polh3DXwi5hgoq1CPeUpc",
+          "viewportSize": 1000,
+          "viewportRatio": 0.5625,
+          "theme": {
+            "backgroundColor": "#ffffff",
+            "themeColors": [
+              "#5b9bd5",
+              "#ed7d31",
+              "#a5a5a5",
+              "#ffc000",
+              "#4472c4"
+            ],
+            "fontColor": "#333333",
+            "fontName": "Microsoft YaHei",
+            "outline": {
+              "color": "#d14424",
+              "width": 2,
+              "style": "solid"
+            },
+            "shadow": {
+              "h": 0,
+              "v": 0,
+              "blur": 10,
+              "color": "#000000"
+            }
+          },
+          "elements": [
+            {
+              "id": "eyebrow",
+              "type": "text",
+              "left": 48,
+              "top": 23,
+              "width": 905,
+              "height": 45.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f4ba78",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:22px;font-weight:500;text-align:left\">06 / 10    作者推演 · 改编自 riba2534 的知乎文章</p>"
+            },
+            {
+              "id": "title",
+              "type": "text",
+              "left": 46,
+              "top": 67,
+              "width": 910,
+              "height": 74.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:42px;font-weight:650;text-align:left\">收入变化，会穿过金融系统</p>"
+            },
+            {
+              "id": "subtitle",
+              "type": "text",
+              "left": 48,
+              "top": 130,
+              "width": 905,
+              "height": 50.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">一条走企业信贷，一条走家庭房贷</p>"
+            },
+            {
+              "id": "node-0",
+              "type": "shape",
+              "left": 48,
+              "top": 198,
+              "width": 280,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-0",
+              "type": "shape",
+              "left": 48,
+              "top": 198,
+              "width": 4,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#9cabff",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-0",
+              "type": "text",
+              "left": 66,
+              "top": 213,
+              "width": 248,
+              "height": 51.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:600;text-align:left\">软件收入下滑</p>"
+            },
+            {
+              "id": "detail-0",
+              "type": "text",
+              "left": 66,
+              "top": 264,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">原有增长预期失效</p>"
+            },
+            {
+              "id": "node-1",
+              "type": "shape",
+              "left": 357,
+              "top": 198,
+              "width": 280,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-1",
+              "type": "shape",
+              "left": 357,
+              "top": 198,
+              "width": 4,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#7cd6c4",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-1",
+              "type": "text",
+              "left": 375,
+              "top": 213,
+              "width": 248,
+              "height": 51.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:600;text-align:left\">偿债能力承压</p>"
+            },
+            {
+              "id": "detail-1",
+              "type": "text",
+              "left": 375,
+              "top": 264,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">贷款风险可能上升</p>"
+            },
+            {
+              "id": "node-2",
+              "type": "shape",
+              "left": 666,
+              "top": 198,
+              "width": 280,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-2",
+              "type": "shape",
+              "left": 666,
+              "top": 198,
+              "width": 4,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#9cabff",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-2",
+              "type": "text",
+              "left": 684,
+              "top": 213,
+              "width": 248,
+              "height": 51.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:600;text-align:left\">机构资产受损</p>"
+            },
+            {
+              "id": "detail-2",
+              "type": "text",
+              "left": 684,
+              "top": 264,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">取决于实际风险敞口</p>"
+            },
+            {
+              "id": "node-3",
+              "type": "shape",
+              "left": 48,
+              "top": 356,
+              "width": 280,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-3",
+              "type": "shape",
+              "left": 48,
+              "top": 356,
+              "width": 4,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#7cd6c4",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-3",
+              "type": "text",
+              "left": 66,
+              "top": 371,
+              "width": 248,
+              "height": 51.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:600;text-align:left\">家庭收入下降</p>"
+            },
+            {
+              "id": "detail-3",
+              "type": "text",
+              "left": 66,
+              "top": 422,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">月供义务仍然存在</p>"
+            },
+            {
+              "id": "node-4",
+              "type": "shape",
+              "left": 357,
+              "top": 356,
+              "width": 280,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-4",
+              "type": "shape",
+              "left": 357,
+              "top": 356,
+              "width": 4,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#9cabff",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-4",
+              "type": "text",
+              "left": 375,
+              "top": 371,
+              "width": 248,
+              "height": 51.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:600;text-align:left\">动用财务缓冲</p>"
+            },
+            {
+              "id": "detail-4",
+              "type": "text",
+              "left": 375,
+              "top": 422,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">延后暴露压力</p>"
+            },
+            {
+              "id": "node-5",
+              "type": "shape",
+              "left": 666,
+              "top": 356,
+              "width": 280,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-5",
+              "type": "shape",
+              "left": 666,
+              "top": 356,
+              "width": 4,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#7cd6c4",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-5",
+              "type": "text",
+              "left": 684,
+              "top": 371,
+              "width": 248,
+              "height": 51.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:600;text-align:left\">还贷压力上升</p>"
+            },
+            {
+              "id": "detail-5",
+              "type": "text",
+              "left": 684,
+              "top": 422,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">不等于必然违约</p>"
+            },
+            {
+              "id": "arrow-0",
+              "type": "text",
+              "left": 322,
+              "top": 235,
+              "width": 50,
+              "height": 63.3,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:34px;font-weight:500;text-align:center\">→</p>"
+            },
+            {
+              "id": "arrow-1",
+              "type": "text",
+              "left": 631,
+              "top": 235,
+              "width": 50,
+              "height": 63.3,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:34px;font-weight:500;text-align:center\">→</p>"
+            },
+            {
+              "id": "arrow-2",
+              "type": "text",
+              "left": 322,
+              "top": 391,
+              "width": 50,
+              "height": 63.3,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:34px;font-weight:500;text-align:center\">→</p>"
+            },
+            {
+              "id": "arrow-3",
+              "type": "text",
+              "left": 631,
+              "top": 391,
+              "width": 50,
+              "height": 63.3,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:34px;font-weight:500;text-align:center\">→</p>"
+            },
+            {
+              "id": "boundary",
+              "type": "text",
+              "left": 48,
+              "top": 501,
+              "width": 909,
+              "height": 43,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:20px;font-weight:400;text-align:left\">箭头表示风险可能传导，不表示损失一定会发生。</p>"
+            }
+          ],
+          "background": {
+            "type": "solid",
+            "color": "#121e36"
+          }
+        }
+      },
+      "actions": [
+        {
+          "id": "credit-cue-0",
+          "type": "highlight",
+          "elementId": "title"
+        },
+        {
+          "id": "credit-speech-0",
+          "type": "speech",
+          "text": "这篇文章为什么从程序员讲到了保险和房贷？因为金融合同承诺的是未来付款，而人工智能可能改变未来收入。作者先画出一条企业链：软件收入承压，偿债能力变弱，持有相关资产的机构也可能受影响。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "credit-cue-1",
+          "type": "highlight",
+          "elementId": "node-0"
+        },
+        {
+          "id": "credit-speech-1",
+          "type": "speech",
+          "text": "另一条链在家庭内部。借款时收入稳定、信用良好，不代表多年后收入仍然稳定。作者担心的不是一开始就乱放贷款，而是好贷款遇上了新的收入环境。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "credit-cue-2",
+          "type": "highlight",
+          "elementId": "node-1"
+        },
+        {
+          "id": "credit-speech-2",
+          "type": "speech",
+          "text": "理解这段，只要记住收入会变，债务不会自动跟着变。至于会不会违约、保险保障会不会受损，还取决于风险敞口、资本缓冲、合同和政策，不能把一条箭头直接讲成一场必然危机。",
+          "agentId": "teacher"
+        }
+      ],
+      "createdAt": 1788853553278,
+      "updatedAt": 1788853553278,
+      "sourceAnchor": {
+        "section": "收入变化，会穿过金融系统",
+        "quote": "贷款本身没毛病，是贷款之后的世界变了。",
+        "startLine": 185,
+        "endLine": 185
+      },
+      "takeaway": "风险来自未来现金流与固定承诺之间可能出现的落差。",
+      "reading": [
+        "私人信贷是银行体系之外的直接贷款安排，ARR 是年度经常性收入。作者把订阅收入预期、融资、保险机构资产配置和家庭退休资金连接起来，强调看不见的风险联系。具体交易规模及实际持仓，本作品没有逐项核实。",
+        "家庭房贷部分关注收入能力下降、动用储蓄、被迫出售资产等传导机制。文章把 2008 年问题简化为流动性问题，这不足以完整解释那次危机；本作品不沿用“当年只要注水就能解决”的绝对说法。"
+      ],
+      "premise": "只有存在实际融资联系、损失超过缓冲且缺少有效处置时，压力才可能被进一步放大。",
+      "kind": "作者推演"
+    },
+    {
+      "id": "value",
+      "outlineId": "value",
+      "stageId": "zhijing-article",
+      "type": "slide",
+      "title": "谁掌握工具，谁承担责任",
+      "order": 6,
+      "content": {
+        "type": "slide",
+        "canvas": {
+          "id": "9oZdiK0bkIcfXPPpaL9Us",
+          "viewportSize": 1000,
+          "viewportRatio": 0.5625,
+          "theme": {
+            "backgroundColor": "#ffffff",
+            "themeColors": [
+              "#5b9bd5",
+              "#ed7d31",
+              "#a5a5a5",
+              "#ffc000",
+              "#4472c4"
+            ],
+            "fontColor": "#333333",
+            "fontName": "Microsoft YaHei",
+            "outline": {
+              "color": "#d14424",
+              "width": 2,
+              "style": "solid"
+            },
+            "shadow": {
+              "h": 0,
+              "v": 0,
+              "blur": 10,
+              "color": "#000000"
+            }
+          },
+          "elements": [
+            {
+              "id": "eyebrow",
+              "type": "text",
+              "left": 48,
+              "top": 23,
+              "width": 905,
+              "height": 45.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f4ba78",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:22px;font-weight:500;text-align:left\">07 / 10    作者判断 · 改编自 riba2534 的知乎文章</p>"
+            },
+            {
+              "id": "title",
+              "type": "text",
+              "left": 46,
+              "top": 67,
+              "width": 910,
+              "height": 74.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:42px;font-weight:650;text-align:left\">谁掌握工具，谁承担责任</p>"
+            },
+            {
+              "id": "subtitle",
+              "type": "text",
+              "left": 48,
+              "top": 130,
+              "width": 905,
+              "height": 50.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">效率、信任和所有权，是不同的问题</p>"
+            },
+            {
+              "id": "node-0",
+              "type": "shape",
+              "left": 55,
+              "top": 198,
+              "width": 890,
+              "height": 79,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-0",
+              "type": "text",
+              "left": 74,
+              "top": 214,
+              "width": 280,
+              "height": 54.6,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:28px;font-weight:600;text-align:left\">能力</p>"
+            },
+            {
+              "id": "detail-0",
+              "type": "text",
+              "left": 370,
+              "top": 216,
+              "width": 560,
+              "height": 50.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">完成任务的成本可能下降</p>"
+            },
+            {
+              "id": "node-1",
+              "type": "shape",
+              "left": 55,
+              "top": 294,
+              "width": 890,
+              "height": 79,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-1",
+              "type": "text",
+              "left": 74,
+              "top": 310,
+              "width": 280,
+              "height": 54.6,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:28px;font-weight:600;text-align:left\">关系与责任</p>"
+            },
+            {
+              "id": "detail-1",
+              "type": "text",
+              "left": 370,
+              "top": 312,
+              "width": 560,
+              "height": 50.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">谁值得信任，谁能被问责</p>"
+            },
+            {
+              "id": "node-2",
+              "type": "shape",
+              "left": 55,
+              "top": 390,
+              "width": 890,
+              "height": 79,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-2",
+              "type": "text",
+              "left": 74,
+              "top": 406,
+              "width": 280,
+              "height": 54.6,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:28px;font-weight:600;text-align:left\">基础设施</p>"
+            },
+            {
+              "id": "detail-2",
+              "type": "text",
+              "left": 370,
+              "top": 408,
+              "width": 560,
+              "height": 50.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">算力、模型和应用由谁拥有</p>"
+            },
+            {
+              "id": "boundary",
+              "type": "text",
+              "left": 48,
+              "top": 501,
+              "width": 909,
+              "height": 43,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:20px;font-weight:400;text-align:left\">能用一个工具，不等于拥有它所产生的全部收益。</p>"
+            }
+          ],
+          "background": {
+            "type": "solid",
+            "color": "#121e36"
+          }
+        }
+      },
+      "actions": [
+        {
+          "id": "value-cue-0",
+          "type": "highlight",
+          "elementId": "title"
+        },
+        {
+          "id": "value-speech-0",
+          "type": "speech",
+          "text": "文章用智能溢价归零，表达认知能力不再那么稀缺的极端推演。接着它提出，人类的价值可能更多来自信任、关系、在场和责任。这里的归零，是作者的强判断，不是已经测量出的价格。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "value-cue-1",
+          "type": "highlight",
+          "elementId": "node-0"
+        },
+        {
+          "id": "value-speech-1",
+          "type": "speech",
+          "text": "与此同时，一个人用人工智能完成更多工作，不等于拥有模型、算力或平台。作者用租户来比喻这种关系：能力被放大了，关键基础设施仍可能掌握在别人手里。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "value-cue-2",
+          "type": "highlight",
+          "elementId": "node-1"
+        },
+        {
+          "id": "value-speech-2",
+          "type": "speech",
+          "text": "这两段合起来，是在问三个不同问题：你能做什么，别人为什么相信你，创造的收益最终由谁取得。它帮助我们理解价值如何变化，但不能据此断言人类只剩一种价值，或某类资产一定获胜。",
+          "agentId": "teacher"
+        }
+      ],
+      "createdAt": 1788853553278,
+      "updatedAt": 1788853553278,
+      "sourceAnchor": {
+        "section": "谁掌握工具，谁承担责任",
+        "quote": "信任和责任——这可能是人类在智能溢价归零之后唯一剩下的经济护城河。",
+        "startLine": 235,
+        "endLine": 235
+      },
+      "takeaway": "能力增强、可信任的责任关系、收益所有权，需要分开理解。",
+      "reading": [
+        "“人情世故”部分强调非公开关系、信任、承诺和复杂社会网络。作品把它整理为社会资本与责任关系，不把具体文化中的做法等同于普遍规范，也不把“技术专家一定不如擅长关系的人”当成结论。",
+        "“阵痛期”部分扩展到博彩、加密市场、资产分化与算力依赖。它们是作者的情景支线：社会压力是否增加短期投机需求、市场是否分化、生活舒适是否与自主选择脱钩。本文不把赌博繁荣、加密资产先跌后涨或芯片股上涨写成可重复的投资规律。"
+      ],
+      "premise": "人与 AI 的能力边界、问责制度、用户信任与市场结构都在变化，护城河并非永久。",
+      "kind": "作者判断"
+    },
+    {
+      "id": "loop",
+      "outlineId": "loop",
+      "stageId": "zhijing-article",
+      "type": "slide",
+      "title": "看见整条反馈循环",
+      "order": 7,
+      "content": {
+        "type": "slide",
+        "canvas": {
+          "id": "sVLx41ErXEgygVZUnQpiV",
+          "viewportSize": 1000,
+          "viewportRatio": 0.5625,
+          "theme": {
+            "backgroundColor": "#ffffff",
+            "themeColors": [
+              "#5b9bd5",
+              "#ed7d31",
+              "#a5a5a5",
+              "#ffc000",
+              "#4472c4"
+            ],
+            "fontColor": "#333333",
+            "fontName": "Microsoft YaHei",
+            "outline": {
+              "color": "#d14424",
+              "width": 2,
+              "style": "solid"
+            },
+            "shadow": {
+              "h": 0,
+              "v": 0,
+              "blur": 10,
+              "color": "#000000"
+            }
+          },
+          "elements": [
+            {
+              "id": "eyebrow",
+              "type": "text",
+              "left": 48,
+              "top": 23,
+              "width": 905,
+              "height": 45.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f4ba78",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:22px;font-weight:500;text-align:left\">08 / 10    作者推演 · 改编自 riba2534 的知乎文章</p>"
+            },
+            {
+              "id": "title",
+              "type": "text",
+              "left": 46,
+              "top": 67,
+              "width": 910,
+              "height": 74.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:42px;font-weight:650;text-align:left\">看见整条反馈循环</p>"
+            },
+            {
+              "id": "subtitle",
+              "type": "text",
+              "left": 48,
+              "top": 130,
+              "width": 905,
+              "height": 50.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">单个参与者理性，不代表整体结果有利</p>"
+            },
+            {
+              "id": "node-0",
+              "type": "shape",
+              "left": 48,
+              "top": 198,
+              "width": 280,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-0",
+              "type": "shape",
+              "left": 48,
+              "top": 198,
+              "width": 4,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#9cabff",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-0",
+              "type": "text",
+              "left": 66,
+              "top": 213,
+              "width": 248,
+              "height": 51.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:600;text-align:left\">AI 能力提升</p>"
+            },
+            {
+              "id": "detail-0",
+              "type": "text",
+              "left": 66,
+              "top": 264,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">降本变得更可行</p>"
+            },
+            {
+              "id": "node-1",
+              "type": "shape",
+              "left": 357,
+              "top": 198,
+              "width": 280,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-1",
+              "type": "shape",
+              "left": 357,
+              "top": 198,
+              "width": 4,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#7cd6c4",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-1",
+              "type": "text",
+              "left": 375,
+              "top": 213,
+              "width": 248,
+              "height": 51.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:600;text-align:left\">削减用工成本</p>"
+            },
+            {
+              "id": "detail-1",
+              "type": "text",
+              "left": 375,
+              "top": 264,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">企业维持利润</p>"
+            },
+            {
+              "id": "node-2",
+              "type": "shape",
+              "left": 666,
+              "top": 198,
+              "width": 280,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-2",
+              "type": "shape",
+              "left": 666,
+              "top": 198,
+              "width": 4,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#9cabff",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-2",
+              "type": "text",
+              "left": 684,
+              "top": 213,
+              "width": 248,
+              "height": 51.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:600;text-align:left\">劳动收入承压</p>"
+            },
+            {
+              "id": "detail-2",
+              "type": "text",
+              "left": 684,
+              "top": 264,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">家庭调整预算</p>"
+            },
+            {
+              "id": "node-3",
+              "type": "shape",
+              "left": 666,
+              "top": 356,
+              "width": 280,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-3",
+              "type": "shape",
+              "left": 666,
+              "top": 356,
+              "width": 4,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#7cd6c4",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-3",
+              "type": "text",
+              "left": 684,
+              "top": 371,
+              "width": 248,
+              "height": 51.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:600;text-align:left\">消费需求减弱</p>"
+            },
+            {
+              "id": "detail-3",
+              "type": "text",
+              "left": 684,
+              "top": 422,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">企业营收承压</p>"
+            },
+            {
+              "id": "node-4",
+              "type": "shape",
+              "left": 357,
+              "top": 356,
+              "width": 280,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-4",
+              "type": "shape",
+              "left": 357,
+              "top": 356,
+              "width": 4,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#9cabff",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-4",
+              "type": "text",
+              "left": 375,
+              "top": 371,
+              "width": 248,
+              "height": 51.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:600;text-align:left\">再寻求降本</p>"
+            },
+            {
+              "id": "detail-4",
+              "type": "text",
+              "left": 375,
+              "top": 422,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">继续投入自动化</p>"
+            },
+            {
+              "id": "node-5",
+              "type": "shape",
+              "left": 48,
+              "top": 356,
+              "width": 280,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-5",
+              "type": "shape",
+              "left": 48,
+              "top": 356,
+              "width": 4,
+              "height": 128,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#7cd6c4",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-5",
+              "type": "text",
+              "left": 66,
+              "top": 371,
+              "width": 248,
+              "height": 51.699999999999996,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:26px;font-weight:600;text-align:left\">循环可能强化</p>"
+            },
+            {
+              "id": "detail-5",
+              "type": "text",
+              "left": 66,
+              "top": 422,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">压力回到起点</p>"
+            },
+            {
+              "id": "arrow-0",
+              "type": "text",
+              "left": 322,
+              "top": 235,
+              "width": 50,
+              "height": 63.3,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:34px;font-weight:500;text-align:center\">→</p>"
+            },
+            {
+              "id": "arrow-1",
+              "type": "text",
+              "left": 631,
+              "top": 235,
+              "width": 50,
+              "height": 63.3,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:34px;font-weight:500;text-align:center\">→</p>"
+            },
+            {
+              "id": "arrow-2",
+              "type": "text",
+              "left": 322,
+              "top": 391,
+              "width": 50,
+              "height": 63.3,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:34px;font-weight:500;text-align:center\">←</p>"
+            },
+            {
+              "id": "arrow-3",
+              "type": "text",
+              "left": 631,
+              "top": 391,
+              "width": 50,
+              "height": 63.3,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:34px;font-weight:500;text-align:center\">←</p>"
+            },
+            {
+              "id": "arrow-down",
+              "type": "text",
+              "left": 785,
+              "top": 318,
+              "width": 50,
+              "height": 53.15,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:27px;font-weight:500;text-align:center\">↓</p>"
+            },
+            {
+              "id": "arrow-up",
+              "type": "text",
+              "left": 155,
+              "top": 318,
+              "width": 50,
+              "height": 53.15,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:27px;font-weight:500;text-align:center\">↑</p>"
+            },
+            {
+              "id": "boundary",
+              "type": "text",
+              "left": 48,
+              "top": 501,
+              "width": 909,
+              "height": 43,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:20px;font-weight:400;text-align:left\">政策、降价、新需求与新岗位，都可能改变反馈强度。</p>"
+            }
+          ],
+          "background": {
+            "type": "solid",
+            "color": "#121e36"
+          }
+        }
+      },
+      "actions": [
+        {
+          "id": "loop-cue-0",
+          "type": "highlight",
+          "elementId": "title"
+        },
+        {
+          "id": "loop-speech-0",
+          "type": "speech",
+          "text": "现在把前面的线连起来。企业为了生存降成本，家庭因为收入不稳少消费，需求下降又促使企业继续降成本。每一步单独看都有理由，叠起来却可能强化彼此的压力。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "loop-cue-1",
+          "type": "highlight",
+          "elementId": "node-0"
+        },
+        {
+          "id": "loop-speech-1",
+          "type": "speech",
+          "text": "作者把它联系到合成谬误：对一个参与者有利的做法，不保证所有人同时这样做，整体也会更好。文章的政策困境，就是收入税基可能缩小，保障支出却可能增加。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "loop-cue-2",
+          "type": "highlight",
+          "elementId": "node-1"
+        },
+        {
+          "id": "loop-speech-2",
+          "type": "speech",
+          "text": "不过，循环并不等于命运已经锁死。再培训、收益分享、转移支付，以及新需求和新岗位，都可能改变它。文章提到算力征税和公共基金，是政策设想，不是已经确定的解决方案。",
+          "agentId": "teacher"
+        }
+      ],
+      "createdAt": 1788853553278,
+      "updatedAt": 1788853553278,
+      "sourceAnchor": {
+        "section": "看见整条反馈循环",
+        "quote": "经济学中有一个术语叫”合成谬误”",
+        "startLine": 290,
+        "endLine": 290
+      },
+      "takeaway": "读懂一个循环，还要找出哪些条件会强化它、哪些环节可能减弱它。",
+      "reading": [
+        "企业层面的竞争与国家层面的 AI 竞争，在文中具有类似结构：单方减速可能担心失去竞争力，而各方加速又可能增加转型压力。这个类比帮助理解动机，但并不证明政策无法协调。",
+        "作者关于税基下降、社会保障需求增长的担忧，指向技术收益的制度性分配。其公共基金、算力税、产出分享等提议应被读作候选机制；是否有效、如何设计、会产生什么副作用，需要另行研究。"
+      ],
+      "premise": "反馈的方向与强度取决于补偿机制，不能从局部案例直接推导整个经济必然失控。",
+      "kind": "作者推演"
+    },
+    {
+      "id": "window",
+      "outlineId": "window",
+      "stageId": "zhijing-article",
+      "type": "slide",
+      "title": "五年是设问，不是时钟",
+      "order": 8,
+      "content": {
+        "type": "slide",
+        "canvas": {
+          "id": "YRkXQebYnMXgSk8GfaxYZ",
+          "viewportSize": 1000,
+          "viewportRatio": 0.5625,
+          "theme": {
+            "backgroundColor": "#ffffff",
+            "themeColors": [
+              "#5b9bd5",
+              "#ed7d31",
+              "#a5a5a5",
+              "#ffc000",
+              "#4472c4"
+            ],
+            "fontColor": "#333333",
+            "fontName": "Microsoft YaHei",
+            "outline": {
+              "color": "#d14424",
+              "width": 2,
+              "style": "solid"
+            },
+            "shadow": {
+              "h": 0,
+              "v": 0,
+              "blur": 10,
+              "color": "#000000"
+            }
+          },
+          "elements": [
+            {
+              "id": "eyebrow",
+              "type": "text",
+              "left": 48,
+              "top": 23,
+              "width": 905,
+              "height": 45.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f4ba78",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:22px;font-weight:500;text-align:left\">09 / 10    阅读判断 · 改编自 riba2534 的知乎文章</p>"
+            },
+            {
+              "id": "title",
+              "type": "text",
+              "left": 46,
+              "top": 67,
+              "width": 910,
+              "height": 74.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:42px;font-weight:650;text-align:left\">五年是设问，不是时钟</p>"
+            },
+            {
+              "id": "subtitle",
+              "type": "text",
+              "left": 48,
+              "top": 130,
+              "width": 905,
+              "height": 50.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">把时间想象、机制判断与证据分开</p>"
+            },
+            {
+              "id": "rail",
+              "type": "shape",
+              "left": 65,
+              "top": 274,
+              "width": 867,
+              "height": 3,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#9cabff",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-0",
+              "type": "text",
+              "left": 56,
+              "top": 212,
+              "width": 280,
+              "height": 67.65,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f4ba78",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:37px;font-weight:600;text-align:left\">2026</p>"
+            },
+            {
+              "id": "node-0",
+              "type": "shape",
+              "left": 70,
+              "top": 264,
+              "width": 19,
+              "height": 22,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#f4ba78",
+              "fixedRatio": false
+            },
+            {
+              "id": "detail-0",
+              "type": "text",
+              "left": 55,
+              "top": 305,
+              "width": 290,
+              "height": 50.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">原文的观察起点</p>"
+            },
+            {
+              "id": "label-1",
+              "type": "text",
+              "left": 365,
+              "top": 212,
+              "width": 280,
+              "height": 67.65,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f4ba78",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:37px;font-weight:600;text-align:left\">2027—2029</p>"
+            },
+            {
+              "id": "node-1",
+              "type": "shape",
+              "left": 379,
+              "top": 264,
+              "width": 19,
+              "height": 22,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#f4ba78",
+              "fixedRatio": false
+            },
+            {
+              "id": "detail-1",
+              "type": "text",
+              "left": 364,
+              "top": 305,
+              "width": 290,
+              "height": 50.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">作者设想的传导期</p>"
+            },
+            {
+              "id": "label-2",
+              "type": "text",
+              "left": 674,
+              "top": 212,
+              "width": 280,
+              "height": 67.65,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f4ba78",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:37px;font-weight:600;text-align:left\">2030</p>"
+            },
+            {
+              "id": "node-2",
+              "type": "shape",
+              "left": 688,
+              "top": 264,
+              "width": 19,
+              "height": 22,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#f4ba78",
+              "fixedRatio": false
+            },
+            {
+              "id": "detail-2",
+              "type": "text",
+              "left": 673,
+              "top": 305,
+              "width": 290,
+              "height": 50.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">用于推演的未来场景</p>"
+            },
+            {
+              "id": "timeline-boundary",
+              "type": "text",
+              "left": 57,
+              "top": 401,
+              "width": 890,
+              "height": 56.05,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:29px;font-weight:600;text-align:left\">作者设想，不是现实进度条</p>"
+            },
+            {
+              "id": "boundary",
+              "type": "text",
+              "left": 48,
+              "top": 501,
+              "width": 909,
+              "height": 43,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:20px;font-weight:400;text-align:left\">这条时间线复述作者设想，不是概率预测或现实进度条。</p>"
+            }
+          ],
+          "background": {
+            "type": "solid",
+            "color": "#121e36"
+          }
+        }
+      },
+      "actions": [
+        {
+          "id": "window-cue-0",
+          "type": "highlight",
+          "elementId": "title"
+        },
+        {
+          "id": "window-speech-0",
+          "type": "speech",
+          "text": "再回头看标题，五年到底是什么？文章没有给出能算出五年的预测模型。它用一条很紧的时间线，提醒读者：工具能力提高得快，个人和组织的适应却需要时间。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "window-cue-1",
+          "type": "highlight",
+          "elementId": "node-0"
+        },
+        {
+          "id": "window-speech-1",
+          "type": "speech",
+          "text": "读这种文章，可以分三层。第一层是有出处的观察，例如某项技术研究。第二层是条件成立时的机制，例如收入下降可能传导到还贷压力。第三层是未来场景，例如哪一年出现系统性危机。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "window-cue-2",
+          "type": "highlight",
+          "elementId": "node-1"
+        },
+        {
+          "id": "window-speech-2",
+          "type": "speech",
+          "text": "不要用第一层的真实，替第三层盖章。我们可以认真对待风险，也保留对时间、规模和必然性的判断。这样，读完带走的是一套理解变化的方法，而不只是一份焦虑。",
+          "agentId": "teacher"
+        }
+      ],
+      "createdAt": 1788853553278,
+      "updatedAt": 1788853553278,
+      "sourceAnchor": {
+        "section": "五年是设问，不是时钟",
+        "quote": "2030 这个时间点未必会精确到来。",
+        "startLine": 313,
+        "endLine": 313
+      },
+      "takeaway": "一个背景事实成立，不代表由它展开的全部预测都成立。",
+      "reading": [
+        "原文末尾也承认能力瓶颈、政策响应和社会适应可能改变走向。它的“金丝雀”比喻表达的是警觉，不提供对矿井、市场或就业的实际监测指标。",
+        "文中的模型发布、历史裁员、劳动份额、私人信贷规模、房价与消费数据，不具有相同的证据等级。下方核验区仅抽查几个容易被误读的关键主张，不代表整篇文章已获得事实认证。"
+      ],
+      "premise": "对具体年份、冲击幅度和资产表现的预测，需要独立证据，不能仅靠故事连贯。",
+      "kind": "阅读判断"
+    },
+    {
+      "id": "action",
+      "outlineId": "action",
+      "stageId": "zhijing-article",
+      "type": "slide",
+      "title": "把紧迫感，变成一次实践",
+      "order": 9,
+      "content": {
+        "type": "slide",
+        "canvas": {
+          "id": "2kR1pVZBTNHqxX2a53ofg",
+          "viewportSize": 1000,
+          "viewportRatio": 0.5625,
+          "theme": {
+            "backgroundColor": "#ffffff",
+            "themeColors": [
+              "#5b9bd5",
+              "#ed7d31",
+              "#a5a5a5",
+              "#ffc000",
+              "#4472c4"
+            ],
+            "fontColor": "#333333",
+            "fontName": "Microsoft YaHei",
+            "outline": {
+              "color": "#d14424",
+              "width": 2,
+              "style": "solid"
+            },
+            "shadow": {
+              "h": 0,
+              "v": 0,
+              "blur": 10,
+              "color": "#000000"
+            }
+          },
+          "elements": [
+            {
+              "id": "eyebrow",
+              "type": "text",
+              "left": 48,
+              "top": 23,
+              "width": 905,
+              "height": 45.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f4ba78",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:22px;font-weight:500;text-align:left\">10 / 10    学习迁移 · 改编自 riba2534 的知乎文章</p>"
+            },
+            {
+              "id": "title",
+              "type": "text",
+              "left": 46,
+              "top": 67,
+              "width": 910,
+              "height": 74.9,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:42px;font-weight:650;text-align:left\">把紧迫感，变成一次实践</p>"
+            },
+            {
+              "id": "subtitle",
+              "type": "text",
+              "left": 48,
+              "top": 130,
+              "width": 905,
+              "height": 50.25,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:25px;font-weight:400;text-align:left\">不必等到相信整套预测，才开始尝试</p>"
+            },
+            {
+              "id": "node-0",
+              "type": "shape",
+              "left": 49,
+              "top": 285,
+              "width": 280,
+              "height": 155,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-0",
+              "type": "shape",
+              "left": 49,
+              "top": 285,
+              "width": 4,
+              "height": 155,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#9cabff",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-0",
+              "type": "text",
+              "left": 67,
+              "top": 300,
+              "width": 248,
+              "height": 57.5,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:30px;font-weight:600;text-align:left\">选一个真任务</p>"
+            },
+            {
+              "id": "detail-0",
+              "type": "text",
+              "left": 67,
+              "top": 351,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">从反复做的工作开始</p>"
+            },
+            {
+              "id": "node-1",
+              "type": "shape",
+              "left": 358,
+              "top": 245,
+              "width": 280,
+              "height": 155,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-1",
+              "type": "shape",
+              "left": 358,
+              "top": 245,
+              "width": 4,
+              "height": 155,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#7cd6c4",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-1",
+              "type": "text",
+              "left": 376,
+              "top": 260,
+              "width": 248,
+              "height": 57.5,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:30px;font-weight:600;text-align:left\">接进完整流程</p>"
+            },
+            {
+              "id": "detail-1",
+              "type": "text",
+              "left": 376,
+              "top": 311,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">输入、执行、核对、交付</p>"
+            },
+            {
+              "id": "node-2",
+              "type": "shape",
+              "left": 667,
+              "top": 205,
+              "width": 280,
+              "height": 155,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#203253",
+              "fixedRatio": false
+            },
+            {
+              "id": "mark-2",
+              "type": "shape",
+              "left": 667,
+              "top": 205,
+              "width": 4,
+              "height": 155,
+              "rotate": 0,
+              "viewBox": [
+                200,
+                200
+              ],
+              "path": "M 0 0 L 200 0 L 200 200 L 0 200 Z",
+              "fill": "#9cabff",
+              "fixedRatio": false
+            },
+            {
+              "id": "label-2",
+              "type": "text",
+              "left": 685,
+              "top": 220,
+              "width": 248,
+              "height": 57.5,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#f3f6ff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:30px;font-weight:600;text-align:left\">用结果来判断</p>"
+            },
+            {
+              "id": "detail-2",
+              "type": "text",
+              "left": 685,
+              "top": 271,
+              "width": 248,
+              "height": 47.35,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:23px;font-weight:400;text-align:left\">质量、耗时、返工与费用</p>"
+            },
+            {
+              "id": "arrow-0",
+              "type": "text",
+              "left": 322,
+              "top": 289,
+              "width": 50,
+              "height": 63.3,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:34px;font-weight:500;text-align:center\">↗</p>"
+            },
+            {
+              "id": "arrow-1",
+              "type": "text",
+              "left": 631,
+              "top": 249,
+              "width": 50,
+              "height": 63.3,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#9cabff",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:34px;font-weight:500;text-align:center\">↗</p>"
+            },
+            {
+              "id": "boundary",
+              "type": "text",
+              "left": 48,
+              "top": 501,
+              "width": 909,
+              "height": 43,
+              "rotate": 0,
+              "defaultFontName": "PingFang SC",
+              "defaultColor": "#afbdd6",
+              "lineHeight": 1.3,
+              "content": "<p style=\"font-size:20px;font-weight:400;text-align:left\">这是本作品的学习实践建议，不是作者新增结论或投资指令。</p>"
+            }
+          ],
+          "background": {
+            "type": "solid",
+            "color": "#121e36"
+          }
+        }
+      },
+      "actions": [
+        {
+          "id": "action-cue-0",
+          "type": "highlight",
+          "elementId": "title"
+        },
+        {
+          "id": "action-speech-0",
+          "type": "speech",
+          "text": "作者最终主张，从旁观转向使用人工智能，并关注能力之外的收益归属。这份学习作品把前一部分落成一个小行动：选一件经常做的真实任务，先记录原来的过程，再尝试让人工智能参与其中。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "action-cue-1",
+          "type": "highlight",
+          "elementId": "node-0"
+        },
+        {
+          "id": "action-speech-1",
+          "type": "speech",
+          "text": "不要只看生成得快不快。把查错和返工也算进去，看看结果是否达到同样标准，决定哪些步骤值得保留。这个实践不需要押注某一年一定发生危机，也不要求你立刻改变职业。",
+          "agentId": "teacher"
+        },
+        {
+          "id": "action-cue-2",
+          "type": "highlight",
+          "elementId": "node-1"
+        },
+        {
+          "id": "action-speech-2",
+          "type": "speech",
+          "text": "原文还谈到现金缓冲、资产积累和投资方向，那是作者的财务观点，不是适合每个人的配置方案。读到这里，记住这句话就够了：人工智能的能力红利，未必自动变成每个人的收入红利。理解传导，再验证行动。",
+          "agentId": "teacher"
+        }
+      ],
+      "createdAt": 1788853553278,
+      "updatedAt": 1788853553278,
+      "sourceAnchor": {
+        "section": "把紧迫感，变成一次实践",
+        "quote": "只要肯花时间真正把 AI 融入日常工作流",
+        "startLine": 334,
+        "endLine": 334
+      },
+      "takeaway": "把文章当作建立判断与开展低风险实践的材料，而不是替你做重大决定的指令。",
+      "reading": [
+        "作者的行动部分有两条线：提高 AI 使用能力；在其假设的窗口内关注现金缓冲和资产积累。还强调算力、模型、应用三层价值链的差异，以及估值、芯片替代等风险。这里保留观点结构，不给出具体买卖、仓位或定投建议。",
+        "正文提到的“一年现金”和特定资产路径不是通用标准。个人资金安排需要结合支出、负债、保障与风险承受能力判断，不能由一篇未来推演直接决定。你可以只完成一次工作流实验，暂时不接受作者的全部宏观结论。"
+      ],
+      "premise": "学习实践、职业选择和投资决策是不同层级的行动，所需证据与风险承受能力不同。",
+      "kind": "学习迁移"
+    }
+  ],
+  "glossary": [
+    [
+      "SaaS",
+      "通过订阅使用的软件服务。文中重点是客户自建、议价及席位减少可能影响收入。"
+    ],
+    [
+      "Agent",
+      "围绕目标调用工具、连续执行任务的 AI 系统；实际自主程度取决于权限、工具与审核。"
+    ],
+    [
+      "劳动收入份额",
+      "分配给劳动者的收入相对于某种产出或收入总量的比例；比较时必须确认地区与统计口径。"
+    ],
+    [
+      "私人信贷 / ARR",
+      "前者是银行之外的直接贷款安排；后者是年度经常性收入，重复订阅不等于未来收入有保证。"
+    ],
+    [
+      "智能溢价",
+      "文章对稀缺认知能力所获回报的概括；“归零”是作者的强推演。"
+    ],
+    [
+      "合成谬误",
+      "把适用于部分或个体的判断，直接推广成对整体也适用的判断。"
+    ]
+  ],
+  "checks": [
+    {
+      "label": "40% 岗位受影响",
+      "status": "口径已核对",
+      "text": "IMF 在 2024 年估计全球近 40% 的就业暴露于 AI，包含替代与互补，不是失业率或岗位消失比例。",
+      "links": [
+        {
+          "title": "IMF 原始说明 · 2024-01-14",
+          "url": "https://www.imf.org/en/Blogs/Articles/2024/01/14/ai-will-transform-the-global-economy-lets-make-sure-it-benefits-humanity"
+        }
+      ]
+    },
+    {
+      "label": "500 多个高危漏洞",
+      "status": "公司原始报告",
+      "text": "Anthropic 在 2026 年 2 月报告，使用 Claude 发现并验证了 500 多个高危漏洞，并将研究称为零日漏洞发现；人类研究员参与验证与修补。不能改写成模型独立完成全部安全工作。",
+      "links": [
+        {
+          "title": "Anthropic 原始研究 · 2026-02-05",
+          "url": "https://www.anthropic.com/research/zero-days"
+        }
+      ]
+    },
+    {
+      "label": "产出普遍相差 10—100 倍",
+      "status": "不作为通用事实",
+      "text": "原文未给出处，本次未找到支持普遍倍数的可靠依据。METR 对早期 2025 工具的研究中，16 名熟悉成熟项目的开发者完成 246 个任务，允许使用 AI 后耗时增加 19%；机构明确不将结果推广到所有编程工作。2026 年更新认为提速可能已提高，但新样本的选择偏差使幅度难以可靠估计。两个结果都不能直接替代你自己的任务测量。",
+      "links": [
+        {
+          "title": "METR 原始研究 · 2025-07-10",
+          "url": "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/"
+        },
+        {
+          "title": "METR 后续更新 · 2026-02-24",
+          "url": "https://metr.org/blog/2026-02-24-uplift-update/"
+        }
+      ]
+    },
+    {
+      "label": "五年窗口与 2030 年危机",
+      "status": "作者情景推演",
+      "text": "文章自行说明年份是思想实验，不是精确预测。其他未逐项核验的市场数据、历史类比及资产走势，不作为本作品的已证实结论。",
+      "links": []
+    }
+  ],
+  "reviewQuestions": [
+    {
+      "question": "为什么企业的效率提高，不保证每个家庭的购买力同步提高？",
+      "answer": "因为生产与分配是两环：收益可能通过工资、利润、降价等不同渠道流向不同主体，还要看新就业和公共分配是否抵消收入损失。"
+    },
+    {
+      "question": "IMF 的 40% 能不能直接理解成 40% 的人会失业？",
+      "answer": "不能。它指就业暴露于 AI，既包括替代风险，也包括 AI 增强人类工作，并非失业率。"
+    },
+    {
+      "question": "如果不相信五年内必然发生危机，这篇文章还有什么可以实践？",
+      "answer": "仍可选择一个重复任务，把 AI 接进完整流程，在相同质量标准下比较耗时、返工和费用；这不依赖精确的宏观预测。"
+    }
+  ],
+  "mediaPolicy": {
+    "voiceUnit": "chapter",
+    "captions": "章节实测；章内讲解及字幕按文本长度近似对齐"
+  },
+  "review": {
+    "passed": true,
+    "kind": "editorial-source-checked",
+    "note": "本 Agent 通读用户正文，逐章核对论点与短引；三组关键说法查阅原始来源，其余不宣称已核实。"
+  },
+  "provenance": {
+    "sourceHash": "2f6914e68ca23541775a39ab6d86d8292156da7dc38757809609e8280533f02f",
+    "preparedAt": "2026-09-08T07:45:53.278Z",
+    "mode": "基于用户正文逐章编写和审核的单篇学习作品，非通用自动生成能力验收",
+    "generation": "OpenMAIC buildCompleteScene 组装人工审定内容；不声称本篇由 generateSceneActions 自动创作",
+    "renderer": "@openmaic/renderer@0.1.6",
+    "profile": "沿用上一份经模型生成的故事/视频/不提问示例规则，不是重新测评用户"
+  }
+}

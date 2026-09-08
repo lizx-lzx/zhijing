@@ -38,6 +38,7 @@ yarn-error.log*
 /.wrangler/
 /outputs/
 /public/demo/openmaic-20260908/
+/public/demo/zhihu-window-20260908/
 /work/
 /data/
 /test-results/

@@ -148,6 +148,183 @@ h1 {
   background: #f8fafc;
   box-shadow: 0 12px 32px #2633540a;
 }
+.article-intro {
+  color: #52627b;
+  font-size: 17px;
+  line-height: 1.8;
+  margin: 12px 0 0;
+  max-width: 800px;
+}
+.preference strong {
+  padding: 3px 10px;
+  background: #eceffa;
+  border-radius: 5px;
+}
+.audio-view,
+.long-reading {
+  padding: clamp(20px, 3vw, 36px);
+  background: #fff;
+}
+.audio-view {
+  min-height: 370px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.audio-view h2 {
+  font-size: 27px;
+  margin: 6px 0 14px;
+}
+.audio-view p,
+.long-reading p {
+  font-size: 17px;
+  line-height: 1.9;
+}
+.audio-view audio {
+  width: 100%;
+  margin: 18px 0;
+}
+.long-reading > h2 {
+  font-size: 25px;
+  line-height: 1.6;
+}
+.reading-chapter {
+  padding-top: 24px;
+  margin-top: 26px;
+  border-top: 1px solid #e0e5ee;
+  scroll-margin-top: 20px;
+}
+.reading-chapter h3 {
+  font-size: 23px;
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+.reading-chapter h3 span {
+  color: #6973be;
+  margin-right: 12px;
+  font-size: 18px;
+}
+.reading-chapter details {
+  margin: 18px 0;
+  font-size: 16px;
+  line-height: 1.8;
+}
+.reading-chapter summary {
+  cursor: pointer;
+  color: #596888;
+  padding: 6px 0;
+}
+.reading-chapter blockquote {
+  margin: 14px 0;
+  padding: 12px 16px;
+  border-left: 3px solid #abb4e2;
+  background: #f4f6fb;
+  line-height: 1.9;
+}
+.key-line {
+  color: #3441a0;
+  background: #f0f2fb;
+  border-left: 3px solid #6d78d5;
+  padding: 12px 18px;
+}
+.claim-check,
+.self-check {
+  padding: 18px 0;
+  border-top: 1px solid #e2e6ef;
+  margin-top: 18px;
+}
+.claim-check h3,
+.self-check h3,
+.glossary h3 {
+  font-size: 20px;
+  line-height: 1.7;
+  margin: 10px 0;
+}
+.status-label {
+  font-size: 14px;
+  color: #705221;
+  background: #fff0d9;
+  padding: 5px 9px;
+  border-radius: 5px;
+}
+.source-link {
+  display: inline-block;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: #404fa8;
+  line-height: 1.8;
+  margin: 5px 18px 5px 0;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+.self-check details {
+  margin: 10px 0;
+}
+.self-check summary {
+  color: #4758a1;
+  cursor: pointer;
+}
+.downloads {
+  margin: 36px 0;
+  border-top: 1px solid #dfe4ee;
+  padding-top: 24px;
+}
+.downloads h2 {
+  font-size: 21px;
+}
+.download-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 18px 0;
+}
+.download-links a {
+  border: 1px solid #d5dcec;
+  border-radius: 8px;
+  background: white;
+  font-size: 15px;
+  padding: 12px 18px;
+}
+.downloads details {
+  margin: 24px 0;
+  font-size: 16px;
+}
+.downloads summary {
+  cursor: pointer;
+}
+.diagram-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding: 24px 0;
+}
+.diagram-links a {
+  color: #4758a1;
+  font-size: 16px;
+  line-height: 1.7;
+}
+@media (max-width: 640px) {
+  .view-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2px;
+  }
+  .view-tabs button {
+    padding: 10px 3px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  .audio-view,
+  .long-reading {
+    padding: 20px 17px;
+  }
+  .reading-chapter h3 {
+    font-size: 21px;
+  }
+  .diagram-links {
+    grid-template-columns: 1fr;
+  }
+}
 .player video {
   display: block;
   width: 100%;

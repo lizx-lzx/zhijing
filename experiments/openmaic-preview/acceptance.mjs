@@ -3,16 +3,18 @@ import fs from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { chromium } from "../../node_modules/playwright/index.mjs";
 import { config } from "../../server/config.mjs";
+import { editionPaths } from "./paths.mjs";
+const { root } = editionPaths();
+const lesson = JSON.parse(await fs.readFile(new URL("lesson.json", root)));
+const count = lesson.scenes.length;
 
 const url = process.env.ZH_PREVIEW_URL || "http://127.0.0.1:4360/";
-const timing = JSON.parse(
-  await fs.readFile(new URL("./timing.json", import.meta.url)),
-);
+const timing = JSON.parse(await fs.readFile(new URL("timing.json", root)));
 const browser = await chromium.launch({
   executablePath: config.chromium,
   headless: true,
 });
-await fs.mkdir(new URL("./render/", import.meta.url), { recursive: true });
+await fs.mkdir(new URL("render/", root), { recursive: true });
 const failures = [];
 try {
   const page = await browser.newPage({
@@ -46,17 +48,17 @@ try {
   await page.getByRole("button", { name: "逐页看图", exact: true }).click();
   assert.equal(
     await page.locator(".slide-controls > span").innerText(),
-    "3 / 4",
+    `3 / ${count}`,
   );
   await page.getByRole("button", { name: "上一页", exact: true }).click();
   assert.equal(
     await page.locator(".slide-controls > span").innerText(),
-    "2 / 4",
+    `2 / ${count}`,
   );
   await page.getByRole("button", { name: "下一页", exact: true }).click();
   assert.equal(
     await page.locator(".slide-controls > span").innerText(),
-    "3 / 4",
+    `3 / ${count}`,
   );
   await page.waitForFunction(
     () => document.querySelector("audio")?.readyState >= 1,
@@ -75,7 +77,7 @@ try {
   );
   assert.ok((await video.evaluate((v) => v.currentTime)) >= thirdStart);
   await page.screenshot({
-    path: fileURLToPath(new URL("./render/desktop-video.png", import.meta.url)),
+    path: fileURLToPath(new URL("render/desktop-video.png", root)),
     fullPage: true,
   });
   await page.setViewportSize({ width: 390, height: 844 });
@@ -85,16 +87,45 @@ try {
     ),
   );
   await page.getByRole("button", { name: "逐页看图", exact: true }).click();
-  await page.locator("summary").filter({ hasText: "完整讲稿" }).click();
-  assert.ok(await page.locator(".reading-body").first().isVisible());
+  const transcript = page.locator("summary").filter({ hasText: "完整讲稿" });
+  await transcript.click();
+  assert.ok(
+    await transcript.locator("..").locator(".reading-body").isVisible(),
+  );
+  await transcript.click();
+  await page.getByRole("button", { name: "只听音频", exact: true }).click();
+  await page.waitForFunction(
+    () => document.querySelector("audio")?.readyState >= 1,
+  );
+  assert.ok(await page.locator(".audio-view").isVisible());
+  await page.getByRole("button", { name: "文字梳理", exact: true }).click();
+  assert.equal(await page.locator(".reading-chapter").count(), count);
+  if (lesson.sourceMeta) {
+    assert.match(await page.locator("h1").innerText(), /窗口期/);
+    assert.ok(!(await page.locator("body").innerText()).includes("人均六本"));
+    await page.locator("summary").filter({ hasText: "哪些是事实" }).click();
+    assert.equal(await page.locator(".claim-check").count(), 4);
+    await page.locator("summary").filter({ hasText: "三个小问题" }).click();
+    assert.equal(await page.locator(".self-check").count(), 3);
+    const answer = page.getByText("查看参考理解", { exact: true }).first();
+    await answer.click();
+    assert.ok(await answer.locator("..").locator("p").isVisible());
+    for (const href of await page
+      .locator("a[download]")
+      .evaluateAll((links) => links.map((l) => l.href))) {
+      assert.equal(new URL(href).origin, new URL(url).origin);
+      const response = await page.request.head(href);
+      assert.equal(response.status(), 200, href);
+    }
+  }
   assert.ok(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   );
   await page.screenshot({
-    path: fileURLToPath(new URL("./render/mobile.png", import.meta.url)),
-    fullPage: true,
+    path: fileURLToPath(new URL("render/mobile.png", root)),
+    fullPage: false,
   });
   assert.equal(await page.getByRole("alert").count(), 0);
   assert.deepEqual(failures, []);
@@ -109,11 +140,13 @@ try {
     chapterSeek: true,
     slideNavigation: true,
     modeTimePreserved: true,
+    fullReadingChapters: count,
+    standaloneAudio: true,
     mobileOverflow: false,
     pageErrors: failures,
   };
   await fs.writeFile(
-    new URL("./render/acceptance.json", import.meta.url),
+    new URL("render/acceptance.json", root),
     JSON.stringify(proof, null, 2),
   );
   console.log(JSON.stringify(proof, null, 2));

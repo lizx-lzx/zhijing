@@ -1,3 +1,5 @@
 node_modules/
 render/
 public/media/
+lessons/*/public/
+lessons/*/render/
