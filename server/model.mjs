@@ -26,6 +26,7 @@ export async function validatedJSON(
         "chapters",
         data?.chapters?.length ?? data?.lesson?.chapters?.length ?? "n/a",
         error.details?.invalidReference || "",
+        error.details?.field || "",
       );
       data = await generate(
         prompt(name) +

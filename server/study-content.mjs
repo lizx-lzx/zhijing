@@ -3,20 +3,24 @@ import { AppError } from "./config.mjs";
 const text = (value, max = 1000) =>
   typeof value === "string" ? value.trim().slice(0, max) : "";
 const list = (value) => (Array.isArray(value) ? value : []);
-const fail = () => {
-  throw new AppError(
+const fail = (field, expected, received) => {
+  const error = new AppError(
     "补充学习内容未通过完整性或来源检查，已保存的内容仍可阅读。",
     502,
     "INVALID_STUDY",
   );
+  error.details = { field, expected, received };
+  throw error;
 };
 export function validateStudy(data, lesson, source) {
-  if (!data || typeof data !== "object") fail();
+  if (!data || typeof data !== "object")
+    fail("study", "完整配套对象", typeof data);
   const chapters = new Map(lesson.chapters.map((c) => [c.id, c]));
   const sources = new Set(source.blocks.map((b) => b.id));
   const sourceIds = (value) => {
     const ids = [...new Set(list(value))];
-    if (!ids.length || ids.some((id) => !sources.has(id))) fail();
+    if (!ids.length || ids.some((id) => !sources.has(id)))
+      fail("sourceIds", "至少一个实际存在的原文段落编号", ids);
     return ids;
   };
   const groups = list(data.overview?.groups).map((g) => ({
@@ -33,7 +37,14 @@ export function validateStudy(data, lesson, source) {
     new Set(mapped).size !== chapters.size ||
     mapped.some((id) => !chapters.has(id))
   )
-    fail();
+    fail(
+      "overview.groups",
+      {
+        chapterIds: [...chapters.keys()],
+        rule: "每章必须且只能出现一次；每组需标题与至少一章",
+      },
+      mapped,
+    );
   const connections = list(data.overview?.connections)
     .slice(0, 24)
     .map((r) => {
@@ -44,7 +55,15 @@ export function validateStudy(data, lesson, source) {
         !["condition", "contrast", "sequence", "related"].includes(r.type) ||
         !text(r.label, 100)
       )
-        fail();
+        fail(
+          "overview.connections",
+          {
+            chapterIds: [...chapters.keys()],
+            types: ["condition", "contrast", "sequence", "related"],
+            rule: "from/to 必须是不同的真实章节编号；label必填；type只能选一个枚举",
+          },
+          { from: r.from, to: r.to, type: r.type, label: r.label },
+        );
       return {
         from: r.from,
         to: r.to,
@@ -56,7 +75,8 @@ export function validateStudy(data, lesson, source) {
   const glossary = list(data.glossary)
     .slice(0, 12)
     .map((g) => {
-      if (!text(g.term, 60) || !text(g.explanation, 600)) fail();
+      if (!text(g.term, 60) || !text(g.explanation, 600))
+        fail("glossary", "每项需要 term 和 explanation", g);
       return {
         term: text(g.term, 60),
         explanation: text(g.explanation, 600),
@@ -72,7 +92,14 @@ export function validateStudy(data, lesson, source) {
         !text(s.setup, 600) ||
         !text(s.takeaway, 600)
       )
-        fail();
+        fail(
+          `scenarios[${i}]`,
+          {
+            chapterIds: [...chapters.keys()],
+            required: ["chapterId", "title", "setup", "takeaway"],
+          },
+          s,
+        );
       const options = list(s.options).map((o, j) => {
         const steps = list(o.path).map((v) => text(v, 160));
         if (
@@ -82,7 +109,11 @@ export function validateStudy(data, lesson, source) {
           steps.length > 5 ||
           steps.some((v) => !v)
         )
-          fail();
+          fail(
+            `scenarios[${i}].options[${j}]`,
+            "必须有 label/explanation，path为2至5个非空步骤字符串组成的数组",
+            o,
+          );
         return {
           id: `o${j + 1}`,
           label: text(o.label, 100),
@@ -90,7 +121,8 @@ export function validateStudy(data, lesson, source) {
           explanation: text(o.explanation, 800),
         };
       });
-      if (options.length < 2 || options.length > 3) fail();
+      if (options.length < 2 || options.length > 3)
+        fail(`scenarios[${i}].options`, "2至3个选项", options.length);
       return {
         id: `case${i + 1}`,
         chapterId: s.chapterId,
@@ -106,7 +138,12 @@ export function validateStudy(data, lesson, source) {
     .slice(0, 12)
     .map((b) => text(b, 700))
     .filter(Boolean);
-  if (!scenarios.length && !text(data.practiceNote, 500)) fail();
+  if (!scenarios.length && !text(data.practiceNote, 500))
+    fail(
+      "practiceNote",
+      "无推演情境时必须解释为什么，没有依据不要强行编造情境",
+      data.practiceNote,
+    );
   return {
     version: 2,
     overview: {
