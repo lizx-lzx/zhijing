@@ -24,6 +24,7 @@ test("page motion can stop independently of saved profiles and media playback", 
   assert.match(css, /\[data-motion="off"\]/);
   assert.match(css, /animation:\s*none !important/);
   assert.match(css, /opacity:\s*1 !important/);
+  assert.doesNotMatch(css, /zHeroFloat|ease-in-out infinite/);
   const source = await readFile("components/learning-app.tsx", "utf8");
   assert.match(source, /visibilitychange/);
   assert.match(source, /aria-label="页面动效"/);
@@ -67,6 +68,13 @@ test("utility controls stay in secondary settings, not the learning navigation",
   const footer = source.match(/<footer[\s\S]*?<\/footer>/)?.[0];
   assert.match(footer, /设置/);
   assert.match(footer, /setAccount\(true\)/);
+  assert.match(footer, /view === "learning"/);
+  const layout = await readFile("app/product.css", "utf8");
+  assert.doesNotMatch(
+    layout,
+    /margin-left:\s*(?:224|196)px|\.z-signed-in \.z-top/,
+  );
+  assert.match(layout, /max-width: 860px/);
   const settings = source.match(/<Modal title="设置"[\s\S]*?<\/Modal>/)?.[0];
   assert.match(settings, /aria-label="页面动效"/);
   assert.match(settings, /<details className="z-detail z-device-settings">/);
@@ -97,11 +105,12 @@ test("welcome, preference examples and private library covers use real visual as
     const html = renderToStaticMarkup(
       createElement(Welcome, { onStart() {}, returning: true }),
     );
-    assert.match(html, /learning-paths-v1.webp/);
-    assert.match(html, /原有作品保留/);
+    assert.match(html, /window-cover.jpg/);
+    assert.doesNotMatch(html, /原有作品保留|z-journey-strip|z-learning-hero/);
     assert.match(html, /找到我的学法/);
-    assert.match(html, /8 题 · 约 2 分钟 · 随时可改/);
-    assert.match(html, /成品示例/);
+    assert.match(html, /8 题 · 约 2 分钟/);
+    assert.match(html, /学习作品 · 示例/);
+    assert.ok((await stat("public/images/window-cover.jpg")).size < 100000);
     assert.doesNotMatch(
       html,
       /让长文更容易开始|看示例，不用给自己分类|按你的节奏，随时继续|<figcaption/,

@@ -1,7 +1,5 @@
-/* Static WebP is pre-optimized; serve directly without an image transformation service. */
+/* Featured cover from the published work, not a mock player. */
 /* eslint-disable @next/next/no-img-element */
-import { useRef } from "react";
-import type { PointerEvent } from "react";
 import { ArrowRight, Play } from "lucide-react";
 import StaggeredText from "./react-bits/staggered-text";
 import { base } from "./learning-ui";
@@ -15,39 +13,13 @@ export function Welcome({
   onContinue?: () => void;
   returning?: boolean;
 }) {
-  const heroRef = useRef<HTMLElement>(null);
-  function moveHero(event: PointerEvent<HTMLElement>) {
-    const hero = heroRef.current;
-    if (
-      !hero ||
-      event.pointerType !== "mouse" ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-      hero.closest('[data-motion="off"]')
-    )
-      return;
-    const bounds = hero.getBoundingClientRect();
-    const x = Math.max(
-      -1,
-      Math.min(1, ((event.clientX - bounds.left) / bounds.width) * 2 - 1),
-    );
-    const y = Math.max(
-      -1,
-      Math.min(1, ((event.clientY - bounds.top) / bounds.height) * 2 - 1),
-    );
-    hero.style.setProperty("--hero-x", `${x * 1.7}deg`);
-    hero.style.setProperty("--hero-y", `${-y * 1.7}deg`);
-  }
-  function resetHero() {
-    heroRef.current?.style.setProperty("--hero-x", "0deg");
-    heroRef.current?.style.setProperty("--hero-y", "0deg");
-  }
   return (
     <main className="z-container z-welcome-visual">
       <section className="z-welcome-intro">
         <div className="z-welcome-copy">
           <StaggeredText
             as="h1"
-            text={"知识不必难读。\n换成你的讲法。"}
+            text={"长文，\n换一种读法。"}
             segmentBy="lines"
             blur={false}
             delay={140}
@@ -57,81 +29,45 @@ export function Welcome({
             to={{ opacity: 1, y: 0 }}
             respectReducedMotion
           />
-          <p>把文章变成适合你的图文、音频或视频。</p>
+          <p>图文、声音、影像。用你喜欢的方式理解。</p>
           <button
             className="button button-primary button-large"
             onClick={onStart}
           >
             找到我的学法 <ArrowRight size={18} />
           </button>
+          <span className="z-welcome-meta">8 题 · 约 2 分钟</span>
           {returning && onContinue && (
             <button
               className="z-text-link z-welcome-return"
               onClick={onContinue}
             >
-              继续原来的学习 <ArrowRight size={16} />
+              继续学习 <ArrowRight size={16} />
             </button>
           )}
-          <span className="z-welcome-meta">8 题 · 约 2 分钟 · 随时可改</span>
-          {returning && (
-            <p className="z-revisit-note">原有作品保留，学法保存后才更新。</p>
-          )}
         </div>
-        <figure
-          className="z-learning-hero"
-          ref={heroRef}
-          onPointerMove={moveHero}
-          onPointerLeave={resetHero}
-        >
-          <img
-            src={`${base}/images/learning-paths-v1.webp`}
-            width={1536}
-            height={1024}
-            fetchPriority="high"
-            alt="一张长文沿着纸带，变成视频画面、图文读本和听读音频"
-          />
-        </figure>
-      </section>
-      <section className="z-welcome-bottom" aria-label="从偏好到学习作品">
-        <ol className="z-journey-strip">
-          <li>
-            <span>01</span>
-            <div>
-              <strong>选学法</strong>
-            </div>
-          </li>
-          <li>
-            <span>02</span>
-            <div>
-              <strong>放入文章</strong>
-            </div>
-          </li>
-          <li>
-            <span>03</span>
-            <div>
-              <strong>开始学习</strong>
-            </div>
-          </li>
-        </ol>
         <a
-          className="z-example-link"
+          className="z-featured-work"
           href={`${base}/demo/zhihu-window-20260908/?ui=2ad9b72`}
+          aria-label="查看学习作品示例：窗口期可能只剩五年"
         >
-          <span className="z-example-poster">
+          <div className="z-featured-cover">
             <img
-              src={`${base}/demo/zhihu-window-20260908/media/poster.jpg`}
-              width={256}
-              height={144}
-              alt="《窗口期可能只剩五年》学习作品封面"
-              loading="lazy"
+              src={`${base}/images/window-cover.jpg`}
+              width={1280}
+              height={720}
+              fetchPriority="high"
+              alt="作品中的思想实验：企业提效与家庭收入为什么可能不同步"
             />
-            <Play size={18} aria-hidden="true" />
-          </span>
-          <span>
-            <small>成品示例</small>
-            <strong>窗口期可能只剩五年</strong>
-          </span>
-          <ArrowRight size={19} />
+            <span className="z-featured-open">
+              <Play size={18} aria-hidden="true" /> 进入作品
+            </span>
+          </div>
+          <div className="z-featured-caption">
+            <span>学习作品 · 示例</span>
+            <h2>窗口期可能只剩五年</h2>
+            <ArrowRight size={24} aria-hidden="true" />
+          </div>
         </a>
       </section>
     </main>

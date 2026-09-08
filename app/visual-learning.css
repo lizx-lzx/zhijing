@@ -1,127 +1,111 @@
-/* Shared visual examples are illustrative, not generated lesson content. */
+/* Real work replaces decorative onboarding chrome. */
 .z-welcome-visual {
-  padding-top: 48px;
-}
-.z-welcome-return {
-  display: flex;
-  margin-top: 10px;
+  padding-top: clamp(48px, 8vh, 100px);
+  padding-bottom: 36px;
 }
 .z-welcome-intro {
   display: grid;
-  grid-template-columns: 0.95fr 1.2fr;
+  grid-template-columns: 0.9fr 1.2fr;
   align-items: center;
-  gap: 38px;
+  gap: clamp(32px, 5vw, 80px);
+  min-height: 530px;
 }
 .z-welcome-visual h1 {
-  font-size: clamp(36px, 4vw, 54px);
-  letter-spacing: -1.4px;
-  line-height: 1.32;
-  font-weight: 650;
-  margin: 16px 0 20px;
+  font-family: var(--font-editorial);
+  font-size: clamp(46px, 4.8vw, 72px);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 1.3;
+  margin: 0 0 28px;
 }
 .z-welcome-visual h1 > span:last-child {
   color: var(--primary);
 }
-.z-learning-hero {
-  margin: 0;
-  min-width: 0;
-  overflow: hidden;
-  border-radius: 26px;
-  background: #f0f7fc;
+.z-welcome-copy > p {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.85;
+  margin: 0 0 36px;
+  max-width: 24em;
 }
-.z-learning-hero img {
+.z-welcome-meta {
+  display: block;
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.z-welcome-return {
+  display: flex;
+  margin-top: 20px;
+}
+.z-featured-work {
+  display: block;
+  min-width: 0;
+}
+.z-featured-cover {
+  overflow: hidden;
+  background: #111d34;
+  border-radius: 4px;
+}
+.z-featured-cover img {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 3/2;
-  object-fit: contain;
-}
-.z-welcome-copy > .z-revisit-note {
-  margin: 18px 0 0;
-  font-size: 0.875rem;
-  line-height: 1.7;
-}
-.z-welcome-bottom {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 28px;
-  margin-top: 38px;
-  padding-top: 30px;
-  border-top: 1px solid var(--line);
-  align-items: center;
-}
-.z-journey-strip {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  gap: 18px 22px;
-}
-.z-journey-strip li {
-  display: flex;
-  gap: 10px;
-  align-items: baseline;
-}
-.z-journey-strip li > span {
-  color: var(--primary);
-  font-size: 0.875rem;
-  font-variant-numeric: tabular-nums;
-}
-.z-journey-strip strong {
-  display: block;
-}
-.z-journey-strip strong {
-  font-size: 0.9375rem;
-  font-weight: 600;
-}
-.z-example-link {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  border: 1px solid var(--line);
-  border-radius: 15px;
-  padding: 13px;
-  background: white;
-}
-.z-example-poster {
-  position: relative;
-  flex: 0 0 98px;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  border-radius: 9px;
-}
-.z-example-poster img {
-  width: 98px;
-  height: 78px;
+  aspect-ratio: 16/9;
   object-fit: cover;
 }
-.z-example-poster svg {
-  position: absolute;
+.z-featured-open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  min-height: 52px;
   color: white;
-  filter: drop-shadow(0 1px 2px #17284e);
+  background: #111d34;
+  font-size: 15px;
 }
-.z-example-link > span:nth-child(2) {
-  min-width: 0;
+.z-featured-caption {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+  gap: 10px 16px;
 }
-.z-example-link strong,
-.z-example-link small {
-  display: block;
-}
-.z-example-link strong {
-  font-size: 1rem;
-  line-height: 1.5;
-  margin: 5px 0;
-}
-.z-example-link small {
-  font-size: 0.875rem;
+.z-featured-caption > span {
+  grid-column: 1 / -1;
   color: var(--muted);
+  font-size: 14px;
 }
-.z-example-link > svg {
-  margin-left: auto;
-  flex-shrink: 0;
+.z-featured-caption h2 {
+  margin: 0;
+  font-family: var(--font-editorial);
+  font-size: clamp(23px, 2.3vw, 32px);
+  font-weight: 500;
+  line-height: 1.5;
+}
+.z-featured-caption > svg {
+  align-self: center;
   color: var(--primary);
+}
+@media (max-width: 800px) {
+  .z-welcome-visual {
+    padding-top: 44px;
+  }
+  .z-welcome-intro {
+    grid-template-columns: 1fr;
+    gap: 44px;
+    min-height: 0;
+  }
+  .z-welcome-visual h1 {
+    font-size: clamp(44px, 8vw, 64px);
+  }
+  .z-welcome-copy > p {
+    margin-bottom: 26px;
+  }
+  .z-featured-caption {
+    padding: 20px 0;
+  }
 }
 .z-choice-label {
   display: flex;
@@ -388,47 +372,9 @@
   font-size: 0.875rem;
   line-height: 1.5;
 }
-@media (max-width: 1050px) {
-  .z-welcome-intro {
-    gap: 24px;
-  }
-  .z-welcome-bottom {
-    grid-template-columns: 1fr;
-  }
-  .z-journey-strip {
-    justify-content: space-between;
-  }
-}
 @media (max-width: 700px) {
   .z-lesson-card {
     display: block;
-  }
-  .z-welcome-visual {
-    padding-top: 28px;
-  }
-  .z-welcome-intro {
-    grid-template-columns: 1fr;
-    gap: 26px;
-  }
-  .z-welcome-visual h1 {
-    font-size: clamp(32px, 8vw, 44px);
-  }
-  .z-learning-hero {
-    width: 100%;
-    max-width: 520px;
-    margin: 0 auto;
-  }
-  .z-welcome-bottom {
-    margin-top: 28px;
-  }
-  .z-journey-strip {
-    flex-direction: column;
-    gap: 18px;
-  }
-  .z-journey-strip li > span {
-    padding: 7px 9px;
-    border-radius: 8px;
-    background: #eaf0fc;
   }
   .z-visual-choices {
     grid-template-columns: 1fr;

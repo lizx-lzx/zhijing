@@ -464,7 +464,7 @@ export default function LearningApp() {
           >
             设置
           </button>
-          <span>AI 辅助理解 · 重要判断请核对原文</span>
+          {view === "learning" && <span>AI 辅助理解 · 重要判断请核对原文</span>}
         </footer>
       </div>
     </div>

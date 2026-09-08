@@ -43,7 +43,7 @@
   padding: 5px 8px;
 }
 .z-study-tools button {
-  min-height: 38px;
+  min-height: 44px;
   white-space: nowrap;
 }
 .z-learning-main > section,
@@ -53,14 +53,14 @@
 .z-diagram-work,
 .z-overview-work,
 .z-practice-work {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 32px;
+  border-top: 1px solid var(--line);
+  padding: 32px 0;
 }
 .z-diagram-work h2,
 .z-overview-work h2,
 .z-practice-work h2 {
+  font-family: var(--font-editorial);
+  font-weight: 500;
   font-size: clamp(22px, 2.4vw, 30px);
   line-height: 1.6;
   margin: 12px 0 22px;
@@ -77,7 +77,7 @@
   background: var(--primary-soft);
   padding: 16px 20px;
   color: var(--primary-dark);
-  border-radius: 0 10px 10px 0;
+  border-radius: 0;
   font-weight: 550;
 }
 .z-chapter-controls {
@@ -115,6 +115,7 @@
   gap: 10px;
 }
 .z-audio-controls select {
+  color: var(--ink);
   padding: 9px;
   background: white;
   border: 1px solid var(--line);
@@ -123,6 +124,13 @@
 .z-audio-surface > .z-kicker {
   display: block;
   margin-top: 15px;
+  color: #c6cfdd;
+}
+.z-audio-surface .z-detail summary {
+  color: #c6cfdd;
+}
+.z-audio-controls button {
+  color: var(--ink);
 }
 .z-audio-surface audio {
   width: 100%;
@@ -143,7 +151,7 @@
 .z-overview-groups > section {
   background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 4px;
   padding: 20px;
 }
 .z-overview-groups h3 {
@@ -362,13 +370,12 @@
     padding: 0 4px;
   }
   .z-study-tools button {
-    min-height: 34px;
+    min-height: 44px;
   }
   .z-diagram-work,
   .z-overview-work,
   .z-practice-work {
-    padding: 22px 18px;
-    border-radius: 12px;
+    padding: 22px 0;
   }
   .z-overview-groups {
     grid-template-columns: 1fr;

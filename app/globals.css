@@ -5,23 +5,23 @@
 @import "./learning-motion.css";
 
 :root {
-  --paper: #f6f7fb;
+  --paper: #fbfcfe;
   --surface: #ffffff;
-  --ink: #1f2a42;
-  --muted: #59677e;
-  --primary: #4c55cc;
-  --primary-dark: #383fa5;
-  --primary-soft: #eceefd;
+  --ink: #141c2b;
+  --muted: #626c7b;
+  --primary: #2459e8;
+  --primary-dark: #1740b8;
+  --primary-soft: #edf2ff;
   --amber: #ad7523;
   --amber-soft: #fff2da;
   --green: #287758;
   --green-soft: #e9f5ef;
-  --line: #e0e5ee;
-  --line-strong: #c9d0e0;
-  --shadow: 0 12px 36px #1e31590a;
+  --line: #e0e4eb;
+  --line-strong: #bdc5d2;
+  --shadow: 0 8px 24px #17203308;
   --font-ui:
     var(--font-geist-sans), "PingFang SC", "Microsoft YaHei", sans-serif;
-  --font-editorial: var(--font-ui);
+  --font-editorial: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
   font-size: 16px;
 }
 * {
@@ -69,7 +69,7 @@ input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
 summary:focus-visible {
-  outline: 3px solid #7c84e9;
+  outline: 3px solid var(--primary);
   outline-offset: 3px;
 }
 input,
@@ -87,14 +87,15 @@ select {
   place-items: center;
   width: 36px;
   height: 36px;
-  border-radius: 11px;
+  border-radius: 3px;
   color: white;
   background: var(--primary);
   font-size: 21px;
 }
 .brand-copy strong {
-  font-size: 21px;
-  letter-spacing: -0.5px;
+  font-family: var(--font-editorial);
+  font-size: 24px;
+  letter-spacing: 1px;
 }
 .button {
   display: inline-flex;
@@ -104,7 +105,7 @@ select {
   min-height: 44px;
   padding: 11px 18px;
   border: 1px solid transparent;
-  border-radius: 11px;
+  border-radius: 5px;
   font-size: 0.9375rem;
   font-weight: 600;
   line-height: 1.5;
@@ -124,7 +125,7 @@ select {
 .button-primary {
   background: var(--primary);
   color: white;
-  box-shadow: 0 4px 12px #4c55cc18;
+  box-shadow: none;
 }
 .button-primary:hover:not(:disabled) {
   background: var(--primary-dark);
@@ -134,12 +135,12 @@ select {
   border-color: var(--line);
 }
 .button-quiet:hover:not(:disabled) {
-  background: #f0f2fc;
-  border-color: #c9cfee;
+  background: var(--primary-soft);
+  border-color: var(--line-strong);
 }
 .button-large {
-  min-height: 50px;
-  padding: 13px 22px;
+  min-height: 54px;
+  padding: 15px 26px;
   font-size: 1rem;
 }
 .z-skip-link {

@@ -21,10 +21,6 @@
   cursor: default;
   opacity: 0.75;
 }
-.z-learning-hero {
-  --hero-x: 0deg;
-  --hero-y: 0deg;
-}
 
 @keyframes zSurfaceIn {
   from {
@@ -44,15 +40,6 @@
   to {
     opacity: 1;
     translate: 0 0;
-  }
-}
-@keyframes zHeroFloat {
-  0%,
-  100% {
-    transform: translateY(2px) scale(0.985);
-  }
-  50% {
-    transform: translateY(-7px) scale(1);
   }
 }
 @keyframes zCheckPop {
@@ -99,7 +86,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   [data-motion="on"] .z-welcome-copy > :not(h1),
-  [data-motion="on"] .z-welcome-bottom,
+  [data-motion="on"] .z-featured-work,
   [data-motion="on"] .z-page-heading,
   [data-motion="on"] .z-profile-summary {
     animation: zSurfaceIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -113,25 +100,7 @@
   [data-motion="on"] .z-welcome-copy > .z-welcome-meta {
     animation-delay: 0.23s;
   }
-  [data-motion="on"] .z-welcome-bottom {
-    animation-delay: 0.24s;
-  }
-  [data-motion="on"] .z-learning-hero {
-    transform: perspective(900px) rotateX(var(--hero-y)) rotateY(var(--hero-x));
-    transition:
-      transform 0.35s ease-out,
-      box-shadow 0.35s ease-out;
-  }
-  [data-motion="on"] .z-learning-hero img {
-    animation: zHeroFloat 6s ease-in-out infinite;
-  }
-  [data-motion="on"] .z-learning-hero figcaption > span {
-    animation: zChoiceIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-  [data-motion="on"] .z-learning-hero figcaption > span:nth-child(2) {
-    animation-delay: 0.12s;
-  }
-  [data-motion="on"] .z-learning-hero figcaption > span:nth-child(3) {
+  [data-motion="on"] .z-featured-work {
     animation-delay: 0.24s;
   }
   [data-motion="on"] .z-question {
@@ -157,7 +126,7 @@
   }
   [data-motion="on"] .z-choice,
   [data-motion="on"] .z-lesson-card,
-  [data-motion="on"] .z-example-link,
+  [data-motion="on"] .z-featured-work,
   [data-motion="on"] .button,
   [data-motion="on"] .z-groups button {
     transition:
@@ -180,7 +149,7 @@
     .z-choice:is(:hover, :focus-visible, .selected)
     .z-waveform
     > span {
-    animation: zWaveBreath 1.7s ease-in-out infinite;
+    animation: zWaveBreath 1.7s ease-in-out 2;
   }
   [data-motion="on"] .z-waveform > span:nth-child(2n) {
     animation-delay: -0.4s !important;
@@ -200,7 +169,7 @@
     .z-choice:is(:hover, :focus-visible, .selected)
     .z-mini-map
     > span {
-    animation: zNodeFocus 3.6s ease-in-out infinite;
+    animation: zNodeFocus 3.6s ease-in-out 1;
   }
   [data-motion="on"] .z-mini-map > span:nth-child(2) {
     animation-delay: -2.4s !important;
@@ -211,20 +180,19 @@
 }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   [data-motion="on"] .z-choice:not(:disabled):hover {
-    transform: translateY(-3px);
-    box-shadow: 0 9px 22px #4c62a518;
+    transform: translateY(-2px);
   }
-  [data-motion="on"] .z-lesson-card:hover,
-  [data-motion="on"] .z-example-link:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 14px 28px #33477317;
+  [data-motion="on"] .z-featured-cover img,
+  [data-motion="on"] .z-card-art img {
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  [data-motion="on"] .z-featured-work:hover img,
+  [data-motion="on"] .z-lesson-card:hover img {
+    transform: scale(1.025);
   }
   [data-motion="on"] .button-primary:not(:disabled):hover {
     transform: translateY(-2px);
     box-shadow: 0 7px 18px #4c5fe82b;
-  }
-  [data-motion="on"] .z-learning-hero:hover {
-    box-shadow: 0 18px 40px #4a72a218;
   }
 }
 /* CSS and ReactBits must both settle immediately; never hide essential text. */
@@ -234,8 +202,8 @@
   animation: none !important;
   transition: none !important;
 }
-[data-motion="off"] .z-learning-hero,
-[data-motion="off"] .z-learning-hero img,
+[data-motion="off"] .z-featured-work,
+[data-motion="off"] .z-featured-cover img,
 [data-motion="off"] .staggered-text span {
   transform: none !important;
   translate: none !important;
@@ -243,8 +211,8 @@
   opacity: 1 !important;
 }
 @media (prefers-reduced-motion: reduce) {
-  .z-learning-hero,
-  .z-learning-hero img,
+  .z-featured-work,
+  .z-featured-cover img,
   .staggered-text span {
     transform: none !important;
     translate: none !important;

@@ -40,6 +40,12 @@ for (const asset of assets) {
   });
 }
 const health = await (await fetch(new URL("api/health", base))).json();
+const cover = await fetch(new URL("images/window-cover.jpg", base));
+assert.equal(cover.status, 200);
+assert.deepEqual(
+  Buffer.from(await cover.arrayBuffer()),
+  await fs.readFile("public/images/window-cover.jpg"),
+);
 assert.equal(health.version, "2.0.0");
 assert.equal(health.generationConfigured, true);
 assert.equal(health.voiceConfigured, true);
@@ -53,5 +59,6 @@ console.log(
     version: health.version,
     assets: verified,
     legacyDemos: true,
+    featuredCover: true,
   }),
 );

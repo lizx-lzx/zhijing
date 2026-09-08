@@ -7,11 +7,12 @@
   min-width: 0;
 }
 .z-container {
-  width: min(1120px, calc(100% - 80px));
+  width: min(1240px, calc(100% - 96px));
   margin: auto;
 }
 .z-container-small {
-  width: min(800px, calc(100% - 80px));
+  width: min(860px, calc(100% - 96px));
+  max-width: 860px;
   margin: auto;
 }
 .z-top {
@@ -47,41 +48,12 @@
 }
 .z-top nav button.active {
   color: var(--primary-dark);
-  background: var(--primary-soft);
+  background: transparent;
+  box-shadow: inset 0 -2px var(--primary);
   font-weight: 600;
 }
 .z-top nav button:hover {
   background: #f0f2f9;
-}
-.z-signed-in .z-top {
-  position: fixed;
-  inset: 0 auto 0 0;
-  width: 224px;
-  height: 100dvh;
-  padding: 32px 20px 24px;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  gap: 0;
-  border: 0;
-  border-right: 1px solid var(--line);
-  z-index: 25;
-}
-.z-signed-in .z-brand-button {
-  text-align: left;
-  padding: 0 10px;
-}
-.z-signed-in .z-top nav {
-  flex-direction: column;
-  margin-top: 48px;
-  gap: 8px;
-}
-.z-signed-in .z-top nav button {
-  min-height: 50px;
-}
-.z-signed-in .z-main-area {
-  margin-left: 224px;
-  padding-top: 10px;
 }
 .z-footer {
   display: flex;
@@ -184,14 +156,15 @@
   flex-shrink: 0;
 }
 .z-page-heading {
-  padding: 38px 0 26px;
+  padding: 60px 0 36px;
 }
 .z-page-heading h1 {
-  font-size: clamp(28px, 3vw, 36px);
-  font-weight: 650;
-  line-height: 1.4;
-  margin: 8px 0 12px;
-  letter-spacing: -0.7px;
+  font-family: var(--font-editorial);
+  font-size: clamp(34px, 3.7vw, 50px);
+  font-weight: 500;
+  line-height: 1.35;
+  margin: 8px 0 16px;
+  letter-spacing: -0.025em;
 }
 .z-page-heading p {
   font-size: 1rem;
@@ -208,130 +181,6 @@
 }
 .z-heading-row .button {
   flex-shrink: 0;
-}
-.z-welcome {
-  display: grid;
-  grid-template-columns: 1.08fr 1fr;
-  gap: 68px;
-  align-items: center;
-  padding: 76px 0 42px;
-}
-.z-welcome h1 {
-  font-size: clamp(38px, 4.2vw, 56px);
-  font-weight: 650;
-  line-height: 1.3;
-  letter-spacing: -1.5px;
-  margin: 18px 0 20px;
-}
-.z-welcome h1 > span:last-child {
-  color: var(--primary);
-}
-.z-welcome-copy > p {
-  color: var(--muted);
-  font-size: 1.125rem;
-  line-height: 1.9;
-  max-width: 470px;
-  margin: 0 0 26px;
-}
-.z-welcome-meta {
-  display: block;
-  color: var(--muted);
-  font-size: 0.875rem;
-  margin-top: 14px;
-}
-.z-welcome-steps {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 22px;
-  padding: 24px 0 0;
-  margin: 32px 0 0;
-  border-top: 1px solid var(--line);
-  font-size: 0.9375rem;
-}
-.z-welcome-steps li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.z-welcome-steps span {
-  font-size: 0.8125rem;
-  color: var(--primary);
-  font-variant-numeric: tabular-nums;
-}
-.z-welcome-card {
-  padding: 20px;
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  background: white;
-  box-shadow: var(--shadow);
-}
-.z-card-cap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.875rem;
-  color: var(--muted);
-  padding: 0 2px 18px;
-}
-.z-card-cap svg {
-  color: var(--primary);
-  flex-shrink: 0;
-}
-.z-featured-lesson {
-  display: block;
-  border: 1px solid var(--line);
-  border-radius: 15px;
-  overflow: hidden;
-}
-.z-featured-cover {
-  aspect-ratio: 16/9;
-  background-size: cover;
-  background-position: center;
-  display: grid;
-  place-items: center;
-  position: relative;
-}
-.z-featured-cover > span {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 18px;
-  border-radius: 30px;
-  background: #fffffff0;
-  color: #2d3860;
-  font-size: 0.9375rem;
-  box-shadow: 0 4px 24px #1114;
-}
-.z-featured-copy {
-  padding: 20px;
-}
-.z-featured-copy > span {
-  font-size: 0.8125rem;
-  color: var(--muted);
-}
-.z-featured-copy h2 {
-  font-size: 23px;
-  line-height: 1.5;
-  margin: 10px 0 8px;
-  font-weight: 600;
-}
-.z-featured-copy p {
-  font-size: 0.9375rem;
-  margin: 0 0 16px;
-  color: var(--muted);
-}
-.z-featured-copy strong {
-  font-size: 0.9375rem;
-  color: var(--primary);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.z-featured-note {
-  color: var(--muted);
-  font-size: 0.875rem;
-  margin: 16px 2px 0;
 }
 .z-media-row {
   display: flex;
@@ -368,7 +217,7 @@
   font-weight: 500;
 }
 .z-progress {
-  height: 5px;
+  height: 2px;
   border-radius: 8px;
   background: #e2e6f2;
   overflow: hidden;
@@ -400,14 +249,9 @@
   border-radius: 9px;
 }
 .z-groups button > span {
-  display: grid;
-  place-items: center;
-  width: 23px;
-  height: 23px;
-  border-radius: 50%;
-  background: #e6e9f2;
-  font-size: 0.8125rem;
-  flex-shrink: 0;
+  color: inherit;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
 }
 .z-groups button.active {
   background: var(--primary-soft);
@@ -415,21 +259,19 @@
   font-weight: 600;
 }
 .z-groups button.active > span {
-  background: var(--primary);
-  color: white;
+  color: var(--primary);
 }
 .z-question {
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 32px;
+  background: transparent;
+  border: 0;
+  padding: 28px 0;
 }
 .z-question h1 {
-  font-size: clamp(24px, 2.8vw, 32px);
-  font-weight: 600;
+  font-family: var(--font-editorial);
+  font-size: clamp(28px, 3.2vw, 38px);
+  font-weight: 500;
   line-height: 1.5;
-  margin: 0 0 10px;
-  letter-spacing: -0.5px;
+  margin: 0 0 16px;
 }
 .z-help {
   font-size: 0.9375rem;
@@ -452,7 +294,7 @@
   padding: 18px;
   text-align: left;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 5px;
   background: white;
   transition:
     background 0.15s,
@@ -464,7 +306,7 @@
 }
 .z-choice.selected {
   border-color: var(--primary);
-  background: #eff1ff;
+  background: var(--primary-soft);
 }
 .z-choice strong {
   display: block;
@@ -559,15 +401,12 @@
 .z-profile-summary {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  overflow: hidden;
-  background: var(--line);
+  gap: 24px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 .z-profile-summary > div {
-  padding: 20px;
-  background: white;
+  padding: 28px 0;
 }
 .z-profile-summary span {
   display: block;
@@ -594,9 +433,7 @@
   color: var(--green);
 }
 .z-rule-list {
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 16px;
+  border-top: 1px solid var(--line);
   overflow: hidden;
 }
 .z-rule {
@@ -651,7 +488,7 @@
   position: sticky;
   bottom: 0;
   z-index: 2;
-  background: #f6f7fbf5;
+  background: #fbfcfef5;
 }
 .z-detail {
   border-top: 1px solid var(--line);
@@ -691,11 +528,10 @@
 }
 
 .z-composer {
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 26px;
-  box-shadow: var(--shadow);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  padding: 32px;
 }
 .z-input-tabs {
   display: flex;
@@ -892,24 +728,20 @@
 .z-library-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  gap: 36px;
 }
 .z-lesson-card {
   width: 100%;
   min-width: 0;
   padding: 0;
-  border: 1px solid var(--line);
-  background: white;
-  border-radius: 15px;
-  overflow: hidden;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  border-radius: 0;
   text-align: left;
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
 }
 .z-lesson-card:hover {
-  border-color: #bcc5e9;
-  box-shadow: var(--shadow);
+  border-color: var(--primary);
 }
 .z-card-art {
   min-height: 100px;
@@ -941,7 +773,7 @@
   color: #7260a7;
 }
 .z-lesson-card-body {
-  padding: 20px;
+  padding: 24px 0;
 }
 .z-card-date {
   display: flex;
@@ -975,11 +807,12 @@
   color: #89591c;
 }
 .z-lesson-card h3 {
-  font-size: 1.125rem;
-  line-height: 1.7;
-  font-weight: 600;
-  min-height: 60px;
-  margin: 16px 0 20px;
+  font-family: var(--font-editorial);
+  font-size: 26px;
+  line-height: 1.5;
+  font-weight: 500;
+  min-height: 78px;
+  margin: 18px 0 24px;
   overflow-wrap: anywhere;
 }
 .z-card-action {
@@ -997,9 +830,7 @@
   justify-content: center;
   min-height: 350px;
   padding: 40px;
-  border: 1px dashed #c8d0e4;
-  border-radius: 18px;
-  background: white;
+  border-top: 1px solid var(--line);
   color: var(--muted);
   text-align: center;
 }
@@ -1020,11 +851,13 @@
   padding: 14px 0 24px;
 }
 .z-lesson-title h1 {
-  font-size: clamp(27px, 3.2vw, 36px);
-  font-weight: 650;
-  line-height: 1.5;
-  letter-spacing: -0.6px;
-  margin: 8px 0 10px;
+  font-family: var(--font-editorial);
+  font-size: clamp(34px, 4.5vw, 58px);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  max-width: 1000px;
+  margin: 16px 0 24px;
 }
 .z-lesson-title p {
   font-size: 1rem;
@@ -1041,7 +874,7 @@
   position: sticky;
   top: 0;
   z-index: 12;
-  background: #f6f7fbf5;
+  background: #fbfcfef5;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
@@ -1116,10 +949,10 @@
 }
 .z-learning-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 224px;
-  gap: 28px;
+  grid-template-columns: minmax(0, 1fr) 200px;
+  gap: 56px;
   align-items: start;
-  margin-top: 24px;
+  margin-top: 36px;
 }
 .z-learning-main {
   min-width: 0;
@@ -1134,10 +967,8 @@
   max-height: calc(100dvh - 115px);
   overflow-y: auto;
   scrollbar-width: thin;
-  padding: 18px 12px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: white;
+  padding: 8px 0 8px 16px;
+  border-left: 1px solid var(--line);
 }
 .z-chapter-nav > span {
   display: block;
@@ -1174,7 +1005,7 @@
   display: block;
   width: 100%;
   aspect-ratio: 16/9;
-  border-radius: 14px;
+  border-radius: 4px;
   background: #1f2a42;
 }
 .z-media-surface p,
@@ -1188,18 +1019,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  padding: 36px;
-  min-height: 310px;
+  gap: 24px;
+  padding: 48px 36px;
+  min-height: 360px;
   justify-content: center;
-  background: #e9f0f6;
-  border: 1px solid var(--line);
-  border-radius: 16px;
+  background: #141f35;
+  color: #f8fafc;
+  border-radius: 4px;
   text-align: center;
 }
 .z-audio-surface h2 {
-  font-size: 24px;
-  font-weight: 600;
+  font-family: var(--font-editorial);
+  font-size: 32px;
+  font-weight: 500;
   margin: 0;
 }
 .z-audio-surface audio {
@@ -1207,8 +1039,8 @@
 }
 .z-audio-surface p {
   margin: 0;
-  color: var(--muted);
-  font-size: 0.875rem;
+  color: #c6cfdd;
+  font-size: 15px;
 }
 .z-media-wait {
   background: #edf0fc;
@@ -1232,15 +1064,14 @@
   width: 100%;
   height: 620px;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 4px;
   background: white;
 }
 .z-reading,
 .z-transcript {
-  padding: 24px 30px;
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 16px;
+  padding: 24px 0;
+  max-width: 780px;
+  margin-inline: auto;
 }
 .z-reading > .z-section-title,
 .z-transcript > .z-section-title {
@@ -1263,7 +1094,7 @@
   margin-left: auto;
 }
 .z-chapter {
-  padding: 24px 0 32px;
+  padding: 40px 0 48px;
   border-top: 1px solid var(--line);
   scroll-margin-top: 110px;
 }
@@ -1280,13 +1111,14 @@
   color: var(--muted);
 }
 .z-chapter h2 {
-  font-size: 26px;
-  font-weight: 600;
-  line-height: 1.6;
-  margin: 12px 0 20px;
+  font-family: var(--font-editorial);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 16px 0 24px;
 }
 .z-chapter > p {
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
   line-height: 2;
   color: #34435d;
   white-space: pre-wrap;
@@ -1369,12 +1201,11 @@
 .z-takeaways {
   padding: 26px;
   margin: 28px 0;
-  border: 1px solid #d7e6de;
-  background: #edf6f0;
-  border-radius: 14px;
+  border-left: 2px solid var(--primary);
+  background: var(--primary-soft);
 }
 .z-takeaways .z-kicker {
-  color: var(--green);
+  color: var(--primary);
 }
 .z-takeaways ul {
   list-style: none;
@@ -1391,7 +1222,7 @@
 }
 .z-takeaways svg {
   flex-shrink: 0;
-  color: var(--green);
+  color: var(--primary);
 }
 .z-quiz section {
   margin: 25px 0;
@@ -1557,14 +1388,6 @@
 }
 
 @media (max-width: 1200px) {
-  .z-signed-in .z-top {
-    width: 196px;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-  .z-signed-in .z-main-area {
-    margin-left: 196px;
-  }
   .z-container,
   .z-container-small {
     width: calc(100% - 48px);
@@ -1603,58 +1426,25 @@
   .z-relation svg {
     transform: rotate(90deg);
   }
-  .z-welcome {
-    gap: 36px;
-    padding-top: 54px;
-  }
 }
 @media (max-width: 800px) {
-  .z-top,
-  .z-signed-in .z-top {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    height: 64px;
-    min-height: 64px;
-    padding: 0 20px;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    border: 0;
-    border-bottom: 1px solid var(--line);
+  .z-top {
+    min-height: 72px;
+    height: auto;
+    padding: 16px 20px;
+    flex-wrap: wrap;
+    gap: 12px;
   }
-  .z-signed-in .z-brand-button {
-    padding: 0;
+  .z-top nav {
+    flex-wrap: wrap;
+    gap: 4px;
   }
-  .z-signed-in .z-top nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: 0;
-    padding: 8px 16px calc(8px + env(safe-area-inset-bottom));
-    border-top: 1px solid var(--line);
-    background: #fffffff5;
-    backdrop-filter: blur(12px);
-    flex-direction: row;
-    gap: 8px;
-    z-index: 30;
+  .z-top nav button {
+    padding: 10px 12px;
+    min-height: 44px;
   }
-  .z-signed-in .z-top nav button {
-    flex: 1;
-    justify-content: center;
-    min-height: 48px;
-    padding: 10px 6px;
-    font-size: 0.875rem;
-  }
-  .z-signed-in .z-main-area {
-    margin-left: 0;
-    padding-top: 0;
-    padding-bottom: 76px;
-  }
-  .z-signed-in .z-question-actions,
-  .z-signed-in .z-profile-actions {
-    bottom: calc(68px + env(safe-area-inset-bottom));
+  .z-top nav svg {
+    display: none;
   }
   .z-toast {
     top: 76px;
@@ -1664,38 +1454,17 @@
   .z-container-small {
     width: calc(100% - 36px);
   }
-  .z-welcome {
-    grid-template-columns: 1fr;
-    max-width: 620px;
-    padding-top: 36px;
-    gap: 32px;
-  }
-  .z-welcome h1 {
-    font-size: 42px;
-    letter-spacing: -1px;
-  }
-  .z-welcome-copy > p {
-    font-size: 1rem;
-    max-width: none;
-  }
-  .z-welcome-steps {
-    margin-top: 24px;
-    padding-top: 20px;
-  }
-  .z-welcome-card {
-    padding: 16px;
-  }
   .z-page-heading {
     padding: 28px 0 22px;
   }
   .z-page-heading h1 {
-    font-size: 29px;
+    font-size: 34px;
   }
   .z-question {
-    padding: 26px;
+    padding: 24px 0;
   }
   .z-lesson-title h1 {
-    font-size: 29px;
+    font-size: 34px;
   }
   .z-footer {
     margin-top: 36px;
@@ -1707,11 +1476,18 @@
   }
 }
 @media (max-width: 560px) {
+  .z-top nav {
+    width: 100%;
+  }
+  .z-top nav button {
+    flex: 1;
+    justify-content: center;
+  }
   .z-onboarding {
     padding-top: 22px;
   }
   .z-question {
-    padding: 22px 18px;
+    padding: 24px 0;
   }
   .z-question h1 {
     font-size: 25px;
@@ -1819,7 +1595,7 @@
   }
   .z-lesson-card {
     display: grid;
-    grid-template-columns: 82px minmax(0, 1fr);
+    grid-template-columns: 1fr;
   }
   .z-card-art {
     flex-direction: column;
@@ -1832,12 +1608,12 @@
     font-size: 0.8125rem;
   }
   .z-lesson-card-body {
-    padding: 18px 16px;
+    padding: 22px 0;
   }
   .z-lesson-card h3 {
     min-height: 0;
     margin: 12px 0 16px;
-    font-size: 1.0625rem;
+    font-size: 24px;
   }
   .z-card-date {
     justify-content: flex-start;
@@ -1849,7 +1625,7 @@
     padding-bottom: 16px;
   }
   .z-lesson-title h1 {
-    font-size: 27px;
+    font-size: 32px;
   }
   .z-lesson-toolbar {
     flex-wrap: wrap;
@@ -1868,7 +1644,7 @@
   }
   .z-reading,
   .z-transcript {
-    padding: 22px 18px;
+    padding: 22px 0;
   }
   .z-chapter h2 {
     font-size: 23px;
