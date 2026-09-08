@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { spawn } from "node:child_process";
 import { once } from "node:events";
+import { createHash } from "node:crypto";
 import { chromium } from "playwright";
 import { config, AppError } from "./config.mjs";
 import { playerHTML } from "./player.mjs";
@@ -102,7 +103,7 @@ const vttTime = (t) => {
   const ms = Math.round(t * 1000);
   return `${String(Math.floor(ms / 3600000)).padStart(2, "0")}:${String(Math.floor(ms / 60000) % 60).padStart(2, "0")}:${String(Math.floor(ms / 1000) % 60).padStart(2, "0")}.${String(ms % 1000).padStart(3, "0")}`;
 };
-export async function produceMedia(id, lesson, formats, onProgress) {
+async function produceVideoMedia(id, lesson, formats, onProgress) {
   const dir = mediaDir(id);
   await fs.mkdir(dir, { recursive: true, mode: 0o700 });
   const needVoice = formats.some((x) =>
@@ -167,9 +168,13 @@ export async function produceMedia(id, lesson, formats, onProgress) {
     "aac",
     "-b:a",
     "96k",
-    path.join(dir, "audio.m4a"),
+    path.join(dir, "audio.pending.m4a"),
   ]);
-  await probe(path.join(dir, "audio.m4a"));
+  await probe(path.join(dir, "audio.pending.m4a"));
+  await fs.rename(
+    path.join(dir, "audio.pending.m4a"),
+    path.join(dir, "audio.m4a"),
+  );
   await fs.writeFile(path.join(dir, "timeline.json"), JSON.stringify(scenes));
   const html = playerHTML(
     lesson,
@@ -192,6 +197,160 @@ export async function produceMedia(id, lesson, formats, onProgress) {
     if (!reusable) await renderVideo(lesson, scenes, dir, onProgress);
   }
   return { status: "ready", duration: cursor, scenes };
+}
+async function produceListening(id, lesson, onProgress) {
+  const dir = mediaDir(id);
+  await fs.mkdir(dir, { recursive: true, mode: 0o700 });
+  let cursor = 0;
+  const scenes = [],
+    files = [];
+  for (const [i, c] of lesson.chapters.entries()) {
+    if (!c.audioNarration)
+      throw new Error("Independent listening script is missing");
+    const fingerprint = createHash("sha256")
+      .update(c.audioNarration)
+      .digest("hex")
+      .slice(0, 16);
+    const filename = `listen-${i}-${fingerprint}.wav`;
+    const file = path.join(dir, filename);
+    try {
+      await probe(file);
+    } catch {
+      await voice(c.audioNarration, file);
+    }
+    const duration = Number((await probe(file)).format.duration);
+    scenes.push({ start: cursor, end: cursor + duration });
+    cursor += duration;
+    if (cursor > 900)
+      throw new AppError(
+        "听读音频超过 15 分钟上限，已完成内容保留。",
+        422,
+        "AUDIO_TOO_LONG",
+      );
+    files.push(`file '${filename}'`);
+    onProgress(
+      `正在制作独立听读 · ${i + 1}/${lesson.chapters.length}`,
+      78 + Math.round((12 * (i + 1)) / lesson.chapters.length),
+    );
+  }
+  await fs.writeFile(path.join(dir, "listen-list.txt"), files.join("\n"));
+  const pending = path.join(dir, "listen.pending.m4a");
+  await execute("ffmpeg", [
+    "-y",
+    "-v",
+    "error",
+    "-f",
+    "concat",
+    "-safe",
+    "0",
+    "-i",
+    path.join(dir, "listen-list.txt"),
+    "-vn",
+    "-ar",
+    "24000",
+    "-ac",
+    "1",
+    "-c:a",
+    "aac",
+    "-b:a",
+    "96k",
+    "-movflags",
+    "+faststart",
+    pending,
+  ]);
+  await probe(pending);
+  await fs.rename(pending, path.join(dir, "listen.m4a"));
+  await fs.writeFile(
+    path.join(dir, "listen.vtt"),
+    "WEBVTT\n\n" +
+      scenes
+        .map(
+          (s, i) =>
+            `${vttTime(s.start)} --> ${vttTime(s.end)}\n${lesson.chapters[i].audioNarration.replace(/-->/g, "→")}\n`,
+        )
+        .join("\n"),
+  );
+  return {
+    audioReady: true,
+    audioFile: "listen.m4a",
+    audioDuration: cursor,
+    audioScenes: scenes,
+  };
+}
+
+export async function produceMedia(
+  id,
+  lesson,
+  formats,
+  onProgress,
+  previous = {},
+) {
+  const state = { ...previous, error: "" };
+  const errors = [];
+  const needVideoTrack =
+    formats.includes("video") || formats.includes("animation");
+  const needListen = formats.includes("audio");
+  if (!needVideoTrack && !needListen) return { status: "not-requested" };
+  if (needVideoTrack) {
+    try {
+      const track = await produceVideoMedia(id, lesson, formats, onProgress);
+      Object.assign(state, track, {
+        videoReady: formats.includes("video"),
+        trackReady: true,
+      });
+      onProgress("讲解媒体已保存", 78, state);
+    } catch (e) {
+      errors.push(
+        e instanceof AppError ? e.message : "视频讲解制作未完成，可以重试。",
+      );
+    }
+  }
+  if (needListen) {
+    try {
+      if (lesson.schemaVersion === 2) {
+        let cached = false;
+        if (state.audioReady && state.audioFile === "listen.m4a") {
+          try {
+            await probe(path.join(mediaDir(id), "listen.m4a"));
+            cached = true;
+          } catch {
+            state.audioReady = false;
+          }
+        }
+        if (!cached)
+          Object.assign(state, await produceListening(id, lesson, onProgress));
+      } else {
+        // Legacy lessons keep their original audio; no fabricated independent adaptation.
+        const track = await produceVideoMedia(
+          id,
+          lesson,
+          ["audio"],
+          onProgress,
+        );
+        Object.assign(state, track, {
+          audioReady: true,
+          audioFile: "audio.m4a",
+          audioDuration: track.duration,
+          audioScenes: track.scenes,
+          trackReady: true,
+        });
+      }
+      onProgress("独立听读已保存", 96, state);
+    } catch (e) {
+      errors.push(
+        e instanceof AppError ? e.message : "听读音频制作未完成，可以重试。",
+      );
+    }
+  }
+  if (!needVideoTrack && state.audioReady) {
+    state.duration = state.audioDuration;
+    state.scenes = state.audioScenes;
+  }
+  return {
+    ...state,
+    status: errors.length ? "failed" : "ready",
+    error: errors.join(" "),
+  };
 }
 async function renderVideo(lesson, scenes, dir, onProgress) {
   const browser = await chromium.launch({
@@ -247,7 +406,7 @@ async function renderVideo(lesson, scenes, dir, onProgress) {
         "+faststart",
         "-threads",
         "2",
-        path.join(dir, "video.mp4"),
+        path.join(dir, "video.pending.mp4"),
       ],
       { stdio: ["pipe", "ignore", "pipe"] },
     );
@@ -284,13 +443,17 @@ async function renderVideo(lesson, scenes, dir, onProgress) {
     }
     ff.stdin.end();
     await done;
-    const info = await probe(path.join(dir, "video.mp4"));
+    const info = await probe(path.join(dir, "video.pending.mp4"));
     if (
       !info.streams.some((s) => s.codec_type === "audio") ||
       !info.streams.some((s) => s.codec_type === "video") ||
       Math.abs(Number(info.format.duration) - duration) > 1.5
     )
       throw new Error("Video verification failed");
+    await fs.rename(
+      path.join(dir, "video.pending.mp4"),
+      path.join(dir, "video.mp4"),
+    );
   } finally {
     if (ff && ff.exitCode === null) ff.kill("SIGTERM");
     await browser.close();

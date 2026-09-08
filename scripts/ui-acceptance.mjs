@@ -144,6 +144,8 @@ async function session(saved = null, initialLessons = []) {
     if (path === "/sources" && body?.url)
       return json({ error: "暂时无法读取此链接。请粘贴文章正文继续。" }, 422);
     if (path.startsWith("/sources")) return json({ source });
+    if (path === "/lessons" && req.method() === "GET")
+      return json({ lessons, total: lessons.length, nextOffset: null });
     if (path === "/lessons") {
       lessons.unshift(structuredClone(pending));
       return json({ lesson: pending });
@@ -151,6 +153,10 @@ async function session(saved = null, initialLessons = []) {
     const id = path.split("/")[2],
       lesson = lessons.find((x) => x.id === id) || ready;
     if (/\/lessons\/[^/]+$/.test(path)) return json({ lesson });
+    if (path.endsWith("/state")) {
+      lesson.studyState = { ...lesson.studyState, ...body };
+      return json({ ok: true });
+    }
     if (path.endsWith("/retry")) {
       Object.assign(lesson, { ...pending, id: lesson.id });
       return json({ lesson });
@@ -336,7 +342,7 @@ try {
     Math.abs((await p.locator("video").evaluate((v) => v.currentTime)) - 20) <
       1,
   );
-  await p.getByRole("button", { name: "图文", exact: true }).click();
+  await p.getByRole("button", { name: "完整图文", exact: true }).click();
   await snapshot(p, "lesson-reading");
   await p.getByRole("button", { name: "查看对应原文" }).first().click();
   await p.getByRole("dialog").waitFor();
@@ -363,9 +369,9 @@ try {
     await p.locator(".z-chapter-nav button[aria-current='step']").textContent(),
     `02${content.chapters[1].title}`,
   );
-  await p.getByRole("button", { name: "音频", exact: true }).click();
+  await p.getByRole("button", { name: "独立听读", exact: true }).click();
   await snapshot(p, "lesson-audio", [1440, 390, 320]);
-  await p.getByRole("button", { name: "互动网页", exact: true }).click();
+  await p.getByRole("button", { name: "网页讲解", exact: true }).click();
   await snapshot(p, "lesson-animation", [1440, 390, 320]);
   await p.getByRole("button", { name: "返回学习库" }).click();
   await p
@@ -373,15 +379,15 @@ try {
     .filter({ has: p.getByRole("heading", { name: failed.title }) })
     .click();
   await snapshot(p, "generation-failed", [1440, 390, 320]);
-  await p.getByRole("button", { name: "重试制作", exact: true }).click();
-  await p.getByRole("heading", { name: "把文章整理成你的讲法" }).waitFor();
+  await p.getByRole("button", { name: "重试未完成部分", exact: true }).click();
+  await p.getByRole("heading", { name: "正在按你的学法整理文章" }).waitFor();
   await p.getByRole("button", { name: "先回学习库" }).click();
   await p
     .getByRole("button")
     .filter({ has: p.getByRole("heading", { name: partial.title }) })
     .click();
   await snapshot(p, "generation-partial", [1440, 390, 320]);
-  await p.getByRole("button", { name: "先看完整图文" }).click();
+  await p.getByRole("button", { name: "先看已保存内容" }).click();
   assert.equal(await p.locator(".z-chapter").first().isVisible(), true);
   assert.deepEqual(existing.errors, []);
   await existing.context.close();

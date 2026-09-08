@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   FileText,
@@ -55,7 +55,9 @@ export function LessonCard({
         <span className="z-card-action">
           {["queued", "working"].includes(lesson.status)
             ? "查看制作进度"
-            : "打开学习内容"}
+            : lesson.studyState?.chapter !== undefined
+              ? `继续第 ${lesson.studyState.chapter + 1} 章`
+              : "打开学习内容"}
           <ArrowRight size={17} />
         </span>
       </div>
@@ -71,6 +73,62 @@ export function LearningLibrary({
   onOpen: (id: string) => void;
   onAdd: () => void;
 }) {
+  const [query, setQuery] = useState("");
+  const [items, setItems] = useState(lessons.slice(0, 24));
+  const [total, setTotal] = useState(lessons.length);
+  const [next, setNext] = useState<number | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  useEffect(() => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => {
+      setLoading(true);
+      void api<{ lessons: Lesson[]; total: number; nextOffset: number | null }>(
+        `/lessons?q=${encodeURIComponent(query)}`,
+      )
+        .then((data) => {
+          if (!controller.signal.aborted) {
+            setItems(data.lessons);
+            setTotal(data.total);
+            setNext(data.nextOffset);
+            setError("");
+          }
+        })
+        .catch((e) => {
+          if (!controller.signal.aborted) setError((e as Error).message);
+        })
+        .finally(() => {
+          if (!controller.signal.aborted) setLoading(false);
+        });
+    }, 250);
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
+  }, [query]);
+  const visibleItems = items.map((item) => {
+    const fresh = lessons.find((value) => value.id === item.id);
+    return fresh && (fresh.updatedAt || "") > (item.updatedAt || "")
+      ? fresh
+      : item;
+  });
+  async function more() {
+    setLoading(true);
+    try {
+      const data = await api<{ lessons: Lesson[]; nextOffset: number | null }>(
+        `/lessons?q=${encodeURIComponent(query)}&offset=${next}`,
+      );
+      setItems((old) => [
+        ...old,
+        ...data.lessons.filter((x) => !old.some((y) => y.id === x.id)),
+      ]);
+      setNext(data.nextOffset);
+    } catch (e) {
+      setError((e as Error).message);
+    } finally {
+      setLoading(false);
+    }
+  }
   return (
     <main className="z-container z-library">
       <div className="z-page-heading">
@@ -82,14 +140,24 @@ export function LearningLibrary({
           </button>
         </div>
         <p>
-          {lessons.length
-            ? `最近的 ${lessons.length} 份学习作品`
+          {total
+            ? `${total} 份学习作品 · 自动保存`
             : "生成的作品会自动留在这里。"}
         </p>
       </div>
-      {lessons.length ? (
+      <label className="z-library-search">
+        找一份作品
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="按标题搜索"
+        />
+      </label>
+      <ErrorNotice message={error} />
+      {items.length ? (
         <div className="z-library-grid">
-          {lessons.map((item) => (
+          {visibleItems.map((item) => (
             <LessonCard
               key={item.id}
               lesson={item}
@@ -100,13 +168,27 @@ export function LearningLibrary({
       ) : (
         <div className="z-empty">
           <Library size={36} />
-          <h2>从第一篇开始</h2>
-          <p>生成的学习内容会自动保存在这里。</p>
+          <h2>{query ? "没有找到这份作品" : "从第一篇开始"}</h2>
+          <p>
+            {query
+              ? "试试其他关键词，或清空搜索。"
+              : "生成的学习内容会自动保存在这里。"}
+          </p>
           <button className="button button-primary" onClick={onAdd}>
             添加一篇内容
             <Plus size={16} />
           </button>
         </div>
+      )}
+      {loading && <Spinner text="正在读取学习库" />}
+      {next !== null && (
+        <button
+          className="button button-quiet z-load-more"
+          disabled={loading}
+          onClick={() => void more()}
+        >
+          加载更多
+        </button>
       )}
     </main>
   );
@@ -133,6 +215,7 @@ export function Workbench({
     [busy, setBusy] = useState(""),
     [error, setError] = useState("");
   const [overrides, setOverrides] = useState<Partial<Answers>>({});
+  const [fullPackage, setFullPackage] = useState(false);
   async function generate(sample = false) {
     setError("");
     setBusy(sample ? "正在载入体验文章" : "正在读取你的内容");
@@ -148,6 +231,19 @@ export function Workbench({
       const d = await api<{ lesson: Lesson }>("/lessons", "POST", {
         sourceId: s.source.id,
         overrides,
+        ...(fullPackage
+          ? {
+              formats: [
+                ...new Set([
+                  overrides.primary || profile.answers.primary,
+                  "reading",
+                  "video",
+                  "audio",
+                  "animation",
+                ]),
+              ],
+            }
+          : {}),
       });
       onGenerated({ ...d.lesson, source: s.source });
     } catch (e) {
@@ -262,6 +358,19 @@ export function Workbench({
             </button>
           </div>
           <ErrorNotice message={error} />
+          <label className="z-full-package">
+            <input
+              type="checkbox"
+              checked={fullPackage}
+              onChange={(e) => setFullPackage(e.target.checked)}
+            />
+            <span>
+              这次同时生成全部形式
+              <small>
+                视频、独立音频一起制作；图文、图解、全文关系和复习卡默认包含。
+              </small>
+            </span>
+          </label>
           <div className="z-compose-bottom">
             <span>
               <ShieldCheck size={16} />
@@ -311,7 +420,9 @@ export function Workbench({
             }
           </p>
           <div className="z-media-row">
-            <span>{mediaLabels[profile.answers.primary]}为主</span>
+            <span>
+              {mediaLabels[overrides.primary || profile.answers.primary]}为主
+            </span>
             {profile.answers.extras.map((m) => (
               <span key={m}>{mediaLabels[m]}</span>
             ))}

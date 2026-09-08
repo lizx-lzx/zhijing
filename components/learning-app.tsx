@@ -56,12 +56,24 @@ export default function LearningApp() {
     api<{ profile: Profile | null; lessons: Lesson[]; hasRecovery: boolean }>(
       "/me",
     )
-      .then((data) => {
+      .then(async (data) => {
         if (!active) return;
         setProfile(data.profile);
         setLessons(data.lessons);
         setHasRecovery(data.hasRecovery);
         setView(data.profile ? "workspace" : "welcome");
+        const resume = new URL(window.location.href).searchParams.get("lesson");
+        if (data.profile && resume && /^[a-f0-9]{32}$/.test(resume)) {
+          try {
+            const found = await api<{ lesson: Lesson }>(`/lessons/${resume}`);
+            if (active) {
+              setLesson(found.lesson);
+              setView("learning");
+            }
+          } catch {
+            if (active) setNotice("无法打开这份作品，请从自己的学习库选择。");
+          }
+        }
         if (!data.profile) {
           try {
             const old = JSON.parse(
@@ -114,6 +126,11 @@ export default function LearningApp() {
     return () => clearInterval(timer);
   }, [view, lessons, refresh]);
   function go(next: string) {
+    if (next !== "learning") {
+      const url = new URL(window.location.href);
+      url.searchParams.delete("lesson");
+      window.history.replaceState(null, "", url);
+    }
     setView(next);
     setError("");
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -124,6 +141,9 @@ export default function LearningApp() {
     setNotice("学习方式已保存。以后可以直接开始。");
   }
   function generated(l: Lesson) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("lesson", l.id);
+    window.history.replaceState(null, "", url);
     setLesson(l);
     go("learning");
     void refresh();
@@ -132,6 +152,9 @@ export default function LearningApp() {
     setBusy("正在打开作品");
     try {
       const data = await api<{ lesson: Lesson }>(`/lessons/${id}`);
+      const url = new URL(window.location.href);
+      url.searchParams.set("lesson", id);
+      window.history.replaceState(null, "", url);
       setLesson(data.lesson);
       go("learning");
     } catch (e) {
@@ -379,6 +402,7 @@ export default function LearningApp() {
               go("library");
             }}
             onUpdate={() => void refresh()}
+            onRegenerated={generated}
             notify={setNotice}
           />
         )}

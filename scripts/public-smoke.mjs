@@ -83,8 +83,31 @@ assert.equal(
 );
 assert.equal(lesson.formats[0], "video");
 assert.equal(lesson.media.status, "ready");
+assert.equal(lesson.result.schemaVersion, 2);
+assert.equal(lesson.media.audioFile, "listen.m4a");
+assert.ok(
+  lesson.result.chapters.every((c) => c.audioNarration && c.evidence.length),
+);
+await json(
+  await a(`/lessons/${job.id}/state`, "PUT", {
+    mode: "diagrams",
+    chapter: 1,
+    notes: "公网验收笔记",
+  }),
+);
+assert.equal(
+  (await json(await a(`/lessons/${job.id}`))).lesson.studyState.chapter,
+  1,
+);
 const artifacts = [];
-for (const file of ["video.mp4", "audio.m4a", "poster.jpg", "captions.vtt"]) {
+for (const file of [
+  "video.mp4",
+  "audio.m4a",
+  "listen.m4a",
+  "poster.jpg",
+  "captions.vtt",
+  "listen.vtt",
+]) {
   const media = await a(`/lessons/${job.id}/media/${file}`, "GET", undefined, {
     Range: "bytes=0-511",
   });
@@ -94,7 +117,7 @@ for (const file of ["video.mp4", "audio.m4a", "poster.jpg", "captions.vtt"]) {
   assert.equal((await b(`/lessons/${job.id}/media/${file}`)).status, 404);
   artifacts.push(file);
 }
-for (const route of ["player", "export.html", "diagram/0"]) {
+for (const route of ["player", "export.html", "notes.md", "diagram/0"]) {
   const r = await a(`/lessons/${job.id}/${route}`);
   assert.equal(r.status, 200);
   const body = await r.text();
@@ -112,6 +135,8 @@ const result = {
   id: job.id,
   title: lesson.title,
   duration: lesson.media.duration,
+  audioDuration: lesson.media.audioDuration,
+  schemaVersion: lesson.result.schemaVersion,
   formats: lesson.formats,
   artifacts,
   checks: [

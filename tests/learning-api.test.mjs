@@ -7,6 +7,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import net from "node:net";
 import { buildProfile } from "../lib/domain.ts";
+import { DatabaseSync } from "node:sqlite";
 
 test("HTTP contract: persistence, isolation, CSRF, recovery and honest failure", async (t) => {
   const temp = await mkdtemp(path.join(tmpdir(), "zhijing-api-test-"));
@@ -146,7 +147,89 @@ test("HTTP contract: persistence, isolation, CSRF, recovery and honest failure",
       },
     );
     const code = (await a("/recovery", "POST", {})).data.code;
+    await t.test(
+      "private progress and notes persist without changing the personal Skill",
+      async () => {
+        const before = JSON.stringify((await a("/me")).data.profile);
+        assert.equal(
+          (
+            await a(`/lessons/${job.id}/state`, "PUT", {
+              notes: "保留我的理解",
+              mode: "reading",
+              chapter: 99,
+            })
+          ).status,
+          200,
+        );
+        assert.equal(
+          (await a(`/lessons/${job.id}`)).data.lesson.studyState.notes,
+          "保留我的理解",
+        );
+        assert.equal(
+          (await b(`/lessons/${job.id}/state`, "PUT", { notes: "入侵" }))
+            .status,
+          404,
+        );
+        assert.equal(JSON.stringify((await a("/me")).data.profile), before);
+        assert.equal(
+          (
+            await b(`/lessons/${job.id}/formats`, "POST", {
+              formats: ["audio"],
+            })
+          ).status,
+          404,
+        );
+        assert.equal(
+          (
+            await a(`/lessons/${job.id}/formats`, "POST", {
+              formats: ["audio"],
+            })
+          ).status,
+          409,
+        );
+        const list = await a("/lessons?q=&offset=0.5");
+        assert.equal(list.status, 200);
+        assert.equal(list.data.total, 1);
+        assert.equal(list.data.lessons[0].studyState.mode, "reading");
+        assert.equal((await b("/lessons")).data.total, 0);
+        assert.equal((await a("/lessons?q=nonexistent")).data.total, 0);
+      },
+    );
     const c = client();
+    await t.test(
+      "library pagination reaches older rows and escapes wildcard searches",
+      async () => {
+        const fixture = new DatabaseSync(path.join(temp, "zhijing.sqlite"));
+        for (let n = 1; n <= 30; n++)
+          fixture
+            .prepare(
+              "INSERT INTO lessons(id,user_id,source_id,profile,formats,title,status,stage,created_at,updated_at) SELECT ?,user_id,source_id,profile,formats,?,'failed','测试固定数据',created_at,updated_at FROM lessons WHERE id=?",
+            )
+            .run(n.toString(16).padStart(32, "0"), `分页作品 ${n}`, job.id);
+        fixture.close();
+        const first = (await a("/lessons?q=" + encodeURIComponent("分页作品")))
+          .data;
+        const second = (
+          await a(
+            "/lessons?q=" +
+              encodeURIComponent("分页作品") +
+              "&offset=" +
+              first.nextOffset,
+          )
+        ).data;
+        assert.equal(first.total, 30);
+        assert.equal(first.lessons.length, 24);
+        assert.equal(second.lessons.length, 6);
+        assert.equal(second.nextOffset, null);
+        assert.equal(
+          new Set([...first.lessons, ...second.lessons].map((item) => item.id))
+            .size,
+          30,
+        );
+        assert.equal((await a("/lessons?q=%25")).data.total, 0);
+        assert.equal((await b("/lessons")).data.total, 0);
+      },
+    );
     await t.test(
       "recovery transfers access only with the correct secret",
       async () => {
@@ -167,6 +250,10 @@ test("HTTP contract: persistence, isolation, CSRF, recovery and honest failure",
       "profile, session, source and job survive a restart",
       async () => {
         assert.equal((await a("/me")).data.profile.answers.entry, "story");
+        assert.equal(
+          (await a(`/lessons/${job.id}`)).data.lesson.studyState.notes,
+          "保留我的理解",
+        );
         assert.equal(
           (await a("/lessons/" + job.id)).data.lesson.source.id,
           source.id,

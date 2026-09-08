@@ -1,6 +1,7 @@
 import { DatabaseSync } from "node:sqlite";
 import { randomBytes, createHash } from "node:crypto";
 import path from "node:path";
+import fs from "node:fs";
 import { config, AppError } from "./config.mjs";
 
 export const db = new DatabaseSync(path.join(config.dataDir, "zhijing.sqlite"));
@@ -17,7 +18,23 @@ CREATE INDEX IF NOT EXISTS idx_lessons_queue ON lessons(status,created_at);
 CREATE INDEX IF NOT EXISTS idx_sources_owner ON sources(user_id);
 CREATE INDEX IF NOT EXISTS idx_versions_owner ON profile_versions(user_id,created_at DESC);
 CREATE UNIQUE INDEX IF NOT EXISTS idx_recovery ON users(recovery_hash) WHERE recovery_hash IS NOT NULL;
-PRAGMA user_version=1;`);
+`);
+// Append-only, additive migration; old releases ignore this table on rollback.
+if (db.prepare("PRAGMA user_version").get().user_version < 2) {
+  db.exec("BEGIN IMMEDIATE");
+  try {
+    db.exec(
+      fs.readFileSync(
+        new URL("./migrations/002-study-state.sql", import.meta.url),
+        "utf8",
+      ),
+    );
+    db.exec("COMMIT");
+  } catch (error) {
+    db.exec("ROLLBACK");
+    throw error;
+  }
+}
 export const uid = () => randomBytes(16).toString("hex");
 export const hash = (value) => createHash("sha256").update(value).digest("hex");
 export const now = () => new Date().toISOString();
@@ -112,9 +129,17 @@ export function getSource(user, id) {
     mode: r.mode,
     blocks: JSON.parse(r.blocks),
     createdAt: r.created_at,
+    updatedAt: r.updated_at,
   };
 }
 export function lessonView(r, details = true) {
+  const stored = one(
+    "SELECT data,updated_at FROM lesson_state WHERE lesson_id=?",
+    r.id,
+  );
+  const state = stored
+    ? { ...JSON.parse(stored.data), updatedAt: stored.updated_at }
+    : {};
   return {
     id: r.id,
     sourceId: r.source_id,
@@ -130,6 +155,13 @@ export function lessonView(r, details = true) {
     createdAt: r.created_at,
     completed: !!r.completed,
     feedback: r.feedback ? JSON.parse(r.feedback) : null,
+    studyState: details
+      ? state
+      : {
+          mode: state.mode,
+          chapter: state.chapter,
+          updatedAt: state.updatedAt,
+        },
   };
 }
 export function ownedLesson(user, id) {
@@ -151,6 +183,7 @@ export function updateLesson(id, fields) {
       "attempts",
       "completed",
       "feedback",
+      "formats",
     ].includes(k),
   );
   run(

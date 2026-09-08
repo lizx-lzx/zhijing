@@ -3,7 +3,7 @@ import test from "node:test";
 test("production worker renders the Chinese application shell, not the old fixed case", async () => {
   const { default: worker } = await import("../dist/server/index.js");
   const response = await worker.fetch(
-    new Request("http://localhost/"),
+    new Request(`http://localhost${process.env.NEXT_PUBLIC_BASE_PATH || ""}/`),
     {
       ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) },
     },

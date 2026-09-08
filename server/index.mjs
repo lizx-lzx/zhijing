@@ -22,7 +22,15 @@ import {
   ownedLesson,
   updateLesson,
 } from "./store.mjs";
-import { designProfile, analyzeContent, composeLesson } from "./model.mjs";
+import {
+  designProfile,
+  analyzeContent,
+  composeLesson,
+  composeStudy,
+} from "./model.mjs";
+import { learningMarkdown } from "./study-content.mjs";
+import { studyHTML } from "./study-export.mjs";
+import { cleanStudyState } from "../lib/study-state.ts";
 import { acquireSource, splitSource } from "./source.mjs";
 import { produceMedia, mediaDir } from "./media.mjs";
 import { playerHTML, diagramSVG } from "./player.mjs";
@@ -169,7 +177,7 @@ const server = http.createServer(async (req, res) => {
       json(res, 200, {
         ok: true,
         service: "zhijing",
-        version: "1.0.0",
+        version: "2.0.0",
         generationConfigured: !!config.modelKey,
         voiceConfigured: !!config.voiceKey,
         queue: one(
@@ -298,6 +306,33 @@ const server = http.createServer(async (req, res) => {
       });
       return;
     }
+    if (route === "/api/lessons" && method === "GET") {
+      const query = (url.searchParams.get("q") || "").slice(0, 160);
+      const offset = Math.floor(
+        Math.max(
+          0,
+          Math.min(100000, Number(url.searchParams.get("offset")) || 0),
+        ),
+      );
+      const pattern = `%${query.replace(/[\\%_]/g, "\\$&")}%`;
+      const total = one(
+        "SELECT count(*) AS n FROM lessons WHERE user_id=? AND title LIKE ? ESCAPE '\\'",
+        user,
+        pattern,
+      ).n;
+      const rows = all(
+        "SELECT * FROM lessons WHERE user_id=? AND title LIKE ? ESCAPE '\\' ORDER BY created_at DESC,id DESC LIMIT 24 OFFSET ?",
+        user,
+        pattern,
+        offset,
+      );
+      json(res, 200, {
+        lessons: rows.map((r) => lessonView(r, false)),
+        total,
+        nextOffset: offset + rows.length < total ? offset + rows.length : null,
+      });
+      return;
+    }
     const match = route.match(/^\/api\/lessons\/([a-f0-9]{32})(?:\/(.*))?$/);
     if (match) {
       const [, id, action] = match;
@@ -309,6 +344,115 @@ const server = http.createServer(async (req, res) => {
             source: getSource(user, row.source_id),
           },
         });
+        return;
+      }
+      if (action === "state" && method === "PUT") {
+        const input = await body(req);
+        const current = one(
+          "SELECT data FROM lesson_state WHERE lesson_id=?",
+          id,
+        );
+        const patch = cleanStudyState(
+          input,
+          row.result ? JSON.parse(row.result) : null,
+          JSON.parse(row.media),
+        );
+        const state = {
+          ...(current ? JSON.parse(current.data) : {}),
+          ...patch,
+        };
+        run(
+          "INSERT INTO lesson_state(lesson_id,data,updated_at) VALUES(?,?,?) ON CONFLICT(lesson_id) DO UPDATE SET data=excluded.data,updated_at=excluded.updated_at",
+          id,
+          JSON.stringify(state),
+          now(),
+        );
+        json(res, 200, { ok: true });
+        return;
+      }
+      if (action === "formats" && method === "POST") {
+        const input = await body(req);
+        if (["queued", "working"].includes(row.status))
+          throw new AppError("这份作品正在制作，完成后可补充形式。", 409);
+        if (!row.result) throw new AppError("请先完成内容生成。", 409);
+        const selected = Array.isArray(input.formats)
+          ? input.formats.filter((f) =>
+              ["video", "audio", "animation"].includes(f),
+            )
+          : [];
+        if (!selected.length) throw new AppError("请选择要补充的音视频形式。");
+        const media = JSON.parse(row.media);
+        const available = {
+          video: media.videoReady,
+          audio: media.audioReady,
+          animation: media.trackReady,
+        };
+        if (selected.every((f) => available[f])) {
+          json(res, 200, { ok: true, alreadyReady: true });
+          return;
+        }
+        if (
+          one(
+            "SELECT count(*) AS n FROM lessons WHERE user_id=? AND status IN ('queued','working')",
+            user,
+          ).n >= 2
+        )
+          throw new AppError("你已有作品正在制作，请完成后再提交。", 429);
+        if (
+          one(
+            "SELECT count(*) AS n FROM lessons WHERE status IN ('queued','working')",
+          ).n >= 12
+        )
+          throw new AppError("当前制作队列已满，请稍后再试。", 429);
+        limit("jobs:global", config.maxDailyJobs);
+        limit("jobs:ip:" + hash(ip), config.maxIpJobs);
+        limit("jobs:user:" + user, config.maxUserJobs);
+        const formats = [...new Set([...JSON.parse(row.formats), ...selected])];
+        updateLesson(id, {
+          formats: JSON.stringify(formats),
+          status: "queued",
+          stage: "等待补充学习形式",
+          error: "",
+          progress: 55,
+        });
+        void drain();
+        json(res, 202, { ok: true });
+        return;
+      }
+      if (action === "regenerate" && method === "POST") {
+        const input = await body(req);
+        json(res, 202, {
+          lesson: createJob(
+            user,
+            ip,
+            row.source_id,
+            input.formats || [
+              ...new Set([
+                ...JSON.parse(row.formats),
+                "reading",
+                "video",
+                "audio",
+                "animation",
+              ]),
+            ],
+            input.overrides,
+          ),
+        });
+        return;
+      }
+      if (action === "notes.md" && method === "GET") {
+        res.setHeader("Content-Type", "text/markdown; charset=utf-8");
+        res.setHeader(
+          "Content-Disposition",
+          'attachment; filename="zhijing-learning-notes.md"',
+        );
+        res.end(
+          learningMarkdown(
+            lessonView(row),
+            getSource(user, row.source_id),
+            skillMarkdown(JSON.parse(row.profile)),
+          ),
+        );
         return;
       }
       if (action === "retry" && method === "POST") {
@@ -368,7 +512,12 @@ const server = http.createServer(async (req, res) => {
         if (!row.result) throw new AppError("内容仍在生成中。", 409);
         const media = JSON.parse(row.media);
         let audio = "";
-        if (media.status === "ready")
+        if (
+          media.trackReady ||
+          (!JSON.parse(row.result).schemaVersion &&
+            media.status === "ready" &&
+            media.duration)
+        )
           audio =
             action === "export.html"
               ? `data:audio/mp4;base64,${(await fsp.readFile(path.join(mediaDir(id), "audio.m4a"))).toString("base64")}`
@@ -383,7 +532,21 @@ const server = http.createServer(async (req, res) => {
             "Content-Disposition",
             'attachment; filename="zhijing-learning.html"',
           );
-        res.end(playerHTML(JSON.parse(row.result), media.scenes || [], audio));
+        if (action === "export.html") {
+          if (media.audioReady && media.audioFile === "listen.m4a")
+            audio = `data:audio/mp4;base64,${(await fsp.readFile(path.join(mediaDir(id), "listen.m4a"))).toString("base64")}`;
+          res.end(
+            studyHTML(
+              JSON.parse(row.result),
+              getSource(user, row.source_id),
+              audio,
+              lessonView(row).studyState?.notes || "",
+            ),
+          );
+        } else
+          res.end(
+            playerHTML(JSON.parse(row.result), media.scenes || [], audio),
+          );
         return;
       }
       if (action?.startsWith("diagram/") && method === "GET") {
@@ -407,12 +570,22 @@ const server = http.createServer(async (req, res) => {
         const types = {
           "video.mp4": "video/mp4",
           "audio.m4a": "audio/mp4",
+          "listen.m4a": "audio/mp4",
           "captions.vtt": "text/vtt; charset=utf-8",
+          "listen.vtt": "text/vtt; charset=utf-8",
           "poster.jpg": "image/jpeg",
         };
         if (!Object.hasOwn(types, file))
           throw new AppError("文件不存在。", 404);
-        const location = path.join(mediaDir(id), file);
+        const media = JSON.parse(row.media);
+        const audioAlias =
+          file === "audio.m4a" &&
+          media.audioFile === "listen.m4a" &&
+          !media.trackReady;
+        const location = path.join(
+          mediaDir(id),
+          audioAlias ? "listen.m4a" : file,
+        );
         let stat;
         try {
           stat = await fsp.stat(location);
@@ -496,7 +669,7 @@ async function drain() {
       stage: "正在按你的讲法编排",
       progress: 28,
     });
-    const result = row.result
+    let result = row.result
       ? JSON.parse(row.result)
       : await composeLesson(source, analysis, profile);
     updateLesson(row.id, {
@@ -505,10 +678,27 @@ async function drain() {
       stage: "图文已就绪，正在制作其他形式",
       progress: 55,
     });
+    if (
+      !result.study &&
+      result.chapters.every((c) => c.audioNarration && c.takeaway)
+    ) {
+      updateLesson(row.id, { stage: "正在核对全景图与互动学习", progress: 55 });
+      result = await composeStudy(source, analysis, profile, result);
+      updateLesson(row.id, { result: JSON.stringify(result), progress: 55 });
+    }
     let media;
     try {
-      media = await produceMedia(row.id, result, formats, (stage, progress) =>
-        updateLesson(row.id, { stage, progress }),
+      media = await produceMedia(
+        row.id,
+        result,
+        formats,
+        (stage, progress, partial) =>
+          updateLesson(row.id, {
+            stage,
+            progress,
+            ...(partial ? { media: JSON.stringify(partial) } : {}),
+          }),
+        JSON.parse(row.media),
       );
     } catch (error) {
       media = {

@@ -67,7 +67,7 @@ try {
   await page.keyboard.press("Escape");
   assert.equal(await page.getByRole("dialog").count(), 0);
   await page.reload();
-  await page.getByRole("heading", { name: "今天想读懂什么？" }).waitFor();
+  await page.locator(".z-reading .z-chapter").first().waitFor();
   await page
     .getByRole("navigation")
     .getByRole("button", { name: "学习库" })

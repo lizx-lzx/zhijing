@@ -1,4 +1,16 @@
 export type Medium = "video" | "reading" | "audio" | "animation";
+export type StudyMode = Medium | "diagrams" | "overview" | "practice";
+export type StudyState = {
+  mode?: StudyMode;
+  chapter?: number;
+  videoTime?: number;
+  audioTime?: number;
+  card?: number;
+  scenario?: number;
+  answers?: Record<string, string>;
+  notes?: string;
+  updatedAt?: string;
+};
 export type Answers = {
   age: string;
   goal: string;
@@ -49,10 +61,50 @@ export type Chapter = {
   sourceIds: string[];
   visual: Visual;
   fictional: boolean;
+  takeaway?: string;
+  premise?: string;
+  recallQuestion?: string;
+  audioNarration?: string;
+  conceptIds?: string[];
+  evidence?: { sourceId: string; quote: string }[];
+};
+export type StudyContent = {
+  version: number;
+  overview: {
+    title: string;
+    groups: { title: string; description: string; chapterIds: string[] }[];
+    connections: {
+      from: string;
+      to: string;
+      type: string;
+      label: string;
+      sourceIds: string[];
+    }[];
+  };
+  glossary: { term: string; explanation: string; sourceIds: string[] }[];
+  scenarios: {
+    id: string;
+    chapterId: string;
+    title: string;
+    setup: string;
+    takeaway: string;
+    fictional: boolean;
+    sourceIds: string[];
+    options: {
+      id: string;
+      label: string;
+      path: string[];
+      explanation: string;
+    }[];
+  }[];
+  boundaries: string[];
+  practiceNote: string;
 };
 export type LessonContent = {
   title: string;
   lead: string;
+  schemaVersion?: number;
+  study?: StudyContent;
   adaptation: string[];
   chapters: Chapter[];
   takeaways: string[];
@@ -80,10 +132,18 @@ export type Lesson = {
     error?: string;
     duration?: number;
     scenes?: { start: number; end: number }[];
+    videoReady?: boolean;
+    audioReady?: boolean;
+    audioFile?: string;
+    trackReady?: boolean;
+    audioDuration?: number;
+    audioScenes?: { start: number; end: number }[];
   };
   createdAt: string;
   completed: boolean;
+  updatedAt?: string;
   source?: Source;
+  studyState?: StudyState;
 };
 export type Option = { value: string; label: string; detail: string };
 export type Question = {
