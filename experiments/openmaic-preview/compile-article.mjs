@@ -11,6 +11,11 @@ import {
 import { narrativeSlide, narrativeDiagram } from "./narrative-slide.mjs";
 import { validateScene } from "./contract.mjs";
 import { editionPaths } from "./paths.mjs";
+import { learningFormats } from "./lessons/window-five-years/formats.mjs";
+import {
+  validateLearningFormats,
+  formatsMarkdown,
+} from "./learning-formats.mjs";
 
 const sourcePath = process.argv[2];
 if (!sourcePath)
@@ -84,6 +89,7 @@ const lesson = {
   glossary,
   checks,
   reviewQuestions,
+  learningFormats,
   mediaPolicy: {
     voiceUnit: "chapter",
     captions: "章节实测；章内讲解及字幕按文本长度近似对齐",
@@ -103,6 +109,7 @@ const lesson = {
     profile: "沿用上一份经模型生成的故事/视频/不提问示例规则，不是重新测评用户",
   },
 };
+validateLearningFormats(lesson);
 await fs.mkdir(new URL("public/", root), { recursive: true });
 await fs.mkdir(new URL("render/", root), { recursive: true });
 await fs.writeFile(
@@ -151,6 +158,10 @@ const notes = [
   ...reviewQuestions.map((q) => `### ${q.question}\n\n${q.answer}`),
 ].join("\n\n");
 await fs.writeFile(new URL("public/learning-notes.md", root), notes);
+await fs.writeFile(
+  new URL("public/learning-formats.md", root),
+  formatsMarkdown(lesson),
+);
 await fs.writeFile(
   new URL("public/learning-skill.md", root),
   `${sample.skill}\n\n本次来源边界：作者推演与核验事实分开；不把年份当承诺；不输出个人投资指令。\n`,

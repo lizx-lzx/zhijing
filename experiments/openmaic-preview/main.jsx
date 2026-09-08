@@ -6,7 +6,10 @@ import lesson from "@lesson";
 import timing from "@timing";
 import { locateSegment, captionAt } from "./contract.mjs";
 import { ResponsiveDiagram, StudyDialog } from "./study-ui.jsx";
+import { InlineDiagram, Overview, Practice } from "./format-views.jsx";
+import { clampTime, playbackRates } from "./learning-formats.mjs";
 import "./style.css";
+import "./formats.css";
 
 const query = new URLSearchParams(location.search);
 const capture = query.has("capture"),
@@ -43,7 +46,26 @@ function scrollToContent(selector) {
 
 function App() {
   const [time, setTime] = useState(0);
-  const [mode, setMode] = useState(timing.voiceReady ? "video" : "slides");
+  const [mode, setMode] = useState(() => {
+    const requested = query.get("mode");
+    const allowed = [
+      "slides",
+      "reading",
+      ...(timing.voiceReady ? ["video", "audio"] : []),
+      ...(lesson.learningFormats ? ["overview", "practice"] : []),
+    ];
+    return allowed.includes(requested)
+      ? requested
+      : timing.voiceReady
+        ? "video"
+        : "slides";
+  });
+  const [playbackRate, setPlaybackRate] = useState(1);
+  const [scenarioAnswers, setScenarioAnswers] = useState({});
+  const [cardIndex, setCardIndex] = useState(0);
+  const [cardRevealed, setCardRevealed] = useState(false);
+  const [practiceView, setPracticeView] = useState("scenarios");
+  const [scenarioIndex, setScenarioIndex] = useState(0);
   const [error, setError] = useState("");
   const [dialog, setDialog] = useState(null);
   const [stageHeight, setStageHeight] = useState(640);
@@ -131,7 +153,7 @@ function App() {
     else if (item.top < bounds.top) list.scrollTop -= bounds.top - item.top + 8;
   }, [index]);
   const seek = (at) => {
-    const bounded = Math.max(0, Math.min(at, duration - 0.01));
+    const bounded = clampTime(at, duration);
     setTime(bounded);
     if (video.current) video.current.currentTime = bounded;
     if (audio.current) audio.current.currentTime = bounded;
@@ -148,6 +170,11 @@ function App() {
     });
   };
   const chooseChapter = (i) => {
+    if (["overview", "practice"].includes(mode)) {
+      setDialog(null);
+      readChapter(lesson.scenes[i].id);
+      return;
+    }
     seek(sceneStarts[i]);
     setDialog(null);
     requestAnimationFrame(() => {
@@ -155,6 +182,16 @@ function App() {
         scrollToContent(`#reading-${lesson.scenes[i].id}`);
       else scrollToContent(".player");
     });
+  };
+  const readChapter = (id) => {
+    const target = lesson.scenes.findIndex((s) => s.id === id);
+    if (target < 0) return;
+    video.current?.pause();
+    audio.current?.pause();
+    seek(sceneStarts[target]);
+    setMode("reading");
+    setError("");
+    requestAnimationFrame(() => scrollToContent(`#reading-${id}`));
   };
   const expandVideo = async () => {
     try {
@@ -190,18 +227,47 @@ function App() {
     </div>
   );
   const audioPlayer = (
-    <audio
-      ref={audio}
-      controls
-      preload="metadata"
-      src="./media/audio.m4a"
-      aria-label="完整讲解音频"
-      onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
-      onLoadedMetadata={(e) => {
-        e.currentTarget.currentTime = time;
-      }}
-      onError={() => setError("配音未能加载，文字梳理和图解仍可阅读。")}
-    />
+    <div className="audio-player">
+      <audio
+        ref={audio}
+        controls
+        preload="metadata"
+        src="./media/audio.m4a"
+        aria-label="完整讲解音频"
+        onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
+        onLoadedMetadata={(e) => {
+          e.currentTarget.currentTime = time;
+          e.currentTarget.playbackRate = playbackRate;
+        }}
+        onError={() => setError("配音未能加载，文字梳理和图解仍可阅读。")}
+      />
+      <div className="audio-tools">
+        <button type="button" onClick={() => seek(time - 15)}>
+          后退 15 秒
+        </button>
+        <button type="button" onClick={() => seek(time + 15)}>
+          前进 15 秒
+        </button>
+        <label>
+          倍速
+          <select
+            aria-label="音频播放速度"
+            value={playbackRate}
+            onChange={(e) => {
+              const rate = Number(e.target.value);
+              setPlaybackRate(rate);
+              if (audio.current) audio.current.playbackRate = rate;
+            }}
+          >
+            {playbackRates.map((rate) => (
+              <option key={rate} value={rate}>
+                {rate}×
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+    </div>
   );
   if (capture)
     return (
@@ -252,15 +318,30 @@ function App() {
         </div>
         {lesson.notice && <p className="content-notice">{lesson.notice}</p>}
         <div className="study-toolbar">
-          <div className="view-tabs" role="group" aria-label="观看方式">
-            {[
-              ["video", "观看讲解"],
-              ["slides", "逐页看图"],
-              ["audio", "只听音频"],
-              ["reading", "文字梳理"],
-            ].map(([key, label]) => (
+          <div
+            className={`view-tabs${lesson.learningFormats ? " extended-tabs" : ""}`}
+            role="group"
+            aria-label="观看方式"
+          >
+            {(lesson.learningFormats
+              ? [
+                  ["video", "视频"],
+                  ["slides", "图解"],
+                  ["audio", "音频"],
+                  ["reading", "图文"],
+                  ["overview", "全景图"],
+                  ["practice", "互动"],
+                ]
+              : [
+                  ["video", "观看讲解"],
+                  ["slides", "逐页看图"],
+                  ["audio", "只听音频"],
+                  ["reading", "文字梳理"],
+                ]
+            ).map(([key, label]) => (
               <button
                 key={key}
+                data-mode={key}
                 type="button"
                 disabled={
                   !timing.voiceReady && ["audio", "video"].includes(key)
@@ -364,13 +445,53 @@ function App() {
               )}
               {mode === "audio" && (
                 <div className="audio-view">
-                  <p className="eyebrow">闭上眼，也能跟上这条逻辑</p>
+                  <p className="eyebrow">完整有声讲解 · {clock(duration)}</p>
                   <h2>{scene.title}</h2>
                   <p>{current.text}</p>
                   {audioPlayer}
-                  <p className="data-note">
-                    可从章节跳转，也可以切回视频继续看。
-                  </p>
+                  <div className="audio-chapters">
+                    <button
+                      type="button"
+                      disabled={index === 0}
+                      onClick={() => seek(sceneStarts[index - 1])}
+                    >
+                      上一章
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => seek(sceneStarts[index])}
+                    >
+                      重听本章
+                    </button>
+                    <button
+                      type="button"
+                      disabled={index === lesson.scenes.length - 1}
+                      onClick={() => seek(sceneStarts[index + 1])}
+                    >
+                      下一章
+                    </button>
+                  </div>
+                  <details className="format-details" key={scene.id}>
+                    <summary>展开本章讲稿</summary>
+                    <p className="data-note">
+                      点击一段跳转 · 段内时间为近似对齐
+                    </p>
+                    <div className="audio-transcript">
+                      {timing.segments
+                        .filter((s) => s.scene === index)
+                        .map((s) => (
+                          <button
+                            key={s.start}
+                            type="button"
+                            aria-current={s === current ? "true" : undefined}
+                            onClick={() => seek(s.start)}
+                          >
+                            <span>{clock(s.start)}</span>
+                            {s.text}
+                          </button>
+                        ))}
+                    </div>
+                  </details>
                 </div>
               )}
               {mode === "reading" && (
@@ -387,6 +508,7 @@ function App() {
                         <span>{String(i + 1).padStart(2, "0")}</span>
                         {s.title}
                       </h3>
+                      {s.diagram && <InlineDiagram diagram={s.diagram} />}
                       {(
                         s.reading ||
                         s.actions
@@ -414,6 +536,33 @@ function App() {
                     </section>
                   ))}
                 </div>
+              )}
+              {mode === "overview" && lesson.learningFormats && (
+                <Overview lesson={lesson} onRead={readChapter} />
+              )}
+              {mode === "practice" && lesson.learningFormats && (
+                <Practice
+                  lesson={lesson}
+                  onRead={readChapter}
+                  answers={scenarioAnswers}
+                  onAnswer={(id, value) =>
+                    setScenarioAnswers((previous) => ({
+                      ...previous,
+                      [id]: value,
+                    }))
+                  }
+                  cardIndex={cardIndex}
+                  onCard={(next) => {
+                    setCardIndex(next);
+                    setCardRevealed(false);
+                  }}
+                  revealed={cardRevealed}
+                  onReveal={setCardRevealed}
+                  view={practiceView}
+                  onView={setPracticeView}
+                  scenarioIndex={scenarioIndex}
+                  onScenario={setScenarioIndex}
+                />
               )}
             </div>
             {mode === "video" && (
@@ -576,6 +725,11 @@ function App() {
                     <a download href="./media/captions.vtt">
                       中文字幕 ↓
                     </a>
+                    {lesson.learningFormats && (
+                      <a download href="./learning-formats.md">
+                        关系图与复习卡 ↓
+                      </a>
+                    )}
                   </>
                 )}
               </div>

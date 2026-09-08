@@ -77,7 +77,7 @@ try {
   await noOverflow();
   await shot("mobile-video", true);
 
-  await page.getByRole("button", { name: "文字梳理", exact: true }).click();
+  await page.locator('.view-tabs [data-mode="reading"]').click();
   await choose(lesson.scenes.length - 1);
   await page.waitForFunction(() => {
     const y = document
@@ -109,7 +109,7 @@ try {
   );
   await shot("mobile-reading");
 
-  await page.getByRole("button", { name: "逐页看图", exact: true }).click();
+  await page.locator('.view-tabs [data-mode="slides"]').click();
   await choose(0);
   if (lesson.scenes[0].diagram) {
     assert.ok(await page.locator(".responsive-diagram").isVisible());
@@ -160,7 +160,7 @@ try {
   const responsive = [];
   for (const width of [320, 600, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 });
-    await page.getByRole("button", { name: "观看讲解", exact: true }).click();
+    await page.locator('.view-tabs [data-mode="video"]').click();
     await noOverflow();
     responsive.push(width);
   }

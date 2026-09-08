@@ -15,6 +15,7 @@ const eslintConfig = defineConfig([
     "build/**",
     "public/demo/openmaic-20260908/**",
     "public/demo/zhihu-window-20260908/**",
+    "experiments/openmaic-preview/lessons/window-five-years/render/formats-unit/**",
     "next-env.d.ts",
   ]),
   eslint.configs.recommended,

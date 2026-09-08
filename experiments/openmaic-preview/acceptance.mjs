@@ -45,7 +45,7 @@ try {
     (at) => Math.abs(document.querySelector("video").currentTime - at) < 0.3,
     thirdStart,
   );
-  await page.getByRole("button", { name: "逐页看图", exact: true }).click();
+  await page.locator('.view-tabs [data-mode="slides"]').click();
   assert.equal(
     await page.locator(".slide-controls > span").innerText(),
     `3 / ${count}`,
@@ -71,7 +71,7 @@ try {
     (at) => document.querySelector("audio").currentTime > at + 0.5,
     thirdStart,
   );
-  await page.getByRole("button", { name: "观看讲解", exact: true }).click();
+  await page.locator('.view-tabs [data-mode="video"]').click();
   await page.waitForFunction(
     () => document.querySelector("video")?.readyState >= 1,
   );
@@ -86,19 +86,19 @@ try {
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   );
-  await page.getByRole("button", { name: "逐页看图", exact: true }).click();
+  await page.locator('.view-tabs [data-mode="slides"]').click();
   const transcript = page.locator("summary").filter({ hasText: "完整讲稿" });
   await transcript.click();
   assert.ok(
     await transcript.locator("..").locator(".reading-body").isVisible(),
   );
   await transcript.click();
-  await page.getByRole("button", { name: "只听音频", exact: true }).click();
+  await page.locator('.view-tabs [data-mode="audio"]').click();
   await page.waitForFunction(
     () => document.querySelector("audio")?.readyState >= 1,
   );
   assert.ok(await page.locator(".audio-view").isVisible());
-  await page.getByRole("button", { name: "文字梳理", exact: true }).click();
+  await page.locator('.view-tabs [data-mode="reading"]').click();
   assert.equal(await page.locator(".reading-chapter").count(), count);
   if (lesson.sourceMeta) {
     assert.match(await page.locator("h1").innerText(), /窗口期/);

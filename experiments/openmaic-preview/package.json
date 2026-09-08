@@ -6,7 +6,7 @@
     "dev": "vite --host 127.0.0.1 --port 4360 --strictPort",
     "build": "vite build",
     "generate": "node generate.mjs",
-    "test": "node --test preview.test.mjs article.test.mjs"
+    "test": "node --test preview.test.mjs article.test.mjs formats.test.mjs"
   },
   "dependencies": {
     "@openmaic/generation": "0.3.6",
