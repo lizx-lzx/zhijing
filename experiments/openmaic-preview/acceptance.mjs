@@ -110,6 +110,8 @@ try {
     const answer = page.getByText("查看参考理解", { exact: true }).first();
     await answer.click();
     assert.ok(await answer.locator("..").locator("p").isVisible());
+    await page.getByRole("button", { name: "下载作品 ↓", exact: true }).click();
+    assert.equal(await page.locator("dialog a[download]").count(), 5 + count);
     for (const href of await page
       .locator("a[download]")
       .evaluateAll((links) => links.map((l) => l.href))) {
@@ -117,6 +119,7 @@ try {
       const response = await page.request.head(href);
       assert.equal(response.status(), 200, href);
     }
+    await page.keyboard.press("Escape");
   }
   assert.ok(
     await page.evaluate(

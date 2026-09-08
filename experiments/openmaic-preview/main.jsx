@@ -5,6 +5,7 @@ import { SlideCanvas } from "@openmaic/renderer";
 import lesson from "@lesson";
 import timing from "@timing";
 import { locateSegment, captionAt } from "./contract.mjs";
+import { ResponsiveDiagram, StudyDialog } from "./study-ui.jsx";
 import "./style.css";
 
 const query = new URLSearchParams(location.search);
@@ -26,14 +27,30 @@ const preferences = lesson.preference || [
   "图解配讲解",
   "不中途提问",
 ];
+function scrollToContent(selector) {
+  const target = document.querySelector(selector);
+  if (!target) return;
+  const toolbarHeight =
+    document.querySelector(".study-toolbar")?.offsetHeight || 0;
+  window.scrollTo({
+    top: Math.max(
+      0,
+      window.scrollY + target.getBoundingClientRect().top - toolbarHeight - 12,
+    ),
+    behavior: "instant",
+  });
+}
 
 function App() {
   const [time, setTime] = useState(0);
   const [mode, setMode] = useState(timing.voiceReady ? "video" : "slides");
   const [error, setError] = useState("");
+  const [dialog, setDialog] = useState(null);
+  const [stageHeight, setStageHeight] = useState(640);
   const video = useRef(null),
     audio = useRef(null),
-    canvasBox = useRef(null);
+    playerBox = useRef(null),
+    readingFrame = useRef(0);
   const current = locateSegment(timing.segments, time);
   const index = current.scene,
     scene = lesson.scenes[index];
@@ -65,6 +82,54 @@ function App() {
       delete window.previewReady;
     };
   }, []);
+  useEffect(() => {
+    if (capture || !playerBox.current) return;
+    const observer = new ResizeObserver(([entry]) =>
+      setStageHeight(entry.contentRect.height),
+    );
+    observer.observe(playerBox.current);
+    return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    if (mode !== "reading" || capture) return;
+    const update = () => {
+      if (readingFrame.current || document.querySelector("dialog[open]"))
+        return;
+      readingFrame.current = requestAnimationFrame(() => {
+        readingFrame.current = 0;
+        const sections = [...document.querySelectorAll(".reading-chapter")];
+        let active = 0;
+        sections.forEach((section, i) => {
+          const threshold =
+            document.querySelector(".study-toolbar").getBoundingClientRect()
+              .bottom + 32;
+          if (section.getBoundingClientRect().top <= threshold) active = i;
+        });
+        setTime((previous) =>
+          locateSegment(timing.segments, previous).scene === active
+            ? previous
+            : sceneStarts[active],
+        );
+      });
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", update);
+      cancelAnimationFrame(readingFrame.current);
+      readingFrame.current = 0;
+    };
+  }, [mode]);
+  useEffect(() => {
+    if (capture) return;
+    const list = document.querySelector(".chapter-list");
+    const active = list?.querySelector(".chapter.active");
+    if (!active || !list.clientHeight) return;
+    const item = active.getBoundingClientRect(),
+      bounds = list.getBoundingClientRect();
+    if (item.bottom > bounds.bottom)
+      list.scrollTop += item.bottom - bounds.bottom + 8;
+    else if (item.top < bounds.top) list.scrollTop -= bounds.top - item.top + 8;
+  }, [index]);
   const seek = (at) => {
     const bounded = Math.max(0, Math.min(at, duration - 0.01));
     setTime(bounded);
@@ -76,9 +141,47 @@ function App() {
     audio.current?.pause();
     setMode(next);
     setError("");
+    requestAnimationFrame(() => {
+      if (next === "reading" && index > 0)
+        scrollToContent(`#reading-${lesson.scenes[index].id}`);
+      else if (window.scrollY > 250) scrollToContent(".player");
+    });
   };
+  const chooseChapter = (i) => {
+    seek(sceneStarts[i]);
+    setDialog(null);
+    requestAnimationFrame(() => {
+      if (mode === "reading")
+        scrollToContent(`#reading-${lesson.scenes[i].id}`);
+      else scrollToContent(".player");
+    });
+  };
+  const expandVideo = async () => {
+    try {
+      if (video.current?.webkitEnterFullscreen)
+        video.current.webkitEnterFullscreen();
+      else if (video.current?.requestFullscreen)
+        await video.current.requestFullscreen();
+      else setError("当前浏览器不支持全屏，可切到图解查看清晰大字版。");
+    } catch {
+      setError("暂时无法进入全屏，可切到图解查看清晰大字版。");
+    }
+  };
+  const chapterButtons = lesson.scenes.map((s, i) => (
+    <button
+      key={s.id}
+      type="button"
+      className={`chapter${i === index ? " active" : ""}`}
+      aria-current={i === index ? "step" : undefined}
+      onClick={() => chooseChapter(i)}
+    >
+      <span className="chapter-no">{String(i + 1).padStart(2, "0")}</span>
+      <span className="chapter-title">{s.title}</span>
+      <span className="chapter-time">{clock(sceneStarts[i])}</span>
+    </button>
+  ));
   const canvas = (
-    <div className="canvas" ref={canvasBox}>
+    <div className="canvas">
       <SlideCanvas
         slide={scene.content.canvas}
         effects={effects}
@@ -121,53 +224,74 @@ function App() {
         <a className="brand" href="/zhijing/">
           <span>径</span>知径
         </a>
-        <span className="trial">文章学习作品</span>
+        {timing.voiceReady && (
+          <button
+            className="download-trigger"
+            type="button"
+            onClick={() => setDialog("downloads")}
+          >
+            下载作品 ↓
+          </button>
+        )}
       </header>
       <main>
         <div className="heading">
           <div>
-            <p className="eyebrow">
-              {lesson.sourceMeta
-                ? `${lesson.author} · 知乎文章`
-                : "从一个小困惑，理解一个统计概念"}
-            </p>
             <h1>{title}</h1>
-          </div>
-          <span className="length">
-            {timing.voiceReady ? `${clock(Math.ceil(duration))} · ` : ""}
-            {lesson.scenes.length} 个章节
-          </span>
-        </div>
-        {lesson.intro && <p className="article-intro">{lesson.intro}</p>}
-        <div className="preference">
-          <span>这次的讲法</span>
-          {preferences.map((p) => (
-            <strong key={p}>{p}</strong>
-          ))}
-        </div>
-        <section className="lesson-layout" aria-label="学习作品">
-          <div className="player-column">
-            <div className="view-tabs" role="group" aria-label="观看方式">
-              {[
-                ["video", "观看讲解"],
-                ["slides", "逐页看图"],
-                ["audio", "只听音频"],
-                ["reading", "文字梳理"],
-              ].map(([key, label]) => (
-                <button
-                  key={key}
-                  type="button"
-                  disabled={
-                    !timing.voiceReady && ["audio", "video"].includes(key)
-                  }
-                  aria-pressed={mode === key}
-                  onClick={() => switchMode(key)}
-                >
-                  {label}
-                </button>
-              ))}
+            <div className="lesson-meta">
+              {lesson.sourceMeta && <span>{lesson.author} · 知乎</span>}
+              <span>
+                {timing.voiceReady ? `${clock(Math.ceil(duration))} · ` : ""}
+                {lesson.scenes.length} 章
+              </span>
+              <button type="button" onClick={() => setDialog("preferences")}>
+                示例讲法 ⌄
+              </button>
             </div>
-            <div className="player">
+          </div>
+        </div>
+        {lesson.notice && <p className="content-notice">{lesson.notice}</p>}
+        <div className="study-toolbar">
+          <div className="view-tabs" role="group" aria-label="观看方式">
+            {[
+              ["video", "观看讲解"],
+              ["slides", "逐页看图"],
+              ["audio", "只听音频"],
+              ["reading", "文字梳理"],
+            ].map(([key, label]) => (
+              <button
+                key={key}
+                type="button"
+                disabled={
+                  !timing.voiceReady && ["audio", "video"].includes(key)
+                }
+                aria-pressed={mode === key}
+                onClick={() => switchMode(key)}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+          <button
+            className="mobile-chapter-trigger"
+            type="button"
+            onClick={() => setDialog("chapters")}
+            aria-label="打开章节目录"
+          >
+            <span>
+              {String(index + 1).padStart(2, "0")} / {lesson.scenes.length}{" "}
+              <strong>{scene.title}</strong>
+            </span>
+            <span>目录 ☰</span>
+          </button>
+        </div>
+        <section
+          className="lesson-layout"
+          aria-label="学习作品"
+          style={{ "--stage-height": `${stageHeight}px` }}
+        >
+          <div className="player-column">
+            <div className={`player mode-${mode}`} ref={playerBox}>
               {mode === "video" && (
                 <video
                   ref={video}
@@ -195,7 +319,15 @@ function App() {
               )}
               {mode === "slides" && (
                 <>
-                  {canvas}
+                  <div className={scene.diagram ? "landscape-diagram" : ""}>
+                    {canvas}
+                  </div>
+                  {scene.diagram && (
+                    <ResponsiveDiagram
+                      diagram={scene.diagram}
+                      title={scene.title}
+                    />
+                  )}
                   <div className="spoken">{current.text}</div>
                   <div className="slide-controls">
                     <button
@@ -218,7 +350,7 @@ function App() {
                     <button
                       type="button"
                       className="expand"
-                      onClick={() => canvasBox.current.requestFullscreen?.()}
+                      onClick={() => setDialog("diagram")}
                     >
                       放大画面
                     </button>
@@ -284,43 +416,34 @@ function App() {
                 </div>
               )}
             </div>
+            {mode === "video" && (
+              <div className="player-actions">
+                <span>
+                  {index + 1} / {lesson.scenes.length} · {scene.title}
+                </span>
+                <button type="button" onClick={expandVideo}>
+                  全屏观看 ⛶
+                </button>
+              </div>
+            )}
             {error && (
               <p role="alert" className="error">
                 {error}
               </p>
             )}
-            <p className="data-note">{sourceNote}</p>
+            <details className="source-brief">
+              <summary>来源说明</summary>
+              <p>{sourceNote}</p>
+            </details>
           </div>
           <aside className="chapters" aria-label="讲解片段">
-            <p className="eyebrow">这一段在讲什么</p>
-            {lesson.scenes.map((s, i) => (
-              <button
-                key={s.id}
-                type="button"
-                className={`chapter${i === index ? " active" : ""}`}
-                aria-current={i === index ? "step" : undefined}
-                onClick={() => {
-                  seek(sceneStarts[i]);
-                  if (mode === "reading")
-                    document
-                      .getElementById(`reading-${s.id}`)
-                      ?.scrollIntoView({ behavior: "smooth", block: "start" });
-                }}
-              >
-                <span className="chapter-no">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="chapter-title">
-                  {s.title}
-                  <small>{clock(sceneStarts[i])}</small>
-                </span>
-                <span className="chapter-dot" aria-hidden="true" />
-              </button>
-            ))}
-            <div className="takeaway">
-              <span>看完带走一句话</span>
-              <p>{thesis}</p>
+            <div className="chapter-heading">
+              <h2>章节目录</h2>
+              <span>{lesson.scenes.length} 章</span>
             </div>
+            <nav className="chapter-list" aria-label="章节导航">
+              {chapterButtons}
+            </nav>
           </aside>
         </section>
         <section className="reading" aria-label="补充学习资料">
@@ -400,7 +523,7 @@ function App() {
             </div>
           </details>
           <details>
-            <summary>来源与本次学习规则</summary>
+            <summary>文章来源</summary>
             <div className="reading-body">
               {lesson.sourceMeta ? (
                 <>
@@ -429,60 +552,89 @@ function App() {
                   ))}
                 </>
               )}
-              <h2>本次学习规则</h2>
-              <p>
-                沿用故事开场、图解配讲解、不打断的示例偏好，不是重新对你进行测评。
-              </p>
-              {lesson.profile.rules.map((r) => (
-                <p key={r.id}>
-                  <strong>{r.title}：</strong>
-                  {r.instruction}
-                </p>
-              ))}
             </div>
           </details>
         </section>
-        {timing.voiceReady && (
-          <section className="downloads" aria-label="带走学习作品">
-            <h2>带走这份学习作品</h2>
-            <div className="download-links">
-              <a download href="./media/video.mp4">
-                讲解视频 ↓
-              </a>
-              <a download href="./media/audio.m4a">
-                完整音频 ↓
-              </a>
-              {lesson.sourceMeta && (
-                <>
-                  <a download href="./learning-notes.md">
-                    学习笔记 ↓
-                  </a>
-                  <a download href="./learning-skill.md">
-                    学习 Skill ↓
-                  </a>
-                  <a download href="./media/captions.vtt">
-                    中文字幕 ↓
-                  </a>
-                </>
-              )}
-            </div>
-            {lesson.sourceMeta && (
-              <details>
-                <summary>下载章节图解</summary>
-                <div className="diagram-links">
-                  {lesson.scenes.map((s, i) => (
-                    <a
-                      key={s.id}
-                      download
-                      href={`./diagrams/chapter-${i + 1}.png`}
-                    >
-                      {String(i + 1).padStart(2, "0")} {s.title} ↓
+        {dialog === "downloads" && (
+          <StudyDialog title="下载学习作品" onClose={() => setDialog(null)}>
+            <section className="downloads" aria-label="带走学习作品">
+              <div className="download-links">
+                <a download href="./media/video.mp4">
+                  讲解视频 ↓
+                </a>
+                <a download href="./media/audio.m4a">
+                  完整音频 ↓
+                </a>
+                {lesson.sourceMeta && (
+                  <>
+                    <a download href="./learning-notes.md">
+                      学习笔记 ↓
                     </a>
-                  ))}
-                </div>
-              </details>
-            )}
-          </section>
+                    <a download href="./learning-skill.md">
+                      学习 Skill ↓
+                    </a>
+                    <a download href="./media/captions.vtt">
+                      中文字幕 ↓
+                    </a>
+                  </>
+                )}
+              </div>
+              {lesson.sourceMeta && (
+                <details>
+                  <summary>下载章节图解</summary>
+                  <div className="diagram-links">
+                    {lesson.scenes.map((s, i) => (
+                      <a
+                        key={s.id}
+                        download
+                        href={`./diagrams/chapter-${i + 1}.png`}
+                      >
+                        {String(i + 1).padStart(2, "0")} {s.title} ↓
+                      </a>
+                    ))}
+                  </div>
+                </details>
+              )}
+            </section>
+          </StudyDialog>
+        )}
+        {dialog === "chapters" && (
+          <StudyDialog
+            title="章节目录"
+            className="chapter-dialog"
+            onClose={() => setDialog(null)}
+          >
+            <nav aria-label="选择章节">{chapterButtons}</nav>
+          </StudyDialog>
+        )}
+        {dialog === "preferences" && (
+          <StudyDialog title="本次讲解设置" onClose={() => setDialog(null)}>
+            <p className="dialog-note">
+              这份作品使用示例偏好，不是对你的测评结果。
+            </p>
+            <div className="preference">
+              {preferences.map((p) => (
+                <strong key={p}>{p}</strong>
+              ))}
+            </div>
+            {lesson.profile.rules.map((r) => (
+              <p className="preference-rule" key={r.id}>
+                <strong>{r.title}</strong>
+                {r.instruction}
+              </p>
+            ))}
+          </StudyDialog>
+        )}
+        {dialog === "diagram" && (
+          <StudyDialog
+            title={`${index + 1}. ${scene.title}`}
+            className="diagram-dialog"
+            onClose={() => setDialog(null)}
+          >
+            <p className="diagram-pan-hint">横版原图 · 可左右滑动查看</p>
+            <div className="diagram-pan">{canvas}</div>
+            {scene.takeaway && <p className="dialog-note">{scene.takeaway}</p>}
+          </StudyDialog>
         )}
         <footer>
           知径 × OpenMAIC · 单篇学习作品，尚未替换正式网站的通用生成流程。

@@ -4,7 +4,7 @@ import fs from "node:fs";
 import { createHash } from "node:crypto";
 import { article, chapters } from "./lessons/window-five-years/content.mjs";
 import { validateScene, validateSlide, locateSegment } from "./contract.mjs";
-import { narrativeSlide } from "./narrative-slide.mjs";
+import { narrativeSlide, narrativeDiagram } from "./narrative-slide.mjs";
 import { editionPaths } from "./paths.mjs";
 const { root } = editionPaths("window-five-years");
 const lesson = JSON.parse(fs.readFileSync(new URL("lesson.json", root)));
@@ -57,6 +57,21 @@ test("Prediction and evidence boundaries are retained", () => {
       .join(""),
     /不是适合每个人/,
   );
+});
+test("Responsive diagrams reuse source nodes and preserve independent paths", () => {
+  for (const [i, chapter] of chapters.entries()) {
+    const diagram = narrativeDiagram(chapter);
+    assert.deepEqual(diagram.groups.flat(), chapter.nodes);
+    assert.deepEqual(lesson.scenes[i].diagram, diagram);
+    assert.equal(diagram.note, chapter.visualNote);
+  }
+  assert.deepEqual(
+    narrativeDiagram(chapters[1]).groups.map((g) => g.length),
+    [3, 3],
+  );
+  assert.equal(narrativeDiagram(chapters[7]).layout, "cycle");
+  assert.equal(narrativeDiagram(chapters[7]).groups.length, 1);
+  assert.match(lesson.notice, /作者推演/);
 });
 test(
   "User source hash and all quoted line anchors match the actual attachment",

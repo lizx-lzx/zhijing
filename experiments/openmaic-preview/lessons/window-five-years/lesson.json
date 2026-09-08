@@ -6,6 +6,7 @@
   "thesis": "AI 的能力红利，未必自动变成每个人的收入红利。",
   "intro": "读懂作者如何从 AI 提效，一步步推到就业、消费、信贷与个人选择。",
   "sourceNote": "依据你提供的知乎正文改编。2030 年危机与五年窗口是作者的情景推演，不是已发生的事实。",
+  "notice": "含作者推演，不是未来预报",
   "preference": [
     "故事开场",
     "先看关系再听解释",
@@ -107,7 +108,7 @@
       "content": {
         "type": "slide",
         "canvas": {
-          "id": "qV_cnEsOp393NGeG9f6zQ",
+          "id": "GkRTOLeCIl_HjrSD60Db4",
           "viewportSize": 1000,
           "viewportRatio": 0.5625,
           "theme": {
@@ -357,8 +358,8 @@
           "agentId": "teacher"
         }
       ],
-      "createdAt": 1788853553277,
-      "updatedAt": 1788853553277,
+      "createdAt": 1788859953619,
+      "updatedAt": 1788859953619,
       "sourceAnchor": {
         "section": "公司更强，你却更不安",
         "quote": "它不是在担心 AI 做不到，恰恰相反，它在担心 AI 真的做到之后会发生什么。",
@@ -371,7 +372,25 @@
         "这条论证有一个关键转向：从一家企业是否获益，转向整个社会能否持续获得收入和购买力。理解这个转向，比记住模型名称和股价涨幅更重要。开头关于小公司岗位的场景是本学习作品补充的假设例子。"
       ],
       "premise": "AI 必须能够以合适的成本与可靠性替代足够多的工作任务，影响才会进一步传导。",
-      "kind": "思想实验"
+      "kind": "思想实验",
+      "diagram": {
+        "layout": "contrast",
+        "kind": "思想实验",
+        "subtitle": "同一项提效，为什么会有两种结果？",
+        "groups": [
+          [
+            {
+              "title": "企业账本",
+              "detail": "成本下降\n利润改善"
+            },
+            {
+              "title": "家庭账本",
+              "detail": "岗位承压\n收入不稳"
+            }
+          ]
+        ],
+        "note": "如果收益没有充分流向劳动者，两本账就可能分开。"
+      }
     },
     {
       "id": "business",
@@ -383,7 +402,7 @@
       "content": {
         "type": "slide",
         "canvas": {
-          "id": "cr1P_4AAGGUKde60rKIRz",
+          "id": "3_QEbyAmkI5bmd8dU2Yx3",
           "viewportSize": 1000,
           "viewportRatio": 0.5625,
           "theme": {
@@ -904,8 +923,8 @@
           "agentId": "teacher"
         }
       ],
-      "createdAt": 1788853553278,
-      "updatedAt": 1788853553278,
+      "createdAt": 1788859953620,
+      "updatedAt": 1788859953620,
       "sourceAnchor": {
         "section": "软件和中间环节先承压",
         "quote": "每家公司做出的都是对自己最理性的选择。但所有公司的选择叠在一起，就是一场踩踏。",
@@ -919,7 +938,43 @@
         "学习时要补上每个箭头需要的条件：软件是否涉及运维、合规与售后；Agent 能否访问供应商接口；用户是否愿意让渡购买权限；支付、信用和纠纷责任由谁承担。原文的“品牌和广告全部失效”属于强推断，不能当成无条件规律。"
       ],
       "premise": "客户不仅有替代技术，还必须有迁移意愿、合法可用的接口和可接受的风险成本。",
-      "kind": "作者推演"
+      "kind": "作者推演",
+      "diagram": {
+        "layout": "flow",
+        "kind": "作者推演",
+        "subtitle": "把“做得便宜”，变成客户的议价能力",
+        "groups": [
+          [
+            {
+              "title": "制作成本降低",
+              "detail": "内部自建成为选项"
+            },
+            {
+              "title": "客户重新议价",
+              "detail": "订阅收入可能下降"
+            },
+            {
+              "title": "再降成本",
+              "detail": "继续裁员或引入 AI"
+            }
+          ],
+          [
+            {
+              "title": "Agent 代办",
+              "detail": "替用户比价与选购"
+            },
+            {
+              "title": "中间环节承压",
+              "detail": "信息差与切换成本减少"
+            },
+            {
+              "title": "价值重新分配",
+              "detail": "服务商需要新理由"
+            }
+          ]
+        ],
+        "note": "两条压力路径：软件订阅，以及依赖信息差的中间环节。"
+      }
     },
     {
       "id": "income",
@@ -931,7 +986,7 @@
       "content": {
         "type": "slide",
         "canvas": {
-          "id": "9-V968RJBUgaGpFSyKRXP",
+          "id": "n_HbhJy25yQJWGYtFFBZo",
           "viewportSize": 1000,
           "viewportRatio": 0.5625,
           "theme": {
@@ -1252,8 +1307,8 @@
           "agentId": "teacher"
         }
       ],
-      "createdAt": 1788853553278,
-      "updatedAt": 1788853553278,
+      "createdAt": 1788859953620,
+      "updatedAt": 1788859953620,
       "sourceAnchor": {
         "section": "产出，不等于购买力",
         "quote": "产出是有的，但钱没有流到人手里",
@@ -1266,7 +1321,29 @@
         "原文给出劳动收入占比的长期数字，但粘贴正文没有明确地区、统计口径和原始出处。本作品不把这些数字画成已经核验的趋势图，也不把作者设想的加速幅度当作测算。"
       ],
       "premise": "替代造成的收入损失，持续超过降价、新收入、新就业和转移支付带来的补偿。",
-      "kind": "作者推演"
+      "kind": "作者推演",
+      "diagram": {
+        "layout": "flow",
+        "kind": "作者推演",
+        "subtitle": "作者称之为“幽灵 GDP”的分配矛盾",
+        "groups": [
+          [
+            {
+              "title": "AI 提高产出",
+              "detail": "能生产更多"
+            },
+            {
+              "title": "收益如何分配",
+              "detail": "工资、利润与价格"
+            },
+            {
+              "title": "家庭购买力",
+              "detail": "是否同步改善"
+            }
+          ]
+        ],
+        "note": "中间这一环，决定企业提效能否转化为普遍受益。"
+      }
     },
     {
       "id": "work",
@@ -1278,7 +1355,7 @@
       "content": {
         "type": "slide",
         "canvas": {
-          "id": "nROZiwhyxFjet2hXF870p",
+          "id": "o0CCdmudpCPvNvF5NRXZg",
           "viewportSize": 1000,
           "viewportRatio": 0.5625,
           "theme": {
@@ -1528,8 +1605,8 @@
           "agentId": "teacher"
         }
       ],
-      "createdAt": 1788853553278,
-      "updatedAt": 1788853553278,
+      "createdAt": 1788859953620,
+      "updatedAt": 1788859953620,
       "sourceAnchor": {
         "section": "岗位冲击，也有时间差",
         "quote": "这只是时间差，不是豁免权。",
@@ -1542,7 +1619,25 @@
         "作者对机器人落地年份、消费下降幅度、高收入群体贡献的比例给出了判断或数字，但本文没有逐项核验。作品保留风险机制，不把这些数字用于计算个人失业概率，也不拿年龄、学历或职业替用户下结论。"
       ],
       "premise": "岗位由多种任务构成，部署成本、责任要求和新增需求，会影响暴露是否转化为替代。",
-      "kind": "作者判断"
+      "kind": "作者判断",
+      "diagram": {
+        "layout": "contrast",
+        "kind": "作者判断",
+        "subtitle": "数字任务与现场工作，面对的约束不同",
+        "groups": [
+          [
+            {
+              "title": "信息处理",
+              "detail": "软件、分析、内容\n更直接面对模型能力"
+            },
+            {
+              "title": "现场执行",
+              "detail": "维修、照护、施工\n还需要可靠的身体"
+            }
+          ]
+        ],
+        "note": "任务受到影响，不等于整个职业立刻消失。"
+      }
     },
     {
       "id": "workflow",
@@ -1554,7 +1649,7 @@
       "content": {
         "type": "slide",
         "canvas": {
-          "id": "bzxCbTYr-qkqhLinoGC1a",
+          "id": "Fh0rdPEfcOPNzYGK2-c_Q",
           "viewportSize": 1000,
           "viewportRatio": 0.5625,
           "theme": {
@@ -1875,8 +1970,8 @@
           "agentId": "teacher"
         }
       ],
-      "createdAt": 1788853553278,
-      "updatedAt": 1788853553278,
+      "createdAt": 1788859953620,
+      "updatedAt": 1788859953620,
       "sourceAnchor": {
         "section": "知道工具，不等于用好",
         "quote": "对于 AI 工具，存在三个截然不同的层级：",
@@ -1889,7 +1984,29 @@
         "本文给出的周报例子是教学假设。它补充了一把可操作的尺子：从接收资料到最终交付，比较完整任务的总成本，包含查错、审核、等待和返工。只比较生成一段文字或一段代码的速度，容易夸大整体效率。"
       ],
       "premise": "效率提升必须在具体任务、模型版本、质量标准和完整成本下测量。",
-      "kind": "作者框架"
+      "kind": "作者框架",
+      "diagram": {
+        "layout": "ladder",
+        "kind": "作者框架",
+        "subtitle": "认知鸿沟，发生在同一间办公室里",
+        "groups": [
+          [
+            {
+              "title": "知道",
+              "detail": "认识工具名称"
+            },
+            {
+              "title": "会用",
+              "detail": "完成一次具体任务"
+            },
+            {
+              "title": "用得好",
+              "detail": "嵌入流程并验证结果"
+            }
+          ]
+        ],
+        "note": "衡量变化，看完成质量、返工与成本，不只看生成速度。"
+      }
     },
     {
       "id": "credit",
@@ -1901,7 +2018,7 @@
       "content": {
         "type": "slide",
         "canvas": {
-          "id": "polh3DXwi5hgoq1CPeUpc",
+          "id": "Pn8bEOSS6Yksm57SAFJpL",
           "viewportSize": 1000,
           "viewportRatio": 0.5625,
           "theme": {
@@ -2422,8 +2539,8 @@
           "agentId": "teacher"
         }
       ],
-      "createdAt": 1788853553278,
-      "updatedAt": 1788853553278,
+      "createdAt": 1788859953621,
+      "updatedAt": 1788859953621,
       "sourceAnchor": {
         "section": "收入变化，会穿过金融系统",
         "quote": "贷款本身没毛病，是贷款之后的世界变了。",
@@ -2436,7 +2553,43 @@
         "家庭房贷部分关注收入能力下降、动用储蓄、被迫出售资产等传导机制。文章把 2008 年问题简化为流动性问题，这不足以完整解释那次危机；本作品不沿用“当年只要注水就能解决”的绝对说法。"
       ],
       "premise": "只有存在实际融资联系、损失超过缓冲且缺少有效处置时，压力才可能被进一步放大。",
-      "kind": "作者推演"
+      "kind": "作者推演",
+      "diagram": {
+        "layout": "flow",
+        "kind": "作者推演",
+        "subtitle": "一条走企业信贷，一条走家庭房贷",
+        "groups": [
+          [
+            {
+              "title": "软件收入下滑",
+              "detail": "原有增长预期失效"
+            },
+            {
+              "title": "偿债能力承压",
+              "detail": "贷款风险可能上升"
+            },
+            {
+              "title": "机构资产受损",
+              "detail": "取决于实际风险敞口"
+            }
+          ],
+          [
+            {
+              "title": "家庭收入下降",
+              "detail": "月供义务仍然存在"
+            },
+            {
+              "title": "动用财务缓冲",
+              "detail": "延后暴露压力"
+            },
+            {
+              "title": "还贷压力上升",
+              "detail": "不等于必然违约"
+            }
+          ]
+        ],
+        "note": "箭头表示风险可能传导，不表示损失一定会发生。"
+      }
     },
     {
       "id": "value",
@@ -2448,7 +2601,7 @@
       "content": {
         "type": "slide",
         "canvas": {
-          "id": "9oZdiK0bkIcfXPPpaL9Us",
+          "id": "KcgBibtLj2XgDFkVt8A5f",
           "viewportSize": 1000,
           "viewportRatio": 0.5625,
           "theme": {
@@ -2695,8 +2848,8 @@
           "agentId": "teacher"
         }
       ],
-      "createdAt": 1788853553278,
-      "updatedAt": 1788853553278,
+      "createdAt": 1788859953621,
+      "updatedAt": 1788859953621,
       "sourceAnchor": {
         "section": "谁掌握工具，谁承担责任",
         "quote": "信任和责任——这可能是人类在智能溢价归零之后唯一剩下的经济护城河。",
@@ -2709,7 +2862,29 @@
         "“阵痛期”部分扩展到博彩、加密市场、资产分化与算力依赖。它们是作者的情景支线：社会压力是否增加短期投机需求、市场是否分化、生活舒适是否与自主选择脱钩。本文不把赌博繁荣、加密资产先跌后涨或芯片股上涨写成可重复的投资规律。"
       ],
       "premise": "人与 AI 的能力边界、问责制度、用户信任与市场结构都在变化，护城河并非永久。",
-      "kind": "作者判断"
+      "kind": "作者判断",
+      "diagram": {
+        "layout": "layers",
+        "kind": "作者判断",
+        "subtitle": "效率、信任和所有权，是不同的问题",
+        "groups": [
+          [
+            {
+              "title": "能力",
+              "detail": "完成任务的成本可能下降"
+            },
+            {
+              "title": "关系与责任",
+              "detail": "谁值得信任，谁能被问责"
+            },
+            {
+              "title": "基础设施",
+              "detail": "算力、模型和应用由谁拥有"
+            }
+          ]
+        ],
+        "note": "能用一个工具，不等于拥有它所产生的全部收益。"
+      }
     },
     {
       "id": "loop",
@@ -2721,7 +2896,7 @@
       "content": {
         "type": "slide",
         "canvas": {
-          "id": "sVLx41ErXEgygVZUnQpiV",
+          "id": "y7jg4asPl9JwF4jiqPm5L",
           "viewportSize": 1000,
           "viewportRatio": 0.5625,
           "theme": {
@@ -3268,8 +3443,8 @@
           "agentId": "teacher"
         }
       ],
-      "createdAt": 1788853553278,
-      "updatedAt": 1788853553278,
+      "createdAt": 1788859953621,
+      "updatedAt": 1788859953621,
       "sourceAnchor": {
         "section": "看见整条反馈循环",
         "quote": "经济学中有一个术语叫”合成谬误”",
@@ -3282,7 +3457,41 @@
         "作者关于税基下降、社会保障需求增长的担忧，指向技术收益的制度性分配。其公共基金、算力税、产出分享等提议应被读作候选机制；是否有效、如何设计、会产生什么副作用，需要另行研究。"
       ],
       "premise": "反馈的方向与强度取决于补偿机制，不能从局部案例直接推导整个经济必然失控。",
-      "kind": "作者推演"
+      "kind": "作者推演",
+      "diagram": {
+        "layout": "cycle",
+        "kind": "作者推演",
+        "subtitle": "单个参与者理性，不代表整体结果有利",
+        "groups": [
+          [
+            {
+              "title": "AI 能力提升",
+              "detail": "降本变得更可行"
+            },
+            {
+              "title": "削减用工成本",
+              "detail": "企业维持利润"
+            },
+            {
+              "title": "劳动收入承压",
+              "detail": "家庭调整预算"
+            },
+            {
+              "title": "消费需求减弱",
+              "detail": "企业营收承压"
+            },
+            {
+              "title": "再寻求降本",
+              "detail": "继续投入自动化"
+            },
+            {
+              "title": "循环可能强化",
+              "detail": "压力回到起点"
+            }
+          ]
+        ],
+        "note": "政策、降价、新需求与新岗位，都可能改变反馈强度。"
+      }
     },
     {
       "id": "window",
@@ -3294,7 +3503,7 @@
       "content": {
         "type": "slide",
         "canvas": {
-          "id": "YRkXQebYnMXgSk8GfaxYZ",
+          "id": "OSGeqNVefOQq4KXD-t-u9",
           "viewportSize": 1000,
           "viewportRatio": 0.5625,
           "theme": {
@@ -3570,8 +3779,8 @@
           "agentId": "teacher"
         }
       ],
-      "createdAt": 1788853553278,
-      "updatedAt": 1788853553278,
+      "createdAt": 1788859953621,
+      "updatedAt": 1788859953621,
       "sourceAnchor": {
         "section": "五年是设问，不是时钟",
         "quote": "2030 这个时间点未必会精确到来。",
@@ -3584,7 +3793,29 @@
         "文中的模型发布、历史裁员、劳动份额、私人信贷规模、房价与消费数据，不具有相同的证据等级。下方核验区仅抽查几个容易被误读的关键主张，不代表整篇文章已获得事实认证。"
       ],
       "premise": "对具体年份、冲击幅度和资产表现的预测，需要独立证据，不能仅靠故事连贯。",
-      "kind": "阅读判断"
+      "kind": "阅读判断",
+      "diagram": {
+        "layout": "timeline",
+        "kind": "阅读判断",
+        "subtitle": "把时间想象、机制判断与证据分开",
+        "groups": [
+          [
+            {
+              "title": "2026",
+              "detail": "原文的观察起点"
+            },
+            {
+              "title": "2027—2029",
+              "detail": "作者设想的传导期"
+            },
+            {
+              "title": "2030",
+              "detail": "用于推演的未来场景"
+            }
+          ]
+        ],
+        "note": "这条时间线复述作者设想，不是概率预测或现实进度条。"
+      }
     },
     {
       "id": "action",
@@ -3596,7 +3827,7 @@
       "content": {
         "type": "slide",
         "canvas": {
-          "id": "2kR1pVZBTNHqxX2a53ofg",
+          "id": "e2aRYnqbUjNhhTB8oFFjf",
           "viewportSize": 1000,
           "viewportRatio": 0.5625,
           "theme": {
@@ -3917,8 +4148,8 @@
           "agentId": "teacher"
         }
       ],
-      "createdAt": 1788853553278,
-      "updatedAt": 1788853553278,
+      "createdAt": 1788859953621,
+      "updatedAt": 1788859953621,
       "sourceAnchor": {
         "section": "把紧迫感，变成一次实践",
         "quote": "只要肯花时间真正把 AI 融入日常工作流",
@@ -3931,7 +4162,29 @@
         "正文提到的“一年现金”和特定资产路径不是通用标准。个人资金安排需要结合支出、负债、保障与风险承受能力判断，不能由一篇未来推演直接决定。你可以只完成一次工作流实验，暂时不接受作者的全部宏观结论。"
       ],
       "premise": "学习实践、职业选择和投资决策是不同层级的行动，所需证据与风险承受能力不同。",
-      "kind": "学习迁移"
+      "kind": "学习迁移",
+      "diagram": {
+        "layout": "ladder",
+        "kind": "学习迁移",
+        "subtitle": "不必等到相信整套预测，才开始尝试",
+        "groups": [
+          [
+            {
+              "title": "选一个真任务",
+              "detail": "从反复做的工作开始"
+            },
+            {
+              "title": "接进完整流程",
+              "detail": "输入、执行、核对、交付"
+            },
+            {
+              "title": "用结果来判断",
+              "detail": "质量、耗时、返工与费用"
+            }
+          ]
+        ],
+        "note": "这是本作品的学习实践建议，不是作者新增结论或投资指令。"
+      }
     }
   ],
   "glossary": [
@@ -4030,7 +4283,7 @@
   },
   "provenance": {
     "sourceHash": "2f6914e68ca23541775a39ab6d86d8292156da7dc38757809609e8280533f02f",
-    "preparedAt": "2026-09-08T07:45:53.278Z",
+    "preparedAt": "2026-09-08T09:32:33.621Z",
     "mode": "基于用户正文逐章编写和审核的单篇学习作品，非通用自动生成能力验收",
     "generation": "OpenMAIC buildCompleteScene 组装人工审定内容；不声称本篇由 generateSceneActions 自动创作",
     "renderer": "@openmaic/renderer@0.1.6",

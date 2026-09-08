@@ -7,6 +7,22 @@ const C = {
   warm: "#f4ba78",
   green: "#7cd6c4",
 };
+export function narrativeDiagram(chapter) {
+  const groups = [];
+  // Landscape flow layouts use independent rows, each containing up to 3 nodes.
+  // Preserve those boundaries when reflowing; never invent a cross-row arrow.
+  if (chapter.layout === "flow") {
+    for (let i = 0; i < chapter.nodes.length; i += 3)
+      groups.push(chapter.nodes.slice(i, i + 3));
+  } else groups.push(chapter.nodes);
+  return {
+    layout: chapter.layout,
+    kind: chapter.kind,
+    subtitle: chapter.subtitle,
+    groups,
+    note: chapter.visualNote,
+  };
+}
 const esc = (s) =>
   String(s).replace(
     /[&<>"']/g,

@@ -8,7 +8,7 @@ import {
   checks,
   reviewQuestions,
 } from "./lessons/window-five-years/content.mjs";
-import { narrativeSlide } from "./narrative-slide.mjs";
+import { narrativeSlide, narrativeDiagram } from "./narrative-slide.mjs";
 import { validateScene } from "./contract.mjs";
 import { editionPaths } from "./paths.mjs";
 
@@ -62,6 +62,7 @@ const scenes = chapters.map((c, i) => {
   scene.reading = c.reading;
   scene.premise = c.premise;
   scene.kind = c.kind;
+  scene.diagram = narrativeDiagram(c);
   validateScene(scene);
   return scene;
 });
