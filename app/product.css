@@ -29,15 +29,11 @@
   background: none;
   padding: 0;
 }
-.z-app:not(.z-signed-in) .z-motion-toggle {
-  margin-left: auto;
-}
 .z-top nav {
   display: flex;
   gap: 6px;
 }
-.z-top nav button,
-.z-account {
+.z-top nav button {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -56,10 +52,6 @@
 }
 .z-top nav button:hover {
   background: #f0f2f9;
-}
-.z-account {
-  border: 1px solid var(--line);
-  background: white;
 }
 .z-signed-in .z-top {
   position: fixed;
@@ -87,10 +79,6 @@
 .z-signed-in .z-top nav button {
   min-height: 50px;
 }
-.z-signed-in .z-account {
-  margin-top: auto;
-  justify-content: center;
-}
 .z-signed-in .z-main-area {
   margin-left: 224px;
   padding-top: 10px;
@@ -106,9 +94,10 @@
   color: var(--muted);
   font-size: 0.875rem;
 }
-.z-footer > span:first-child {
-  color: var(--ink);
-  font-weight: 600;
+.z-footer > button {
+  min-height: 44px;
+  color: var(--muted);
+  font-size: 0.875rem;
 }
 .z-loading {
   min-height: 100dvh;
@@ -1496,7 +1485,8 @@
   border-radius: 9px;
   background: #f7f8fc;
 }
-.z-modal > p {
+.z-modal > p,
+.z-device-settings > p {
   color: var(--muted);
   line-height: 1.9;
   font-size: 1rem;
@@ -1635,14 +1625,6 @@
   }
   .z-signed-in .z-brand-button {
     padding: 0;
-  }
-  .z-signed-in .z-account {
-    margin: 0;
-  }
-  .z-account {
-    min-height: 40px;
-    font-size: 0.875rem;
-    padding: 8px 12px;
   }
   .z-signed-in .z-top nav {
     position: fixed;

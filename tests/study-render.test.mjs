@@ -51,6 +51,32 @@ test("welcome entry is non-destructive and takes precedence over a resume link",
   assert.equal(entryRoute(true, "").view, "workspace");
 });
 
+test("utility controls stay in secondary settings, not the learning navigation", async () => {
+  const source = await readFile("components/learning-app.tsx", "utf8");
+  const header = source.match(
+    /<header className="z-top">([\s\S]*?)<\/header>/,
+  )?.[1];
+  assert.ok(header);
+  assert.match(header, /<Brand/);
+  assert.match(header, /学习库/);
+  assert.doesNotMatch(
+    header,
+    /保存与恢复|z-account|z-motion-toggle|setAccount/,
+  );
+  assert.doesNotMatch(source, /保存与恢复/);
+  const footer = source.match(/<footer[\s\S]*?<\/footer>/)?.[0];
+  assert.match(footer, /设置/);
+  assert.match(footer, /setAccount\(true\)/);
+  const settings = source.match(/<Modal title="设置"[\s\S]*?<\/Modal>/)?.[0];
+  assert.match(settings, /aria-label="页面动效"/);
+  assert.match(settings, /<details className="z-detail z-device-settings">/);
+  assert.match(settings, /在其他设备继续学习/);
+  assert.match(settings, /旧码会失效/);
+  assert.match(settings, /请私下保存，不要发给别人/);
+  assert.match(settings, /makeRecovery\(\)/);
+  assert.match(settings, /restoreAccount\(\)/);
+});
+
 test("welcome, preference examples and private library covers use real visual assets", async () => {
   const server = await createServer({
     configFile: false,

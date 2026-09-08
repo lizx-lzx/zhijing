@@ -275,41 +275,6 @@ export default function LearningApp() {
             </button>
           </nav>
         )}
-        <button
-          className="z-motion-toggle"
-          type="button"
-          aria-label="页面动效"
-          aria-pressed={!motionPaused && !reducedMotion}
-          disabled={!!reducedMotion}
-          title={
-            reducedMotion
-              ? "跟随系统的减少动态效果设置"
-              : "只影响页面动效，不影响音视频播放"
-          }
-          onClick={() => setMotionPaused((value) => !value)}
-        >
-          {!motionPaused && !reducedMotion ? (
-            <Pause size={17} />
-          ) : (
-            <Play size={17} />
-          )}
-          <span>
-            {reducedMotion
-              ? "已减少动态"
-              : motionPaused
-                ? "开启动效"
-                : "暂停动效"}
-          </span>
-        </button>
-        <button
-          className="z-account"
-          onClick={() => {
-            setError("");
-            setAccount(true);
-          }}
-        >
-          保存与恢复
-        </button>
       </header>
       <div className="z-main-area" id="learning-content">
         {notice && (
@@ -401,65 +366,104 @@ export default function LearningApp() {
           />
         )}
         {account && (
-          <Modal title="把学习带到下一台设备" onClose={() => setAccount(false)}>
-            <p>
-              偏好与作品已保存在服务器。恢复码是你的私人钥匙，换浏览器或清除
-              Cookie 后，用它找回内容。
-            </p>
-            {recovery ? (
-              <div className="z-recovery">
-                <label>
-                  请私下保存，不要发给别人
-                  <input
-                    readOnly
-                    value={recovery}
-                    onFocus={(e) => e.target.select()}
-                  />
-                </label>
+          <Modal title="设置" onClose={() => setAccount(false)}>
+            <button
+              className="z-motion-toggle"
+              type="button"
+              aria-label="页面动效"
+              aria-pressed={!motionPaused && !reducedMotion}
+              disabled={!!reducedMotion}
+              title={
+                reducedMotion
+                  ? "跟随系统的减少动态效果设置"
+                  : "只影响页面动效，不影响音视频播放"
+              }
+              onClick={() => setMotionPaused((value) => !value)}
+            >
+              {!motionPaused && !reducedMotion ? (
+                <Pause size={17} />
+              ) : (
+                <Play size={17} />
+              )}
+              <span>
+                {reducedMotion
+                  ? "已减少动态"
+                  : motionPaused
+                    ? "开启动效"
+                    : "暂停动效"}
+              </span>
+            </button>
+            <details className="z-detail z-device-settings">
+              <summary>在其他设备继续学习</summary>
+              <p>
+                偏好与作品已保存在服务器。恢复码是你的私人钥匙，换浏览器或清除
+                Cookie 后，用它找回内容。
+              </p>
+              {recovery ? (
+                <div className="z-recovery">
+                  <label>
+                    请私下保存，不要发给别人
+                    <input
+                      readOnly
+                      value={recovery}
+                      onFocus={(e) => e.target.select()}
+                    />
+                  </label>
+                  <button
+                    className="button button-primary"
+                    onClick={() =>
+                      downloadText(
+                        "知径-私人恢复码.txt",
+                        `知径：${window.location.origin}${base}/\n私人恢复码：${recovery}\n请勿分享。持有码的人可访问你的学习内容。`,
+                      )
+                    }
+                  >
+                    下载保存恢复码
+                  </button>
+                </div>
+              ) : (
                 <button
                   className="button button-primary"
-                  onClick={() =>
-                    downloadText(
-                      "知径-私人恢复码.txt",
-                      `知径：${window.location.origin}${base}/\n私人恢复码：${recovery}\n请勿分享。持有码的人可访问你的学习内容。`,
-                    )
-                  }
+                  disabled={!!busy}
+                  onClick={() => void makeRecovery()}
                 >
-                  下载保存恢复码
+                  {hasRecovery
+                    ? "生成新恢复码（旧码会失效）"
+                    : "生成我的恢复码"}
                 </button>
-              </div>
-            ) : (
+              )}
+              <hr />
+              <h3>已有恢复码？</h3>
+              <label className="z-field-label">
+                恢复码
+                <input
+                  value={restore}
+                  onChange={(e) => setRestore(e.target.value)}
+                  placeholder="粘贴以前保存的恢复码"
+                  autoComplete="off"
+                />
+              </label>
+              <ErrorNotice message={error} />
               <button
-                className="button button-primary"
-                disabled={!!busy}
-                onClick={() => void makeRecovery()}
+                className="button button-quiet"
+                disabled={!!busy || !restore.trim()}
+                onClick={() => void restoreAccount()}
               >
-                {hasRecovery ? "生成新恢复码（旧码会失效）" : "生成我的恢复码"}
+                {busy ? <Spinner text={busy} /> : "恢复我的学习库"}
               </button>
-            )}
-            <hr />
-            <h3>已有恢复码？</h3>
-            <label className="z-field-label">
-              恢复码
-              <input
-                value={restore}
-                onChange={(e) => setRestore(e.target.value)}
-                placeholder="粘贴以前保存的恢复码"
-                autoComplete="off"
-              />
-            </label>
-            <ErrorNotice message={error} />
-            <button
-              className="button button-quiet"
-              disabled={!!busy || !restore.trim()}
-              onClick={() => void restoreAccount()}
-            >
-              {busy ? <Spinner text={busy} /> : "恢复我的学习库"}
-            </button>
+            </details>
           </Modal>
         )}
         <footer className="z-footer z-container">
-          <span>知径</span>
+          <button
+            className="z-text-link"
+            onClick={() => {
+              setError("");
+              setAccount(true);
+            }}
+          >
+            设置
+          </button>
           <span>AI 辅助理解 · 重要判断请核对原文</span>
         </footer>
       </div>

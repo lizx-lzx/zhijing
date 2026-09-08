@@ -21,12 +21,6 @@
   cursor: default;
   opacity: 0.75;
 }
-.z-signed-in .z-motion-toggle {
-  margin-top: auto;
-}
-.z-signed-in .z-account {
-  margin-top: 10px;
-}
 .z-learning-hero {
   --hero-x: 0deg;
   --hero-y: 0deg;
@@ -261,20 +255,5 @@
 @media (max-width: 700px) {
   .z-top {
     gap: 10px;
-  }
-  .z-motion-toggle {
-    width: 40px;
-    min-height: 40px;
-    padding: 8px;
-    flex-shrink: 0;
-  }
-  .z-motion-toggle span {
-    display: none;
-  }
-  .z-signed-in .z-motion-toggle {
-    margin: 0 0 0 auto;
-  }
-  .z-signed-in .z-account {
-    margin: 0;
   }
 }
