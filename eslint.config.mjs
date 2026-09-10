@@ -15,6 +15,7 @@ const eslintConfig = defineConfig([
     "build/**",
     "public/demo/openmaic-20260908/**",
     "public/demo/zhihu-window-20260908/**",
+    "public/demo/zhihu-motion-20260910/**",
     "experiments/openmaic-preview/**/render/**",
     "next-env.d.ts",
   ]),

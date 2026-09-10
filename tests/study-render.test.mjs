@@ -162,8 +162,12 @@ test("welcome, preference examples and private library covers use real visual as
       const frame = document.querySelector("iframe");
       assert.ok(frame);
       assert.equal(frame.getAttribute("src"), casePreviewUrl(medium));
-      assert.ok(frame.getAttribute("src").endsWith(`&mode=${mode}`));
-      assert.match(frame.getAttribute("src"), /zhihu-window-20260908/);
+      if (medium === "animation") {
+        assert.match(frame.getAttribute("src"), /zhihu-motion-20260910\/$/);
+      } else {
+        assert.ok(frame.getAttribute("src").endsWith(`&mode=${mode}`));
+        assert.match(frame.getAttribute("src"), /zhihu-window-20260908/);
+      }
       assert.match(frame.getAttribute("title"), /窗口期可能只剩五年/);
       assert.equal(frame.getAttribute("allow"), "fullscreen");
       assert.equal(
