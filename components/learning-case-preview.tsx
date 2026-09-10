@@ -16,7 +16,9 @@ const caseModes: Record<Medium, string> = {
 export const casePreviewUrl = (medium: Medium) =>
   medium === "animation"
     ? `${base}/demo/zhihu-motion-20260910/`
-    : `${base}/demo/zhihu-window-20260908/?ui=rice-20260910&mode=${caseModes[medium]}`;
+    : medium === "video"
+      ? `${base}/demo/zhihu-motion-20260910/?mode=video`
+      : `${base}/demo/zhihu-window-20260908/?ui=rice-20260910&mode=${caseModes[medium]}`;
 
 export function ArticleCaseDialog({
   medium,

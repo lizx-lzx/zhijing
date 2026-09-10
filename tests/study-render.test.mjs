@@ -164,6 +164,11 @@ test("welcome, preference examples and private library covers use real visual as
       assert.equal(frame.getAttribute("src"), casePreviewUrl(medium));
       if (medium === "animation") {
         assert.match(frame.getAttribute("src"), /zhihu-motion-20260910\/$/);
+      } else if (medium === "video") {
+        assert.match(
+          frame.getAttribute("src"),
+          /zhihu-motion-20260910\/\?mode=video$/,
+        );
       } else {
         assert.ok(frame.getAttribute("src").endsWith(`&mode=${mode}`));
         assert.match(frame.getAttribute("src"), /zhihu-window-20260908/);
