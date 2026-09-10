@@ -23,6 +23,10 @@ const sceneStarts = lesson.scenes.map(
 const title = lesson.title;
 // Version visual assets so a cached blue video cannot outlive the new theme.
 const visualAsset = (path) => `${path}?v=rice-20260910`;
+const videoAsset = (file) =>
+  title === "窗口期可能只剩五年"
+    ? `../zhihu-motion-20260910/${file}`
+    : visualAsset(`./media/${file}`);
 const sourceNote =
   lesson.sourceNote || "示例里的五人读书组及阅读量均为虚构数据。";
 const thesis =
@@ -382,7 +386,7 @@ function App() {
                   controls
                   playsInline
                   preload="metadata"
-                  poster={visualAsset("./media/poster.jpg")}
+                  poster={videoAsset("poster.jpg")}
                   aria-label={`${title}讲解视频`}
                   onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
                   onLoadedMetadata={(e) => {
@@ -393,7 +397,7 @@ function App() {
                   }
                 >
                   <source
-                    src={visualAsset("./media/video.mp4")}
+                    src={videoAsset("video.mp4")}
                     type="video/mp4"
                   />
                   <track
@@ -714,7 +718,7 @@ function App() {
           <StudyDialog title="下载学习作品" onClose={() => setDialog(null)}>
             <section className="downloads" aria-label="带走学习作品">
               <div className="download-links">
-                <a download href={visualAsset("./media/video.mp4")}>
+                <a download href={videoAsset("video.mp4")}>
                   讲解视频 ↓
                 </a>
                 <a download href="./media/audio.m4a">

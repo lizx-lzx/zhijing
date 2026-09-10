@@ -106,6 +106,7 @@ test("welcome, preference examples and private library covers use real visual as
       createElement(Welcome, { onStart() {}, returning: true }),
     );
     assert.match(html, /window-cover.jpg/);
+    assert.match(html, /zhihu-window-20260908\/\?ui=case-entry-20260910&amp;mode=overview/);
     assert.doesNotMatch(html, /原有作品保留|z-journey-strip|z-learning-hero/);
     assert.match(html, /找到我的学法/);
     assert.match(html, /8 题 · 约 2 分钟/);
@@ -164,11 +165,6 @@ test("welcome, preference examples and private library covers use real visual as
       assert.equal(frame.getAttribute("src"), casePreviewUrl(medium));
       if (medium === "animation") {
         assert.match(frame.getAttribute("src"), /zhihu-motion-20260910\/$/);
-      } else if (medium === "video") {
-        assert.match(
-          frame.getAttribute("src"),
-          /zhihu-motion-20260910\/\?mode=video$/,
-        );
       } else {
         assert.ok(frame.getAttribute("src").endsWith(`&mode=${mode}`));
         assert.match(frame.getAttribute("src"), /zhihu-window-20260908/);
