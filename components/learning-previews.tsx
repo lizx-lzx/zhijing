@@ -1,11 +1,4 @@
-import {
-  BookOpen,
-  Headphones,
-  MessageCircle,
-  MonitorPlay,
-  MousePointer2,
-  Sparkles,
-} from "lucide-react";
+import { BookOpen, Headphones, MonitorPlay, MousePointer2 } from "lucide-react";
 import type { Medium } from "../lib/domain";
 
 // Static, labelled presentation examples. These do not play media or classify ability.
@@ -85,51 +78,6 @@ export function MediaPreview({ medium }: { medium: Medium }) {
   );
 }
 
-export function EntryPreview({ entry }: { entry: string }) {
-  return (
-    <span className={`z-entry-preview z-entry-${entry}`} aria-hidden="true">
-      {entry === "story" ? (
-        <>
-          <MessageCircle size={23} />
-          <span className="z-story-bubble">
-            “我读了 2 本书，
-            <br />
-            怎么又没到平均水平？”
-          </span>
-          <span className="z-preview-note">虚构情境</span>
-        </>
-      ) : entry === "analysis" ? (
-        <>
-          <strong>平均数 ≠ 大多数人</strong>
-          <BookChart />
-        </>
-      ) : entry === "map" ? (
-        <>
-          <span className="z-map-root">怎样理解“平均”？</span>
-          <span className="z-map-branches">
-            <span>数据分布</span>
-            <span>极端值</span>
-            <span>中位数</span>
-          </span>
-        </>
-      ) : entry === "question" ? (
-        <>
-          <span className="z-question-mark">?</span>
-          <strong>
-            为什么 5 个人里，
-            <br />4 个都低于平均数？
-          </strong>
-        </>
-      ) : (
-        <>
-          <Sparkles size={26} />
-          <span>看内容，再选讲法</span>
-        </>
-      )}
-    </span>
-  );
-}
-
 export function PacePreview({ pace }: { pace: string }) {
   const labels: Record<string, string[]> = {
     compact: ["重点", "结论"],
@@ -153,7 +101,6 @@ export function ChoicePreview({
   value: string;
 }) {
   if (question === "primary") return <MediaPreview medium={value as Medium} />;
-  if (question === "entry") return <EntryPreview entry={value} />;
   if (question === "pace") return <PacePreview pace={value} />;
   return null;
 }

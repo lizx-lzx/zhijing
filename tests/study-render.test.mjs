@@ -120,19 +120,45 @@ test("welcome, preference examples and private library covers use real visual as
     );
     for (const [question, values] of Object.entries({
       primary: ["video", "reading", "audio", "animation"],
-      entry: ["story", "analysis", "map", "question", "adaptive"],
       pace: ["compact", "balanced", "gentle"],
     })) {
       for (const value of values) {
         const preview = renderToStaticMarkup(
           createElement(ChoicePreview, { question, value }),
         );
-        assert.match(preview, /class="z-(format|entry|pace)-preview/);
+        assert.match(preview, /class="z-(format|pace)-preview/);
         if (question === "pace") assert.match(preview, /结论/);
         assert.match(preview, /aria-hidden="true"/);
         assert.doesNotMatch(preview, /<button|<audio|<video/);
       }
     }
+    const opening = questions.find((q) => q.id === "entry");
+    assert.deepEqual(
+      opening.options.map((o) => o.value),
+      ["story", "analysis", "map", "question", "adaptive"],
+    );
+    for (const option of opening.options) {
+      assert.equal(
+        renderToStaticMarkup(
+          createElement(ChoicePreview, {
+            question: "entry",
+            value: option.value,
+          }),
+        ),
+        "",
+      );
+      assert.ok(!option.detail);
+      assert.doesNotMatch(option.label, /平均|读书|中位数/);
+    }
+    const onboarding = await readFile(
+      "components/learning-onboarding.tsx",
+      "utf8",
+    );
+    assert.match(onboarding, /z-onboarding-entry/);
+    assert.doesNotMatch(
+      onboarding.split("export function Onboarding")[1],
+      /\["primary", "entry"/,
+    );
     const lesson = {
       id: "a".repeat(32),
       formats: ["video"],

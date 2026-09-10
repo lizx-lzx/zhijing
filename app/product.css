@@ -279,6 +279,33 @@
   margin: 0 0 22px;
   color: var(--muted);
 }
+/* Opening preference needs a choice, not a lesson before the choice. */
+.z-onboarding-entry {
+  max-width: 680px;
+}
+.z-onboarding-entry .z-groups {
+  margin: 16px 0 12px;
+}
+.z-onboarding-entry .z-question {
+  padding: 14px 0;
+}
+.z-onboarding-entry .z-question h1 {
+  font-size: clamp(24px, 2.5vw, 30px);
+  margin-bottom: 20px;
+}
+.z-onboarding-entry .z-choices {
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin: 0;
+}
+.z-onboarding-entry .z-choice {
+  min-height: 58px;
+  padding: 14px 18px;
+}
+.z-onboarding-entry .z-question-actions {
+  margin-top: 20px;
+  padding-top: 12px;
+}
 .z-choices {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

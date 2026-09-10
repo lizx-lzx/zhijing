@@ -230,7 +230,9 @@ export function Onboarding({
       />
     );
   return (
-    <main className="z-onboarding z-container-small">
+    <main
+      className={`z-onboarding z-container-small${q.id === "entry" ? " z-onboarding-entry" : ""}`}
+    >
       <div className="z-question-meta">
         <span>
           第 {step + 1} / {questions.length} 题
@@ -269,11 +271,11 @@ export function Onboarding({
       <section key={step} className="z-question">
         <h1>{q.title}</h1>
         {q.help && <p className="z-help">{q.help}</p>}
-        {["primary", "entry"].includes(q.id) && (
+        {q.id === "primary" && (
           <span className="z-preview-caption">呈现示意</span>
         )}
         <div
-          className={`z-choices${["primary", "entry", "pace"].includes(q.id) ? " z-visual-choices" : ""}`}
+          className={`z-choices${["primary", "pace"].includes(q.id) ? " z-visual-choices" : ""}`}
           data-multiple={!!q.multiple}
         >
           {q.options.map((option) => {
@@ -316,13 +318,7 @@ export function Onboarding({
                   </span>
                   <span>
                     <strong>{option.label}</strong>
-                    {option.detail && (
-                      <small
-                        className={q.id === "entry" ? "sr-only" : undefined}
-                      >
-                        {option.detail}
-                      </small>
-                    )}
+                    {option.detail && <small>{option.detail}</small>}
                   </span>
                 </span>
               </button>
