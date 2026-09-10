@@ -17,6 +17,7 @@ import {
 import type { Answers, Medium, Profile } from "../lib/domain";
 import { api, endpoint, ErrorNotice, Spinner } from "./learning-ui";
 import { ChoicePreview } from "./learning-previews";
+import { ArticleCasePreview } from "./learning-case-preview";
 
 export function SkillEditor({
   profile,
@@ -271,11 +272,8 @@ export function Onboarding({
       <section key={step} className="z-question">
         <h1>{q.title}</h1>
         {q.help && <p className="z-help">{q.help}</p>}
-        {q.id === "primary" && (
-          <span className="z-preview-caption">呈现示意</span>
-        )}
         <div
-          className={`z-choices${["primary", "pace"].includes(q.id) ? " z-visual-choices" : ""}`}
+          className={`z-choices${q.id === "pace" ? " z-visual-choices" : ""}`}
           data-multiple={!!q.multiple}
         >
           {q.options.map((option) => {
@@ -325,6 +323,7 @@ export function Onboarding({
             );
           })}
         </div>
+        {q.id === "primary" && <ArticleCasePreview medium={answers.primary} />}
         {q.id === "primary" && (
           <div className="z-extras">
             <span>还想同时得到（可不选）</span>

@@ -17,7 +17,7 @@ import {
 import type { Answers, Lesson, Profile, Source } from "../lib/domain";
 import { mediaLabels, profileForLesson, questions } from "../lib/domain";
 import { api, base, endpoint, ErrorNotice, Spinner } from "./learning-ui";
-import { BookChart } from "./learning-previews";
+import { ArticleCasePreview } from "./learning-case-preview";
 
 export function LessonCard({
   lesson,
@@ -423,22 +423,7 @@ export function Workbench({
           仅提交你有权使用的内容；原文与学习偏好将由 AI 服务处理。
         </p>
       </section>
-      <section className="z-sample">
-        <div className="z-sample-graphic">
-          <BookChart />
-        </div>
-        <div>
-          <h3>试试“平均数”示例文章</h3>
-        </div>
-        <button
-          className="button button-quiet"
-          disabled={!!busy}
-          onClick={() => void generate(true)}
-        >
-          为我制作这篇
-          <ArrowRight size={17} />
-        </button>
-      </section>
+      <ArticleCasePreview medium={profile.answers.primary} />
       {lessons.length > 0 && (
         <section className="z-recent">
           <div className="z-section-title">

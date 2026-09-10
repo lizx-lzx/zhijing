@@ -1,83 +1,4 @@
-import { BookOpen, Headphones, MonitorPlay, MousePointer2 } from "lucide-react";
-import type { Medium } from "../lib/domain";
-
-// Static, labelled presentation examples. These do not play media or classify ability.
-export function BookChart() {
-  return (
-    <svg
-      viewBox="0 0 280 118"
-      role="img"
-      aria-label="示例：五个人读了 2、2、3、3、20 本书，平均 6 本，四个人低于平均数。"
-    >
-      <path d="M20 88H262" stroke="#bdc8df" />
-      {[2, 2, 3, 3, 20].map((value, i) => (
-        <g key={i}>
-          <rect
-            className="z-demo-bar"
-            x={32 + i * 46}
-            y={88 - value * 3.1}
-            width="25"
-            height={value * 3.1}
-            rx="4"
-            fill={i === 4 ? "#f5b548" : "#6574df"}
-          />
-          <text
-            x={44.5 + i * 46}
-            y={81 - value * 3.1}
-            textAnchor="middle"
-            fill="#36415d"
-            fontSize="14"
-          >
-            {value}
-          </text>
-        </g>
-      ))}
-      <path d="M20 69.4H262" stroke="#5766c6" strokeDasharray="4 4" />
-      <text x="22" y="111" fill="#58657b" fontSize="14">
-        5 人的读书量
-      </text>
-      <text x="260" y="111" textAnchor="end" fill="#5766c6" fontSize="14">
-        平均 6 本
-      </text>
-    </svg>
-  );
-}
-
-export function MediaPreview({ medium }: { medium: Medium }) {
-  const Icon = {
-    video: MonitorPlay,
-    reading: BookOpen,
-    audio: Headphones,
-    animation: MousePointer2,
-  }[medium];
-  return (
-    <span className={`z-format-preview z-format-${medium}`} aria-hidden="true">
-      <span className="z-format-caption">
-        <Icon size={18} />
-        {medium === "audio" ? "不看屏幕，也能听懂" : "平均数 ≠ 大多数人"}
-      </span>
-      {medium === "audio" ? (
-        <span className="z-waveform">
-          {[
-            16, 28, 40, 23, 46, 62, 44, 26, 52, 70, 48, 33, 60, 43, 26, 50, 67,
-            39, 22, 45, 58, 32, 18,
-          ].map((height, i) => (
-            <span key={i} style={{ height }} />
-          ))}
-        </span>
-      ) : medium === "animation" ? (
-        <span className="z-mini-map">
-          <span>看现象</span>
-          <span>找原因</span>
-          <span>换个角度</span>
-        </span>
-      ) : (
-        <BookChart />
-      )}
-    </span>
-  );
-}
-
+// A lightweight rhythm example; content examples live in the real case preview.
 export function PacePreview({ pace }: { pace: string }) {
   const labels: Record<string, string[]> = {
     compact: ["重点", "结论"],
@@ -100,7 +21,6 @@ export function ChoicePreview({
   question: string;
   value: string;
 }) {
-  if (question === "primary") return <MediaPreview medium={value as Medium} />;
   if (question === "pace") return <PacePreview pace={value} />;
   return null;
 }

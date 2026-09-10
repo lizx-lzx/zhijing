@@ -381,6 +381,116 @@
   padding: 8px 0 18px;
   border-bottom: 1px solid var(--line);
 }
+.z-article-case {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 14px 0;
+  margin-bottom: 12px;
+  text-align: left;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.z-article-case > img {
+  width: 100px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.z-article-case-copy {
+  flex: 1;
+  min-width: 0;
+}
+.z-article-case-copy > span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin-bottom: 4px;
+}
+.z-article-case-copy > strong {
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 550;
+}
+.z-article-case-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--primary);
+  font-size: 0.9375rem;
+}
+.z-article-case:hover .z-article-case-action {
+  text-decoration: underline;
+}
+.z-modal:has(.z-case-frame) {
+  width: min(1100px, calc(100% - 24px));
+  padding: 0 20px 20px;
+}
+.z-case-modes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.z-case-modes > button {
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: white;
+  color: var(--ink);
+  font-size: 1rem;
+}
+.z-case-modes > button[aria-pressed="true"] {
+  border-color: var(--primary);
+  color: var(--primary-dark);
+  background: var(--primary-soft);
+}
+.z-case-modes > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  min-height: 44px;
+  font-size: 0.875rem;
+  color: var(--primary);
+}
+.z-case-frame {
+  display: block;
+  width: 100%;
+  height: min(680px, 65dvh);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: white;
+}
+@media (max-width: 560px) {
+  .z-article-case {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .z-article-case > img {
+    width: 76px;
+  }
+  .z-article-case-action {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .z-modal:has(.z-case-frame) {
+    padding: 0 12px 12px;
+  }
+  .z-case-modes {
+    gap: 6px;
+  }
+  .z-case-modes > button {
+    padding: 8px 10px;
+  }
+}
 .z-extras > span {
   color: var(--muted);
   font-size: 0.9375rem;

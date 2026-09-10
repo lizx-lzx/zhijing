@@ -119,18 +119,59 @@ test("welcome, preference examples and private library covers use real visual as
       (await stat("public/images/learning-paths-v1.webp")).size < 100000,
     );
     for (const [question, values] of Object.entries({
-      primary: ["video", "reading", "audio", "animation"],
       pace: ["compact", "balanced", "gentle"],
     })) {
       for (const value of values) {
         const preview = renderToStaticMarkup(
           createElement(ChoicePreview, { question, value }),
         );
-        assert.match(preview, /class="z-(format|pace)-preview/);
+        assert.match(preview, /class="z-pace-preview/);
         if (question === "pace") assert.match(preview, /结论/);
         assert.match(preview, /aria-hidden="true"/);
         assert.doesNotMatch(preview, /<button|<audio|<video/);
       }
+    }
+    const { ArticleCasePreview, ArticleCaseDialog, casePreviewUrl } =
+      await server.ssrLoadModule("/components/learning-case-preview.tsx");
+    for (const [medium, mode] of Object.entries({
+      video: "video",
+      reading: "reading",
+      audio: "audio",
+      animation: "overview",
+    })) {
+      assert.equal(
+        renderToStaticMarkup(
+          createElement(ChoicePreview, { question: "primary", value: medium }),
+        ),
+        "",
+      );
+      const tile = renderToStaticMarkup(
+        createElement(ArticleCasePreview, { medium }),
+      );
+      assert.match(tile, /窗口期可能只剩五年/);
+      assert.match(tile, /window-cover.jpg/);
+      assert.doesNotMatch(tile, /平均|<iframe|<video|<audio|<dialog/);
+      const dialog = renderToStaticMarkup(
+        createElement(ArticleCaseDialog, {
+          medium,
+          onChange() {},
+          onClose() {},
+        }),
+      );
+      const { document } = parseHTML(dialog);
+      const frame = document.querySelector("iframe");
+      assert.ok(frame);
+      assert.equal(frame.getAttribute("src"), casePreviewUrl(medium));
+      assert.ok(frame.getAttribute("src").endsWith(`&mode=${mode}`));
+      assert.match(frame.getAttribute("src"), /zhihu-window-20260908/);
+      assert.match(frame.getAttribute("title"), /窗口期可能只剩五年/);
+      assert.equal(frame.getAttribute("allow"), "fullscreen");
+      assert.equal(
+        document.querySelectorAll('.z-case-modes button[aria-pressed="true"]')
+          .length,
+        1,
+      );
+      assert.doesNotMatch(dialog, /autoPlay|autoplay|平均数/);
     }
     const opening = questions.find((q) => q.id === "entry");
     assert.deepEqual(
@@ -246,6 +287,8 @@ test("concise settings preserve the full questionnaire and explicit save boundar
       }),
     );
     const work = parseHTML(workbench).document;
+    assert.match(workbench, /窗口期可能只剩五年/);
+    assert.doesNotMatch(workbench, /平均数|为我制作这篇/);
     const settings = work.querySelector(".z-temporary");
     assert.equal(settings.hasAttribute("open"), false);
     assert.equal(settings.querySelectorAll("select").length, 4);
