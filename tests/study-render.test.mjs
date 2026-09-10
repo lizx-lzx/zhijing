@@ -96,6 +96,13 @@ test("welcome, preference examples and private library covers use real visual as
     const { Welcome } = await server.ssrLoadModule(
       "/components/learning-welcome.tsx",
     );
+    const { Brand } = await server.ssrLoadModule("/components/learning-ui.tsx");
+    const brand = parseHTML(renderToStaticMarkup(createElement(Brand))).document;
+    const mark = brand.querySelector("svg.brand-mark");
+    assert.equal(mark.getAttribute("data-brand-version"), "rounded-jing-v1");
+    assert.equal(mark.getAttribute("aria-hidden"), "true");
+    assert.equal(mark.querySelector("g").getAttribute("stroke-linecap"), "round");
+    assert.equal(brand.querySelector(".brand-copy strong").textContent, "知径");
     const { ChoicePreview } = await server.ssrLoadModule(
       "/components/learning-previews.tsx",
     );

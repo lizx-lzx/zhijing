@@ -35,7 +35,25 @@ export async function api<T>(
 export function Brand() {
   return (
     <span className="brand">
-      <span className="brand-mark">径</span>
+      <svg
+        className="brand-mark"
+        viewBox="0 0 64 64"
+        aria-hidden="true"
+        focusable="false"
+        data-brand-version="rounded-jing-v1"
+      >
+        <g
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M22 15 15 23 M23 27 14 36 M20 31 20 51" />
+          <path d="M31 17H47Q44 26 31 33 M36 25 50 33" />
+          <path d="M32 40H49 M40.5 40V51 M30 51H51" />
+        </g>
+      </svg>
       <span className="brand-copy">
         <strong>知径</strong>
       </span>
