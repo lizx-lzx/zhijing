@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { defaultAnswers } from "../lib/domain.ts";
+import { sampleText } from "../server/sample.mjs";
 
 const origin = process.env.ZH_ACCEPTANCE_URL || "http://127.0.0.1:4330/api";
 function client() {
@@ -43,7 +44,9 @@ assert.equal(
   (await a("/sources", "POST", { url: "http://127.0.0.1" })).status,
   400,
 );
-const source = (await a("/sources/sample", "POST", {})).data.source;
+const source = (
+  await a("/sources", "POST", { title: "隔离测试材料", text: sampleText })
+).data.source;
 const runs = [];
 for (const entry of ["story", "analysis", "map"]) {
   const design = await a("/profile/design", "POST", {

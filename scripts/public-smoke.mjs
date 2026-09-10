@@ -2,6 +2,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { defaultAnswers } from "../lib/domain.ts";
+import { sampleText } from "../server/sample.mjs";
 const base = process.env.ZH_ACCEPTANCE_URL;
 if (!base || !base.startsWith("https://"))
   throw new Error("Set ZH_ACCEPTANCE_URL to the intended HTTPS /api endpoint");
@@ -55,7 +56,9 @@ assert.equal(
     .status,
   403,
 );
-const { source } = await json(await a("/sources/sample", "POST", {}));
+const { source } = await json(
+  await a("/sources", "POST", { title: "隔离测试材料", text: sampleText }),
+);
 const { lesson: job } = await json(
   await a("/lessons", "POST", { sourceId: source.id }),
 );

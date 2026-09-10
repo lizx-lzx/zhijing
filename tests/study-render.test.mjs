@@ -289,6 +289,16 @@ test("concise settings preserve the full questionnaire and explicit save boundar
     const work = parseHTML(workbench).document;
     assert.match(workbench, /窗口期可能只剩五年/);
     assert.doesNotMatch(workbench, /平均数|为我制作这篇/);
+    assert.equal(work.querySelectorAll(".z-article-case").length, 1);
+    assert.ok(work.querySelector(".z-recent .z-article-case"));
+    assert.match(
+      work.querySelector(".z-recent").textContent,
+      /接着上次继续.*窗口期可能只剩五年.*预览讲解视频/,
+    );
+    assert.doesNotMatch(
+      await readFile("components/learning-workbench.tsx", "utf8"),
+      /sources\/sample/,
+    );
     const settings = work.querySelector(".z-temporary");
     assert.equal(settings.hasAttribute("open"), false);
     assert.equal(settings.querySelectorAll("select").length, 4);

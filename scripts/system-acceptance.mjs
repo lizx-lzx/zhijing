@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { defaultAnswers } from "../lib/domain.ts";
+import { sampleText } from "../server/sample.mjs";
 const base = process.env.ZH_ACCEPTANCE_URL;
 const statePath = process.env.ZH_ACCEPTANCE_STATE;
 const articlePath = process.env.ZH_ACCEPTANCE_ARTICLE;
@@ -101,7 +102,10 @@ for (const def of definitions) {
           title: "窗口期可能只剩五年",
           text: await fs.readFile(articlePath, "utf8"),
         })
-      : await api("/sources/sample", "POST", {});
+      : await api("/sources", "POST", {
+          title: "隔离测试材料",
+          text: sampleText,
+        });
     const { lesson } = await api("/lessons", "POST", {
       sourceId: source.id,
       formats: def.full

@@ -31,7 +31,7 @@ import {
 import { learningMarkdown } from "./study-content.mjs";
 import { studyHTML } from "./study-export.mjs";
 import { cleanStudyState } from "../lib/study-state.ts";
-import { acquireSource, splitSource } from "./source.mjs";
+import { acquireSource } from "./source.mjs";
 import { produceMedia, mediaDir } from "./media.mjs";
 import { playerHTML, diagramSVG } from "./player.mjs";
 import {
@@ -41,7 +41,12 @@ import {
   profileForLesson,
 } from "../lib/domain.ts";
 
-import { sampleText } from "./sample.mjs";
+// Hide only the retired built-in fixture, never user-submitted statistics articles.
+// Apply before LIMIT/OFFSET so library counts and pagination remain truthful.
+const visibleLesson = `NOT EXISTS (
+  SELECT 1 FROM sources AS legacy WHERE legacy.id=lessons.source_id
+  AND legacy.mode='sample' AND legacy.title='平均数为什么不一定代表大多数人？'
+)`;
 
 async function body(req) {
   if (!String(req.headers["content-type"] || "").startsWith("application/json"))
@@ -198,7 +203,7 @@ const server = http.createServer(async (req, res) => {
         hasRecovery: !!one("SELECT recovery_hash FROM users WHERE id=?", user)
           ?.recovery_hash,
         lessons: all(
-          "SELECT * FROM lessons WHERE user_id=? ORDER BY created_at DESC LIMIT 60",
+          `SELECT * FROM lessons WHERE user_id=? AND ${visibleLesson} ORDER BY created_at DESC LIMIT 60`,
           user,
         ).map((r) => lessonView(r, false)),
       });
@@ -281,15 +286,11 @@ const server = http.createServer(async (req, res) => {
     }
     if (route === "/api/sources/sample" && method === "POST") {
       await body(req);
-      json(res, 201, {
-        source: insertSource(user, {
-          title: "平均数为什么不一定代表大多数人？",
-          url: "",
-          mode: "sample",
-          blocks: splitSource(sampleText),
-        }),
-      });
-      return;
+      throw new AppError(
+        "旧体验案例已下线，请打开《窗口期可能只剩五年》学习案例。",
+        410,
+        "SAMPLE_RETIRED",
+      );
     }
     if (route === "/api/lessons" && method === "POST") {
       const input = await body(req);
@@ -316,12 +317,12 @@ const server = http.createServer(async (req, res) => {
       );
       const pattern = `%${query.replace(/[\\%_]/g, "\\$&")}%`;
       const total = one(
-        "SELECT count(*) AS n FROM lessons WHERE user_id=? AND title LIKE ? ESCAPE '\\'",
+        `SELECT count(*) AS n FROM lessons WHERE user_id=? AND ${visibleLesson} AND title LIKE ? ESCAPE '\\'`,
         user,
         pattern,
       ).n;
       const rows = all(
-        "SELECT * FROM lessons WHERE user_id=? AND title LIKE ? ESCAPE '\\' ORDER BY created_at DESC,id DESC LIMIT 24 OFFSET ?",
+        `SELECT * FROM lessons WHERE user_id=? AND ${visibleLesson} AND title LIKE ? ESCAPE '\\' ORDER BY created_at DESC,id DESC LIMIT 24 OFFSET ?`,
         user,
         pattern,
         offset,

@@ -230,17 +230,15 @@ export function Workbench({
   const [overrides, setOverrides] = useState<Partial<Answers>>({});
   const [fullPackage, setFullPackage] = useState(false);
   const currentAnswers = profileForLesson(profile, overrides).answers;
-  async function generate(sample = false) {
+  async function generate() {
     setError("");
-    setBusy(sample ? "正在载入体验文章" : "正在读取你的内容");
+    setBusy("正在读取你的内容");
     try {
-      const s = sample
-        ? await api<{ source: Source }>("/sources/sample", "POST", {})
-        : await api<{ source: Source }>(
-            "/sources",
-            "POST",
-            mode === "link" ? { url } : { text, title },
-          );
+      const s = await api<{ source: Source }>(
+        "/sources",
+        "POST",
+        mode === "link" ? { url } : { text, title },
+      );
       setBusy("正在提交学习任务");
       const d = await api<{ lesson: Lesson }>("/lessons", "POST", {
         sourceId: s.source.id,
@@ -262,7 +260,7 @@ export function Workbench({
       onGenerated({ ...d.lesson, source: s.source });
     } catch (e) {
       setError((e as Error).message);
-      if (!sample && mode === "link") setMode("text");
+      if (mode === "link") setMode("text");
     } finally {
       setBusy("");
     }
@@ -423,27 +421,25 @@ export function Workbench({
           仅提交你有权使用的内容；原文与学习偏好将由 AI 服务处理。
         </p>
       </section>
-      <ArticleCasePreview medium={profile.answers.primary} />
-      {lessons.length > 0 && (
-        <section className="z-recent">
-          <div className="z-section-title">
-            <h2>接着上次继续</h2>
-            <button className="z-text-link" onClick={onLibrary}>
-              全部作品
-              <ArrowRight size={16} />
-            </button>
-          </div>
-          <div className="z-library-grid">
-            {lessons.slice(0, 3).map((item) => (
-              <LessonCard
-                key={item.id}
-                lesson={item}
-                onOpen={() => onOpen(item.id)}
-              />
-            ))}
-          </div>
-        </section>
-      )}
+      <section className="z-recent">
+        <div className="z-section-title">
+          <h2>接着上次继续</h2>
+          <button className="z-text-link" onClick={onLibrary}>
+            全部作品
+            <ArrowRight size={16} />
+          </button>
+        </div>
+        <ArticleCasePreview medium="video" />
+        <div className="z-library-grid">
+          {lessons.slice(0, 3).map((item) => (
+            <LessonCard
+              key={item.id}
+              lesson={item}
+              onOpen={() => onOpen(item.id)}
+            />
+          ))}
+        </div>
+      </section>
     </main>
   );
 }

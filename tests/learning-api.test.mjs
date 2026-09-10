@@ -8,6 +8,7 @@ import path from "node:path";
 import net from "node:net";
 import { buildProfile } from "../lib/domain.ts";
 import { DatabaseSync } from "node:sqlite";
+import { sampleText } from "../server/sample.mjs";
 
 test("HTTP contract: persistence, isolation, CSRF, recovery and honest failure", async (t) => {
   const temp = await mkdtemp(path.join(tmpdir(), "zhijing-api-test-"));
@@ -107,7 +108,13 @@ test("HTTP contract: persistence, isolation, CSRF, recovery and honest failure",
       );
       assert.equal((await a("/sources", "POST", { text: "不足" })).status, 400);
     });
-    const source = (await a("/sources/sample", "POST", {})).data.source;
+    assert.equal((await a("/sources/sample", "POST", {})).status, 410);
+    const source = (
+      await a("/sources", "POST", {
+        title: "平均数为什么不一定代表大多数人？",
+        text: sampleText,
+      })
+    ).data.source;
     await t.test(
       "another user cannot generate from an owned source",
       async () => {
@@ -196,6 +203,44 @@ test("HTTP contract: persistence, isolation, CSRF, recovery and honest failure",
       },
     );
     const c = client();
+    await t.test(
+      "retired built-in samples disappear without hiding a user's same-title article",
+      async () => {
+        const fixture = new DatabaseSync(path.join(temp, "zhijing.sqlite"));
+        const legacySource = "e".repeat(32),
+          legacyLesson = "f".repeat(32);
+        try {
+          fixture
+            .prepare(
+              "INSERT INTO sources SELECT ?,user_id,title,url,'sample',blocks,created_at FROM sources WHERE id=?",
+            )
+            .run(legacySource, source.id);
+          fixture
+            .prepare(
+              "INSERT INTO lessons(id,user_id,source_id,profile,formats,title,status,stage,created_at,updated_at) SELECT ?,user_id,?,profile,formats,'读了两本，为什么没到平均水平？','failed','旧体验',created_at,updated_at FROM lessons WHERE id=?",
+            )
+            .run(legacyLesson, legacySource, job.id);
+        } finally {
+          fixture.close();
+        }
+        const list = (await a("/lessons")).data;
+        assert.equal(list.total, 1);
+        assert.equal(list.lessons[0].id, job.id);
+        assert.ok(
+          !(await a("/me")).data.lessons.some((x) => x.id === legacyLesson),
+        );
+        assert.equal(
+          (await a("/lessons?q=" + encodeURIComponent("读了两本"))).data.total,
+          0,
+        );
+        assert.equal(
+          (await a(`/lessons/${legacyLesson}`)).status,
+          200,
+          "Historical data stays recoverable by its owner",
+        );
+        assert.equal((await b(`/lessons/${legacyLesson}`)).status, 404);
+      },
+    );
     await t.test(
       "library pagination reaches older rows and escapes wildcard searches",
       async () => {
