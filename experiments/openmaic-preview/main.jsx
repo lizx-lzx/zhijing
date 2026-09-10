@@ -21,6 +21,8 @@ const sceneStarts = lesson.scenes.map(
   (_, i) => timing.segments.find((s) => s.scene === i).start,
 );
 const title = lesson.title;
+// Version visual assets so a cached blue video cannot outlive the new theme.
+const visualAsset = (path) => `${path}?v=rice-20260910`;
 const sourceNote =
   lesson.sourceNote || "示例里的五人读书组及阅读量均为虚构数据。";
 const thesis =
@@ -82,8 +84,9 @@ function App() {
           [current.effect.type]: {
             elementId: current.effect.elementId,
             dimness: 0.22,
-            color: "#9cabff",
-            opacity: 0.1,
+            color: "#b3402a",
+            opacity: 0.055,
+            borderWidth: 0,
             animated: false,
           },
         }
@@ -379,7 +382,7 @@ function App() {
                   controls
                   playsInline
                   preload="metadata"
-                  poster="./media/poster.jpg"
+                  poster={visualAsset("./media/poster.jpg")}
                   aria-label={`${title}讲解视频`}
                   onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
                   onLoadedMetadata={(e) => {
@@ -389,7 +392,10 @@ function App() {
                     setError("视频未能加载，可以切到图解或文字继续学习。")
                   }
                 >
-                  <source src="./media/video.mp4" type="video/mp4" />
+                  <source
+                    src={visualAsset("./media/video.mp4")}
+                    type="video/mp4"
+                  />
                   <track
                     kind="captions"
                     src="./media/captions.vtt"
@@ -708,7 +714,7 @@ function App() {
           <StudyDialog title="下载学习作品" onClose={() => setDialog(null)}>
             <section className="downloads" aria-label="带走学习作品">
               <div className="download-links">
-                <a download href="./media/video.mp4">
+                <a download href={visualAsset("./media/video.mp4")}>
                   讲解视频 ↓
                 </a>
                 <a download href="./media/audio.m4a">
@@ -741,7 +747,7 @@ function App() {
                       <a
                         key={s.id}
                         download
-                        href={`./diagrams/chapter-${i + 1}.png`}
+                        href={visualAsset(`./diagrams/chapter-${i + 1}.png`)}
                       >
                         {String(i + 1).padStart(2, "0")} {s.title} ↓
                       </a>

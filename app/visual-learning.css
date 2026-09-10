@@ -19,7 +19,7 @@
   margin: 0 0 28px;
 }
 .z-welcome-visual h1 > span:last-child {
-  color: var(--primary);
+  color: var(--ink);
 }
 .z-welcome-copy > p {
   color: var(--muted);
@@ -44,7 +44,8 @@
 }
 .z-featured-cover {
   overflow: hidden;
-  background: #111d34;
+  background: var(--paper);
+  border: 1px solid var(--line);
   border-radius: 4px;
 }
 .z-featured-cover img {
@@ -61,8 +62,10 @@
   gap: 8px;
   padding: 16px;
   min-height: 52px;
-  color: white;
-  background: #111d34;
+  color: var(--primary-dark);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 0;
   font-size: 15px;
 }
 .z-featured-caption {
@@ -119,7 +122,7 @@
 }
 .z-preview-caption {
   display: block;
-  color: #5b6882;
+  color: #736b61;
   font-size: 0.875rem;
 }
 .z-visual-choices .z-choice {
@@ -151,8 +154,8 @@
   min-width: 0;
   border-radius: 10px;
   padding: 16px;
-  background: #eef3fb;
-  color: #334567;
+  background: #f5f1e8;
+  color: #2b2926;
 }
 .z-format-caption {
   display: flex;
@@ -170,16 +173,16 @@
   width: 100%;
 }
 .z-format-video {
-  background: #edf0fd;
+  background: #f5f1e8;
 }
 .z-format-reading {
-  background: #eff6f7;
+  background: #f5f1e8;
 }
 .z-format-audio {
-  background: #eff1fb;
+  background: #f5f1e8;
 }
 .z-format-animation {
-  background: #f1f4ff;
+  background: #f5f1e8;
 }
 .z-waveform {
   height: 118px;
@@ -192,10 +195,10 @@
   display: block;
   width: 5px;
   border-radius: 8px;
-  background: #717fcb;
+  background: #b9af9e;
 }
 .z-waveform > span:nth-child(3n) {
-  background: #aab6ea;
+  background: #ded7c9;
 }
 .z-mini-map {
   height: 118px;
@@ -207,8 +210,8 @@
 .z-mini-map > span {
   position: relative;
   padding: 10px 7px;
-  border: 1px solid #c9d3ec;
-  background: white;
+  border: 1px solid #ded7c9;
+  background: var(--surface, #fbf8f1);
   border-radius: 8px;
   font-size: 0.875rem;
   line-height: 1.5;
@@ -219,7 +222,7 @@
   position: absolute;
   width: 12px;
   height: 1px;
-  background: #8f9ec5;
+  background: #b9af9e;
   left: -13px;
   top: 50%;
 }
@@ -233,21 +236,21 @@
   gap: 9px;
   padding: 16px 10px;
   border-radius: 9px;
-  background: #f1f4fb;
-  color: #35466a;
+  background: #f5f1e8;
+  color: #2b2926;
   text-align: center;
 }
 .z-entry-preview > svg {
-  color: #687bd1;
+  color: #b3402a;
 }
 .z-entry-preview .z-story-bubble {
   font-size: 0.9375rem;
   line-height: 1.65;
-  color: #35466a;
+  color: #2b2926;
 }
 .z-entry-preview .z-preview-note {
   font-size: 0.875rem;
-  color: #596880;
+  color: #736b61;
 }
 .z-entry-analysis {
   padding: 12px;
@@ -261,9 +264,9 @@
   font-size: 0.9375rem;
 }
 .z-map-root {
-  border: 1px solid #c9d3ec;
+  border: 1px solid #ded7c9;
   border-radius: 8px;
-  background: white;
+  background: var(--surface, #fbf8f1);
   padding: 9px 18px;
   font-size: 0.875rem;
 }
@@ -272,7 +275,7 @@
   gap: 7px;
   margin-top: 13px;
   padding-top: 12px;
-  border-top: 1px solid #bac6e3;
+  border-top: 1px solid #ded7c9;
   position: relative;
 }
 .z-map-branches::before {
@@ -280,19 +283,19 @@
   position: absolute;
   width: 1px;
   height: 14px;
-  background: #bac6e3;
+  background: #ded7c9;
   top: -15px;
   left: 50%;
 }
 .z-map-branches > span {
   padding: 6px 8px;
-  background: #e0e7fa;
+  background: #ebe5d9;
   border-radius: 6px;
   font-size: 0.875rem;
 }
 .z-question-mark {
   font-size: 2.5rem;
-  color: #7183d5;
+  color: #b3402a;
   font-weight: 600;
   line-height: 1;
 }
@@ -303,7 +306,7 @@
   align-items: center;
   min-height: 82px;
   padding: 16px;
-  background: #f0f4fb;
+  background: #f5f1e8;
   border-radius: 9px;
 }
 .z-pace-preview > span {
@@ -312,19 +315,19 @@
   padding: 10px 6px;
   font-size: 0.875rem;
   line-height: 1.4;
-  background: #dfe6fa;
-  color: #46567a;
+  background: #ebe5d9;
+  color: #736b61;
   border-radius: 6px;
 }
 .z-pace-preview > span:last-child {
-  background: #6678ca;
+  background: #b3402a;
   color: white;
 }
 .z-sample > .z-sample-graphic {
   max-width: 180px;
   flex: 0 1 180px;
   padding: 8px;
-  background: #f3f6fc;
+  background: #f5f1e8;
   border-radius: 10px;
 }
 .z-sample-graphic svg {
@@ -355,8 +358,8 @@
   box-sizing: content-box;
   padding: 8px;
   border-radius: 9px;
-  background: #ffffffed;
-  color: #43557a;
+  background: #fbf8f1ed;
+  color: #736b61;
 }
 .z-card-art > span {
   position: absolute;
@@ -367,8 +370,8 @@
   max-width: calc(100% - 24px);
   padding: 5px 9px;
   border-radius: 7px;
-  background: #ffffffed;
-  color: #3b4a67;
+  background: #fbf8f1ed;
+  color: #2b2926;
   font-size: 0.875rem;
   line-height: 1.5;
 }

@@ -179,3 +179,13 @@ test("model content stays inert in HTML, SVG and source presentation", () => {
     }).includes("<script>"),
   );
 });
+
+test("Newly generated video and diagram templates share the rice-paper palette", () => {
+  const data = validateLesson(raw, source);
+  const html = playerHTML(data);
+  const svg = diagramSVG(data.chapters[0]);
+  assert.match(html, /background:#f5f1e8;color:#2b2926/);
+  assert.match(html, /background:#b3402a/);
+  assert.match(svg, /fill="#f5f1e8"/);
+  assert.doesNotMatch(html + svg, /#e6ebff|#5364cb|#232943|#e7ebff/);
+});

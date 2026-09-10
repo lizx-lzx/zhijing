@@ -23,7 +23,7 @@
   justify-content: space-between;
   gap: 24px;
   border-bottom: 1px solid var(--line);
-  background: white;
+  background: var(--surface, #fbf8f1);
 }
 .z-brand-button {
   border: 0;
@@ -53,7 +53,7 @@
   font-weight: 600;
 }
 .z-top nav button:hover {
-  background: #f0f2f9;
+  background: #f5f1e8;
 }
 .z-footer {
   display: flex;
@@ -114,9 +114,9 @@
   gap: 10px;
   padding: 14px 22px;
   border-radius: 12px;
-  background: #24304b;
+  background: #2b2926;
   color: white;
-  box-shadow: 0 10px 40px #2233;
+  box-shadow: 0 10px 40px #2b292633;
   font-size: 0.9375rem;
 }
 .z-toast svg {
@@ -193,8 +193,8 @@
   align-items: center;
   gap: 6px;
   padding: 5px 9px;
-  background: #eff2fa;
-  color: #43557a;
+  background: #f5f1e8;
+  color: #736b61;
   border-radius: 6px;
   font-size: 0.875rem;
 }
@@ -219,7 +219,7 @@
 .z-progress {
   height: 2px;
   border-radius: 8px;
-  background: #e2e6f2;
+  background: #ebe5d9;
   overflow: hidden;
 }
 .z-progress > span {
@@ -322,14 +322,14 @@
   text-align: left;
   border: 1px solid var(--line);
   border-radius: 5px;
-  background: white;
+  background: var(--surface, #fbf8f1);
   transition:
     background 0.15s,
     border-color 0.15s;
 }
 .z-choice:hover:not(:disabled) {
-  border-color: #9ea8e1;
-  background: #fafbff;
+  border-color: #b9af9e;
+  background: #f5f1e8;
 }
 .z-choice.selected {
   border-color: var(--primary);
@@ -354,7 +354,7 @@
   flex: 0 0 22px;
   width: 22px;
   height: 22px;
-  border: 1px solid #bfc8db;
+  border: 1px solid #ded7c9;
   border-radius: 6px;
   color: white;
 }
@@ -372,7 +372,7 @@
   gap: 12px;
   position: sticky;
   bottom: 0;
-  background: #fffffff5;
+  background: #fbf8f1f5;
   padding: 20px 0 0;
   margin-top: 24px;
   z-index: 2;
@@ -443,7 +443,7 @@
   padding: 8px 14px;
   border: 1px solid var(--line);
   border-radius: 5px;
-  background: white;
+  background: var(--surface, #fbf8f1);
   color: var(--ink);
   font-size: 1rem;
 }
@@ -467,7 +467,7 @@
   height: min(680px, 65dvh);
   border: 1px solid var(--line);
   border-radius: 6px;
-  background: white;
+  background: var(--surface, #fbf8f1);
 }
 @media (max-width: 560px) {
   .z-article-case {
@@ -531,7 +531,7 @@
   padding: 14px;
   margin-top: 10px;
   color: var(--ink);
-  background: white;
+  background: var(--surface, #fbf8f1);
   font-size: 1rem;
   line-height: 1.8;
 }
@@ -608,7 +608,7 @@
 .z-rule-content > p {
   font-size: 1rem;
   line-height: 1.85;
-  color: #3c4b66;
+  color: #2b2926;
   margin: 10px 0;
 }
 .z-rule-content .z-rule-evidence {
@@ -625,7 +625,7 @@
   position: sticky;
   bottom: 0;
   z-index: 2;
-  background: #fbfcfef5;
+  background: #f5f1e8f5;
 }
 .z-detail {
   border-top: 1px solid var(--line);
@@ -679,7 +679,7 @@
 }
 .z-input-tabs > button {
   border: 0;
-  background: #f1f3f8;
+  background: #f5f1e8;
   color: var(--muted);
   min-height: 44px;
   padding: 10px 15px;
@@ -711,7 +711,7 @@
   cursor: pointer;
 }
 .z-upload:focus-within {
-  outline: 3px solid #7c84e9;
+  outline: 3px solid #b3402a;
   outline-offset: 3px;
   border-radius: 6px;
 }
@@ -728,7 +728,7 @@
   width: 100%;
   margin-top: 10px;
   border: 1px solid var(--line-strong);
-  background: #fbfcff;
+  background: #f5f1e8;
   border-radius: 10px;
   padding: 14px;
   color: var(--ink);
@@ -742,7 +742,7 @@
   width: 100%;
   min-height: 250px;
   border: 1px solid var(--line-strong);
-  background: #fbfcff;
+  background: #f5f1e8;
   border-radius: 10px;
   padding: 16px;
   font-size: 1rem;
@@ -787,7 +787,7 @@
 .z-temporary {
   margin: 18px 0 0;
   padding: 16px;
-  background: #f5f7fd;
+  background: #f5f1e8;
 }
 .z-temporary > summary {
   display: flex;
@@ -827,7 +827,7 @@
   font-size: 0.875rem;
 }
 .z-temporary select {
-  background: white;
+  background: var(--surface, #fbf8f1);
 }
 .z-sample {
   display: flex;
@@ -835,7 +835,7 @@
   justify-content: space-between;
   gap: 20px;
   border: 1px solid var(--line);
-  background: #fff8;
+  background: #fbf8f188;
   padding: 22px 24px;
   margin-top: 24px;
   border-radius: 14px;
@@ -887,8 +887,8 @@
   justify-content: space-between;
   gap: 12px;
   padding: 22px;
-  background: #e9edfb;
-  color: #535fb8;
+  background: #ebe5d9;
+  color: #b3402a;
 }
 .z-card-art > svg {
   flex-shrink: 0;
@@ -902,12 +902,12 @@
   color: #317c76;
 }
 .z-card-art-reading {
-  background: #eef0f5;
-  color: #607294;
+  background: #ebe5d9;
+  color: #736b61;
 }
 .z-card-art-animation {
-  background: #f0ecfb;
-  color: #7260a7;
+  background: #f5f1e8;
+  color: #736b61;
 }
 .z-lesson-card-body {
   padding: 24px 0;
@@ -925,8 +925,8 @@
   font-size: 0.8125rem;
   padding: 3px 7px;
   border-radius: 5px;
-  background: #eef1f8;
-  color: #4d5e7c;
+  background: #f5f1e8;
+  color: #736b61;
 }
 .z-status-completed,
 .z-status-ready {
@@ -1011,7 +1011,7 @@
   position: sticky;
   top: 0;
   z-index: 12;
-  background: #fbfcfef5;
+  background: #f5f1e8f5;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
@@ -1038,8 +1038,8 @@
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 8px;
-  background: white;
-  box-shadow: 0 10px 35px #2433531c;
+  background: var(--surface, #fbf8f1);
+  box-shadow: 0 10px 35px #2b29261c;
 }
 .z-export a {
   display: block;
@@ -1057,9 +1057,9 @@
   margin: 28px auto;
   padding: 32px;
   max-width: 760px;
-  border: 1px solid #dbe1f7;
+  border: 1px solid #ebe5d9;
   border-radius: 18px;
-  background: white;
+  background: var(--surface, #fbf8f1);
 }
 .z-job-progress h2 {
   font-size: 24px;
@@ -1143,7 +1143,7 @@
   width: 100%;
   aspect-ratio: 16/9;
   border-radius: 4px;
-  background: #1f2a42;
+  background: #2b2926;
 }
 .z-media-surface p,
 .z-animation-surface > p {
@@ -1160,8 +1160,9 @@
   padding: 48px 36px;
   min-height: 360px;
   justify-content: center;
-  background: #141f35;
-  color: #f8fafc;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
   border-radius: 4px;
   text-align: center;
 }
@@ -1176,12 +1177,12 @@
 }
 .z-audio-surface p {
   margin: 0;
-  color: #c6cfdd;
+  color: var(--muted);
   font-size: 15px;
 }
 .z-media-wait {
-  background: #edf0fc;
-  border: 1px solid #dce2f5;
+  background: #f5f1e8;
+  border: 1px solid #ebe5d9;
   border-radius: 16px;
   padding: 36px;
   text-align: center;
@@ -1202,7 +1203,7 @@
   height: 620px;
   border: 1px solid var(--line);
   border-radius: 4px;
-  background: white;
+  background: var(--surface, #fbf8f1);
 }
 .z-reading,
 .z-transcript {
@@ -1222,7 +1223,7 @@
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 15px 18px;
-  background: white;
+  background: var(--surface, #fbf8f1);
   font-size: 0.9375rem;
   color: var(--primary-dark);
   margin-bottom: 20px;
@@ -1257,7 +1258,7 @@
 .z-chapter > p {
   font-size: 1.125rem;
   line-height: 2;
-  color: #34435d;
+  color: #2b2926;
   white-space: pre-wrap;
 }
 .z-diagram {
@@ -1276,13 +1277,13 @@
   flex: 1;
   min-width: 0;
   padding: 20px 17px;
-  background: #edf1fb;
-  border: 1px solid #dce3f6;
+  background: #f5f1e8;
+  border: 1px solid #ebe5d9;
   border-radius: 11px;
 }
 .z-node-index {
   display: block;
-  color: #6375ac;
+  color: #736b61;
   font-size: 0.8125rem;
   margin-bottom: 10px;
 }
@@ -1295,7 +1296,7 @@
   font-size: 1rem;
   line-height: 1.8;
   margin: 10px 0 0;
-  color: #43567a;
+  color: #736b61;
 }
 .z-relation {
   display: flex;
@@ -1303,7 +1304,7 @@
   align-self: center;
   flex-direction: column;
   gap: 5px;
-  color: #5b6fb0;
+  color: #736b61;
   max-width: 64px;
 }
 .z-relation span {
@@ -1418,11 +1419,11 @@
   border-radius: 18px;
   padding: 0 28px 28px;
   color: var(--ink);
-  background: white;
-  box-shadow: 0 24px 90px #1e2d4c33;
+  background: var(--surface, #fbf8f1);
+  box-shadow: 0 24px 90px #2b292633;
 }
 .z-modal::backdrop {
-  background: #19284277;
+  background: #2b292677;
   backdrop-filter: blur(3px);
 }
 .z-modal-top {
@@ -1434,7 +1435,7 @@
   margin-bottom: 12px;
   position: sticky;
   top: 0;
-  background: white;
+  background: var(--surface, #fbf8f1);
   z-index: 1;
   border-bottom: 1px solid var(--line);
 }
@@ -1451,7 +1452,7 @@
   flex-shrink: 0;
   border: 1px solid var(--line);
   border-radius: 9px;
-  background: #f7f8fc;
+  background: #f5f1e8;
 }
 .z-modal > p,
 .z-device-settings > p {
@@ -1481,7 +1482,7 @@
 .z-recovery {
   padding: 20px;
   background: var(--primary-soft);
-  border: 1px solid #dce1f7;
+  border: 1px solid #ebe5d9;
   border-radius: 12px;
 }
 .z-recovery label {
@@ -1496,7 +1497,7 @@
   border-radius: 8px;
   padding: 12px;
   margin: 12px 0;
-  background: white;
+  background: var(--surface, #fbf8f1);
 }
 .z-directory-dialog {
   display: grid;

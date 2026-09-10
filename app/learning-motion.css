@@ -9,13 +9,13 @@
   border: 1px solid var(--line);
   border-radius: 10px;
   color: var(--muted);
-  background: white;
+  background: var(--surface, #fbf8f1);
   font-size: 0.875rem;
   white-space: nowrap;
 }
 .z-motion-toggle[aria-pressed="true"] {
   color: var(--primary-dark);
-  background: #f1f4ff;
+  background: #f5f1e8;
 }
 .z-motion-toggle:disabled {
   cursor: default;
@@ -44,12 +44,11 @@
 }
 @keyframes zCheckPop {
   0% {
-    transform: scale(0.78);
-  }
-  65% {
-    transform: scale(1.14);
+    opacity: 0;
+    transform: scale(0.94);
   }
   100% {
+    opacity: 1;
     transform: scale(1);
   }
 }
@@ -74,12 +73,12 @@
   0%,
   70%,
   100% {
-    background: white;
+    background: var(--surface, #fbf8f1);
     transform: translateY(0);
   }
   25%,
   45% {
-    background: #dfe7ff;
+    background: #ebe5d9;
     transform: translateY(-3px);
   }
 }
@@ -192,7 +191,7 @@
   }
   [data-motion="on"] .button-primary:not(:disabled):hover {
     transform: translateY(-2px);
-    box-shadow: 0 7px 18px #4c5fe82b;
+    box-shadow: 0 7px 18px #736b612b;
   }
 }
 /* CSS and ReactBits must both settle immediately; never hide essential text. */

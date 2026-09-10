@@ -20,7 +20,7 @@
   padding: 10px 38px 10px 14px;
   border: 1px solid var(--line);
   border-radius: 10px;
-  background: white;
+  background: var(--surface, #fbf8f1);
   color: var(--primary-dark);
   font-size: 1rem;
   cursor: pointer;
@@ -94,7 +94,7 @@
 .z-practice-tabs button {
   border: 1px solid var(--line);
   border-radius: 10px;
-  background: white;
+  background: var(--surface, #fbf8f1);
   padding: 9px 15px;
   min-height: 44px;
 }
@@ -117,17 +117,17 @@
 .z-audio-controls select {
   color: var(--ink);
   padding: 9px;
-  background: white;
+  background: var(--surface, #fbf8f1);
   border: 1px solid var(--line);
   border-radius: 10px;
 }
 .z-audio-surface > .z-kicker {
   display: block;
   margin-top: 15px;
-  color: #c6cfdd;
+  color: var(--muted);
 }
 .z-audio-surface .z-detail summary {
-  color: #c6cfdd;
+  color: var(--muted);
 }
 .z-audio-controls button {
   color: var(--ink);
@@ -165,7 +165,7 @@
   width: 100%;
   display: block;
   text-align: left;
-  background: white;
+  background: var(--surface, #fbf8f1);
   border: 1px solid var(--line);
   border-radius: 9px;
   padding: 12px;
@@ -212,7 +212,7 @@
 .z-scenario-options button {
   padding: 20px;
   border: 1px solid var(--line);
-  background: white;
+  background: var(--surface, #fbf8f1);
   border-radius: 12px;
   text-align: left;
   line-height: 1.8;
@@ -268,7 +268,7 @@
   padding: 20px;
   font-size: 17px;
   line-height: 1.9;
-  background: white;
+  background: var(--surface, #fbf8f1);
 }
 .z-download-grid {
   display: grid;
@@ -296,7 +296,7 @@
   width: 100%;
   border: 0;
   border-bottom: 1px solid var(--line);
-  background: white;
+  background: var(--surface, #fbf8f1);
 }
 .z-directory-dialog button.active {
   color: var(--primary-dark);
@@ -332,7 +332,7 @@
   padding: 12px 16px;
   border: 1px solid var(--line-strong);
   border-radius: 12px;
-  background: white;
+  background: var(--surface, #fbf8f1);
 }
 .z-load-more {
   display: block;

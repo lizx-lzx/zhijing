@@ -5,20 +5,20 @@
 @import "./learning-motion.css";
 
 :root {
-  --paper: #fbfcfe;
-  --surface: #ffffff;
-  --ink: #141c2b;
-  --muted: #626c7b;
-  --primary: #2459e8;
-  --primary-dark: #1740b8;
-  --primary-soft: #edf2ff;
+  --paper: #f5f1e8;
+  --surface: #fbf8f1;
+  --ink: #2b2926;
+  --muted: #736b61;
+  --primary: #b3402a;
+  --primary-dark: #8d301f;
+  --primary-soft: #f2e4db;
   --amber: #ad7523;
   --amber-soft: #fff2da;
   --green: #287758;
   --green-soft: #e9f5ef;
-  --line: #e0e4eb;
-  --line-strong: #bdc5d2;
-  --shadow: 0 8px 24px #17203308;
+  --line: #ded7c9;
+  --line-strong: #b9af9e;
+  --shadow: 0 8px 24px #2b292608;
   --font-ui:
     var(--font-geist-sans), "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-editorial: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
@@ -131,7 +131,7 @@ select {
   background: var(--primary-dark);
 }
 .button-quiet {
-  background: white;
+  background: var(--surface, #fbf8f1);
   border-color: var(--line);
 }
 .button-quiet:hover:not(:disabled) {
@@ -148,7 +148,7 @@ select {
   top: -80px;
   left: 12px;
   z-index: 100;
-  background: white;
+  background: var(--surface, #fbf8f1);
   color: var(--primary);
   padding: 12px;
   border: 2px solid var(--primary);

@@ -55,7 +55,7 @@
 .inline-diagram {
   margin: 0 0 26px;
   padding: 24px;
-  background: #f4f6fc;
+  background: #f5f1e8;
   border: 1px solid var(--line);
   border-radius: 12px;
 }
@@ -75,9 +75,9 @@
 }
 .inline-node {
   padding: 12px 16px;
-  background: white;
-  border: 1px solid #d4daee;
-  border-left: 3px solid #737adb;
+  background: var(--surface, #fbf8f1);
+  border: 1px solid #ebe5d9;
+  border-left: 3px solid #b3402a;
   border-radius: 8px;
 }
 .inline-node strong,
@@ -130,7 +130,7 @@
 }
 .overview-branch {
   padding: 18px 14px;
-  background: #f6f7fc;
+  background: #f5f1e8;
   border: 1px solid var(--line);
   border-radius: 12px;
 }
@@ -166,7 +166,7 @@
   line-height: 1.7;
   margin-top: 8px;
   padding: 12px;
-  background: white;
+  background: var(--surface, #fbf8f1);
   color: var(--ink);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -174,7 +174,7 @@
 .overview-branch button[aria-pressed="true"] {
   border-color: var(--accent);
   background: var(--tint);
-  color: #333994;
+  color: #736b61;
 }
 .overview-branch button span {
   flex-shrink: 0;
@@ -182,9 +182,9 @@
 .map-detail {
   margin-top: 22px;
   padding: 22px 24px;
-  border-left: 3px solid #737adb;
+  border-left: 3px solid #b3402a;
   border-radius: 0 12px 12px 0;
-  background: #f1f3fc;
+  background: #f5f1e8;
 }
 .map-detail h3 {
   font-size: 1.25rem;
@@ -215,15 +215,15 @@
   border: 1px solid var(--line);
   padding: 8px 14px;
   border-radius: 9px;
-  background: white;
+  background: var(--surface, #fbf8f1);
   color: var(--ink);
   font-size: 1rem;
 }
 .practice-tabs button[aria-pressed="true"],
 .scenario-nav button[aria-pressed="true"] {
   background: var(--tint);
-  border-color: #a0a4e0;
-  color: #353da0;
+  border-color: #b9af9e;
+  color: #736b61;
 }
 .scenario-nav {
   border-top: 1px solid var(--line);
@@ -232,7 +232,7 @@
 }
 .scenario-nav button {
   border: 0;
-  background: #f4f5fa;
+  background: #f5f1e8;
 }
 .scenario-notice {
   color: #805717;
@@ -247,7 +247,7 @@
 .scenario-options button {
   padding: 18px;
   border: 1px solid var(--line);
-  background: #f7f8fc;
+  background: #f5f1e8;
   border-radius: 12px;
   color: var(--ink);
   font-size: 1.0625rem;
@@ -306,9 +306,9 @@
 }
 .recall-card {
   padding: 28px;
-  border: 1px solid #d2d6ed;
+  border: 1px solid #ded7c9;
   border-radius: 14px;
-  background: #f7f8fe;
+  background: #f5f1e8;
   min-height: 270px;
   display: flex;
   flex-direction: column;
@@ -333,7 +333,7 @@
   font-size: 1rem;
 }
 .card-answer blockquote {
-  border-left: 3px solid #a0a4e0;
+  border-left: 3px solid #b9af9e;
   padding-left: 14px;
   margin: 8px 0;
   font-size: 1rem;
@@ -370,10 +370,10 @@
   border-radius: 8px;
   min-height: 44px;
   padding: 8px;
-  background: white;
+  background: var(--surface, #fbf8f1);
 }
 .audio-tools select:focus-visible {
-  outline: 3px solid #6369d8;
+  outline: 3px solid #b3402a;
   outline-offset: 3px;
 }
 .audio-view .audio-tools {
@@ -393,7 +393,7 @@
   display: block;
   text-align: left;
   border: 1px solid var(--line);
-  background: white;
+  background: var(--surface, #fbf8f1);
   border-radius: 10px;
   padding: 16px;
   color: var(--ink);
@@ -407,8 +407,8 @@
   font-size: 0.9375rem;
 }
 .audio-transcript button[aria-current] {
-  background: #f1f3fc;
-  border-color: #a0a4e0;
+  background: #f5f1e8;
+  border-color: #b9af9e;
 }
 @media (max-width: 1100px) and (min-width: 1001px), (max-width: 740px) {
   .overview-grid {
@@ -440,7 +440,7 @@
     flex-direction: column;
   }
   .inline-path + .inline-path {
-    border-top: 1px dashed #abb3d7;
+    border-top: 1px dashed #b9af9e;
     padding-top: 18px;
   }
   .inline-contrast .inline-path,

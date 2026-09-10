@@ -74,6 +74,7 @@ ZH_PUBLIC_UI_URL=https://app.chainvalley.top/zhijing/ node scripts/public-ui-smo
 - [页面动效与减少动态设置](docs/09-页面动效.md)
 - [界面减法与保留边界](docs/10-界面减法.md)
 - [整体视觉重设计](docs/11-整体视觉重设计.md)
+- [宣纸留白：网站、案例与视频视觉统一](docs/14-宣纸留白视觉统一.md)
 - [OpenMAIC 单篇讲解试作：实现、边界与复现](experiments/openmaic-preview/README.md)
 - [知乎文章《窗口期可能只剩五年》：完整学习作品](experiments/openmaic-preview/lessons/window-five-years/README.md)
 

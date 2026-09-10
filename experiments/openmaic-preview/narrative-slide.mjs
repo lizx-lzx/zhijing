@@ -1,11 +1,11 @@
 const C = {
-  bg: "#121e36",
-  ink: "#f3f6ff",
-  muted: "#afbdd6",
-  panel: "#203253",
-  accent: "#9cabff",
-  warm: "#f4ba78",
-  green: "#7cd6c4",
+  bg: "#f5f1e8",
+  ink: "#2b2926",
+  muted: "#736b61",
+  panel: "#ebe5d9",
+  accent: "#b3402a",
+  warm: "#8d301f",
+  green: "#8a8174",
 };
 export function narrativeDiagram(chapter) {
   const groups = [];
@@ -49,7 +49,7 @@ const text = (
   width: w,
   height: size * 1.45 * String(value).split("\n").length + 14,
   rotate: 0,
-  defaultFontName: "PingFang SC",
+  defaultFontName: id === "title" ? "Songti SC" : "PingFang SC",
   defaultColor: color,
   lineHeight: 1.3,
   content: `<p style="font-size:${size}px;font-weight:${weight};text-align:${align}">${esc(value).replace(/\n/g, "<br>")}</p>`,

@@ -141,7 +141,7 @@ test("Audio navigation remains bounded and speed choices include normal playback
   assert.equal(clampTime(120, 408.8), 120);
   assert.deepEqual(playbackRates, [0.75, 1, 1.25, 1.5, 2]);
 });
-test("Added forms do not change previously released narration or recording geometry", () => {
+test("Rice theme preserves released narration, content and recording geometry", () => {
   const previous = JSON.parse(
     execFileSync(
       "git",
@@ -156,14 +156,44 @@ test("Added forms do not change previously released narration or recording geome
     scenes.map((s) => ({
       actions: s.actions,
       diagram: s.diagram,
-      canvas: { ...s.content.canvas, id: undefined },
+      canvas: {
+        ...s.content.canvas,
+        id: undefined,
+        background: undefined,
+        elements: s.content.canvas.elements.map((element) => ({
+          ...element,
+          fill: undefined,
+          defaultColor: undefined,
+          defaultFontName: undefined,
+        })),
+      },
     }));
   assert.deepEqual(stable(lesson.scenes), stable(previous.scenes));
   if (process.env.ZH_REQUIRE_MEDIA === "1")
     assert.equal(
       createHash("sha256")
-        .update(fs.readFileSync(new URL("public/media/video.mp4", edition)))
+        .update(fs.readFileSync(new URL("public/media/audio.m4a", edition)))
         .digest("hex"),
-      "d86ae71205eb7a8bb512ca84a99233c6ea5840e2235438150c5731a807b6e47a",
+      "84a81b66fe33aa28ac1c9dd24d66ddf5a9cc8f8a25a3118e2433a20ddd1bc4bd",
     );
+});
+
+test("Rice theme is baked into every chapter, not only player chrome", () => {
+  const palette = new Set([
+    "#f5f1e8",
+    "#2b2926",
+    "#736b61",
+    "#ebe5d9",
+    "#b3402a",
+    "#8d301f",
+    "#8a8174",
+  ]);
+  for (const scene of lesson.scenes) {
+    const canvas = scene.content.canvas;
+    assert.equal(canvas.background.color, "#f5f1e8");
+    for (const element of canvas.elements) {
+      if (element.fill) assert.ok(palette.has(element.fill));
+      if (element.defaultColor) assert.ok(palette.has(element.defaultColor));
+    }
+  }
 });

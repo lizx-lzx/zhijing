@@ -14,7 +14,7 @@ const caseModes: Record<Medium, string> = {
   animation: "overview",
 };
 export const casePreviewUrl = (medium: Medium) =>
-  `${base}/demo/zhihu-window-20260908/?ui=2ad9b72&mode=${caseModes[medium]}`;
+  `${base}/demo/zhihu-window-20260908/?ui=rice-20260910&mode=${caseModes[medium]}`;
 
 export function ArticleCaseDialog({
   medium,
@@ -70,7 +70,7 @@ export function ArticleCasePreview({ medium }: { medium: Medium }) {
         aria-label={`预览学习案例：窗口期可能只剩五年 · ${mediaLabels[medium]}`}
       >
         <img
-          src={`${base}/images/window-cover.jpg`}
+          src={`${base}/images/window-cover.jpg?v=rice-20260910`}
           width={1280}
           height={720}
           alt=""

@@ -3,15 +3,16 @@
 
 :root {
   font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-  color: #202b42;
-  background: #f7f8fc;
+  color: #2b2926;
+  background: #f5f1e8;
   font-synthesis: none;
   font-size: 16px;
-  --ink: #202b42;
-  --muted: #58647b;
-  --accent: #4c50c7;
-  --line: #e0e4ee;
-  --tint: #edeefd;
+  --ink: #2b2926;
+  --muted: #736b61;
+  --accent: #b3402a;
+  --line: #ded7c9;
+  --tint: #f2e4db;
+  --surface: #fbf8f1;
 }
 * {
   box-sizing: border-box;
@@ -37,7 +38,7 @@ button:disabled {
 button:focus-visible,
 a:focus-visible,
 summary:focus-visible {
-  outline: 3px solid #6369d8;
+  outline: 3px solid #b3402a;
   outline-offset: 3px;
 }
 a {
@@ -74,7 +75,7 @@ a {
 .download-trigger {
   color: var(--ink);
   border: 1px solid var(--line);
-  background: white;
+  background: var(--surface, #fbf8f1);
   min-height: 42px;
   padding: 8px 15px;
   border-radius: 10px;
@@ -82,7 +83,7 @@ a {
 }
 .download-trigger:hover {
   background: var(--tint);
-  border-color: #c7caf1;
+  border-color: #736b61;
 }
 main {
   max-width: 1320px;
@@ -90,8 +91,9 @@ main {
   margin: auto;
 }
 h1 {
+  font-family: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
   font-size: clamp(26px, 2.6vw, 34px);
-  font-weight: 650;
+  font-weight: 500;
   line-height: 1.4;
   margin: 0;
   letter-spacing: -0.6px;
@@ -132,7 +134,7 @@ h1 {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: #f7f8fcf5;
+  background: #f5f1e8f5;
   backdrop-filter: blur(12px);
   padding: 8px 0 12px;
 }
@@ -141,7 +143,7 @@ h1 {
   gap: 4px;
   padding: 4px;
   border-radius: 12px;
-  background: #eceef5;
+  background: #ebe5d9;
 }
 .view-tabs button {
   padding: 9px 18px;
@@ -154,13 +156,13 @@ h1 {
   white-space: nowrap;
 }
 .view-tabs button:hover {
-  background: #ffffff85;
+  background: #fbf8f185;
 }
 .view-tabs button[aria-pressed="true"] {
-  background: white;
+  background: var(--surface, #fbf8f1);
   color: var(--accent);
   font-weight: 600;
-  box-shadow: 0 2px 5px #28334e0b;
+  box-shadow: 0 2px 5px #2b29260b;
 }
 .mobile-chapter-trigger {
   display: none;
@@ -178,20 +180,20 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 16px;
   overflow: hidden;
-  background: white;
-  box-shadow: 0 8px 30px #28365006;
+  background: var(--surface, #fbf8f1);
+  box-shadow: 0 8px 30px #2b292606;
 }
 .player video {
   display: block;
   width: 100%;
   aspect-ratio: 16/9;
-  background: #111d35;
+  background: #f5f1e8;
 }
 .canvas {
   width: 100%;
   aspect-ratio: 16/9;
   position: relative;
-  background: #f8fafc;
+  background: #f5f1e8;
 }
 .player-actions {
   display: flex;
@@ -238,7 +240,7 @@ h1 {
   min-height: 200px;
   border: 1px solid var(--line);
   border-radius: 16px;
-  background: #fff9;
+  background: #fbf8f199;
   overflow: hidden;
 }
 .chapter-heading {
@@ -263,7 +265,7 @@ h1 {
   min-height: 0;
   padding: 0 8px 10px;
   scrollbar-width: thin;
-  scrollbar-color: #b9bfd3 transparent;
+  scrollbar-color: #ded7c9 transparent;
 }
 .chapter {
   display: flex;
@@ -280,17 +282,17 @@ h1 {
   min-height: 58px;
 }
 .chapter:hover {
-  background: #eff1f8;
+  background: #f5f1e8;
 }
 .chapter.active {
   background: var(--tint);
-  color: #30378d;
-  border-color: #dddff6;
+  color: #2b2926;
+  border-color: #ebe5d9;
 }
 .chapter-no {
   font-size: 0.8125rem;
   font-variant-numeric: tabular-nums;
-  color: #69758a;
+  color: #736b61;
 }
 .chapter-title {
   flex: 1;
@@ -301,11 +303,11 @@ h1 {
 .chapter-time {
   font-size: 0.8125rem;
   font-variant-numeric: tabular-nums;
-  color: #69758a;
+  color: #736b61;
 }
 .active .chapter-no,
 .active .chapter-time {
-  color: #5055ad;
+  color: #b3402a;
 }
 .eyebrow {
   color: var(--muted);
@@ -318,7 +320,7 @@ h1 {
   border-top: 1px solid var(--line);
   font-size: 1.0625rem;
   line-height: 1.9;
-  background: white;
+  background: var(--surface, #fbf8f1);
 }
 .slide-controls {
   display: flex;
@@ -330,7 +332,7 @@ h1 {
 .slide-controls button {
   border: 1px solid var(--line);
   border-radius: 9px;
-  background: white;
+  background: var(--surface, #fbf8f1);
   min-height: 44px;
   padding: 8px 12px;
   color: var(--ink);
@@ -352,7 +354,7 @@ h1 {
 .audio-view,
 .long-reading {
   padding: clamp(22px, 3vw, 38px);
-  background: white;
+  background: var(--surface, #fbf8f1);
 }
 .audio-view {
   min-height: 370px;
@@ -406,14 +408,14 @@ h1 {
 .reading-chapter blockquote {
   margin: 14px 0;
   padding: 12px 16px;
-  border-left: 3px solid #abb4e2;
-  background: #f4f6fb;
+  border-left: 3px solid #b9af9e;
+  background: #f5f1e8;
   line-height: 1.9;
 }
 .key-line {
-  color: #3441a0;
-  background: #f0f2fb;
-  border-left: 3px solid #6d78d5;
+  color: #b3402a;
+  background: #f5f1e8;
+  border-left: 3px solid #b3402a;
   padding: 12px 18px;
 }
 .reading {
@@ -468,7 +470,7 @@ h1 {
   display: inline-block;
   text-decoration: underline;
   text-underline-offset: 3px;
-  color: #404fa8;
+  color: #736b61;
   line-height: 1.8;
   margin: 5px 18px 5px 0;
   font-size: 0.9375rem;
@@ -478,7 +480,7 @@ h1 {
   margin: 10px 0;
 }
 .self-check summary {
-  color: #4758a1;
+  color: #736b61;
   cursor: pointer;
 }
 .data-note {
@@ -510,17 +512,17 @@ footer a {
 }
 .study-dialog {
   color: var(--ink);
-  background: white;
+  background: var(--surface, #fbf8f1);
   border: 1px solid var(--line);
   border-radius: 20px;
   padding: 0;
   width: min(600px, calc(100% - 32px));
   max-height: calc(100dvh - 48px);
   margin: auto;
-  box-shadow: 0 24px 100px #16223f35;
+  box-shadow: 0 24px 100px #2b292635;
 }
 .study-dialog::backdrop {
-  background: #18243e73;
+  background: #2b292673;
   backdrop-filter: blur(4px);
 }
 .dialog-heading {
@@ -531,7 +533,7 @@ footer a {
   padding: 16px 24px;
   position: sticky;
   top: 0;
-  background: #fffffff5;
+  background: #fbf8f1f5;
   border-bottom: 1px solid var(--line);
   z-index: 1;
 }
@@ -546,7 +548,7 @@ footer a {
   padding: 8px 12px;
   color: var(--muted);
   border: 0;
-  background: #f2f4f8;
+  background: #f5f1e8;
   border-radius: 9px;
   font-size: 0.9375rem;
 }
@@ -571,7 +573,7 @@ footer a {
 .preference strong {
   padding: 4px 10px;
   font-weight: 500;
-  color: #4149a0;
+  color: #b3402a;
   background: var(--tint);
   border-radius: 6px;
 }
@@ -593,13 +595,13 @@ footer a {
 .download-links a {
   border: 1px solid var(--line);
   border-radius: 10px;
-  background: #f8f9fd;
+  background: #f5f1e8;
   font-size: 1rem;
   padding: 18px;
 }
 .download-links a:hover {
   background: var(--tint);
-  border-color: #c7caf1;
+  border-color: #736b61;
 }
 .downloads details {
   margin: 24px 0 0;
@@ -615,7 +617,7 @@ footer a {
   padding: 16px 0 0;
 }
 .diagram-links a {
-  color: #4758a1;
+  color: #736b61;
   font-size: 1rem;
   line-height: 1.7;
   padding: 10px 0;
@@ -627,7 +629,7 @@ footer a {
   overflow: auto;
   overscroll-behavior: contain;
   border-radius: 12px;
-  background: #121e36;
+  background: #f5f1e8;
 }
 .diagram-dialog .dialog-note {
   margin: 18px 0 0;
@@ -637,9 +639,21 @@ footer a {
   display: none;
 }
 
-/* Capture geometry stays independent of responsive UI. Existing media is unchanged. */
+/* Quiet ink emphasis: no neon outline or glow in either playback or export. */
+.canvas .highlight-overlay > div {
+  box-shadow: none !important;
+  border-bottom: 2px solid #b3402a !important;
+  border-radius: 0 !important;
+}
+.brand > span,
+.player,
+.chapters,
+.study-dialog {
+  border-radius: 4px;
+}
+/* Capture geometry stays independent of responsive UI. */
 .capture {
-  background: #f8fafc;
+  background: #f5f1e8;
   overflow: hidden;
 }
 .capture-layout {
@@ -662,8 +676,8 @@ footer a {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  background: #19263d;
+  color: #2b2926;
+  background: #ebe5d9;
   font-size: 26px;
   line-height: 1.55;
   text-align: center;
@@ -673,7 +687,7 @@ footer a {
   bottom: 0;
   left: 0;
   height: 4px;
-  background: #959bf5;
+  background: #b3402a;
 }
 @media (max-width: 1000px) {
   .topbar {
@@ -862,11 +876,11 @@ footer a {
   .responsive-diagram {
     display: block;
     padding: 24px 20px;
-    background: #121e36;
-    color: #f3f6ff;
+    background: #f5f1e8;
+    color: #2b2926;
   }
   .diagram-kind {
-    color: #f4ba78;
+    color: #8d301f;
     font-size: 0.875rem;
   }
   .responsive-diagram h2 {
@@ -878,23 +892,23 @@ footer a {
   .diagram-subtitle {
     font-size: 1.0625rem;
     line-height: 1.8;
-    color: #c5cfe2;
+    color: #736b61;
     margin: 0 0 24px;
   }
   .diagram-path + .diagram-path {
-    border-top: 1px solid #526480;
+    border-top: 1px solid #736b61;
     padding-top: 24px;
     margin-top: 24px;
   }
   .path-label {
     display: block;
     font-size: 0.875rem;
-    color: #c5cfe2;
+    color: #736b61;
     margin-bottom: 12px;
   }
   .diagram-node {
-    background: #203253;
-    border-left: 3px solid #9cabff;
+    background: #f5f1e8;
+    border-left: 3px solid #b3402a;
     border-radius: 0 10px 10px 0;
     padding: 18px;
   }
@@ -905,7 +919,7 @@ footer a {
     margin: 0 0 7px;
   }
   .diagram-node p {
-    color: #d0d9ea;
+    color: #736b61;
     font-size: 1.125rem;
     line-height: 1.8;
     white-space: pre-line;
@@ -916,7 +930,7 @@ footer a {
     font-size: 25px;
     line-height: 1.4;
     padding: 9px 0;
-    color: #acb9ff;
+    color: #b3402a;
   }
   .relation-layers .diagram-node + .diagram-node {
     margin-top: 14px;
@@ -924,16 +938,16 @@ footer a {
   .diagram-note {
     font-size: 1rem;
     line-height: 1.9;
-    color: #c5cfe2;
+    color: #736b61;
     margin: 22px 0 0;
   }
   .cycle-return,
   .diagram-warning {
     font-size: 1rem;
     line-height: 1.8;
-    color: #f4ba78;
+    color: #8d301f;
     padding: 14px;
-    background: #203253;
+    background: #f5f1e8;
     border-radius: 8px;
     margin: 16px 0 0;
   }

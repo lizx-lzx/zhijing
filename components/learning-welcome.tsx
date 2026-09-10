@@ -48,12 +48,12 @@ export function Welcome({
         </div>
         <a
           className="z-featured-work"
-          href={`${base}/demo/zhihu-window-20260908/?ui=2ad9b72`}
+          href={`${base}/demo/zhihu-window-20260908/?ui=rice-20260910`}
           aria-label="查看学习作品示例：窗口期可能只剩五年"
         >
           <div className="z-featured-cover">
             <img
-              src={`${base}/images/window-cover.jpg`}
+              src={`${base}/images/window-cover.jpg?v=rice-20260910`}
               width={1280}
               height={720}
               fetchPriority="high"
