@@ -21,10 +21,16 @@ const source = {
   url: "",
   createdAt: new Date().toISOString(),
   blocks: [
+    { id: "intro", text: "这是原文的前文，应保留供读者对照。".repeat(40) },
     {
       id: "p1",
       text: "平均数描述总体，但不能代替每一个人的实际情况。比较数据时，要先问清样本是谁。",
     },
+    {
+      id: "p2",
+      text: "这是另一处相关原文。旧作品只记录了段落关联，没有准确句子。",
+    },
+    { id: "after", text: "这是原文的后文，不应被过滤或高亮。" },
   ],
 };
 const content = {
@@ -37,8 +43,8 @@ const content = {
       title,
       kind: "解释",
       fictional: i === 0,
-      sourceIds: ["p1"],
-      body: "同样是一个平均数，背后可能是完全不同的生活。一个数字能告诉我们总体的水平，却不能替每一个人说话。\n因此，看到数据时可以先问：它统计了谁？这些人之间的差异有多大？理解数字的边界，才能减少被数字误导的机会。",
+      sourceIds: ["p1", "p2"],
+      body: "平均数描述总体，但不能代替每一个人的实际情况。\n因此，看到数据时可以先问：它统计了谁？这些人之间的差异有多大？理解数字的边界，才能减少被数字误导的机会。",
       narration: "测试讲解",
       visual: {
         type: "chain",
@@ -344,6 +350,23 @@ try {
   await snapshot(p, "lesson-reading");
   await p.getByRole("button", { name: "查看对应原文" }).first().click();
   await p.getByRole("dialog").waitFor();
+  assert.equal(
+    await p.locator(".z-source-paragraph").count(),
+    4,
+    "source retains surrounding paragraphs",
+  );
+  assert.equal(
+    await p.locator("[data-highlight=sentence]").count(),
+    1,
+    "literal source sentence is highlighted",
+  );
+  assert.ok(
+    (await p.locator("[data-highlight=paragraph]").count()) > 0,
+    "legacy paragraph mapping is explicit",
+  );
+  await p.getByRole("button", { name: "下一处", exact: true }).click();
+  await p.getByText("对应原文 2 / 2", { exact: true }).waitFor();
+  await p.screenshot({ path: `${out}/source-highlight.png`, fullPage: true });
   assert.equal(await p.evaluate(() => document.body.style.overflow), "hidden");
   await p.keyboard.press("Escape");
   assert.equal(await p.getByRole("dialog").count(), 0);
@@ -351,6 +374,12 @@ try {
     await p.evaluate(() => document.activeElement.textContent),
     "查看对应原文",
   );
+  await p.setViewportSize({ width: 390, height: 844 });
+  await p.getByRole("button", { name: "查看对应原文" }).first().click();
+  await p.getByRole("button", { name: "返回讲解", exact: true }).waitFor();
+  await p.screenshot({ path: `${out}/source-mobile.png`, fullPage: true });
+  await p.getByRole("button", { name: "返回讲解", exact: true }).click();
+  assert.equal(await p.getByRole("dialog").count(), 0);
   await p.setViewportSize({ width: 390, height: 844 });
   await p.getByRole("button", { name: "打开章节目录" }).click();
   await p.screenshot({

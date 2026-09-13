@@ -1,4 +1,44 @@
 /* Personal reading room: shared surfaces, not a new product flow. */
+.z-source-reader {
+  position: relative;
+}
+.z-source-tools {
+  position: sticky;
+  top: 96px;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  background: var(--surface);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.z-source-tools button {
+  margin-left: 16px;
+}
+.z-source-tools button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.z-source-paragraph p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.9;
+}
+.z-source-paragraph[data-source-target] {
+  border-left: 3px solid var(--primary);
+  padding-left: 16px;
+}
+.z-source-paragraph mark {
+  background: #f4dca5;
+  color: #342d27;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.z-source-paragraph mark[data-highlight="paragraph"] {
+  background: #f5e8dd;
+}
 .z-app {
   background:
     radial-gradient(ellipse at 88% 12%, #f0dec344, transparent 48%),

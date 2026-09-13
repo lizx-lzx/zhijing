@@ -494,3 +494,9 @@ body:not(.capture) .study-toolbar {
     padding: 8px;
   }
 }
+.source-highlight {
+  background: #f4dca5;
+  color: #342d27;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}

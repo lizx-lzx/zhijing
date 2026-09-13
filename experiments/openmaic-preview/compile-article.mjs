@@ -36,6 +36,8 @@ const scenes = chapters.map((c, i) => {
   const at = source.indexOf(c.quote);
   if (at < 0) throw new Error(`Untraceable quote for ${c.id}`);
   const startLine = source.slice(0, at).split("\n").length;
+  const paragraphStart = source.lastIndexOf("\n\n", at);
+  const paragraphEnd = source.indexOf("\n\n", at + c.quote.length);
   const actions = c.speech.flatMap((text, n) => [
     {
       id: `${c.id}-cue-${n}`,
@@ -62,6 +64,12 @@ const scenes = chapters.map((c, i) => {
     quote: c.quote,
     startLine,
     endLine: startLine + c.quote.split("\n").length - 1,
+    context: source
+      .slice(
+        paragraphStart < 0 ? 0 : paragraphStart + 2,
+        paragraphEnd < 0 ? source.length : paragraphEnd,
+      )
+      .trim(),
   };
   scene.takeaway = c.takeaway;
   scene.reading = c.reading;

@@ -19,6 +19,7 @@ import {
   Visual,
 } from "./learning-ui";
 import { useStudyState } from "./use-study-state";
+import { SourceReader } from "./source-reader";
 
 const modes: { id: StudyMode; label: string }[] = [
   { id: "video", label: "讲解视频" },
@@ -76,6 +77,7 @@ export function LessonView({
   const [focus, setFocus] = useState<string[]>([]),
     [error, setError] = useState(""),
     [busy, setBusy] = useState(false);
+  const [sourceExplanation, setSourceExplanation] = useState("");
   const [connectionError, setConnectionError] = useState(""),
     [rate, setRate] = useState(1),
     [time, setTime] = useState(0);
@@ -162,8 +164,9 @@ export function LessonView({
     };
   }, [medium, active, patch]);
 
-  function source(ids: string[] = []) {
+  function source(ids: string[] = [], explanation = "") {
     setFocus(ids);
+    setSourceExplanation(explanation);
     setDialog("source");
   }
   function track(at: number, lane: "video" | "audio", force = false) {
@@ -989,7 +992,7 @@ export function LessonView({
                   <div className="z-chapter-foot">
                     <button
                       className="z-source-button"
-                      onClick={() => source(c.sourceIds)}
+                      onClick={() => source(c.sourceIds, c.body)}
                     >
                       查看对应原文
                     </button>
@@ -1198,19 +1201,12 @@ export function LessonView({
               在知乎查看原文 ↗
             </a>
           )}
-          {focus.length > 0 && (
-            <button className="z-text-link" onClick={() => setFocus([])}>
-              显示全部段落
-            </button>
-          )}
-          {lesson.source.blocks
-            .filter((b) => !focus.length || focus.includes(b.id))
-            .map((b) => (
-              <section className="z-source-paragraph" key={b.id}>
-                <strong>{b.id}</strong>
-                <p>{b.text}</p>
-              </section>
-            ))}
+          <SourceReader
+            blocks={lesson.source.blocks}
+            ids={focus}
+            explanation={sourceExplanation}
+            onClose={() => setDialog(null)}
+          />
           <button
             className="button button-quiet"
             onClick={() => setDialog(null)}
