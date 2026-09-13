@@ -1,4 +1,24 @@
 /* These reading formats never change the video capture canvas. */
+body:not(.capture) {
+  background: #f8f4eb;
+  --line: #e8ded0;
+  --surface: #fffdf8;
+  --tint: #f5e8dd;
+}
+body:not(.capture) .player {
+  border-radius: 22px;
+  border-color: var(--line);
+  box-shadow: 0 12px 38px #78533209;
+}
+body:not(.capture) .topbar {
+  border-bottom-color: transparent;
+}
+body:not(.capture) .chapter {
+  border-radius: 12px;
+}
+body:not(.capture) .study-toolbar {
+  background: #f8f4ebf5;
+}
 .extended-tabs {
   display: flex;
   width: fit-content;

@@ -1,6 +1,6 @@
 /* Featured cover from the published work, not a mock player. */
 /* eslint-disable @next/next/no-img-element */
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import StaggeredText from "./react-bits/staggered-text";
 import { base } from "./learning-ui";
 
@@ -19,7 +19,7 @@ export function Welcome({
         <div className="z-welcome-copy">
           <StaggeredText
             as="h1"
-            text={"长文，\n换一种读法。"}
+            text={"给好奇心，\n留一个小角落。"}
             segmentBy="lines"
             blur={false}
             delay={140}
@@ -29,7 +29,7 @@ export function Welcome({
             to={{ opacity: 1, y: 0 }}
             respectReducedMotion
           />
-          <p>图文、声音、影像。用你喜欢的方式理解。</p>
+          <p>把一篇长文，变成你愿意读下去的样子。</p>
           <button
             className="button button-primary button-large"
             onClick={onStart}
@@ -46,30 +46,35 @@ export function Welcome({
             </button>
           )}
         </div>
-        <a
-          className="z-featured-work"
-          href={`${base}/demo/zhihu-window-20260908/?ui=case-entry-20260910&mode=overview`}
-          aria-label="查看学习作品示例：窗口期可能只剩五年"
-        >
-          <div className="z-featured-cover">
-            <img
-              src={`${base}/images/window-cover.jpg?v=rice-20260910`}
-              width={1280}
-              height={720}
-              fetchPriority="high"
-              alt="作品中的思想实验：企业提效与家庭收入为什么可能不同步"
-            />
-            <span className="z-featured-open">
-              <Play size={18} aria-hidden="true" /> 进入作品
-            </span>
-          </div>
-          <div className="z-featured-caption">
-            <span>学习作品 · 示例</span>
-            <h2>窗口期可能只剩五年</h2>
-            <ArrowRight size={24} aria-hidden="true" />
-          </div>
-        </a>
+        <div className="z-reading-nook" aria-hidden="true">
+          <img
+            src={`${base}/images/reading-nook-v1.webp`}
+            width={1200}
+            height={900}
+            alt=""
+            fetchPriority="high"
+          />
+        </div>
       </section>
+      <a
+        className="z-featured-work"
+        href={`${base}/demo/zhihu-window-20260908/?ui=case-entry-20260910&mode=overview`}
+        aria-label="查看学习作品示例：窗口期可能只剩五年"
+      >
+        <div className="z-featured-cover">
+          <img
+            src={`${base}/images/window-cover.jpg?v=rice-20260910`}
+            width={1280}
+            height={720}
+            alt="作品中的思想实验：企业提效与家庭收入为什么可能不同步"
+          />
+        </div>
+        <div className="z-featured-caption">
+          <span>学习作品 · 示例</span>
+          <h2>窗口期可能只剩五年</h2>
+          <ArrowRight size={24} aria-hidden="true" />
+        </div>
+      </a>
     </main>
   );
 }

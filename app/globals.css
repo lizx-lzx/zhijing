@@ -3,22 +3,24 @@
 @import "./study.css";
 @import "./visual-learning.css";
 @import "./learning-motion.css";
+@import "./warmth.css";
 
 :root {
-  --paper: #f5f1e8;
-  --surface: #fbf8f1;
-  --ink: #2b2926;
-  --muted: #736b61;
+  --paper: #f8f4eb;
+  --surface: #fffdf8;
+  --ink: #342d27;
+  --muted: #76695d;
   --primary: #b3402a;
   --primary-dark: #8d301f;
-  --primary-soft: #f2e4db;
+  --primary-soft: #f5e8dd;
   --amber: #ad7523;
   --amber-soft: #fff2da;
   --green: #287758;
   --green-soft: #e9f5ef;
-  --line: #ded7c9;
-  --line-strong: #b9af9e;
-  --shadow: 0 8px 24px #2b292608;
+  --line: #e8ded0;
+  --line-strong: #c8b9a5;
+  --shadow: 0 12px 38px #78533209, 0 2px 6px #78533205;
+  --radius-card: 24px;
   --font-ui:
     var(--font-geist-sans), "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-editorial: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
@@ -105,7 +107,7 @@ select {
   min-height: 44px;
   padding: 11px 18px;
   border: 1px solid transparent;
-  border-radius: 5px;
+  border-radius: 14px;
   font-size: 0.9375rem;
   font-weight: 600;
   line-height: 1.5;

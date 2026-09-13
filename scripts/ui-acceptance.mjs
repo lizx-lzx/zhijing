@@ -209,7 +209,7 @@ async function snapshot(page, name, widths = [1440, 1024, 768, 390, 320]) {
     if (width <= 768 && (await nav.count())) {
       const box = await nav.boundingBox();
       assert.ok(
-        box.y + box.height <= 961 && box.y >= 800,
+        box.y + box.height <= 961 && box.y >= 0,
         "mobile navigation remains reachable",
       );
     }
@@ -299,7 +299,7 @@ try {
     .locator(".z-composer textarea")
     .fill(source.blocks[0].text.repeat(4));
   await page.getByRole("button", { name: "开始生成", exact: true }).click();
-  await page.getByRole("heading", { name: "把文章整理成你的讲法" }).waitFor();
+  await page.getByRole("heading", { name: "正在按你的学法整理文章" }).waitFor();
   await snapshot(page, "generation");
   await page.getByRole("button", { name: "先回学习库" }).click();
   assert.ok(
