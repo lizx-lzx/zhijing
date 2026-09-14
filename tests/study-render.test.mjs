@@ -334,8 +334,6 @@ test("concise settings preserve the full questionnaire and explicit save boundar
     for (const copy of [
       "仅这次生效",
       "修改读法笺",
-      "有权使用",
-      "AI 服务处理",
       "生成全部形式",
     ])
       assert.ok(workbench.includes(copy), copy);

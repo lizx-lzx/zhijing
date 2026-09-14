@@ -413,9 +413,6 @@ export function Workbench({
             )}
           </button>
         </div>
-        <p className="z-disclosure">
-          仅提交你有权使用的内容；原文与学习偏好将由 AI 服务处理。
-        </p>
       </section>
       <section className="z-recent">
         <div className="z-section-title">
