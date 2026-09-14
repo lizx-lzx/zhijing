@@ -391,25 +391,10 @@ function App() {
           <div>
             <h1>{title}</h1>
             {query.get("experience") === "demo" && (
-              <p className="lesson-meta">示例内容 · 预置作品，非本次输入生成</p>
-            )}
-            {mode !== "video" && (
-              <div className="lesson-meta">
-                {lesson.sourceMeta && <span>{lesson.author} · 知乎</span>}
-                <span>
-                  {timing.voiceReady ? `${clock(Math.ceil(duration))} · ` : ""}
-                  {lesson.scenes.length} 章
-                </span>
-                <button type="button" onClick={() => setDialog("preferences")}>
-                  示例讲法 ⌄
-                </button>
-              </div>
+              <p className="lesson-meta">演示</p>
             )}
           </div>
         </div>
-        {mode !== "video" && lesson.notice && (
-          <p className="content-notice">{lesson.notice}</p>
-        )}
         <div className="study-toolbar">
           <button
             className="mobile-source-trigger"
