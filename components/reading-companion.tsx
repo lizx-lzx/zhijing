@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { api } from "./learning-ui";
 import { CompanionCat } from "./companion-cat";
+import { useCompanionDrag } from "./use-companion-drag";
 type Message = {
   role: string;
   text: string;
@@ -36,6 +37,7 @@ export function ReadingCompanion({
   const conversation = useRef<HTMLDivElement>(null);
   const launcher = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLElement>(null);
+  const floating = useCompanionDrag(launcher, panel, open);
   useEffect(() => {
     if (open) panel.current?.focus();
   }, [open]);
@@ -94,10 +96,25 @@ export function ReadingCompanion({
       <button
         className="z-pet"
         ref={launcher}
+        style={floating.style}
+        {...floating.handlers}
+        onKeyDown={(e) => {
+          const delta: Record<string, [number, number]> = {
+            ArrowLeft: [-20, 0],
+            ArrowRight: [20, 0],
+            ArrowUp: [0, -20],
+            ArrowDown: [0, 20],
+          };
+          if (delta[e.key]) {
+            e.preventDefault();
+            floating.moveBy(...delta[e.key]);
+          }
+        }}
         aria-expanded={open}
         aria-controls="companion-popover"
         aria-label="打开陪读小猫"
         onClick={() => {
+          if (floating.consumeClick()) return;
           if (open) close();
           else setOpen(true);
         }}
@@ -112,6 +129,7 @@ export function ReadingCompanion({
           aria-label="陪读小猫"
           aria-modal="false"
           ref={panel}
+          style={floating.panelStyle}
           tabIndex={-1}
           onKeyDown={(e) => {
             if (e.key === "Escape") {

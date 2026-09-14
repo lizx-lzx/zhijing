@@ -2,6 +2,8 @@
   flex-wrap: wrap;
 }
 .z-pet {
+  touch-action: none;
+  user-select: none;
   position: fixed;
   right: 20px;
   bottom: 20px;
@@ -16,6 +18,9 @@
   color: #85442e;
   box-shadow: 0 5px 20px #65432920;
   cursor: pointer;
+}
+.z-pet:active {
+  cursor: grabbing;
 }
 .z-pet-cat {
   font-size: 32px;
