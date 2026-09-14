@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { api, Modal } from "./learning-ui";
+import { api } from "./learning-ui";
 import { CompanionCat } from "./companion-cat";
 type Message = {
   role: string;
@@ -34,6 +34,15 @@ export function ReadingCompanion({
   const [loaded, setLoaded] = useState(false);
   const chatPath = lessonId ? `/lessons/${lessonId}/chat` : "/companion/chat";
   const conversation = useRef<HTMLDivElement>(null);
+  const launcher = useRef<HTMLButtonElement>(null);
+  const panel = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (open) panel.current?.focus();
+  }, [open]);
+  function close() {
+    setOpen(false);
+    launcher.current?.focus();
+  }
   useEffect(() => {
     if (conversation.current)
       conversation.current.scrollTop = conversation.current.scrollHeight;
@@ -84,16 +93,39 @@ export function ReadingCompanion({
     <>
       <button
         className="z-pet"
+        ref={launcher}
+        aria-expanded={open}
+        aria-controls="companion-popover"
         aria-label="打开陪读小猫"
         onClick={() => {
-          setScope(null);
-          setOpen(true);
+          if (open) close();
+          else setOpen(true);
         }}
       >
         <CompanionCat busy={busy} open={open} />
       </button>
       {open && (
-        <Modal title="陪读小猫" onClose={() => setOpen(false)}>
+        <section
+          id="companion-popover"
+          className="z-pet-popover"
+          role="dialog"
+          aria-label="陪读小猫"
+          aria-modal="false"
+          ref={panel}
+          tabIndex={-1}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") {
+              e.stopPropagation();
+              close();
+            }
+          }}
+        >
+          <header className="z-pet-popover-header">
+            <strong>陪读小猫</strong>
+            <button className="z-text-link" aria-label="关闭" onClick={close}>
+              ×
+            </button>
+          </header>
           <div className="z-pet-scope">
             {scope
               ? `正在聊：${scope.title}`
@@ -199,7 +231,7 @@ export function ReadingCompanion({
             </a>{" "}
             · 知径交互改编
           </small>
-        </Modal>
+        </section>
       )}
     </>
   );

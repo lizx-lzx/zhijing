@@ -122,6 +122,66 @@
 .z-pet-credit a {
   color: inherit;
 }
+.z-pet-popover {
+  position: fixed;
+  right: 20px;
+  bottom: 158px;
+  z-index: 40;
+  width: min(370px, calc(100vw - 24px));
+  max-height: calc(100dvh - 180px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: #fffaf2;
+  border: 1px solid #dfcab2;
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: 0 12px 40px #61472b26;
+  color: #40362d;
+  font-size: 14px;
+}
+.z-pet-popover:focus {
+  outline: none;
+}
+.z-pet-popover-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.z-pet-popover-header button {
+  font-size: 26px;
+  min-width: 36px;
+  min-height: 36px;
+}
+.z-pet-popover .z-pet-messages {
+  max-height: 24dvh;
+  min-height: 60px;
+}
+.z-pet-popover .z-pet-shortcuts {
+  justify-content: flex-start;
+  gap: 6px;
+}
+.z-pet-popover .z-pet-shortcuts button {
+  font-size: 13px;
+  padding: 7px 10px;
+  min-height: 36px;
+}
+.z-pet-popover .z-pet-input {
+  min-height: 62px;
+  font-size: 16px;
+}
+.z-pet-popover .z-pet-credit {
+  font-size: 11px;
+  margin-top: 12px;
+}
+@media (max-width: 600px) {
+  .z-pet-popover {
+    right: 10px;
+    bottom: 130px;
+    max-height: calc(100dvh - 145px);
+    padding: 14px;
+  }
+}
 .z-pet-fallback {
   display: block;
   padding-top: 45px;
