@@ -953,7 +953,24 @@ function App() {
           <a href="./THIRD-PARTY-NOTICES.txt">开源说明</a>
         </footer>
       </main>
-      {!capture && <ReadingCompanion target={null} onSource={() => {}} />}
+      {!capture && (
+        <ReadingCompanion
+          target={null}
+          onSource={() => {}}
+          studyContext={{
+            id: scene.id,
+            title: scene.title,
+            quote: scene.sourceAnchor?.context,
+          }}
+          onOriginal={() => {
+            if (window.innerWidth <= 1000) {
+              video.current?.pause();
+              audio.current?.pause();
+              setDialog("source");
+            } else setSidebar("source");
+          }}
+        />
+      )}
     </>
   );
 }

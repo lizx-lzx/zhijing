@@ -1,6 +1,21 @@
 .z-lesson-toolbar {
   flex-wrap: wrap;
 }
+.z-pet-nudge {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  width: 144px;
+  padding: 12px 10px;
+  border: 1px solid #e3d6c3;
+  border-radius: 16px 16px 16px 4px;
+  background: #fffdf8;
+  color: #594536;
+  font-size: 15px;
+  line-height: 1.5;
+  box-shadow: 0 6px 20px #68452612;
+  white-space: nowrap;
+}
 .z-pet {
   touch-action: none;
   user-select: none;

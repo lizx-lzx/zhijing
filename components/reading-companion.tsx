@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { api } from "./learning-ui";
 import { CompanionCat } from "./companion-cat";
 import { useCompanionDrag } from "./use-companion-drag";
+import { studyNudges, useStudyNudge } from "./use-study-nudge";
 type Message = {
   role: string;
   text: string;
@@ -12,6 +13,8 @@ export function ReadingCompanion({
   lessonId,
   target,
   onSource,
+  studyContext,
+  onOriginal,
 }: {
   lessonId?: string;
   target: {
@@ -21,6 +24,8 @@ export function ReadingCompanion({
     paragraphIndex?: number;
   } | null;
   onSource: (ids: string[], text: string) => void;
+  studyContext?: { id: string; title: string; quote?: string };
+  onOriginal?: () => void;
 }) {
   const [open, setOpen] = useState(false),
     [busy, setBusy] = useState(false);
@@ -38,6 +43,7 @@ export function ReadingCompanion({
   const launcher = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLElement>(null);
   const floating = useCompanionDrag(launcher, panel, open);
+  const hint = useStudyNudge(studyContext?.id, open);
   useEffect(() => {
     if (open) panel.current?.focus();
   }, [open]);
@@ -115,11 +121,29 @@ export function ReadingCompanion({
         aria-label="打开陪读小猫"
         onClick={() => {
           if (floating.consumeClick()) return;
+          if (hint.nudge) {
+            const action = hint.nudge;
+            hint.dismiss();
+            if (action === "original" && onOriginal) {
+              onOriginal();
+              return;
+            }
+            setQuestion(
+              `请帮我梳理「${studyContext?.title || "这一章"}」。${studyContext?.quote ? `参考原文：${studyContext.quote}` : ""}`,
+            );
+            setOpen(true);
+            return;
+          }
           if (open) close();
           else setOpen(true);
         }}
       >
         <CompanionCat busy={busy} open={open} />
+        {hint.nudge && (
+          <span className="z-pet-nudge" role="status">
+            {studyNudges.find((item) => item.id === hint.nudge)?.text}
+          </span>
+        )}
       </button>
       {open && (
         <section
