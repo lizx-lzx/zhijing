@@ -170,18 +170,33 @@ function App() {
     if (audio.current) audio.current.currentTime = bounded;
   };
   const switchMode = (next) => {
+    if (next === mode) return;
+    const media =
+      mode === "video"
+        ? video.current
+        : mode === "audio"
+          ? audio.current
+          : null;
+    const position =
+      media && media.readyState > 0
+        ? clampTime(media.currentTime, duration)
+        : time;
+    const chapter = locateSegment(timing.segments, position).scene;
     video.current?.pause();
     audio.current?.pause();
-    setMode(next);
+    flushSync(() => {
+      setTime(position);
+      setMode(next);
+    });
     setError("");
     requestAnimationFrame(() => {
-      if (next === "reading" && index > 0)
-        scrollToContent(`#reading-${lesson.scenes[index].id}`);
+      if (next === "reading")
+        scrollToContent(`#reading-${lesson.scenes[chapter].id}`);
       else if (window.scrollY > 250) scrollToContent(".player");
     });
   };
   const chooseChapter = (i) => {
-    if (["overview", "practice"].includes(mode)) {
+    if (mode === "practice") {
       setDialog(null);
       readChapter(lesson.scenes[i].id);
       return;
@@ -576,7 +591,15 @@ function App() {
                 </div>
               )}
               {mode === "overview" && lesson.learningFormats && (
-                <Overview lesson={lesson} onRead={readChapter} />
+                <Overview
+                  lesson={lesson}
+                  onRead={readChapter}
+                  activeChapter={scene.id}
+                  onSelect={(id) => {
+                    const i = lesson.scenes.findIndex((s) => s.id === id);
+                    if (i >= 0 && i !== index) seek(sceneStarts[i]);
+                  }}
+                />
               )}
               {mode === "practice" && lesson.learningFormats && (
                 <Practice

@@ -39,9 +39,10 @@ export function InlineDiagram({ diagram }) {
   );
 }
 
-export function Overview({ lesson, onRead }) {
+export function Overview({ lesson, onRead, activeChapter, onSelect }) {
   const { overview } = lesson.learningFormats;
-  const [selected, setSelected] = useState(lesson.scenes[0].id);
+  const [localSelected, setSelected] = useState(lesson.scenes[0].id);
+  const selected = activeChapter || localSelected;
   const detail = useRef(null);
   const scene = lesson.scenes.find((s) => s.id === selected);
   const loop = lesson.scenes.find((s) => s.id === overview.loopChapter);
@@ -65,6 +66,7 @@ export function Overview({ lesson, onRead }) {
                   aria-pressed={id === selected}
                   onClick={() => {
                     setSelected(id);
+                    onSelect?.(id);
                     requestAnimationFrame(() =>
                       detail.current?.scrollIntoView({
                         block: "nearest",

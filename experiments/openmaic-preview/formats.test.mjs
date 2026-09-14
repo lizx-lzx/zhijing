@@ -39,6 +39,15 @@ fs.writeFileSync(
   ),
 );
 const { InlineDiagram, Overview, Practice } = await import(output.href);
+test("Overview follows the shared chapter instead of resetting to chapter one", () => {
+  const chapter = lesson.scenes[3];
+  const html = renderToStaticMarkup(React.createElement(Overview, {
+    lesson, onRead() {}, activeChapter: chapter.id, onSelect() {},
+  }));
+  assert.ok(html.includes(`<h3>${chapter.title}</h3>`));
+  assert.equal((html.match(/aria-pressed="true"/g) || []).length, 1);
+  assert.ok(html.includes(`aria-pressed="true">${chapter.title}`));
+});
 const noop = () => {};
 const props = {
   lesson,
