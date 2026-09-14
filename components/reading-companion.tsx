@@ -202,26 +202,28 @@ export function ReadingCompanion({
             ))}
             {busy && <p role="status">小猫正在翻书…</p>}
           </div>
-          <div className="z-pet-shortcuts">
-            {(lessonId
-              ? ["讲简单点", "换个例子", "帮我回顾重点", "问我一个小问题"]
-              : [
-                  "怎么开始学习？",
-                  "帮我选一种学习方式",
-                  "今天不太想学，陪我聊聊",
-                  "怎么找到之前的文章？",
-                ]
-            ).map((t) => (
-              <button
-                className="button button-quiet"
-                disabled={busy || !loaded}
-                key={t}
-                onClick={() => void send(t)}
-              >
-                {t}
-              </button>
-            ))}
-          </div>
+          {loaded && messages.length === 0 && !busy && (
+            <div className="z-pet-shortcuts">
+              {(lessonId
+                ? ["讲简单点", "换个例子", "帮我回顾重点", "问我一个小问题"]
+                : [
+                    "怎么开始学习？",
+                    "帮我选一种学习方式",
+                    "今天不太想学，陪我聊聊",
+                    "怎么找到之前的文章？",
+                  ]
+              ).map((t) => (
+                <button
+                  className="button button-quiet"
+                  disabled={busy || !loaded}
+                  key={t}
+                  onClick={() => void send(t)}
+                >
+                  {t}
+                </button>
+              ))}
+            </div>
+          )}
           <form
             onSubmit={(e) => {
               e.preventDefault();
