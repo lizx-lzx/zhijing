@@ -95,6 +95,12 @@ body {
   color: var(--ink);
 }
 .brand-copy {
+  width: auto;
+  height: auto;
+  background: transparent;
+  color: var(--ink);
+  white-space: nowrap;
+  flex-shrink: 0;
   font-family: "Songti SC", "STSong", serif;
   font-size: 28px;
 }

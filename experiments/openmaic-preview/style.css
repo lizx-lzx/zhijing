@@ -62,7 +62,7 @@ a {
   font-size: 21px;
   font-weight: 650;
 }
-.brand > span {
+.brand > span:not(.brand):not(.brand-copy) {
   display: grid;
   place-items: center;
   width: 32px;

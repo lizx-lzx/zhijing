@@ -486,7 +486,7 @@ function App() {
                   aria-label={`${title}讲解视频`}
                   onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
                   onLoadedMetadata={(e) => {
-                    e.currentTarget.currentTime = time;
+                    if (time > 0) e.currentTarget.currentTime = time;
                   }}
                   onError={() =>
                     setError("视频未能加载，可以切到图解或文字继续学习。")
