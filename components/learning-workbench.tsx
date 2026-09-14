@@ -251,7 +251,9 @@ export function Workbench({
         localStorage.setItem("zhijing-demo-mode", selectedMode);
         localStorage.setItem("zhijing-demo-time", "0");
       } catch {}
-      window.location.assign(demoStudyUrl(base, selectedMode));
+      window.location.assign(
+        demoStudyUrl(base, selectedMode) + (fullPackage ? "&formats=all" : ""),
+      );
       return;
     }
     setError("");
@@ -423,16 +425,15 @@ export function Workbench({
           </details>
         }
         <ErrorNotice message={error} />
-        {!demoMode && (
-          <label className="z-full-package">
-            <input
-              type="checkbox"
-              checked={fullPackage}
-              onChange={(e) => setFullPackage(e.target.checked)}
-            />
-            <span>生成全部形式</span>
-          </label>
-        )}
+        <label className="z-full-package">
+          <input
+            type="checkbox"
+            checked={fullPackage}
+            disabled={!!busy}
+            onChange={(e) => setFullPackage(e.target.checked)}
+          />
+          <span>{demoMode ? "体验全部形式" : "生成全部形式"}</span>
+        </label>
         {busy && demoMode && (
           <div className="z-demo-preparing" role="status">
             <span aria-hidden="true">▱</span>

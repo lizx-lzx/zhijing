@@ -327,6 +327,11 @@ test("concise settings preserve the full questionnaire and explicit save boundar
     assert.ok(settings);
     assert.equal(settings.querySelectorAll("select").length, 4);
     assert.equal(settings.querySelectorAll("select[disabled]").length, 3);
+    assert.ok(work.querySelector('.z-full-package input[type="checkbox"]'));
+    assert.match(
+      work.querySelector(".z-full-package").textContent,
+      /体验全部形式/,
+    );
     assert.equal(work.querySelectorAll(".z-current-profile").length, 0);
     assert.equal(
       work.querySelectorAll(".z-composer .z-format-preview").length,
