@@ -671,38 +671,6 @@ function App() {
                           <p>{s.premise}</p>
                         </details>
                       )}
-                      {s.sourceAnchor && (
-                        <details>
-                          <summary>查看对应原文</summary>
-                          <blockquote>
-                            {
-                              s.sourceAnchor.context?.split(
-                                s.sourceAnchor.quote,
-                              )[0]
-                            }
-                            <mark className="source-highlight">
-                              {s.sourceAnchor.quote}
-                            </mark>
-                            {s.sourceAnchor.context
-                              ?.split(s.sourceAnchor.quote)
-                              .slice(1)
-                              .join(s.sourceAnchor.quote)}
-                          </blockquote>
-                          <p className="data-note">
-                            用户提供文本 · 第 {s.sourceAnchor.startLine} 行
-                          </p>
-                          {lesson.sourceMeta?.url && (
-                            <a
-                              className="source-link"
-                              href={`${lesson.sourceMeta.url}#:~:text=${encodeURIComponent(s.sourceAnchor.quote)}`}
-                              target="_blank"
-                              rel="noreferrer"
-                            >
-                              在知乎查看作者原文 ↗
-                            </a>
-                          )}
-                        </details>
-                      )}
                     </section>
                   ))}
                 </div>
