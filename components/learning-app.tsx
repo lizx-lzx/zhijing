@@ -20,8 +20,10 @@ import { Onboarding, SkillEditor } from "./learning-onboarding";
 import { LearningLibrary, Workbench } from "./learning-workbench";
 import { LessonView } from "./learning-lesson";
 import { ReadingCompanion } from "./reading-companion";
+import { useExperienceShortcut } from "./use-experience-shortcut";
 
 export default function LearningApp() {
+  useExperienceShortcut(base);
   const reducedMotion = useReducedMotion();
   const [motionPaused, setMotionPaused] = useState(false);
   const [pageVisible, setPageVisible] = useState(true);

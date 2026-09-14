@@ -12,6 +12,7 @@ import "./style.css";
 import "./formats.css";
 import { Brand } from "../../components/learning-ui";
 import { ReadingCompanion } from "../../components/reading-companion";
+import { useExperienceShortcut } from "../../components/use-experience-shortcut";
 import "../../app/study.css";
 import "./room.css";
 import { narrativeSlide } from "./narrative-slide.mjs";
@@ -59,6 +60,7 @@ function scrollToContent(selector) {
 }
 
 function App() {
+  useExperienceShortcut("/zhijing");
   const [visibleModes, setVisibleModes] = useState(() => {
     let value = query.get("formats");
     if (!value && query.has("resume")) {
