@@ -90,6 +90,18 @@ function App() {
         : "slides";
   });
   const [playbackRate, setPlaybackRate] = useState(1);
+  useEffect(() => {
+    if (mode !== "reading" || !time || capture) return;
+    const chapter = locateSegment(timing.segments, time).scene;
+    const frame = requestAnimationFrame(() => scrollToContent(`#reading-${lesson.scenes[chapter].id}`));
+    return () => cancelAnimationFrame(frame);
+  }, []);
+  useEffect(() => {
+    if (capture || query.get("experience") !== "demo") return;
+    try {
+      localStorage.setItem("zhijing-demo-mode", mode);
+    } catch {}
+  }, [mode]);
   const [scenarioAnswers, setScenarioAnswers] = useState({});
   const [cardIndex, setCardIndex] = useState(0);
   const [cardRevealed, setCardRevealed] = useState(false);
@@ -1003,9 +1015,15 @@ function App() {
               audio.current?.pause();
               setDialog("source");
             } else {
-              const panel = document.querySelector(".full-original .source-panel");
+              const panel = document.querySelector(
+                ".full-original .source-panel",
+              );
               const mark = panel?.querySelector("mark");
-              if (mark) panel.scrollTop += mark.getBoundingClientRect().top - panel.getBoundingClientRect().top - 60;
+              if (mark)
+                panel.scrollTop +=
+                  mark.getBoundingClientRect().top -
+                  panel.getBoundingClientRect().top -
+                  60;
             }
           }}
         />

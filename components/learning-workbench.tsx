@@ -16,7 +16,7 @@ import {
 import type { Answers, Lesson, Profile, Source } from "../lib/domain";
 import { mediaLabels, profileForLesson, questions } from "../lib/domain";
 import { api, base, endpoint, ErrorNotice, Spinner } from "./learning-ui";
-import { casePreviewUrl } from "./learning-case-preview";
+import { demoEntryMode, demoStudyUrl, demoModes } from "../lib/demo-route";
 
 export function LessonCard({
   lesson,
@@ -230,22 +230,28 @@ export function Workbench({
   const [fullPackage, setFullPackage] = useState(false);
   const demoMode = true;
   const [demoVisited, setDemoVisited] = useState(false);
+  const [resumeMode, setResumeMode] = useState("video");
   useEffect(() => {
     try {
       setDemoVisited(localStorage.getItem("zhijing-demo-visited") === "1");
+      const saved = localStorage.getItem("zhijing-demo-mode") || "video";
+      if (demoModes.includes(saved)) setResumeMode(saved);
     } catch {}
   }, []);
   const currentAnswers = profileForLesson(profile, overrides).answers;
   async function generate() {
     if (busy) return;
     if (demoMode) {
+      const selectedMode = demoEntryMode(currentAnswers.primary);
       setError("");
       setBusy("正在准备示例");
       await new Promise((resolve) => setTimeout(resolve, 1800));
       try {
         localStorage.setItem("zhijing-demo-visited", "1");
+        localStorage.setItem("zhijing-demo-mode", selectedMode);
+        localStorage.setItem("zhijing-demo-time", "0");
       } catch {}
-      window.location.assign(casePreviewUrl("video") + "&experience=demo");
+      window.location.assign(demoStudyUrl(base, selectedMode));
       return;
     }
     setError("");
@@ -358,19 +364,24 @@ export function Workbench({
             </span>
           </div>
         )}
-        {!demoMode && (
+        {
           <details className="z-detail z-temporary">
             <summary>
               <span>
                 这次读法：<strong>{mediaLabels[currentAnswers.primary]}</strong>
-                {currentAnswers.extras.length > 0 &&
+                {!demoMode &&
+                  currentAnswers.extras.length > 0 &&
                   ` + ${currentAnswers.extras.map((m) => mediaLabels[m]).join("、")}`}
               </span>
               <span className="z-settings-toggle">
                 调整 <ChevronDown size={16} aria-hidden="true" />
               </span>
             </summary>
-            <p>仅这次生效</p>
+            <p>
+              {demoMode
+                ? "形式可切换；目标、讲法与节奏沿用预置示例。"
+                : "仅这次生效"}
+            </p>
             <div className="z-temporary-fields">
               {questions
                 .filter((q) =>
@@ -387,6 +398,7 @@ export function Workbench({
                       }[q.id as "primary" | "goal" | "entry" | "pace"]
                     }
                     <select
+                      disabled={!!busy || (demoMode && q.id !== "primary")}
                       value={currentAnswers[q.id] as string}
                       onChange={(e) =>
                         setOverrides((v) => ({ ...v, [q.id]: e.target.value }))
@@ -394,7 +406,11 @@ export function Workbench({
                     >
                       {q.options.map((o) => (
                         <option key={o.value} value={o.value}>
-                          {o.label}
+                          {demoMode &&
+                          q.id === "primary" &&
+                          o.value === "animation"
+                            ? "互动全景图"
+                            : o.label}
                         </option>
                       ))}
                     </select>
@@ -405,7 +421,7 @@ export function Workbench({
               修改读法笺 <ArrowRight size={15} />
             </button>
           </details>
-        )}
+        }
         <ErrorNotice message={error} />
         {!demoMode && (
           <label className="z-full-package">
@@ -452,7 +468,7 @@ export function Workbench({
         {demoVisited && (
           <a
             className="z-article-case"
-            href={casePreviewUrl("video") + "&experience=demo"}
+            href={demoStudyUrl(base, resumeMode, true)}
           >
             <img
               src={`${base}/images/window-cover.jpg`}

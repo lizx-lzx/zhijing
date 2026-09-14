@@ -318,16 +318,15 @@ test("concise settings preserve the full questionnaire and explicit save boundar
     assert.match(workbench, /演示模式/);
     assert.doesNotMatch(workbench, /平均数|为我制作这篇/);
     assert.equal(work.querySelectorAll(".z-article-case").length, 0);
-    assert.match(
-      work.querySelector(".z-recent").textContent,
-      /上回读到/,
-    );
+    assert.match(work.querySelector(".z-recent").textContent, /上回读到/);
     assert.doesNotMatch(
       await readFile("components/learning-workbench.tsx", "utf8"),
       /sources\/sample/,
     );
     const settings = work.querySelector(".z-temporary");
-    assert.equal(settings, null);
+    assert.ok(settings);
+    assert.equal(settings.querySelectorAll("select").length, 4);
+    assert.equal(settings.querySelectorAll("select[disabled]").length, 3);
     assert.equal(work.querySelectorAll(".z-current-profile").length, 0);
     assert.equal(
       work.querySelectorAll(".z-composer .z-format-preview").length,
