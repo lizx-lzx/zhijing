@@ -78,6 +78,7 @@ function App() {
   const [scenarioIndex, setScenarioIndex] = useState(0);
   const [error, setError] = useState("");
   const [dialog, setDialog] = useState(null);
+  const [sidebar, setSidebar] = useState("chapters");
   const [stageHeight, setStageHeight] = useState(640);
   const video = useRef(null),
     audio = useRef(null),
@@ -86,6 +87,49 @@ function App() {
   const current = locateSegment(timing.segments, time);
   const index = current.scene,
     scene = lesson.scenes[index];
+  const sourcePanel = (
+    <div className="source-panel" key={scene.id}>
+      <h3>{scene.title}</h3>
+      {scene.sourceAnchor ? (
+        <>
+          <blockquote>
+            {scene.sourceAnchor.context?.split(scene.sourceAnchor.quote)[0]}
+            <mark className="source-highlight">{scene.sourceAnchor.quote}</mark>
+            {scene.sourceAnchor.context
+              ?.split(scene.sourceAnchor.quote)
+              .slice(1)
+              .join(scene.sourceAnchor.quote)}
+          </blockquote>
+          {lesson.sourceMeta?.url && (
+            <a
+              className="source-link"
+              href={`${lesson.sourceMeta.url}#:~:text=${encodeURIComponent(scene.sourceAnchor.quote)}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              阅读全文 ↗
+            </a>
+          )}
+        </>
+      ) : (
+        <p>这一章暂未关联原文片段。</p>
+      )}
+      <div className="source-navigation">
+        <button
+          disabled={index === 0}
+          onClick={() => seek(sceneStarts[index - 1])}
+        >
+          上一段
+        </button>
+        <button
+          disabled={index === lesson.scenes.length - 1}
+          onClick={() => seek(sceneStarts[index + 1])}
+        >
+          下一段
+        </button>
+      </div>
+    </div>
+  );
   const effects =
     !still && current.effect
       ? {
@@ -348,6 +392,16 @@ function App() {
           <p className="content-notice">{lesson.notice}</p>
         )}
         <div className="study-toolbar">
+          <button
+            className="mobile-source-trigger"
+            onClick={() => {
+              video.current?.pause();
+              audio.current?.pause();
+              setDialog("source");
+            }}
+          >
+            对照原文
+          </button>
           <div
             className={`view-tabs${lesson.learningFormats ? " extended-tabs" : ""}`}
             role="group"
@@ -650,12 +704,28 @@ function App() {
           </div>
           <aside className="chapters" aria-label="讲解片段">
             <div className="chapter-heading">
-              <h2>章节目录</h2>
-              <span>{lesson.scenes.length} 章</span>
+              <div className="source-tabs" role="group" aria-label="目录与原文">
+                <button
+                  aria-pressed={sidebar === "chapters"}
+                  onClick={() => setSidebar("chapters")}
+                >
+                  目录
+                </button>
+                <button
+                  aria-pressed={sidebar === "source"}
+                  onClick={() => setSidebar("source")}
+                >
+                  原文
+                </button>
+              </div>
             </div>
-            <nav className="chapter-list" aria-label="章节导航">
-              {chapterButtons}
-            </nav>
+            {sidebar === "source" ? (
+              sourcePanel
+            ) : (
+              <nav className="chapter-list" aria-label="章节导航">
+                {chapterButtons}
+              </nav>
+            )}
           </aside>
         </section>
         <section className="reading" aria-label="补充学习资料">
@@ -813,6 +883,15 @@ function App() {
                 </details>
               )}
             </section>
+          </StudyDialog>
+        )}
+        {dialog === "source" && (
+          <StudyDialog
+            title="对照原文"
+            className="source-dialog"
+            onClose={() => setDialog(null)}
+          >
+            {sourcePanel}
           </StudyDialog>
         )}
         {dialog === "chapters" && (
