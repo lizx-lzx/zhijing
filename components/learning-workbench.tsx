@@ -1,7 +1,7 @@
 "use client";
 /* Private posters require the visitor cookie; do not route through an image proxy. */
 /* eslint-disable @next/next/no-img-element */
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer, useRef } from "react";
 import {
   ArrowRight,
   ChevronDown,
@@ -21,6 +21,7 @@ import {
   demoStudyUrl,
   demoModes,
   demoLabels,
+  updateDemoSelection,
 } from "../lib/demo-route";
 
 export function LessonCard({
@@ -234,12 +235,19 @@ export function Workbench({
   const [overrides, setOverrides] = useState<Partial<Answers>>({});
   const [fullPackage, setFullPackage] = useState(false);
   const demoMode = true;
-  const [primaryMode, setPrimaryMode] = useState(() =>
-    demoEntryMode(profile.answers.primary),
-  );
-  const [selectedModes, setSelectedModes] = useState<string[]>(() => [
-    demoEntryMode(profile.answers.primary),
-  ]);
+  const [{ primary: primaryMode, modes: selectedModes }, selectFormats] =
+    useReducer(updateDemoSelection, profile.answers.primary, (primary) => ({
+      primary: demoEntryMode(primary),
+      modes: [demoEntryMode(primary)],
+    }));
+  const allFormats = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (allFormats.current)
+      allFormats.current.indeterminate =
+        demoMode &&
+        selectedModes.length > 0 &&
+        selectedModes.length < demoModes.length;
+  }, [selectedModes.length]);
   const [showFormats, setShowFormats] = useState(false);
   const [demoVisited, setDemoVisited] = useState(false);
   const [resumeMode, setResumeMode] = useState("video");
@@ -252,7 +260,7 @@ export function Workbench({
   }, []);
   const currentAnswers = profileForLesson(profile, overrides).answers;
   async function generate() {
-    if (busy) return;
+    if (busy || (demoMode && !selectedModes.length)) return;
     if (demoMode) {
       const selectedMode = primaryMode;
       setError("");
@@ -388,7 +396,7 @@ export function Workbench({
                 这次读法：
                 <strong>
                   {demoMode
-                    ? demoLabels[primaryMode]
+                    ? demoLabels[primaryMode] || "请选择形式"
                     : mediaLabels[currentAnswers.primary]}
                 </strong>
                 {!demoMode &&
@@ -429,10 +437,7 @@ export function Workbench({
                       onChange={(e) => {
                         if (demoMode && q.id === "primary") {
                           const value = e.target.value;
-                          setPrimaryMode(value);
-                          setSelectedModes((old) =>
-                            old.includes(value) ? old : [...old, value],
-                          );
+                          selectFormats({ type: "primary", mode: value });
                         } else
                           setOverrides((v) => ({
                             ...v,
@@ -440,6 +445,11 @@ export function Workbench({
                           }));
                       }}
                     >
+                      {demoMode && q.id === "primary" && !primaryMode && (
+                        <option value="" disabled>
+                          请选择形式
+                        </option>
+                      )}
                       {(demoMode && q.id === "primary"
                         ? Object.entries(demoLabels).map(([value, label]) => ({
                             value,
@@ -468,15 +478,14 @@ export function Workbench({
         <label className="z-full-package">
           <input
             type="checkbox"
+            ref={allFormats}
             checked={
               demoMode ? selectedModes.length === demoModes.length : fullPackage
             }
             disabled={!!busy}
             onChange={(e) => {
               setFullPackage(e.target.checked);
-              setSelectedModes(
-                e.target.checked ? [...demoModes] : [primaryMode],
-              );
+              selectFormats({ type: "all", checked: e.target.checked });
             }}
           />
           <span>{demoMode ? "体验全部形式" : "生成全部形式"}</span>
@@ -504,13 +513,13 @@ export function Workbench({
                     <input
                       type="checkbox"
                       checked={selectedModes.includes(value)}
-                      disabled={!!busy || value === primaryMode}
+                      disabled={!!busy}
                       onChange={(e) =>
-                        setSelectedModes((old) =>
-                          e.target.checked
-                            ? [...old, value]
-                            : old.filter((m) => m !== value),
-                        )
+                        selectFormats({
+                          type: "toggle",
+                          mode: value,
+                          checked: e.target.checked,
+                        })
                       }
                     />
                     {label}
@@ -532,7 +541,11 @@ export function Workbench({
           <button
             className="button button-primary button-large"
             onClick={() => void generate()}
-            disabled={!!busy || (mode === "link" ? !url.trim() : !text.trim())}
+            disabled={
+              !!busy ||
+              (demoMode && !selectedModes.length) ||
+              (mode === "link" ? !url.trim() : !text.trim())
+            }
           >
             {busy ? (
               <Spinner text={busy} />
