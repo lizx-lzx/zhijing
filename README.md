@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/favicon.svg" width="64" alt="知径标志" />
+  <img src="public/brand/zhijing-icon.svg" width="64" alt="知径标志" />
   <h1>知径 · Zhijing</h1>
   <p><strong>给好奇心，留一个小角落。</strong></p>
   <p>把一篇长文，变成你愿意读下去的样子。</p>
@@ -12,6 +12,8 @@
 </div>
 
 ![知径的温馨书房首页](docs/images/welcome.png)
+
+[项目 Icon · PNG](public/brand/zhijing-icon.png) · [Icon · SVG](public/brand/zhijing-icon.svg) · [项目封面](public/og.png)
 
 ## 把长文变得更容易开始
 

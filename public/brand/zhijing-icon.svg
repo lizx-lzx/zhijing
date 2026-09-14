@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">知径</title>
+  <rect width="64" height="64" rx="14.2222" fill="#b3402a"/>
+  <g fill="none" stroke="#fffdf8" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 15 15 23 M23 27 14 36 M20 31 20 51"/>
+    <path d="M31 17H47Q44 26 31 33 M36 25 50 33"/>
+    <path d="M32 40H49 M40.5 40V51 M30 51H51"/>
+  </g>
+</svg>
