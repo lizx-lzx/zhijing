@@ -15,11 +15,11 @@ await fs.mkdir(out, { recursive: true });
 for (const file of ["index.html", "motion.js", "style.css"])
   await fs.copyFile(new URL(file, import.meta.url), new URL(file, out));
 await fs.copyFile(
-  "/Users/li/Documents/gpt/一键网页动画/技术规范/动效引擎.js",
+  new URL("vendor/engine.js", import.meta.url),
   new URL("engine.js", out),
 );
 await fs.copyFile(
-  "/Users/li/Documents/gpt/一键网页动画/成片/AI智力劳动成本-16比9/animation/gsap.min.js",
+  new URL("vendor/gsap.min.js", import.meta.url),
   new URL("gsap.min.js", out),
 );
 await fs.copyFile(
@@ -30,6 +30,12 @@ await fs.copyFile(
   new URL("public/media/captions.vtt", lesson),
   new URL("captions.vtt", out),
 );
+// Frozen media from the reviewed article, not newly generated results.
+for (const file of ["video.mp4", "poster.jpg"])
+  await fs.copyFile(
+    new URL(`assets/${file}`, import.meta.url),
+    new URL(file, out),
+  );
 const timing = JSON.parse(
   await fs.readFile(new URL("timing.json", lesson), "utf8"),
 );

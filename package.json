@@ -14,6 +14,10 @@
     "test:acceptance": "node scripts/acceptance.mjs",
     "typecheck": "tsc --noEmit",
     "api": "node server/index.mjs",
+    "demo:install": "npm ci --prefix experiments/openmaic-preview --ignore-scripts",
+    "demo:build": "node experiments/article-motion/build.mjs && ZH_LESSON=window-five-years npm run build --prefix experiments/openmaic-preview",
+    "dev:demo": "NEXT_PUBLIC_BASE_PATH=/zhijing npm run dev",
+    "build:complete": "npm run demo:build && NEXT_PUBLIC_BASE_PATH=/zhijing npm run build",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"
   },

@@ -1,0 +1,6 @@
+# Preserve frozen third-party files and exclude them from source-language statistics.
+experiments/article-motion/vendor/** -text linguist-vendored
+**/THIRD-PARTY-NOTICES.txt -text linguist-vendored
+**/RIVE-LICENSE.txt -text linguist-vendored
+public/demo/cat-companion-preview/rive.js -text linguist-vendored
+*.vtt -text

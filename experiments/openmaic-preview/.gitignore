@@ -1,5 +1,4 @@
 node_modules/
 render/
-public/media/
-lessons/*/public/
+# Frozen example media/downloads are source assets for a complete clone.
 lessons/*/render/
