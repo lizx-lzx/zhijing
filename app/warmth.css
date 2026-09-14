@@ -1,6 +1,11 @@
 /* Personal reading room: shared surfaces, not a new product flow. */
 .z-full-package {
   display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+.z-full-package input {
+  margin-top: 0;
 }
 .z-formats-expand {
   display: inline-flex;
