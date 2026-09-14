@@ -311,19 +311,23 @@ function App() {
         <div className="heading">
           <div>
             <h1>{title}</h1>
-            <div className="lesson-meta">
-              {lesson.sourceMeta && <span>{lesson.author} · 知乎</span>}
-              <span>
-                {timing.voiceReady ? `${clock(Math.ceil(duration))} · ` : ""}
-                {lesson.scenes.length} 章
-              </span>
-              <button type="button" onClick={() => setDialog("preferences")}>
-                示例讲法 ⌄
-              </button>
-            </div>
+            {mode !== "video" && (
+              <div className="lesson-meta">
+                {lesson.sourceMeta && <span>{lesson.author} · 知乎</span>}
+                <span>
+                  {timing.voiceReady ? `${clock(Math.ceil(duration))} · ` : ""}
+                  {lesson.scenes.length} 章
+                </span>
+                <button type="button" onClick={() => setDialog("preferences")}>
+                  示例讲法 ⌄
+                </button>
+              </div>
+            )}
           </div>
         </div>
-        {lesson.notice && <p className="content-notice">{lesson.notice}</p>}
+        {mode !== "video" && lesson.notice && (
+          <p className="content-notice">{lesson.notice}</p>
+        )}
         <div className="study-toolbar">
           <div
             className={`view-tabs${lesson.learningFormats ? " extended-tabs" : ""}`}
@@ -610,10 +614,12 @@ function App() {
                 {error}
               </p>
             )}
-            <details className="source-brief">
-              <summary>来源说明</summary>
-              <p>{sourceNote}</p>
-            </details>
+            {mode !== "video" && (
+              <details className="source-brief">
+                <summary>来源说明</summary>
+                <p>{sourceNote}</p>
+              </details>
+            )}
           </div>
           <aside className="chapters" aria-label="讲解片段">
             <div className="chapter-heading">
