@@ -10,6 +10,10 @@ import { InlineDiagram, Overview, Practice } from "./format-views.jsx";
 import { clampTime, playbackRates } from "./learning-formats.mjs";
 import "./style.css";
 import "./formats.css";
+import { Brand } from "../../components/learning-ui";
+import { ReadingCompanion } from "../../components/reading-companion";
+import "../../app/study.css";
+import "./room.css";
 
 const query = new URLSearchParams(location.search);
 const capture = query.has("capture"),
@@ -295,7 +299,7 @@ function App() {
     <>
       <header className="topbar">
         <a className="brand" href="/zhijing/">
-          <span>径</span>知径
+          <Brand />
         </a>
         {timing.voiceReady && (
           <button
@@ -827,10 +831,11 @@ function App() {
           </StudyDialog>
         )}
         <footer>
-          知径 · 单篇学习作品，尚未替换正式网站的通用生成流程。
+          <a href="/zhijing/">回到书房</a>
           <a href="./THIRD-PARTY-NOTICES.txt">开源说明</a>
         </footer>
       </main>
+      {!capture && <ReadingCompanion target={null} onSource={() => {}} />}
     </>
   );
 }

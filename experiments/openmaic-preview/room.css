@@ -1,0 +1,137 @@
+/* Shared reading-room surroundings; lesson canvases and media remain intact. */
+:root {
+  --paper: #f8f4eb;
+  --surface: #fffdf8;
+  --primary: #b3402a;
+  --primary-soft: #f2e4db;
+  --line: #e3d6c3;
+  --ink: #342d27;
+  --muted: #7c7063;
+  color: var(--ink);
+  background: var(--paper);
+}
+body {
+  background:
+    linear-gradient(#f8f4ebdf, #f8f4ebf5),
+    url("/zhijing/images/reading-nook-v1.webp") center/cover fixed;
+  min-height: 100vh;
+}
+.topbar {
+  height: 92px;
+  border: 0;
+}
+.brand {
+  gap: 13px;
+}
+.brand > .brand {
+  display: flex;
+}
+.brand .brand-mark {
+  width: 44px;
+  height: 44px;
+  padding: 4px;
+  border-radius: 13px;
+  background: var(--primary);
+  color: #fff8ef;
+}
+.brand > span.brand {
+  width: auto;
+  height: auto;
+  background: none;
+  color: var(--ink);
+}
+.brand-copy {
+  font-family: "Songti SC", "STSong", serif;
+  font-size: 28px;
+}
+.brand-copy strong {
+  font-weight: 600;
+}
+.heading {
+  padding: 12px 0 22px;
+}
+h1 {
+  font-size: clamp(28px, 3vw, 40px);
+  letter-spacing: 0.02em;
+}
+.study-toolbar {
+  background: #f8f4ebeb;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  padding: 8px;
+}
+.view-tabs {
+  background: transparent;
+  gap: 6px;
+}
+.view-tabs button {
+  border-radius: 13px;
+}
+.view-tabs button[aria-pressed="true"] {
+  background: var(--primary-soft);
+  box-shadow: none;
+}
+.player {
+  border-radius: 24px;
+  background: var(--surface);
+  box-shadow: 0 12px 44px #6845260c;
+}
+.chapters {
+  padding: 22px 18px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: #fffdf8ed;
+}
+.download-trigger {
+  border-radius: 15px;
+  background: #fffdf8cc;
+}
+.reading > details {
+  background: #fffdf8e8;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  margin: 12px 0;
+  padding: 16px 20px;
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 70px;
+}
+.z-pet-popover .button {
+  font: inherit;
+  border: 1px solid var(--line);
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--ink);
+}
+.z-pet-popover .button-primary {
+  background: var(--primary);
+  color: white;
+}
+.z-pet-popover .z-text-link {
+  border: 0;
+  background: none;
+  color: var(--primary);
+}
+@media (max-width: 700px) {
+  .topbar {
+    height: 76px;
+    padding: 0 18px;
+  }
+  main {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .study-toolbar {
+    border-radius: 15px;
+  }
+  .view-tabs {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  .player {
+    border-radius: 18px;
+  }
+}

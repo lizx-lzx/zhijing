@@ -7,8 +7,10 @@ const edition = editionPaths();
 
 export default defineConfig({
   base: "./",
+  define: { "process.env.NEXT_PUBLIC_BASE_PATH": JSON.stringify("/zhijing") },
   publicDir: fileURLToPath(new URL("public/", edition.root)),
   resolve: {
+    dedupe: ["react", "react-dom"],
     alias: {
       "@lesson": fileURLToPath(new URL("lesson.json", edition.root)),
       "@timing": fileURLToPath(new URL("timing.json", edition.root)),
