@@ -45,15 +45,11 @@ export function ResponsiveDiagram({ diagram, title }) {
       className={`responsive-diagram relation-${layout}`}
       aria-label={`${title}纵向图解`}
     >
-      <span className="diagram-kind">{diagram.kind}</span>
       <h2>{title}</h2>
       <p className="diagram-subtitle">{diagram.subtitle}</p>
       <div className="diagram-groups">
         {groups.map((nodes, group) => (
           <div className="diagram-path" key={group}>
-            {groups.length > 1 && (
-              <span className="path-label">路径 {group + 1}</span>
-            )}
             {nodes.map((node, index) => (
               <React.Fragment key={`${group}-${index}`}>
                 {index > 0 && (linked || layout === "contrast") && (

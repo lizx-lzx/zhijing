@@ -54,7 +54,6 @@ export function Overview({ lesson, onRead, activeChapter, onSelect }) {
       <div className="overview-grid">
         {overview.groups.map((group, i) => (
           <section className="overview-branch" key={group.title}>
-            <span className="branch-number">0{i + 1}</span>
             <h3>{group.title}</h3>
             <p>{group.description}</p>
             {group.chapters.map((id) => {

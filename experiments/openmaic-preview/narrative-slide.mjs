@@ -2,7 +2,7 @@ const C = {
   bg: "#f5f1e8",
   ink: "#2b2926",
   muted: "#736b61",
-  panel: "#ebe5d9",
+  panel: "#fffdf8",
   accent: "#b3402a",
   warm: "#8d301f",
   green: "#8a8174",
@@ -72,38 +72,51 @@ const rect = (id, x, y, w, h, fill) => ({
 // currency or forecasts; every timeline is explicitly marked as a scenario.
 export function narrativeSlide(chapter, index, total, attribution = "") {
   const e = [
-    text(
-      "eyebrow",
-      `${String(index + 1).padStart(2, "0")} / ${total}    ${chapter.kind}${attribution ? ` · ${attribution}` : ""}`,
-      48,
-      23,
-      905,
-      22,
-      C.warm,
-      500,
-    ),
-    text("title", chapter.title, 46, 67, 910, 42, C.ink, 650),
-    text("subtitle", chapter.subtitle, 48, 130, 905, 25, C.muted),
+    text("title", chapter.title, 48, 48, 905, 38, C.ink, 500),
+    text("subtitle", chapter.subtitle, 48, 116, 905, 23, C.muted),
   ];
   const box = (node, i, x, y, w, h, size = 28) => {
     e.push(rect(`node-${i}`, x, y, w, h, C.panel));
-    e.push(rect(`mark-${i}`, x, y, 4, h, i % 2 ? C.green : C.accent));
+    e.push(rect(`mark-${i}`, x, y, w, 1.5, "#ded7c9"));
     e.push(
-      text(`label-${i}`, node.title, x + 18, y + 15, w - 32, size, C.ink, 600),
+      text(
+        `label-${i}`,
+        node.title,
+        x + 20,
+        y + 16,
+        w - 40,
+        Math.min(size, 25),
+        C.ink,
+        500,
+      ),
     );
     e.push(
-      text(`detail-${i}`, node.detail, x + 18, y + 66, w - 32, 23, C.muted),
+      text(`detail-${i}`, node.detail, x + 20, y + 61, w - 40, 20, C.muted),
     );
   };
-  const arrow = (id, x, y, value = "→", size = 34) =>
-    e.push(text(`arrow-${id}`, value, x, y, 50, size, C.accent, 500, "center"));
+  const arrow = (id, x, y, value = "→", size = 24) => {
+    const vertical = value === "↑" || value === "↓";
+    const a = text(
+      `arrow-${id}`,
+      value,
+      vertical ? x : x - 14,
+      vertical ? 322 : y,
+      38,
+      vertical ? 18 : Math.min(size, 24),
+      C.muted,
+      400,
+      "center",
+    );
+    a.height = vertical ? 24 : 38;
+    e.push(a);
+  };
   if (chapter.layout === "contrast") {
-    chapter.nodes.forEach((n, i) => box(n, i, 50 + i * 465, 215, 420, 211, 35));
+    chapter.nodes.forEach((n, i) => box(n, i, 50 + i * 465, 215, 390, 211, 25));
     arrow("contrast", 469, 290, "≠", 36);
   } else if (chapter.layout === "flow" || chapter.layout === "cycle") {
     if (chapter.nodes.length === 3) {
       chapter.nodes.forEach((n, i) =>
-        box(n, i, 48 + i * 309, 245, 280, 153, 29),
+        box(n, i, 48 + i * 309, 245, 250, 153, 25),
       );
       arrow(0, 322, 287);
       arrow(1, 631, 287);
@@ -111,7 +124,7 @@ export function narrativeSlide(chapter, index, total, attribution = "") {
       const cycle = chapter.layout === "cycle";
       chapter.nodes.forEach((n, i) => {
         const col = cycle && i >= 3 ? 5 - i : i % 3;
-        box(n, i, 48 + col * 309, 198 + Math.floor(i / 3) * 158, 280, 128, 26);
+        box(n, i, 48 + col * 309, 198 + Math.floor(i / 3) * 158, 250, 116, 25);
       });
       arrow(0, 322, 235);
       arrow(1, 631, 235);
@@ -124,7 +137,7 @@ export function narrativeSlide(chapter, index, total, attribution = "") {
     }
   } else if (chapter.layout === "ladder") {
     chapter.nodes.forEach((n, i) =>
-      box(n, i, 49 + i * 309, 285 - i * 40, 280, 155, 30),
+      box(n, i, 49 + i * 309, 285 - i * 40, 250, 155, 25),
     );
     arrow(0, 322, 289, "↗");
     arrow(1, 631, 249, "↗");

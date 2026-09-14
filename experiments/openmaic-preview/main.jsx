@@ -14,6 +14,8 @@ import { Brand } from "../../components/learning-ui";
 import { ReadingCompanion } from "../../components/reading-companion";
 import "../../app/study.css";
 import "./room.css";
+import { narrativeSlide } from "./narrative-slide.mjs";
+import { chapters as articleChapters } from "./lessons/window-five-years/content.mjs";
 
 const query = new URLSearchParams(location.search);
 const capture = query.has("capture"),
@@ -306,7 +308,17 @@ function App() {
   const canvas = (
     <div className="canvas">
       <SlideCanvas
-        slide={scene.content.canvas}
+        slide={
+          !capture &&
+          lesson.sourceMeta &&
+          articleChapters[index]?.id === scene.id
+            ? narrativeSlide(
+                articleChapters[index],
+                index,
+                lesson.scenes.length,
+              )
+            : scene.content.canvas
+        }
         effects={effects}
         chrome={false}
       />

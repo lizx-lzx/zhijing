@@ -1,4 +1,39 @@
 /* Shared reading-room surroundings; lesson canvases and media remain intact. */
+.diagram-node,
+.inline-node {
+  background: #fffdf8 !important;
+  border: 1px solid #ded7c9 !important;
+  border-left-width: 1px !important;
+  padding: 24px !important;
+}
+.diagram-node h3,
+.inline-node strong {
+  font-weight: 500;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.diagram-node p,
+.inline-node > span {
+  line-height: 1.8;
+  color: #736b61;
+}
+.relation-marker,
+.inline-arrow {
+  margin: 12px auto;
+  color: #736b61 !important;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+}
+.responsive-diagram h2 {
+  line-height: 1.5;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+.diagram-subtitle {
+  margin-bottom: 28px;
+  line-height: 1.7;
+}
 .source-tabs,
 .source-navigation {
   display: flex;
