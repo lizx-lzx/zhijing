@@ -260,6 +260,11 @@ try {
   const first = await session();
   const { page } = first;
   await snapshot(page, "welcome");
+  await page.getByRole('button',{name:'打开陪读小猫'}).click();
+  await page.getByRole('button',{name:'怎么开始学习？',exact:true}).click();
+  await page.getByText('这是小猫的解释。',{exact:true}).waitFor();
+  assert.ok(first.writes.some(w=>w.path==='/companion/chat'));
+  await page.getByRole('button',{name:'关闭',exact:true}).click();
   await page.getByRole("button", { name: "找到我的学法" }).click();
   await snapshot(page, "questionnaire");
   await page.getByRole("button", { name: "22—29 岁" }).click();

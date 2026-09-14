@@ -11,7 +11,7 @@ export function ReadingCompanion({
   target,
   onSource,
 }: {
-  lessonId: string;
+  lessonId?: string;
   target: {
     id: string;
     title: string;
@@ -32,6 +32,7 @@ export function ReadingCompanion({
     [question, setQuestion] = useState(""),
     [error, setError] = useState("");
   const [loaded, setLoaded] = useState(false);
+  const chatPath = lessonId ? `/lessons/${lessonId}/chat` : "/companion/chat";
   const conversation = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (conversation.current)
@@ -47,7 +48,7 @@ export function ReadingCompanion({
   useEffect(() => {
     if (!open || loaded) return;
     let active = true;
-    api<{ messages: Message[] }>(`/lessons/${lessonId}/chat`)
+    api<{ messages: Message[] }>(chatPath)
       .then((d) => {
         if (active) {
           setMessages(d.messages);
@@ -61,21 +62,17 @@ export function ReadingCompanion({
     return () => {
       active = false;
     };
-  }, [open, loaded, lessonId]);
+  }, [open, loaded, chatPath]);
   async function send(text: string) {
     if (busy || !loaded || !text.trim()) return;
     setBusy(true);
     setError("");
     try {
-      const d = await api<{ messages: Message[] }>(
-        `/lessons/${lessonId}/chat`,
-        "POST",
-        {
-          question: text,
-          chapterId: scope?.id,
-          paragraphIndex: scope?.paragraphIndex,
-        },
-      );
+      const d = await api<{ messages: Message[] }>(chatPath, "POST", {
+        question: text,
+        chapterId: scope?.id,
+        paragraphIndex: scope?.paragraphIndex,
+      });
       setMessages(d.messages);
       setQuestion("");
     } catch (e) {
@@ -103,7 +100,11 @@ export function ReadingCompanion({
       {open && (
         <Modal title="陪读小猫" onClose={() => setOpen(false)}>
           <div className="z-pet-scope">
-            {scope ? `正在聊：${scope.title}` : "正在聊这篇文章"}
+            {scope
+              ? `正在聊：${scope.title}`
+              : lessonId
+                ? "正在聊这篇文章"
+                : "小猫陪你聊聊"}
             {scope && (
               <button className="z-text-link" onClick={() => setScope(null)}>
                 聊整篇
@@ -133,7 +134,15 @@ export function ReadingCompanion({
             {busy && <p role="status">小猫正在翻书…</p>}
           </div>
           <div className="z-pet-shortcuts">
-            {["讲简单点", "换个例子"].map((t) => (
+            {(lessonId
+              ? ["讲简单点", "换个例子", "帮我回顾重点", "问我一个小问题"]
+              : [
+                  "怎么开始学习？",
+                  "帮我选一种学习方式",
+                  "今天不太想学，陪我聊聊",
+                  "怎么找到之前的文章？",
+                ]
+            ).map((t) => (
               <button
                 className="button button-quiet"
                 disabled={busy || !loaded}

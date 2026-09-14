@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS sources(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REF
 CREATE TABLE IF NOT EXISTS lessons(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id),source_id TEXT NOT NULL REFERENCES sources(id),profile TEXT NOT NULL,formats TEXT NOT NULL,title TEXT NOT NULL,status TEXT NOT NULL,stage TEXT NOT NULL,progress INTEGER NOT NULL DEFAULT 0,result TEXT,analysis TEXT,media TEXT NOT NULL DEFAULT '{}',error TEXT NOT NULL DEFAULT '',attempts INTEGER NOT NULL DEFAULT 0,completed INTEGER NOT NULL DEFAULT 0,feedback TEXT,created_at TEXT NOT NULL,updated_at TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS quotas(key TEXT PRIMARY KEY,count INTEGER NOT NULL,expires_at INTEGER NOT NULL);
 CREATE TABLE IF NOT EXISTS companion_chats(lesson_id TEXT PRIMARY KEY REFERENCES lessons(id),data TEXT NOT NULL DEFAULT '[]');
+CREATE TABLE IF NOT EXISTS companion_lobby(user_id TEXT PRIMARY KEY REFERENCES users(id),data TEXT NOT NULL DEFAULT '[]');
 CREATE INDEX IF NOT EXISTS idx_lessons_owner ON lessons(user_id,created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_lessons_queue ON lessons(status,created_at);
 CREATE INDEX IF NOT EXISTS idx_sources_owner ON sources(user_id);

@@ -77,6 +77,9 @@ test("HTTP contract: persistence, isolation, CSRF, recovery and honest failure",
       b = client();
     assert.equal((await a("/me")).data.profile, null);
     assert.equal((await b("/me")).data.profile, null);
+    assert.deepEqual((await a('/companion/chat')).data.messages, []);
+    assert.equal((await a('/companion/chat','POST',{question:''})).status,400);
+    assert.equal((await a('/companion/chat','POST',{question:'你好'},{Origin:'https://evil.example'})).status,403);
     const profile = buildProfile({
       entry: "story",
       primary: "reading",

@@ -199,6 +199,49 @@ const server = http.createServer(async (req, res) => {
     limit("requests:" + hash(ip), 240, 60);
     const user = session(req, res);
     const method = req.method;
+    if (route === "/api/companion/chat" && method === "GET") {
+      json(res, 200, {
+        messages: JSON.parse(
+          one("SELECT data FROM companion_lobby WHERE user_id=?", user)?.data ||
+            "[]",
+        ),
+      });
+      return;
+    }
+    if (route === "/api/companion/chat" && method === "POST") {
+      const input = await body(req);
+      if (companionBusy.has(user) || companionBusy.size >= 4)
+        throw new AppError("小猫正在整理回答，稍等一下。", 429);
+      limit("chat:user:" + user, 60);
+      limit("chat:global", 600);
+      companionBusy.add(user);
+      try {
+        const history = JSON.parse(
+          one("SELECT data FROM companion_lobby WHERE user_id=?", user)?.data ||
+            "[]",
+        );
+        const answer = await answerCompanion(
+          { title: "还未打开文章", blocks: [] },
+          null,
+          { question: input.question },
+          history,
+        );
+        const messages = [
+          ...history,
+          { role: "user", text: input.question },
+          { role: "assistant", text: answer.answer, citations: [] },
+        ].slice(-40);
+        run(
+          "INSERT INTO companion_lobby(user_id,data) VALUES(?,?) ON CONFLICT(user_id) DO UPDATE SET data=excluded.data",
+          user,
+          JSON.stringify(messages),
+        );
+        json(res, 200, { messages });
+      } finally {
+        companionBusy.delete(user);
+      }
+      return;
+    }
     if (route === "/api/me" && method === "GET") {
       json(res, 200, {
         profile: getProfile(user),

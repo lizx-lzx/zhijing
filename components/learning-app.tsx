@@ -19,6 +19,7 @@ import {
 import { Onboarding, SkillEditor } from "./learning-onboarding";
 import { LearningLibrary, Workbench } from "./learning-workbench";
 import { LessonView } from "./learning-lesson";
+import { ReadingCompanion } from "./reading-companion";
 
 export default function LearningApp() {
   const reducedMotion = useReducedMotion();
@@ -292,6 +293,9 @@ export default function LearningApp() {
           <div className="z-container">
             <ErrorNotice message={error} />
           </div>
+        )}
+        {view !== "learning" && (
+          <ReadingCompanion target={null} onSource={() => {}} />
         )}
         {view === "welcome" && (
           <Welcome
