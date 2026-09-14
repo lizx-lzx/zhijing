@@ -52,6 +52,34 @@ test("welcome entry is non-destructive and takes precedence over a resume link",
   assert.equal(entryRoute(true, "").view, "workspace");
 });
 
+test("questionnaire URLs survive reloads for new and returning visitors", () => {
+  const id = "b".repeat(32);
+  for (const hasProfile of [true, false]) {
+    for (const start of ["questionnaire", "preferences"]) {
+      assert.deepEqual(
+        entryRoute(hasProfile, `?ui=old-cache-key&start=${start}&lesson=${id}`),
+        { view: "questionnaire", lesson: null },
+      );
+    }
+  }
+  assert.deepEqual(entryRoute(true, "?ui=ec106ba"), {
+    view: "workspace",
+    lesson: null,
+  });
+  assert.deepEqual(entryRoute(false, ""), { view: "welcome", lesson: null });
+});
+
+test("recording entry preserves saved data and distinguishes editing answers", async () => {
+  const app = await readFile("components/learning-app.tsx", "utf8");
+  const shortcut = await readFile("components/use-experience-shortcut.ts", "utf8");
+  assert.match(app, /fresh \? "questionnaire" : "preferences"/);
+  assert.match(app, /onStart=\{\(\) => go\("questionnaire", true\)\}/);
+  assert.match(app, /onRetake=\{\(\) => go\("questionnaire"\)\}/);
+  assert.match(app, /freshQuestionnaire\s*\? defaultAnswers/);
+  assert.match(shortcut, /\?start=questionnaire/);
+  assert.doesNotMatch(shortcut, /localStorage|sessionStorage|document\.cookie|\/profile|\/recovery/);
+});
+
 test("utility controls stay in secondary settings, not the learning navigation", async () => {
   const source = await readFile("components/learning-app.tsx", "utf8");
   const header = source.match(

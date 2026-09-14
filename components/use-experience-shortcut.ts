@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 
-// Recording shortcut: navigate to a fresh welcome flow without clearing saved data.
+// Recording shortcut: open question one without clearing the saved profile or works.
 export function useExperienceShortcut(basePath: string) {
   useEffect(() => {
     const restart = (event: KeyboardEvent) => {
@@ -16,7 +16,7 @@ export function useExperienceShortcut(basePath: string) {
       )
         return;
       event.preventDefault();
-      const welcome = `${basePath}/?start=welcome`;
+      const questionnaire = `${basePath}/?start=questionnaire`;
       // A focused same-origin case preview should restart the whole site, not its iframe.
       let destination: Window = window;
       try {
@@ -25,7 +25,7 @@ export function useExperienceShortcut(basePath: string) {
       } catch {
         // When embedded by another origin, only navigate our own frame.
       }
-      destination.location.assign(welcome);
+      destination.location.assign(questionnaire);
     };
     window.addEventListener("keydown", restart, true);
     return () => window.removeEventListener("keydown", restart, true);

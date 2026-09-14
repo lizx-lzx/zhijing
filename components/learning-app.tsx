@@ -75,6 +75,10 @@ export default function LearningApp() {
         setLessons(data.lessons);
         setHasRecovery(data.hasRecovery);
         const route = entryRoute(!!data.profile, window.location.search);
+        setFreshQuestionnaire(
+          new URLSearchParams(window.location.search).get("start") ===
+            "questionnaire",
+        );
         setView(route.view);
         const resume = route.lesson;
         if (resume) {
@@ -139,14 +143,17 @@ export default function LearningApp() {
     const timer = setInterval(() => void refresh().catch(() => {}), 6000);
     return () => clearInterval(timer);
   }, [view, lessons, refresh]);
-  function go(next: string) {
+  function go(next: string, fresh = false) {
     if (next !== "learning") {
       const url = new URL(window.location.href);
       url.searchParams.delete("lesson");
       if (next === "welcome") url.searchParams.set("start", "welcome");
+      else if (next === "questionnaire")
+        url.searchParams.set("start", fresh ? "questionnaire" : "preferences");
       else url.searchParams.delete("start");
       window.history.replaceState(null, "", url);
     }
+    if (next === "questionnaire") setFreshQuestionnaire(fresh);
     setView(next);
     setError("");
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -303,10 +310,7 @@ export default function LearningApp() {
           <Welcome
             returning={!!profile}
             onContinue={() => go("workspace")}
-            onStart={() => {
-              setFreshQuestionnaire(true);
-              go("questionnaire");
-            }}
+            onStart={() => go("questionnaire", true)}
           />
         )}
         {view === "questionnaire" && (
@@ -335,10 +339,7 @@ export default function LearningApp() {
             existing
             onSave={saved}
             onBack={() => go("workspace")}
-            onRetake={() => {
-              setFreshQuestionnaire(false);
-              go("questionnaire");
-            }}
+            onRetake={() => go("questionnaire")}
           />
         )}
         {view === "workspace" && profile && (

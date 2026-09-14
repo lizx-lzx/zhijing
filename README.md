@@ -173,7 +173,7 @@ npm run dev:demo
 
 打开 [localhost:3000/zhijing](http://localhost:3000/zhijing/?start=welcome)。仅构建和浏览预置作品不需要重新生成媒体；模型配置与基础规则降级方式见[运行说明](docs/21-运行与完整打包.md)。
 
-录演示时，在网页内按 **Option + Shift + R**（Mac）或 **Alt + Shift + R**（Windows），即可回到欢迎页反复走完整流程，不清空已有作品。
+录演示时，在知径网页内按 **Option + Shift + R**（Mac）或 **Alt + Shift + R**（Windows），即可从问卷第 1 题重新开始；也可直接打开[固定问卷入口](https://app.chainvalley.top/zhijing/?start=questionnaire)。在问卷页刷新仍会打开问卷，不清空已保存的学法与作品；普通首页刷新仍保留老用户状态。从欢迎页开始则使用页面顶部的「从头体验」。
 
 ## 项目结构
 
