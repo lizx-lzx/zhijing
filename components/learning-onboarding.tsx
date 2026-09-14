@@ -6,7 +6,6 @@ import {
   Check,
   ChevronDown,
   Download,
-  ShieldCheck,
 } from "lucide-react";
 import {
   buildProfile,
@@ -71,10 +70,6 @@ export function SkillEditor({
             </strong>
           </div>
         ))}
-      </div>
-      <div className="z-profile-banner">
-        <ShieldCheck size={20} />
-        <span>按偏好定制，不是能力测评。保存后生效。</span>
       </div>
       <details className="z-detail z-profile-rules">
         <summary>查看与编辑学习规则</summary>

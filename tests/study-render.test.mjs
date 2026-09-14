@@ -296,13 +296,13 @@ test("concise settings preserve the full questionnaire and explicit save boundar
     );
     assert.equal(document.querySelectorAll(".z-profile-visual").length, 0);
     for (const copy of [
-      "保存后生效",
       "保存并开始学习",
       "查看与编辑学习规则",
       "下载 Skill",
       "重新做问卷",
     ])
       assert.ok(html.includes(copy), copy);
+    assert.ok(!html.includes("按偏好定制，不是能力测评。保存后生效。"));
 
     const workbench = renderToStaticMarkup(
       createElement(Workbench, {
