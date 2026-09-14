@@ -82,7 +82,7 @@ export default function LearningApp() {
               setView("learning");
             }
           } catch {
-            if (active) setNotice("无法打开这份作品，请从自己的学习库选择。");
+            if (active) setNotice("无法打开这份作品，请从自己的知藏选择。");
           }
         }
         if (!data.profile) {
@@ -263,7 +263,7 @@ export default function LearningApp() {
               }}
             >
               <Library size={17} />
-              学习库
+              知藏
             </button>
             <button
               className={view === "profile" ? "active" : ""}
@@ -271,7 +271,7 @@ export default function LearningApp() {
               onClick={() => go("profile")}
             >
               <Settings2 size={17} />
-              我的学法
+              读法笺
             </button>
           </nav>
         )}
@@ -449,7 +449,7 @@ export default function LearningApp() {
                 disabled={!!busy || !restore.trim()}
                 onClick={() => void restoreAccount()}
               >
-                {busy ? <Spinner text={busy} /> : "恢复我的学习库"}
+                {busy ? <Spinner text={busy} /> : "恢复我的知藏"}
               </button>
             </details>
           </Modal>

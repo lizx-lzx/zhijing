@@ -59,7 +59,7 @@ test("utility controls stay in secondary settings, not the learning navigation",
   )?.[1];
   assert.ok(header);
   assert.match(header, /<Brand/);
-  assert.match(header, /学习库/);
+  assert.match(header, /知藏/);
   assert.doesNotMatch(
     header,
     /保存与恢复|z-account|z-motion-toggle|setAccount/,
@@ -97,11 +97,16 @@ test("welcome, preference examples and private library covers use real visual as
       "/components/learning-welcome.tsx",
     );
     const { Brand } = await server.ssrLoadModule("/components/learning-ui.tsx");
-    const brand = parseHTML(renderToStaticMarkup(createElement(Brand))).document;
+    const brand = parseHTML(
+      renderToStaticMarkup(createElement(Brand)),
+    ).document;
     const mark = brand.querySelector("svg.brand-mark");
     assert.equal(mark.getAttribute("data-brand-version"), "rounded-jing-v1");
     assert.equal(mark.getAttribute("aria-hidden"), "true");
-    assert.equal(mark.querySelector("g").getAttribute("stroke-linecap"), "round");
+    assert.equal(
+      mark.querySelector("g").getAttribute("stroke-linecap"),
+      "round",
+    );
     assert.equal(brand.querySelector(".brand-copy strong").textContent, "知径");
     const { ChoicePreview } = await server.ssrLoadModule(
       "/components/learning-previews.tsx",
@@ -113,7 +118,10 @@ test("welcome, preference examples and private library covers use real visual as
       createElement(Welcome, { onStart() {}, returning: true }),
     );
     assert.match(html, /window-cover.jpg/);
-    assert.match(html, /zhihu-window-20260908\/\?ui=case-entry-20260910&amp;mode=overview/);
+    assert.match(
+      html,
+      /zhihu-window-20260908\/\?ui=case-entry-20260910&amp;mode=overview/,
+    );
     assert.doesNotMatch(html, /原有作品保留|z-journey-strip|z-learning-hero/);
     assert.match(html, /找到我的学法/);
     assert.match(html, /8 题 · 约 2 分钟/);
@@ -305,7 +313,7 @@ test("concise settings preserve the full questionnaire and explicit save boundar
     assert.ok(work.querySelector(".z-recent .z-article-case"));
     assert.match(
       work.querySelector(".z-recent").textContent,
-      /接着上次继续.*窗口期可能只剩五年.*预览讲解视频/,
+      /上回读到.*窗口期可能只剩五年.*预览讲解视频/,
     );
     assert.doesNotMatch(
       await readFile("components/learning-workbench.tsx", "utf8"),
@@ -324,12 +332,11 @@ test("concise settings preserve the full questionnaire and explicit save boundar
       0,
     );
     for (const copy of [
-      "只影响这次",
-      "不改变已保存的学法",
-      "修改长期学法",
+      "仅这次生效",
+      "修改读法笺",
       "有权使用",
       "AI 服务处理",
-      "同时生成全部形式",
+      "生成全部形式",
     ])
       assert.ok(workbench.includes(copy), copy);
     assert.equal(
@@ -466,7 +473,7 @@ test("main product renders all seven study modes from a single private lesson", 
         }),
       );
       assert.ok(html.includes(expected), mode);
-      assert.ok(html.includes("我的笔记"));
+      assert.ok(html.includes("拾句"));
       assert.ok(html.includes("导出"));
       const select = parseHTML(html).document.querySelector(
         'select[aria-label="学习形式"]',

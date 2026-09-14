@@ -56,7 +56,7 @@ export function SkillEditor({
   return (
     <main className="z-container-small z-profile">
       <div className="z-page-heading">
-        <h1>{existing ? "我的学法" : "你的学法，准备好了"}</h1>
+        <h1>{existing ? "读法笺" : "你的学法，准备好了"}</h1>
       </div>
       <div className="z-profile-summary">
         {(["primary", "entry", "pace"] as const).map((key, i) => (

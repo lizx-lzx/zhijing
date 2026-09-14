@@ -264,7 +264,7 @@ export function LessonView({
       onUpdate();
       notify(
         completed
-          ? "已标记学完，作品仍保留在学习库。"
+          ? "已标记学完，作品仍保留在知藏。"
           : "已记录，不会自动修改个人 Skill。",
       );
     } catch (e) {
@@ -328,7 +328,7 @@ export function LessonView({
           }}
         >
           <ArrowLeft size={16} />
-          返回学习库
+          返回知藏
         </button>
         <div className="z-lesson-title">
           {lesson.source?.mode === "sample" && (
@@ -375,7 +375,7 @@ export function LessonView({
               onClick={() => setDialog("notes")}
             >
               <FileText size={16} />
-              我的笔记
+              拾句
             </button>
             <button
               type="button"
@@ -404,9 +404,9 @@ export function LessonView({
             <div className="z-progress">
               <span style={{ width: `${lesson.progress}%` }} />
             </div>
-            <p>可以离开，完成后会保存在学习库。</p>
+            <p>可以离开，完成后会保存在知藏。</p>
             <button className="button button-quiet" onClick={onBack}>
-              先回学习库
+              先回知藏
             </button>
           </section>
         )}
@@ -1106,7 +1106,7 @@ export function LessonView({
       )}
       {dialog === "notes" && (
         <Modal
-          title="我的学习笔记"
+          title="拾句 · 笔记"
           onClose={() => {
             flush();
             setDialog(null);
@@ -1114,11 +1114,11 @@ export function LessonView({
         >
           <textarea
             className="z-study-notes"
-            aria-label="我的学习笔记"
+            aria-label="拾句 · 笔记"
             value={state.notes || ""}
             maxLength={8000}
             onChange={(e) => patch({ notes: e.target.value })}
-            placeholder="记下自己的理解、疑问或应用想法…"
+            placeholder="摘一句原文，或记下你的想法…"
           />
           <p role="status" className="z-help">
             {saved}

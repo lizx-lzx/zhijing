@@ -276,12 +276,12 @@ try {
   assert.equal(await page.locator(".z-temporary").getAttribute("open"), "");
   await page
     .getByRole("navigation")
-    .getByRole("button", { name: "学习库" })
+    .getByRole("button", { name: "知藏" })
     .click();
   await snapshot(page, "library-empty");
   await page
     .getByRole("navigation")
-    .getByRole("button", { name: "我的学法" })
+    .getByRole("button", { name: "读法笺" })
     .click();
   await snapshot(page, "skill-existing");
   await page.locator(".z-profile-rules > summary").click();
@@ -300,14 +300,14 @@ try {
     "editing does not auto-save",
   );
   await page.getByRole("button", { name: "保存并开始学习" }).click();
-  await page.getByRole("button", { name: "粘贴正文", exact: true }).click();
+  await page.getByRole("button", { name: "放入正文", exact: true }).click();
   await page
     .locator(".z-composer textarea")
     .fill(source.blocks[0].text.repeat(4));
-  await page.getByRole("button", { name: "开始生成", exact: true }).click();
+  await page.getByRole("button", { name: "帮我读懂它", exact: true }).click();
   await page.getByRole("heading", { name: "正在按你的学法整理文章" }).waitFor();
   await snapshot(page, "generation");
-  await page.getByRole("button", { name: "先回学习库" }).click();
+  await page.getByRole("button", { name: "先回知藏" }).click();
   assert.ok(
     await page.getByText("正在整理的文章", { exact: true }).isVisible(),
   );
@@ -317,10 +317,7 @@ try {
   const existing = await session(profile, [ready, pending, partial, failed]);
   const p = existing.page;
   await snapshot(p, "workspace");
-  await p
-    .getByRole("navigation")
-    .getByRole("button", { name: "学习库" })
-    .click();
+  await p.getByRole("navigation").getByRole("button", { name: "知藏" }).click();
   await snapshot(p, "library");
   await p
     .getByRole("button")
@@ -400,7 +397,7 @@ try {
   await snapshot(p, "lesson-audio", [1440, 390, 320]);
   await p.getByRole("combobox", { name: "学习形式" }).selectOption("animation");
   await snapshot(p, "lesson-animation", [1440, 390, 320]);
-  await p.getByRole("button", { name: "返回学习库" }).click();
+  await p.getByRole("button", { name: "返回知藏" }).click();
   await p
     .getByRole("button")
     .filter({ has: p.getByRole("heading", { name: failed.title }) })
@@ -408,7 +405,7 @@ try {
   await snapshot(p, "generation-failed", [1440, 390, 320]);
   await p.getByRole("button", { name: "重试未完成部分", exact: true }).click();
   await p.getByRole("heading", { name: "正在按你的学法整理文章" }).waitFor();
-  await p.getByRole("button", { name: "先回学习库" }).click();
+  await p.getByRole("button", { name: "先回知藏" }).click();
   await p
     .getByRole("button")
     .filter({ has: p.getByRole("heading", { name: partial.title }) })

@@ -1,0 +1,208 @@
+.z-app {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(90deg, #f7f1e9ed, #f7f1e9b8),
+    url("../public/images/reading-nook-v1.webp") center/cover fixed;
+}
+.z-app::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 28%,
+    #fff7d24a 36%,
+    transparent 49%,
+    #fff3ca3a 57%,
+    transparent 69%
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+.z-top {
+  background: #faf5edba;
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid #dfd0bb;
+  max-width: none;
+  padding-left: max(30px, calc((100vw - 1160px) / 2));
+  padding-right: max(30px, calc((100vw - 1160px) / 2));
+}
+.z-top nav {
+  background: #fffcf4;
+  border-color: #e4d5bd;
+}
+.z-workspace {
+  position: relative;
+  max-width: 1180px;
+  padding: 0 30px 60px;
+}
+.z-workspace .z-page-heading {
+  padding-top: 38px;
+  padding-bottom: 26px;
+}
+.z-workspace .z-page-heading h1 {
+  font-size: 36px;
+  letter-spacing: 1px;
+}
+.z-workspace .z-composer {
+  position: relative;
+  margin: 0 auto;
+  padding: 36px 44px;
+  border-radius: 12px 20px 20px 12px;
+  background: #fffdf8;
+  border: 1px solid #dfceb6;
+  border-left: 7px solid #b9754d;
+  box-shadow:
+    0 18px 0 -8px #d5b991,
+    0 23px 0 -9px #b28d61,
+    0 42px 60px -26px #62462555;
+  max-width: 920px;
+}
+.z-workspace .z-input-tabs {
+  background: #f5ecdd;
+  border-radius: 14px;
+  padding: 5px;
+}
+.z-workspace .z-compose-bottom {
+  justify-content: flex-end;
+  border-top: 1px solid #e9dcc9;
+  padding-top: 22px;
+}
+.z-workspace .z-recent {
+  margin-top: 68px;
+  padding-top: 28px;
+  border-top: 2px solid #ceb18e;
+}
+.z-workspace .z-section-title h2,
+.z-library h1 {
+  font-family: "Songti SC", serif;
+}
+.z-workspace textarea,
+.z-workspace input {
+  background: #fffcf5;
+  border-color: #e0d1ba;
+}
+.z-question {
+  background: #fffdf7;
+  border: 1px solid #dbc7a9;
+  border-left: 7px solid #b6855a;
+  border-radius: 10px 22px 22px 10px;
+  box-shadow:
+    8px 8px 0 -3px #eee0ca,
+    14px 14px 0 -6px #d6bea0,
+    0 28px 50px #6b4b2020;
+  padding: 30px;
+}
+.z-profile-summary,
+.z-rule-list {
+  background: #fffdf6;
+  border-color: #dcccaf;
+  box-shadow: 5px 5px 0 #e9dbc8;
+}
+.z-library-grid {
+  gap: 24px;
+  padding: 12px 0 24px;
+  border-bottom: 5px solid #ccb08d;
+  box-shadow: 0 11px 13px -12px #6a4a25;
+}
+.z-lesson-card {
+  border-color: #d9c6aa;
+  border-radius: 8px 16px 16px 8px;
+  border-left: 5px solid #ae7951;
+  box-shadow: 4px 5px 0 #e6d7c1;
+}
+.z-reading {
+  border: 1px solid #deceb6;
+  border-left: 5px solid #c49b70;
+  background: #fffdf7;
+  box-shadow: 6px 7px 0 -2px #e5d6bf;
+}
+.z-lesson-toolbar {
+  background: #faf4e9ed;
+  backdrop-filter: blur(12px);
+}
+.z-app:has(.z-reading)::before,
+.z-app:has(video)::before {
+  animation: none !important;
+}
+.z-welcome-visual {
+  background: transparent;
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-motion="on"].z-app::before {
+    animation: roomSun 10s ease-in-out infinite alternate;
+  }
+  [data-motion="on"] .z-reading-nook img {
+    animation: roomDrift 9s ease-in-out infinite alternate;
+  }
+  [data-motion="on"] .z-composer,
+  [data-motion="on"] .z-question {
+    animation: roomOpen 0.65s ease-out both;
+  }
+  [data-motion="on"] .z-lesson-card {
+    transition:
+      transform 0.25s,
+      box-shadow 0.25s;
+  }
+  [data-motion="on"] .z-lesson-card:hover {
+    transform: translateY(-6px) rotate(-0.4deg);
+    box-shadow: 5px 12px 18px #64451a18;
+  }
+}
+@keyframes roomSun {
+  from {
+    opacity: 0.3;
+    transform: translateX(-5%);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateX(5%);
+  }
+}
+@keyframes roomDrift {
+  from {
+    transform: translateY(2px) scale(1);
+  }
+  to {
+    transform: translateY(-5px) scale(1.025);
+  }
+}
+@keyframes roomOpen {
+  from {
+    opacity: 0;
+    transform: perspective(1200px) rotateY(-5deg) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+[data-motion="off"].z-app::before {
+  animation: none !important;
+}
+@media (max-width: 760px) {
+  .z-workspace {
+    padding: 0 18px 40px;
+  }
+  .z-workspace .z-composer {
+    padding: 22px 18px;
+  }
+  .z-workspace .z-page-heading h1 {
+    font-size: 28px;
+  }
+  .z-question {
+    padding: 20px 16px;
+  }
+  .z-top {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .z-app {
+    background-attachment: scroll;
+    background-size: auto 100vh;
+  }
+  .z-workspace .z-recent {
+    margin-top: 48px;
+  }
+}

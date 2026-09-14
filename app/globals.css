@@ -4,6 +4,7 @@
 @import "./visual-learning.css";
 @import "./learning-motion.css";
 @import "./warmth.css";
+@import "./reading-room.css";
 
 :root {
   --paper: #f8f4eb;

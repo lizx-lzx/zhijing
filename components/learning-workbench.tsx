@@ -11,7 +11,6 @@ import {
   MonitorPlay,
   Play,
   Plus,
-  ShieldCheck,
   Upload,
 } from "lucide-react";
 import type { Answers, Lesson, Profile, Source } from "../lib/domain";
@@ -150,7 +149,7 @@ export function LearningLibrary({
     <main className="z-container z-library">
       <div className="z-page-heading">
         <div className="z-heading-row">
-          <h1>学习库</h1>
+          <h1>知藏</h1>
           <button className="button button-primary" onClick={onAdd}>
             <Plus size={17} />
             添加内容
@@ -193,7 +192,7 @@ export function LearningLibrary({
           </button>
         </div>
       )}
-      {loading && <Spinner text="正在读取学习库" />}
+      {loading && <Spinner text="正在读取知藏" />}
       {next !== null && (
         <button
           className="button button-quiet z-load-more"
@@ -268,7 +267,8 @@ export function Workbench({
   return (
     <main className="z-container z-workspace">
       <div className="z-page-heading">
-        <h1>今天想读懂什么？</h1>
+        <h1>待启集</h1>
+        <p>把想读懂的，放在这里。</p>
       </div>
       <section className="z-composer">
         <div className="z-input-tabs" role="group" aria-label="内容输入方式">
@@ -276,17 +276,17 @@ export function Workbench({
             aria-pressed={mode === "link"}
             onClick={() => setMode("link")}
           >
-            知乎链接
+            放入链接
           </button>
           <button
             aria-pressed={mode === "text"}
             onClick={() => setMode("text")}
           >
-            粘贴正文
+            放入正文
           </button>
           <label className="z-upload">
             <Upload size={16} />
-            导入文本
+            放入文件
             <input
               type="file"
               accept=".txt,.md,text/plain,text/markdown"
@@ -342,7 +342,7 @@ export function Workbench({
         <details className="z-detail z-temporary">
           <summary>
             <span>
-              本次：<strong>{mediaLabels[currentAnswers.primary]}</strong>
+              这次读法：<strong>{mediaLabels[currentAnswers.primary]}</strong>
               {currentAnswers.extras.length > 0 &&
                 ` + ${currentAnswers.extras.map((m) => mediaLabels[m]).join("、")}`}
             </span>
@@ -350,7 +350,7 @@ export function Workbench({
               调整 <ChevronDown size={16} aria-hidden="true" />
             </span>
           </summary>
-          <p>只影响这次，不改变已保存的学法。</p>
+          <p>仅这次生效</p>
           <div className="z-temporary-fields">
             {questions
               .filter((q) =>
@@ -382,7 +382,7 @@ export function Workbench({
               ))}
           </div>
           <button className="z-text-link" onClick={onProfile}>
-            修改长期学法 <ArrowRight size={15} />
+            修改读法笺 <ArrowRight size={15} />
           </button>
         </details>
         <ErrorNotice message={error} />
@@ -392,13 +392,9 @@ export function Workbench({
             checked={fullPackage}
             onChange={(e) => setFullPackage(e.target.checked)}
           />
-          <span>同时生成全部形式</span>
+          <span>生成全部形式</span>
         </label>
         <div className="z-compose-bottom">
-          <span>
-            <ShieldCheck size={16} />
-            私人保存
-          </span>
           <button
             className="button button-primary button-large"
             onClick={() => void generate()}
@@ -411,7 +407,7 @@ export function Workbench({
               <Spinner text={busy} />
             ) : (
               <>
-                开始生成
+                帮我读懂它
                 <ArrowRight size={18} />
               </>
             )}
@@ -423,9 +419,9 @@ export function Workbench({
       </section>
       <section className="z-recent">
         <div className="z-section-title">
-          <h2>接着上次继续</h2>
+          <h2>上回读到</h2>
           <button className="z-text-link" onClick={onLibrary}>
-            全部作品
+            打开知藏
             <ArrowRight size={16} />
           </button>
         </div>
