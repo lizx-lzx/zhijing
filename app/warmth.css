@@ -1,4 +1,30 @@
 /* Personal reading room: shared surfaces, not a new product flow. */
+.z-demo-preparing {
+  padding: 28px;
+  text-align: center;
+  background: #f8f0e2;
+  border-radius: 20px;
+  margin: 16px 0;
+}
+.z-demo-preparing > span {
+  display: inline-block;
+  font-size: 52px;
+  color: #b3402a;
+  animation: demo-page 1.2s ease-in-out infinite;
+}
+.z-demo-preparing small {
+  color: #7c7063;
+}
+@keyframes demo-page {
+  50% {
+    transform: translateY(-9px) rotate(-12deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .z-demo-preparing > span {
+    animation: none;
+  }
+}
 .z-source-reader {
   position: relative;
 }

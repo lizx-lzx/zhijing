@@ -55,7 +55,23 @@ function scrollToContent(selector) {
 }
 
 function App() {
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(() => {
+    if (capture || query.get("experience") !== "demo") return 0;
+    try {
+      return clampTime(
+        Number(localStorage.getItem("zhijing-demo-time")) || 0,
+        duration,
+      );
+    } catch {
+      return 0;
+    }
+  });
+  useEffect(() => {
+    if (capture || query.get("experience") !== "demo") return;
+    try {
+      localStorage.setItem("zhijing-demo-time", String(time));
+    } catch {}
+  }, [time]);
   const [mode, setMode] = useState(() => {
     const requested = query.get("mode");
     const allowed = [
@@ -374,6 +390,9 @@ function App() {
         <div className="heading">
           <div>
             <h1>{title}</h1>
+            {query.get("experience") === "demo" && (
+              <p className="lesson-meta">示例内容 · 预置作品，非本次输入生成</p>
+            )}
             {mode !== "video" && (
               <div className="lesson-meta">
                 {lesson.sourceMeta && <span>{lesson.author} · 知乎</span>}

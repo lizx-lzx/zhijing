@@ -315,31 +315,25 @@ test("concise settings preserve the full questionnaire and explicit save boundar
       }),
     );
     const work = parseHTML(workbench).document;
-    assert.match(workbench, /窗口期可能只剩五年/);
+    assert.match(workbench, /演示模式/);
     assert.doesNotMatch(workbench, /平均数|为我制作这篇/);
-    assert.equal(work.querySelectorAll(".z-article-case").length, 1);
-    assert.ok(work.querySelector(".z-recent .z-article-case"));
+    assert.equal(work.querySelectorAll(".z-article-case").length, 0);
     assert.match(
       work.querySelector(".z-recent").textContent,
-      /上回读到.*窗口期可能只剩五年.*预览讲解视频/,
+      /上回读到/,
     );
     assert.doesNotMatch(
       await readFile("components/learning-workbench.tsx", "utf8"),
       /sources\/sample/,
     );
     const settings = work.querySelector(".z-temporary");
-    assert.equal(settings.hasAttribute("open"), false);
-    assert.equal(settings.querySelectorAll("select").length, 4);
-    assert.match(
-      settings.querySelector("summary").textContent,
-      /讲解视频.*图文.*音频/,
-    );
+    assert.equal(settings, null);
     assert.equal(work.querySelectorAll(".z-current-profile").length, 0);
     assert.equal(
       work.querySelectorAll(".z-composer .z-format-preview").length,
       0,
     );
-    for (const copy of ["仅这次生效", "修改读法笺", "生成全部形式"])
+    for (const copy of ["演示模式", "预置学习作品", "开始体验"])
       assert.ok(workbench.includes(copy), copy);
     assert.equal(
       JSON.stringify(profile),

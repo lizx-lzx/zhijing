@@ -16,7 +16,7 @@ import {
 import type { Answers, Lesson, Profile, Source } from "../lib/domain";
 import { mediaLabels, profileForLesson, questions } from "../lib/domain";
 import { api, base, endpoint, ErrorNotice, Spinner } from "./learning-ui";
-import { ArticleCasePreview } from "./learning-case-preview";
+import { casePreviewUrl } from "./learning-case-preview";
 
 export function LessonCard({
   lesson,
@@ -228,8 +228,26 @@ export function Workbench({
     [error, setError] = useState("");
   const [overrides, setOverrides] = useState<Partial<Answers>>({});
   const [fullPackage, setFullPackage] = useState(false);
+  const demoMode = true;
+  const [demoVisited, setDemoVisited] = useState(false);
+  useEffect(() => {
+    try {
+      setDemoVisited(localStorage.getItem("zhijing-demo-visited") === "1");
+    } catch {}
+  }, []);
   const currentAnswers = profileForLesson(profile, overrides).answers;
   async function generate() {
+    if (busy) return;
+    if (demoMode) {
+      setError("");
+      setBusy("正在准备示例");
+      await new Promise((resolve) => setTimeout(resolve, 1800));
+      try {
+        localStorage.setItem("zhijing-demo-visited", "1");
+      } catch {}
+      window.location.assign(casePreviewUrl("video") + "&experience=demo");
+      return;
+    }
     setError("");
     setBusy("正在读取你的内容");
     try {
@@ -269,6 +287,7 @@ export function Workbench({
       <div className="z-page-heading">
         <h1>待启集</h1>
         <p>把想读懂的，放在这里。</p>
+        <p>演示模式 · 输入任意内容，体验预置学习作品</p>
       </div>
       <section className="z-composer">
         <div className="z-input-tabs" role="group" aria-label="内容输入方式">
@@ -332,82 +351,90 @@ export function Workbench({
               value={text}
               onChange={(e) => setText(e.target.value)}
               maxLength={45000}
-              placeholder="把想理解的内容粘贴到这里。支持 100—45000 字。"
+              placeholder="放入任意文字，体验示例。"
             />
             <span className="z-character-count">
               {text.length.toLocaleString()} / 45,000 字
             </span>
           </div>
         )}
-        <details className="z-detail z-temporary">
-          <summary>
-            <span>
-              这次读法：<strong>{mediaLabels[currentAnswers.primary]}</strong>
-              {currentAnswers.extras.length > 0 &&
-                ` + ${currentAnswers.extras.map((m) => mediaLabels[m]).join("、")}`}
-            </span>
-            <span className="z-settings-toggle">
-              调整 <ChevronDown size={16} aria-hidden="true" />
-            </span>
-          </summary>
-          <p>仅这次生效</p>
-          <div className="z-temporary-fields">
-            {questions
-              .filter((q) =>
-                ["primary", "goal", "entry", "pace"].includes(q.id),
-              )
-              .map((q) => (
-                <label className="z-field-label" key={q.id}>
-                  {
+        {!demoMode && (
+          <details className="z-detail z-temporary">
+            <summary>
+              <span>
+                这次读法：<strong>{mediaLabels[currentAnswers.primary]}</strong>
+                {currentAnswers.extras.length > 0 &&
+                  ` + ${currentAnswers.extras.map((m) => mediaLabels[m]).join("、")}`}
+              </span>
+              <span className="z-settings-toggle">
+                调整 <ChevronDown size={16} aria-hidden="true" />
+              </span>
+            </summary>
+            <p>仅这次生效</p>
+            <div className="z-temporary-fields">
+              {questions
+                .filter((q) =>
+                  ["primary", "goal", "entry", "pace"].includes(q.id),
+                )
+                .map((q) => (
+                  <label className="z-field-label" key={q.id}>
                     {
-                      primary: "主要形式",
-                      goal: "这次目标",
-                      entry: "讲解入口",
-                      pace: "讲解节奏",
-                    }[q.id as "primary" | "goal" | "entry" | "pace"]
-                  }
-                  <select
-                    value={currentAnswers[q.id] as string}
-                    onChange={(e) =>
-                      setOverrides((v) => ({ ...v, [q.id]: e.target.value }))
+                      {
+                        primary: "主要形式",
+                        goal: "这次目标",
+                        entry: "讲解入口",
+                        pace: "讲解节奏",
+                      }[q.id as "primary" | "goal" | "entry" | "pace"]
                     }
-                  >
-                    {q.options.map((o) => (
-                      <option key={o.value} value={o.value}>
-                        {o.label}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              ))}
-          </div>
-          <button className="z-text-link" onClick={onProfile}>
-            修改读法笺 <ArrowRight size={15} />
-          </button>
-        </details>
+                    <select
+                      value={currentAnswers[q.id] as string}
+                      onChange={(e) =>
+                        setOverrides((v) => ({ ...v, [q.id]: e.target.value }))
+                      }
+                    >
+                      {q.options.map((o) => (
+                        <option key={o.value} value={o.value}>
+                          {o.label}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                ))}
+            </div>
+            <button className="z-text-link" onClick={onProfile}>
+              修改读法笺 <ArrowRight size={15} />
+            </button>
+          </details>
+        )}
         <ErrorNotice message={error} />
-        <label className="z-full-package">
-          <input
-            type="checkbox"
-            checked={fullPackage}
-            onChange={(e) => setFullPackage(e.target.checked)}
-          />
-          <span>生成全部形式</span>
-        </label>
+        {!demoMode && (
+          <label className="z-full-package">
+            <input
+              type="checkbox"
+              checked={fullPackage}
+              onChange={(e) => setFullPackage(e.target.checked)}
+            />
+            <span>生成全部形式</span>
+          </label>
+        )}
+        {busy && demoMode && (
+          <div className="z-demo-preparing" role="status">
+            <span aria-hidden="true">▱</span>
+            <p>正在准备示例</p>
+            <small>即将打开《窗口期可能只剩五年》</small>
+          </div>
+        )}
         <div className="z-compose-bottom">
           <button
             className="button button-primary button-large"
             onClick={() => void generate()}
-            disabled={
-              !!busy ||
-              (mode === "link" ? !url.trim() : text.trim().length < 100)
-            }
+            disabled={!!busy || (mode === "link" ? !url.trim() : !text.trim())}
           >
             {busy ? (
               <Spinner text={busy} />
             ) : (
               <>
-                帮我读懂它
+                开始体验
                 <ArrowRight size={18} />
               </>
             )}
@@ -422,7 +449,26 @@ export function Workbench({
             <ArrowRight size={16} />
           </button>
         </div>
-        <ArticleCasePreview medium="video" />
+        {demoVisited && (
+          <a
+            className="z-article-case"
+            href={casePreviewUrl("video") + "&experience=demo"}
+          >
+            <img
+              src={`${base}/images/window-cover.jpg`}
+              alt=""
+              width={1280}
+              height={720}
+            />
+            <span className="z-article-case-copy">
+              <span>示例体验</span>
+              <strong>窗口期可能只剩五年</strong>
+            </span>
+            <span className="z-article-case-action">
+              接着读 <ArrowRight size={16} />
+            </span>
+          </a>
+        )}
         <div className="z-library-grid">
           {lessons.slice(0, 3).map((item) => (
             <LessonCard
