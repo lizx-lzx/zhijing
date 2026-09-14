@@ -16,6 +16,7 @@ import "../../app/study.css";
 import "./room.css";
 import { narrativeSlide } from "./narrative-slide.mjs";
 import { chapters as articleChapters } from "./lessons/window-five-years/content.mjs";
+import originalText from "./lessons/window-five-years/original.txt?raw";
 
 const query = new URLSearchParams(location.search);
 const capture = query.has("capture"),
@@ -105,7 +106,37 @@ function App() {
   const current = locateSegment(timing.segments, time);
   const index = current.scene,
     scene = lesson.scenes[index];
+  useEffect(() => {
+    const container = document.querySelector(".full-original .source-panel");
+    const target = container?.querySelector("mark");
+    if (target)
+      container.scrollTop +=
+        target.getBoundingClientRect().top -
+        container.getBoundingClientRect().top -
+        60;
+  }, [index, mode]);
   const sourcePanel = (
+    <div className="source-panel full-original-text">
+      {originalText.split("\n").map((line, i) => {
+        const quote = scene.sourceAnchor?.quote;
+        const at = quote ? line.indexOf(quote) : -1;
+        return (
+          <p key={i}>
+            {at >= 0 ? (
+              <>
+                {line.slice(0, at)}
+                <mark className="source-highlight">{quote}</mark>
+                {line.slice(at + quote.length)}
+              </>
+            ) : (
+              line
+            )}
+          </p>
+        );
+      })}
+    </div>
+  );
+  const excerptPanel = (
     <div className="source-panel" key={scene.id}>
       <h3>{scene.title}</h3>
       {scene.sourceAnchor ? (
@@ -471,6 +502,10 @@ function App() {
           aria-label="学习作品"
           style={{ "--stage-height": `${stageHeight}px` }}
         >
+          <aside className="full-original" aria-label="作者原文">
+            <h2>原文</h2>
+            {sourcePanel}
+          </aside>
           <div className="player-column">
             <div className={`player mode-${mode}`} ref={playerBox}>
               {mode === "video" && (
@@ -718,7 +753,7 @@ function App() {
               </details>
             )}
           </div>
-          <aside className="chapters" aria-label="讲解片段">
+          <aside className="chapters" aria-label="讲解片段" hidden>
             <div className="chapter-heading">
               <div className="source-tabs" role="group" aria-label="目录与原文">
                 <button
@@ -831,7 +866,7 @@ function App() {
                   </p>
                   <p>
                     {lesson.sourceMeta.acquisition}
-                    。页面只展示改编讲解和必要的短引，不重新公开整篇原文。
+                    。原文栏展示用户提供的完整文本。
                   </p>
                   <a
                     className="source-link"
@@ -967,7 +1002,11 @@ function App() {
               video.current?.pause();
               audio.current?.pause();
               setDialog("source");
-            } else setSidebar("source");
+            } else {
+              const panel = document.querySelector(".full-original .source-panel");
+              const mark = panel?.querySelector("mark");
+              if (mark) panel.scrollTop += mark.getBoundingClientRect().top - panel.getBoundingClientRect().top - 60;
+            }
           }}
         />
       )}

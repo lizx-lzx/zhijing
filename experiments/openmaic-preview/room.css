@@ -1,4 +1,44 @@
 /* Shared reading-room surroundings; lesson canvases and media remain intact. */
+.lesson-layout {
+  grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.7fr);
+}
+.lesson-layout > .chapters {
+  display: none;
+}
+.full-original {
+  position: sticky;
+  top: 90px;
+  border: 1px solid var(--line);
+  background: #fffdf8;
+  border-radius: 20px;
+  padding: 22px;
+  min-width: 0;
+}
+.full-original h2 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 12px;
+}
+.full-original .source-panel {
+  max-height: 65vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.full-original-text p {
+  line-height: 1.9;
+  font-size: 16px;
+  margin: 0 0 18px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 1000px) {
+  .full-original {
+    display: none;
+  }
+  .lesson-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 .diagram-node,
 .inline-node {
   background: #fffdf8 !important;
