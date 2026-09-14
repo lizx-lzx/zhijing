@@ -166,6 +166,14 @@ test("welcome, preference examples and private library covers use real visual as
       );
       assert.match(tile, /窗口期可能只剩五年/);
       assert.match(tile, /window-cover.jpg/);
+      const entry = parseHTML(tile).document.querySelector(".z-article-case");
+      if (medium === "video") {
+        assert.equal(entry.tagName, "A");
+        assert.equal(entry.getAttribute("href"), casePreviewUrl(medium));
+        assert.equal(entry.getAttribute("target"), "_blank");
+      } else {
+        assert.equal(entry.tagName, "BUTTON");
+      }
       assert.doesNotMatch(tile, /平均|<iframe|<video|<audio|<dialog/);
       const dialog = renderToStaticMarkup(
         createElement(ArticleCaseDialog, {

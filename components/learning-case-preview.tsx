@@ -63,12 +63,18 @@ export function ArticleCaseDialog({
 export function ArticleCasePreview({ medium }: { medium: Medium }) {
   // Preview state is independent of the questionnaire; closing unmounts players.
   const [preview, setPreview] = useState<Medium | null>(null);
+  const Entry = medium === "video" ? "a" : "button";
   return (
     <>
-      <button
-        type="button"
+      <Entry
+        {...(medium === "video"
+          ? {
+              href: casePreviewUrl(medium),
+              target: "_blank",
+              rel: "noopener noreferrer",
+            }
+          : { type: "button" as const, onClick: () => setPreview(medium) })}
         className="z-article-case"
-        onClick={() => setPreview(medium)}
         aria-label={`预览学习案例：窗口期可能只剩五年 · ${mediaLabels[medium]}`}
       >
         <img
@@ -85,7 +91,7 @@ export function ArticleCasePreview({ medium }: { medium: Medium }) {
           <Play size={16} aria-hidden="true" />
           预览{mediaLabels[medium]}
         </span>
-      </button>
+      </Entry>
       {preview && (
         <ArticleCaseDialog
           medium={preview}
