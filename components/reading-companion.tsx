@@ -231,24 +231,6 @@ export function ReadingCompanion({
             </div>
           </form>
           {error && <p role="alert">{error}</p>}
-          <small className="z-pet-credit">
-            <a
-              href="https://rive.app/marketplace/27136-51126-cat-pomodoro/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Cat Pomodoro · AnggaMotion
-            </a>{" "}
-            ·{" "}
-            <a
-              href="https://creativecommons.org/licenses/by/4.0/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              CC BY 4.0
-            </a>{" "}
-            · 知径交互改编
-          </small>
         </section>
       )}
     </>

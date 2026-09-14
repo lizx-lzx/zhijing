@@ -371,6 +371,27 @@ export default function LearningApp() {
         )}
         {account && (
           <Modal title="设置" onClose={() => setAccount(false)}>
+            <details className="z-detail">
+              <summary>关于知径 · 素材致谢</summary>
+              <p>
+                <a
+                  href="https://rive.app/marketplace/27136-51126-cat-pomodoro/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Cat Pomodoro · AnggaMotion
+                </a>{" "}
+                ·{" "}
+                <a
+                  href="https://creativecommons.org/licenses/by/4.0/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  CC BY 4.0
+                </a>
+              </p>
+              <p>知径改编：角色显示与对话动作联动。原角色造型未重绘。</p>
+            </details>
             <button
               className="z-motion-toggle"
               type="button"
