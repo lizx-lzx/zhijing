@@ -187,11 +187,7 @@ export function LearningLibrary({
         <div className="z-empty">
           <Library size={36} />
           <h2>{query ? "没有找到这份作品" : "从第一篇开始"}</h2>
-          <p>
-            {query
-              ? "试试其他关键词，或清空搜索。"
-              : "生成的学习内容会自动保存在这里。"}
-          </p>
+          {query && <p>试试其他关键词，或清空搜索。</p>}
           <button className="button button-primary" onClick={onAdd}>
             添加一篇内容
             <Plus size={16} />
@@ -317,8 +313,7 @@ export function Workbench({
     <main className="z-container z-workspace">
       <div className="z-page-heading">
         <h1>待启集</h1>
-        <p>把想读懂的，放在这里。</p>
-        <p>演示模式 · 输入任意内容，体验预置学习作品</p>
+        {demoMode && <p>演示模式 · 预置学习作品</p>}
       </div>
       <section className="z-composer">
         <div className="z-input-tabs" role="group" aria-label="内容输入方式">
@@ -382,11 +377,13 @@ export function Workbench({
               value={text}
               onChange={(e) => setText(e.target.value)}
               maxLength={45000}
-              placeholder="放入任意文字，体验示例。"
+              placeholder="放入想读的正文…"
             />
-            <span className="z-character-count">
-              {text.length.toLocaleString()} / 45,000 字
-            </span>
+            {text.length >= 40000 && (
+              <span className="z-character-count">
+                {text.length.toLocaleString()} / 45,000 字
+              </span>
+            )}
           </div>
         )}
         {
@@ -407,11 +404,7 @@ export function Workbench({
                 调整 <ChevronDown size={16} aria-hidden="true" />
               </span>
             </summary>
-            <p>
-              {demoMode
-                ? "形式可切换；目标、讲法与节奏沿用预置示例。"
-                : "仅这次生效"}
-            </p>
+            <p>{demoMode ? "示例的目标、讲法与节奏固定。" : "仅这次生效"}</p>
             <div className="z-temporary-fields">
               {questions
                 .filter((q) =>
@@ -523,7 +516,6 @@ export function Workbench({
                       }
                     />
                     {label}
-                    {value === primaryMode && <small>主要</small>}
                   </label>
                 ))}
               </div>
@@ -534,7 +526,6 @@ export function Workbench({
           <div className="z-demo-preparing" role="status">
             <span aria-hidden="true">▱</span>
             <p>正在准备示例</p>
-            <small>即将打开《窗口期可能只剩五年》</small>
           </div>
         )}
         <div className="z-compose-bottom">
@@ -578,7 +569,7 @@ export function Workbench({
               height={720}
             />
             <span className="z-article-case-copy">
-              <span>示例体验</span>
+              <span>示例</span>
               <strong>窗口期可能只剩五年</strong>
             </span>
             <span className="z-article-case-action">

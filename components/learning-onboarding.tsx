@@ -177,7 +177,7 @@ export function SkillEditor({
             >
               <span>{new Date(v.createdAt).toLocaleString("zh-CN")}</span>
               <strong>{v.profile.name}</strong>
-              <span>载入预览，保存后才恢复</span>
+              <span>保存后恢复</span>
             </button>
           ))}
         </details>
@@ -321,7 +321,7 @@ export function Onboarding({
         {q.id === "primary" && <ArticleCasePreview medium={answers.primary} />}
         {q.id === "primary" && (
           <div className="z-extras">
-            <span>还想同时得到（可不选）</span>
+            <span>其他形式（可选）</span>
             <div>
               {(Object.keys(mediaLabels) as Medium[])
                 .filter((m) => m !== answers.primary)
@@ -356,7 +356,7 @@ export function Onboarding({
               onChange={(e) =>
                 setAnswers((a) => ({ ...a, note: e.target.value }))
               }
-              placeholder="比如：喜欢有情绪和画面感的故事；不喜欢过多术语。"
+              placeholder="比如：喜欢故事，少用术语。"
             />
           </label>
         )}

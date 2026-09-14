@@ -48,7 +48,6 @@ export function Overview({ lesson, onRead, activeChapter, onSelect }) {
   const loop = lesson.scenes.find((s) => s.id === overview.loopChapter);
   return (
     <div className="format-view overview-view">
-      <p className="eyebrow">全文关系图</p>
       <h2>{overview.title}</h2>
       <p className="format-intro">{overview.note}</p>
       <div className="overview-grid">
@@ -129,7 +128,6 @@ export function Practice({
   const card = cards[cardIndex];
   return (
     <div className="format-view practice-view">
-      <p className="eyebrow">可选练习 · 不计分，不改变你的学习偏好</p>
       <div className="practice-tabs" role="group" aria-label="互动方式">
         <button
           type="button"
@@ -177,7 +175,6 @@ export function Practice({
                   onClick={() => onAnswer(scenario.id, o.id)}
                 >
                   {o.label}
-                  <span>{picked?.id === o.id ? "正在看" : "看看会怎样 →"}</span>
                 </button>
               ))}
             </div>
@@ -200,9 +197,7 @@ export function Practice({
                   <p className="key-line">{scenario.takeaway}</p>
                 </>
               ) : (
-                <p className="format-intro">
-                  选一个条件看变化，也可以直接回到正文。
-                </p>
+                <p className="format-intro">选一个条件看变化</p>
               )}
             </div>
             <button
@@ -218,7 +213,6 @@ export function Practice({
         <>
           <div className="card-counter">
             {cardIndex + 1} / {cards.length}
-            <span>先想一想，或直接看答案</span>
           </div>
           <section
             className="recall-card"
@@ -238,11 +232,8 @@ export function Practice({
                 <p>{card.answer}</p>
                 <p className="format-condition">成立条件：{card.premise}</p>
                 <details>
-                  <summary>对应原文短引</summary>
+                  <summary>原文</summary>
                   <blockquote>{card.sourceAnchor.quote}</blockquote>
-                  <p className="data-note">
-                    用户提供文本 · 第 {card.sourceAnchor.startLine} 行
-                  </p>
                 </details>
               </div>
             )}

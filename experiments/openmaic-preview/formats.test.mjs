@@ -41,9 +41,14 @@ fs.writeFileSync(
 const { InlineDiagram, Overview, Practice } = await import(output.href);
 test("Overview follows the shared chapter instead of resetting to chapter one", () => {
   const chapter = lesson.scenes[3];
-  const html = renderToStaticMarkup(React.createElement(Overview, {
-    lesson, onRead() {}, activeChapter: chapter.id, onSelect() {},
-  }));
+  const html = renderToStaticMarkup(
+    React.createElement(Overview, {
+      lesson,
+      onRead() {},
+      activeChapter: chapter.id,
+      onSelect() {},
+    }),
+  );
   assert.ok(html.includes(`<h3>${chapter.title}</h3>`));
   assert.equal((html.match(/aria-pressed="true"/g) || []).length, 1);
   assert.ok(html.includes(`aria-pressed="true">${chapter.title}`));
@@ -102,7 +107,7 @@ test("Three scenarios render two distinct conditional outcomes each, without aut
       });
       for (const step of option.path) assert.ok(html.includes(step));
       assert.ok(html.includes(option.explanation));
-      assert.match(html, /不改变你的学习偏好/);
+      assert.doesNotMatch(html, /可选练习 · 不计分|不改变你的学习偏好/);
       return html;
     });
     assert.notEqual(variants[0], variants[1]);
@@ -124,6 +129,7 @@ test("Ten optional recall cards hide answers first, reveal source-bound answers,
     assert.ok(shown.includes(card.answer));
     assert.ok(shown.includes(card.premise));
     assert.ok(shown.includes(card.sourceAnchor.quote));
+    assert.doesNotMatch(shown, /用户提供文本 · 第|先想一想，或直接看答案/);
     assert.match(hidden, /aria-expanded="false"/);
     assert.match(shown, /aria-expanded="true"/);
     if (i === 0) assert.match(hidden, /disabled="">上一张/);

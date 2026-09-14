@@ -70,7 +70,7 @@ export function Welcome({
           />
         </div>
         <div className="z-featured-caption">
-          <span>学习作品 · 示例</span>
+          <span>示例</span>
           <h2>窗口期可能只剩五年</h2>
           <ArrowRight size={24} aria-hidden="true" />
         </div>

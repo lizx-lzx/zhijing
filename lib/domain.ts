@@ -179,7 +179,6 @@ export const questions: Question[] = [
     id: "age",
     group: "认识你的学习习惯",
     title: "先告诉我，你的年龄阶段",
-    help: "仅用于选择表达和例子，不判断能力。",
     options: options([
       ["18-21", "18—21 岁"],
       ["22-29", "22—29 岁"],
@@ -205,7 +204,7 @@ export const questions: Question[] = [
     id: "primary",
     group: "认识你的学习习惯",
     title: "你更愿意用哪种形式开始？",
-    help: "选一个为主，其他可加选。",
+    help: "选一个为主。",
     options: options([
       ["video", "讲解视频", "画面、配音和字幕一起讲。"],
       ["reading", "图文", "自己掌握速度，边看文字边看图。"],
@@ -229,7 +228,7 @@ export const questions: Question[] = [
     id: "support",
     group: "找到更容易看懂的讲法",
     title: "讲到难点时，怎样帮你更好？",
-    help: "可多选，也可跳过。",
+    help: "可多选或跳过。",
     multiple: true,
     options: options([
       ["plain", "换成大白话", "先解释术语，再继续。"],
@@ -254,7 +253,7 @@ export const questions: Question[] = [
     id: "interaction",
     group: "按你舒服的节奏来",
     title: "要不要留一点参与空间？",
-    help: "参与自愿，不答题也能看完。",
+    help: "不答题也能看完。",
     options: options([
       ["none", "直接讲给我听", "不中途提问；练习放在折叠区。"],
       ["end", "最后试一下", "看完后，自愿做一两道小题。"],

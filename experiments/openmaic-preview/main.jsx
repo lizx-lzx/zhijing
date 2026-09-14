@@ -639,7 +639,6 @@ function App() {
               )}
               {mode === "audio" && (
                 <div className="audio-view">
-                  <p className="eyebrow">完整有声讲解 · {clock(duration)}</p>
                   <h2>{scene.title}</h2>
                   <p>{current.text}</p>
                   {audioPlayer}
@@ -666,10 +665,7 @@ function App() {
                     </button>
                   </div>
                   <details className="format-details" key={scene.id}>
-                    <summary>展开本章讲稿</summary>
-                    <p className="data-note">
-                      点击一段跳转 · 段内时间为近似对齐
-                    </p>
+                    <summary>本章讲稿</summary>
                     <div className="audio-transcript">
                       {timing.segments
                         .filter((s) => s.scene === index)
@@ -678,6 +674,7 @@ function App() {
                             key={s.start}
                             type="button"
                             aria-current={s === current ? "true" : undefined}
+                            title="跳到这一段（近似时间）"
                             onClick={() => seek(s.start)}
                           >
                             <span>{clock(s.start)}</span>
@@ -690,7 +687,6 @@ function App() {
               )}
               {mode === "reading" && (
                 <div className="long-reading">
-                  <p className="eyebrow">完整梳理 · 保留观点、前提和原文定位</p>
                   <h2>{thesis}</h2>
                   {lesson.scenes.map((s, i) => (
                     <section
@@ -698,10 +694,7 @@ function App() {
                       key={s.id}
                       className="reading-chapter"
                     >
-                      <h3>
-                        <span>{String(i + 1).padStart(2, "0")}</span>
-                        {s.title}
-                      </h3>
+                      <h3>{s.title}</h3>
                       {s.diagram && <InlineDiagram diagram={s.diagram} />}
                       {(
                         s.reading ||
@@ -772,12 +765,6 @@ function App() {
               <p role="alert" className="error">
                 {error}
               </p>
-            )}
-            {mode !== "video" && (
-              <details className="source-brief">
-                <summary>来源说明</summary>
-                <p>{sourceNote}</p>
-              </details>
             )}
           </div>
           <aside className="chapters" aria-label="讲解片段" hidden>
@@ -851,7 +838,7 @@ function App() {
           )}
           {lesson.reviewQuestions && (
             <details>
-              <summary>想确认理解？三个小问题（可跳过）</summary>
+              <summary>小练习（可选）</summary>
               <div className="reading-body">
                 {lesson.reviewQuestions.map((q) => (
                   <section className="self-check" key={q.question}>
@@ -866,13 +853,11 @@ function App() {
             </details>
           )}
           <details>
-            <summary>展开完整讲稿</summary>
+            <summary>完整讲稿</summary>
             <div className="reading-body">
               {lesson.scenes.map((s, i) => (
                 <section key={s.id}>
-                  <h2>
-                    {i + 1}. {s.title}
-                  </h2>
+                  <h2>{s.title}</h2>
                   {timing.segments
                     .filter((seg) => seg.scene === i)
                     .map((seg, n) => (
@@ -885,6 +870,7 @@ function App() {
           <details>
             <summary>文章来源</summary>
             <div className="reading-body">
+              <p>{sourceNote}</p>
               {lesson.sourceMeta ? (
                 <>
                   <h2>{lesson.sourceMeta.title}</h2>
@@ -1001,11 +987,10 @@ function App() {
         )}
         {dialog === "diagram" && (
           <StudyDialog
-            title={`${index + 1}. ${scene.title}`}
+            title={scene.title}
             className="diagram-dialog"
             onClose={() => setDialog(null)}
           >
-            <p className="diagram-pan-hint">横版原图 · 可左右滑动查看</p>
             <div className="diagram-pan">{canvas}</div>
             {scene.takeaway && <p className="dialog-note">{scene.takeaway}</p>}
           </StudyDialog>

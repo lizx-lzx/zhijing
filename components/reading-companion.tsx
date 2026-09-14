@@ -168,20 +168,17 @@ export function ReadingCompanion({
               ×
             </button>
           </header>
-          <div className="z-pet-scope">
-            {scope
-              ? `正在聊：${scope.title}`
-              : lessonId
-                ? "正在聊这篇文章"
-                : "小猫陪你聊聊"}
-            {scope && (
-              <button className="z-text-link" onClick={() => setScope(null)}>
-                聊整篇
-              </button>
-            )}
-          </div>
+          {(scope || lessonId) && (
+            <div className="z-pet-scope">
+              {scope ? scope.title : "这篇文章"}
+              {scope && (
+                <button className="z-text-link" onClick={() => setScope(null)}>
+                  聊整篇
+                </button>
+              )}
+            </div>
+          )}
           <div className="z-pet-messages" aria-live="polite" ref={conversation}>
-            {!messages.length && <p>哪里没懂？我们一起看看。</p>}
             {messages.map((m, i) => (
               <div className={`z-pet-message ${m.role}`} key={i}>
                 <strong>{m.role === "user" ? "你" : "小猫"}</strong>

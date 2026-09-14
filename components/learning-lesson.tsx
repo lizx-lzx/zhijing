@@ -304,13 +304,9 @@ export function LessonView({
               ? "为这篇文章制作独立听读"
               : "补做旧版讲解音轨"}
       </h2>
-      <p>
-        {lane === "audio"
-          ? result?.schemaVersion
-            ? "独立讲稿已随图文保存；配音完成后，不看画面也能完整听懂。"
-            : "旧版使用原讲解稿。需要独立听读与全套配套内容，可以生成新版，原作品继续保留。"
-          : "按这篇文章的章节、图解和讲稿制作，不调用旧样片。"}
-      </p>
+      {lane === "audio" && !result?.schemaVersion && (
+        <p>旧版使用原讲解稿；独立听读需生成新版，原作品保留。</p>
+      )}
       <button
         className="button button-primary"
         disabled={busy || pending}
@@ -519,7 +515,6 @@ export function LessonView({
                       label="章节内近似时间字幕"
                     />
                   </video>
-                  <p>{chapter.title} · AI 配音讲解 · 字幕为近似对齐</p>
                 </section>
               ) : (
                 mediaWait("video")
@@ -528,11 +523,9 @@ export function LessonView({
               (audioReady ? (
                 <section className="z-audio-surface">
                   <Headphones size={32} />
-                  <span className="z-kicker">
-                    {audioFile === "listen.m4a"
-                      ? "不依赖画面的独立听读"
-                      : "旧版讲解音轨"}
-                  </span>
+                  {audioFile !== "listen.m4a" && (
+                    <span className="z-kicker">旧版讲解音轨</span>
+                  )}
                   <h2>{chapter.title}</h2>
                   <p>{chapter.takeaway || result.lead}</p>
                   <audio
@@ -689,7 +682,6 @@ export function LessonView({
                 <div className="z-overview-groups">
                   {study.overview.groups.map((g, i) => (
                     <section key={i}>
-                      <span className="z-kicker">0{i + 1}</span>
                       <h3>{g.title}</h3>
                       <p>{g.description}</p>
                       {g.chapterIds.map((id) => {
@@ -750,9 +742,6 @@ export function LessonView({
             )}
             {medium === "practice" && study && (
               <section className="z-practice-work">
-                <p className="z-kicker">
-                  随时可跳过，不计分、不自动改变学习 Skill
-                </p>
                 <div
                   className="z-practice-tabs"
                   role="group"
@@ -1146,7 +1135,6 @@ export function LessonView({
                   {lesson.completed ? "已完成，点击取消" : "标记学完"}
                 </button>
               </div>
-              <p>反馈不会自动改写你的个人 Skill。</p>
             </section>
           </div>
         </div>

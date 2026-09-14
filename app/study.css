@@ -177,6 +177,9 @@
   max-height: 24dvh;
   min-height: 60px;
 }
+.z-pet-popover .z-pet-messages:empty {
+  min-height: 0;
+}
 .z-pet-popover .z-pet-shortcuts {
   justify-content: flex-start;
   gap: 6px;

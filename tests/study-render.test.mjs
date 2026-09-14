@@ -68,7 +68,7 @@ test("utility controls stay in secondary settings, not the learning navigation",
   const footer = source.match(/<footer[\s\S]*?<\/footer>/)?.[0];
   assert.match(footer, /设置/);
   assert.match(footer, /setAccount\(true\)/);
-  assert.match(footer, /view === "learning"/);
+  assert.doesNotMatch(footer, /AI 辅助理解|重要判断请核对原文/);
   const layout = await readFile("app/product.css", "utf8");
   assert.doesNotMatch(
     layout,
@@ -125,7 +125,8 @@ test("welcome, preference examples and private library covers use real visual as
     assert.doesNotMatch(html, /原有作品保留|z-journey-strip|z-learning-hero/);
     assert.match(html, /找到我的学法/);
     assert.match(html, /8 题 · 约 2 分钟/);
-    assert.match(html, /学习作品 · 示例/);
+    assert.match(html, /<span>示例<\/span>/);
+    assert.doesNotMatch(html, /学习作品 · 示例/);
     assert.ok((await stat("public/images/window-cover.jpg")).size < 100000);
     assert.doesNotMatch(
       html,
@@ -327,7 +328,12 @@ test("concise settings preserve the full questionnaire and explicit save boundar
     assert.ok(settings);
     assert.equal(settings.querySelectorAll("select").length, 4);
     assert.equal(settings.querySelectorAll("select[disabled]").length, 3);
-    assert.equal(settings.querySelector("select:not([disabled])").querySelectorAll("option").length, 6);
+    assert.equal(
+      settings
+        .querySelector("select:not([disabled])")
+        .querySelectorAll("option").length,
+      6,
+    );
     assert.ok(work.querySelector('[aria-controls="demo-formats"]'));
     assert.ok(work.querySelector('.z-full-package input[type="checkbox"]'));
     assert.match(
@@ -341,6 +347,9 @@ test("concise settings preserve the full questionnaire and explicit save boundar
     );
     for (const copy of ["演示模式", "预置学习作品", "开始体验"])
       assert.ok(workbench.includes(copy), copy);
+    assert.doesNotMatch(workbench, /把想读懂的，放在这里|输入任意内容，体验/);
+    assert.equal(work.querySelectorAll(".z-page-heading p").length, 1);
+    assert.equal(work.querySelectorAll(".z-character-count").length, 0);
     assert.equal(
       JSON.stringify(profile),
       before,
@@ -357,6 +366,7 @@ test("concise settings preserve the full questionnaire and explicit save boundar
     assert.equal(questions.length, 8);
     assert.equal(questions.filter((q) => q.multiple).length, 2);
     assert.match(questionnaire, /随时可改/);
+    assert.doesNotMatch(questionnaire, /不判断能力/);
     const goals = questions.find((q) => q.id === "goal");
     assert.match(
       goals.options.find((o) => o.value === "remember").detail,
@@ -374,7 +384,9 @@ test("concise settings preserve the full questionnaire and explicit save boundar
     const library = renderToStaticMarkup(
       createElement(LearningLibrary, { lessons: [], onOpen() {}, onAdd() {} }),
     );
-    assert.equal((library.match(/自动保存在这里/g) || []).length, 1);
+    assert.doesNotMatch(library, /自动保存在这里/);
+    assert.match(library, /从第一篇开始/);
+    assert.match(library, /添加一篇内容/);
     assert.match(library, /按标题搜索作品/);
   } finally {
     await server.close();
@@ -487,6 +499,10 @@ test("main product renders all seven study modes from a single private lesson", 
         0,
       );
       assert.doesNotMatch(html, /×\s*OpenMAIC/);
+      assert.doesNotMatch(
+        html,
+        /AI 配音讲解 · 字幕为近似对齐|不依赖画面的独立听读|反馈不会自动改写/,
+      );
     }
     const preferred = renderToStaticMarkup(
       createElement(LessonView, {
