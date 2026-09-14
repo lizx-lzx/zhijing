@@ -16,7 +16,12 @@ import {
 import type { Answers, Lesson, Profile, Source } from "../lib/domain";
 import { mediaLabels, profileForLesson, questions } from "../lib/domain";
 import { api, base, endpoint, ErrorNotice, Spinner } from "./learning-ui";
-import { demoEntryMode, demoStudyUrl, demoModes } from "../lib/demo-route";
+import {
+  demoEntryMode,
+  demoStudyUrl,
+  demoModes,
+  demoLabels,
+} from "../lib/demo-route";
 
 export function LessonCard({
   lesson,
@@ -229,6 +234,13 @@ export function Workbench({
   const [overrides, setOverrides] = useState<Partial<Answers>>({});
   const [fullPackage, setFullPackage] = useState(false);
   const demoMode = true;
+  const [primaryMode, setPrimaryMode] = useState(() =>
+    demoEntryMode(profile.answers.primary),
+  );
+  const [selectedModes, setSelectedModes] = useState<string[]>(() => [
+    demoEntryMode(profile.answers.primary),
+  ]);
+  const [showFormats, setShowFormats] = useState(false);
   const [demoVisited, setDemoVisited] = useState(false);
   const [resumeMode, setResumeMode] = useState("video");
   useEffect(() => {
@@ -242,7 +254,7 @@ export function Workbench({
   async function generate() {
     if (busy) return;
     if (demoMode) {
-      const selectedMode = demoEntryMode(currentAnswers.primary);
+      const selectedMode = primaryMode;
       setError("");
       setBusy("正在准备示例");
       await new Promise((resolve) => setTimeout(resolve, 1800));
@@ -250,9 +262,12 @@ export function Workbench({
         localStorage.setItem("zhijing-demo-visited", "1");
         localStorage.setItem("zhijing-demo-mode", selectedMode);
         localStorage.setItem("zhijing-demo-time", "0");
+        localStorage.setItem("zhijing-demo-formats", selectedModes.join(","));
       } catch {}
       window.location.assign(
-        demoStudyUrl(base, selectedMode) + (fullPackage ? "&formats=all" : ""),
+        demoStudyUrl(base, selectedMode) +
+          "&formats=" +
+          encodeURIComponent(selectedModes.join(",")),
       );
       return;
     }
@@ -370,7 +385,12 @@ export function Workbench({
           <details className="z-detail z-temporary">
             <summary>
               <span>
-                这次读法：<strong>{mediaLabels[currentAnswers.primary]}</strong>
+                这次读法：
+                <strong>
+                  {demoMode
+                    ? demoLabels[primaryMode]
+                    : mediaLabels[currentAnswers.primary]}
+                </strong>
                 {!demoMode &&
                   currentAnswers.extras.length > 0 &&
                   ` + ${currentAnswers.extras.map((m) => mediaLabels[m]).join("、")}`}
@@ -401,12 +421,32 @@ export function Workbench({
                     }
                     <select
                       disabled={!!busy || (demoMode && q.id !== "primary")}
-                      value={currentAnswers[q.id] as string}
-                      onChange={(e) =>
-                        setOverrides((v) => ({ ...v, [q.id]: e.target.value }))
+                      value={
+                        demoMode && q.id === "primary"
+                          ? primaryMode
+                          : (currentAnswers[q.id] as string)
                       }
+                      onChange={(e) => {
+                        if (demoMode && q.id === "primary") {
+                          const value = e.target.value;
+                          setPrimaryMode(value);
+                          setSelectedModes((old) =>
+                            old.includes(value) ? old : [...old, value],
+                          );
+                        } else
+                          setOverrides((v) => ({
+                            ...v,
+                            [q.id]: e.target.value,
+                          }));
+                      }}
                     >
-                      {q.options.map((o) => (
+                      {(demoMode && q.id === "primary"
+                        ? Object.entries(demoLabels).map(([value, label]) => ({
+                            value,
+                            label,
+                          }))
+                        : q.options
+                      ).map((o) => (
                         <option key={o.value} value={o.value}>
                           {demoMode &&
                           q.id === "primary" &&
@@ -428,12 +468,59 @@ export function Workbench({
         <label className="z-full-package">
           <input
             type="checkbox"
-            checked={fullPackage}
+            checked={
+              demoMode ? selectedModes.length === demoModes.length : fullPackage
+            }
             disabled={!!busy}
-            onChange={(e) => setFullPackage(e.target.checked)}
+            onChange={(e) => {
+              setFullPackage(e.target.checked);
+              setSelectedModes(
+                e.target.checked ? [...demoModes] : [primaryMode],
+              );
+            }}
           />
           <span>{demoMode ? "体验全部形式" : "生成全部形式"}</span>
         </label>
+        {demoMode && (
+          <>
+            <button
+              className="z-text-link z-formats-expand"
+              aria-label="展开选择学习形式"
+              aria-expanded={showFormats}
+              aria-controls="demo-formats"
+              onClick={() => setShowFormats(!showFormats)}
+            >
+              <ChevronDown size={16} />
+            </button>
+            {showFormats && (
+              <div
+                id="demo-formats"
+                className="z-demo-formats"
+                role="group"
+                aria-label="选择学习形式"
+              >
+                {Object.entries(demoLabels).map(([value, label]) => (
+                  <label key={value}>
+                    <input
+                      type="checkbox"
+                      checked={selectedModes.includes(value)}
+                      disabled={!!busy || value === primaryMode}
+                      onChange={(e) =>
+                        setSelectedModes((old) =>
+                          e.target.checked
+                            ? [...old, value]
+                            : old.filter((m) => m !== value),
+                        )
+                      }
+                    />
+                    {label}
+                    {value === primaryMode && <small>主要</small>}
+                  </label>
+                ))}
+              </div>
+            )}
+          </>
+        )}
         {busy && demoMode && (
           <div className="z-demo-preparing" role="status">
             <span aria-hidden="true">▱</span>

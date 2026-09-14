@@ -327,6 +327,8 @@ test("concise settings preserve the full questionnaire and explicit save boundar
     assert.ok(settings);
     assert.equal(settings.querySelectorAll("select").length, 4);
     assert.equal(settings.querySelectorAll("select[disabled]").length, 3);
+    assert.equal(settings.querySelector("select:not([disabled])").querySelectorAll("option").length, 6);
+    assert.ok(work.querySelector('[aria-controls="demo-formats"]'));
     assert.ok(work.querySelector('.z-full-package input[type="checkbox"]'));
     assert.match(
       work.querySelector(".z-full-package").textContent,
