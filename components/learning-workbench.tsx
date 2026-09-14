@@ -486,13 +486,14 @@ export function Workbench({
         {demoMode && (
           <>
             <button
+              type="button"
               className="z-text-link z-formats-expand"
-              aria-label="展开选择学习形式"
+              aria-label={showFormats ? "收起选择学习形式" : "展开选择学习形式"}
               aria-expanded={showFormats}
               aria-controls="demo-formats"
-              onClick={() => setShowFormats(!showFormats)}
+              onClick={() => setShowFormats((expanded) => !expanded)}
             >
-              <ChevronDown size={16} />
+              <ChevronDown size={16} aria-hidden="true" />
             </button>
             {showFormats && (
               <div

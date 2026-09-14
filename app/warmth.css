@@ -7,6 +7,21 @@
   vertical-align: middle;
   padding: 10px;
 }
+.z-formats-expand svg {
+  transform: rotate(90deg);
+  transition: transform 180ms ease;
+}
+.z-formats-expand[aria-expanded="true"] svg {
+  transform: rotate(0deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .z-formats-expand svg {
+    transition: none;
+  }
+}
+[data-motion="off"] .z-formats-expand svg {
+  transition: none;
+}
 .z-demo-formats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
