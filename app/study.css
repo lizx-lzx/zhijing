@@ -1,6 +1,86 @@
 .z-lesson-toolbar {
   flex-wrap: wrap;
 }
+.z-pet {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 35;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff8e9;
+  border: 1px solid #dbbba0;
+  border-radius: 40px;
+  padding: 10px 16px;
+  color: #85442e;
+  box-shadow: 0 5px 20px #65432920;
+  cursor: pointer;
+}
+.z-pet-cat {
+  font-size: 32px;
+  display: inline-block;
+  transform-origin: bottom;
+}
+.z-pet-small .z-pet-cat {
+  font-size: 20px;
+}
+.z-pet-scope,
+.z-pet-actions,
+.z-pet-shortcuts {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 12px 0;
+  flex-wrap: wrap;
+}
+.z-pet-messages {
+  max-height: 42vh;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.z-pet-message {
+  padding: 12px;
+  margin: 10px 0;
+  background: #f7f1e8;
+  border-radius: 14px;
+  overflow-wrap: anywhere;
+}
+.z-pet-message.user {
+  background: #f1e0d4;
+}
+.z-pet-message p {
+  white-space: pre-wrap;
+}
+.z-pet-input {
+  width: 100%;
+  min-height: 80px;
+  border: 1px solid #d9c9b8;
+  border-radius: 12px;
+  padding: 12px;
+  background: #fffdf8;
+  color: #332a23;
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-motion="on"] .z-pet-cat {
+    animation: catBreathe 4s ease-in-out infinite;
+  }
+}
+@keyframes catBreathe {
+  50% {
+    transform: translateY(-3px) rotate(-4deg);
+  }
+}
+@media (max-width: 600px) {
+  .z-pet {
+    right: 10px;
+    bottom: 10px;
+    padding: 6px 10px;
+  }
+  .z-pet-cat {
+    font-size: 24px;
+  }
+}
 .z-current-medium {
   font-weight: 600;
   color: var(--primary-dark);

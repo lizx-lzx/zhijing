@@ -134,6 +134,7 @@ test("HTTP contract: persistence, isolation, CSRF, recovery and honest failure",
           "/export.json",
           "/player",
           "/media/video.mp4",
+          "/chat",
         ])
           assert.equal((await b("/lessons/" + job.id + suffix)).status, 404);
       },

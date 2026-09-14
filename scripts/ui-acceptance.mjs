@@ -163,6 +163,25 @@ async function session(saved = null, initialLessons = []) {
       lesson.studyState = { ...lesson.studyState, ...body };
       return json({ ok: true });
     }
+    if (path.endsWith("/chat"))
+      return json({
+        messages:
+          req.method() === "GET"
+            ? []
+            : [
+                { role: "user", text: body.question },
+                {
+                  role: "assistant",
+                  text: "这是小猫的解释。",
+                  citations: [
+                    {
+                      id: "p1",
+                      quote: "平均数描述总体，但不能代替每一个人的实际情况。",
+                    },
+                  ],
+                },
+              ],
+      });
     if (path.endsWith("/retry")) {
       Object.assign(lesson, { ...pending, id: lesson.id });
       return json({ lesson });
@@ -347,6 +366,19 @@ try {
   await p.getByRole("combobox", { name: "学习形式" }).selectOption("reading");
   assert.equal(await p.locator(".z-other-formats").getAttribute("open"), null);
   await snapshot(p, "lesson-reading");
+  await p
+    .getByRole("button", { name: "问小猫：第1段", exact: true })
+    .first()
+    .click();
+  await p.getByRole("button", { name: "讲简单点", exact: true }).click();
+  await p.getByText("这是小猫的解释。", { exact: true }).waitFor();
+  await snapshot(p, "companion");
+  await p.getByRole("button", { name: /查看原文：/ }).click();
+  await p.getByRole("dialog").waitFor();
+  await p
+    .getByRole("dialog")
+    .getByRole("button", { name: "关闭", exact: true })
+    .click();
   await p.getByRole("button", { name: "查看对应原文" }).first().click();
   await p.getByRole("dialog").waitFor();
   assert.equal(

@@ -20,6 +20,7 @@ import {
 } from "./learning-ui";
 import { useStudyState } from "./use-study-state";
 import { SourceReader } from "./source-reader";
+import { ReadingCompanion } from "./reading-companion";
 
 const modes: { id: StudyMode; label: string }[] = [
   { id: "video", label: "讲解视频" },
@@ -63,6 +64,12 @@ export function LessonView({
   onRegenerated?: (lesson: Lesson) => void;
 }) {
   const [lesson, setLesson] = useState(initial);
+  const [petTarget, setPetTarget] = useState<{
+    paragraphIndex?: number;
+    id: string;
+    title: string;
+    nonce: number;
+  } | null>(null);
   const { state, patch, saved, flush } = useStudyState(
     initial.id,
     initial.studyState,
@@ -322,6 +329,11 @@ export function LessonView({
 
   return (
     <main className="z-lesson">
+      <ReadingCompanion
+        lessonId={lesson.id}
+        target={petTarget}
+        onSource={source}
+      />
       <header className="z-lesson-header z-container">
         <button
           className="z-text-link"
@@ -991,7 +1003,23 @@ export function LessonView({
                     .split(/\n+/)
                     .filter(Boolean)
                     .map((p, j) => (
-                      <p key={j}>{p}</p>
+                      <div className="z-explain-paragraph" key={j}>
+                        <p>{p}</p>
+                        <button
+                          className="z-text-link"
+                          aria-label={`问小猫：第${j + 1}段`}
+                          onClick={() =>
+                            setPetTarget({
+                              id: c.id,
+                              title: `${c.title} · 第${j + 1}段`,
+                              paragraphIndex: j,
+                              nonce: Date.now(),
+                            })
+                          }
+                        >
+                          没看懂？
+                        </button>
+                      </div>
                     ))}
                   <Visual chapter={c} />
                   {c.takeaway && (
@@ -1004,6 +1032,18 @@ export function LessonView({
                     </details>
                   )}
                   <div className="z-chapter-foot">
+                    <button
+                      className="z-source-button"
+                      onClick={() =>
+                        setPetTarget({
+                          id: c.id,
+                          title: c.title,
+                          nonce: Date.now(),
+                        })
+                      }
+                    >
+                      问问小猫
+                    </button>
                     <button
                       className="z-source-button"
                       onClick={() => source(c.sourceIds, c.body)}

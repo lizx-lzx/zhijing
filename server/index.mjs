@@ -1,4 +1,6 @@
 import http from "node:http";
+import { answerCompanion } from "./companion.mjs";
+const companionBusy = new Set();
 import fs from "node:fs";
 import fsp from "node:fs/promises";
 import path from "node:path";
@@ -338,6 +340,57 @@ const server = http.createServer(async (req, res) => {
     if (match) {
       const [, id, action] = match;
       const row = ownedLesson(user, id);
+      if (action === "chat" && method === "GET") {
+        json(res, 200, {
+          messages: JSON.parse(
+            one("SELECT data FROM companion_chats WHERE lesson_id=?", id)
+              ?.data || "[]",
+          ),
+        });
+        return;
+      }
+      if (action === "chat" && method === "POST") {
+        const input = await body(req);
+        if (companionBusy.has(user) || companionBusy.size >= 4)
+          throw new AppError("小猫正在整理回答，稍等一下。", 429);
+        limit("chat:user:" + user, 60);
+        limit("chat:global", 600);
+        companionBusy.add(user);
+        try {
+          const history = JSON.parse(
+            one("SELECT data FROM companion_chats WHERE lesson_id=?", id)
+              ?.data || "[]",
+          );
+          const answer = await answerCompanion(
+            getSource(user, row.source_id),
+            row.result ? JSON.parse(row.result) : null,
+            input,
+            history,
+          );
+          const messages = [
+            ...history,
+            {
+              role: "user",
+              text: input.question,
+              chapterId: input.chapterId || null,
+            },
+            {
+              role: "assistant",
+              text: answer.answer,
+              citations: answer.citations,
+            },
+          ].slice(-40);
+          run(
+            "INSERT INTO companion_chats(lesson_id,data) VALUES(?,?) ON CONFLICT(lesson_id) DO UPDATE SET data=excluded.data",
+            id,
+            JSON.stringify(messages),
+          );
+          json(res, 200, { messages });
+        } finally {
+          companionBusy.delete(user);
+        }
+        return;
+      }
       if (!action && method === "GET") {
         json(res, 200, {
           lesson: {
