@@ -85,6 +85,59 @@
   font-weight: 600;
   color: var(--primary-dark);
 }
+.z-pet {
+  padding: 0 !important;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  gap: 0;
+}
+.z-pet-character {
+  display: block;
+  position: relative;
+  width: 130px;
+  height: 140px;
+  overflow: hidden;
+  mask-image: radial-gradient(ellipse at 50% 50%, black 52%, transparent 73%);
+}
+.z-pet-character canvas {
+  position: absolute;
+  width: 320px;
+  height: 240px;
+  left: -90px;
+  top: -42px;
+  pointer-events: none;
+}
+.z-pet-small {
+  transform: scale(0.65);
+  transform-origin: bottom right;
+}
+.z-pet-credit {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 18px;
+}
+.z-pet-credit a {
+  color: inherit;
+}
+.z-pet-fallback {
+  display: block;
+  padding-top: 45px;
+}
+@media (max-width: 600px) {
+  .z-pet-character {
+    width: 104px;
+    height: 112px;
+  }
+  .z-pet-character canvas {
+    width: 256px;
+    height: 192px;
+    left: -72px;
+    top: -34px;
+  }
+}
 .z-other-formats {
   position: relative;
 }

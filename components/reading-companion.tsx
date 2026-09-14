@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { api, Modal } from "./learning-ui";
+import { CompanionCat } from "./companion-cat";
 type Message = {
   role: string;
   text: string;
@@ -21,7 +22,6 @@ export function ReadingCompanion({
   onSource: (ids: string[], text: string) => void;
 }) {
   const [open, setOpen] = useState(false),
-    [hidden, setHidden] = useState(false),
     [busy, setBusy] = useState(false);
   const [scope, setScope] = useState<{
       id: string;
@@ -42,7 +42,6 @@ export function ReadingCompanion({
     if (target) {
       setScope(target);
       setOpen(true);
-      setHidden(false);
     }
   }, [target]);
   useEffect(() => {
@@ -84,18 +83,14 @@ export function ReadingCompanion({
   return (
     <>
       <button
-        className={`z-pet ${hidden ? "z-pet-small" : ""}`}
+        className="z-pet"
         aria-label="打开陪读小猫"
         onClick={() => {
           setScope(null);
           setOpen(true);
-          setHidden(false);
         }}
       >
-        <span className="z-pet-cat" aria-hidden="true">
-          🐈
-        </span>
-        <span>{hidden ? "小猫" : "问问小猫"}</span>
+        <CompanionCat busy={busy} open={open} />
       </button>
       {open && (
         <Modal title="陪读小猫" onClose={() => setOpen(false)}>
@@ -172,11 +167,10 @@ export function ReadingCompanion({
                 type="button"
                 className="z-text-link"
                 onClick={() => {
-                  setHidden(true);
                   setOpen(false);
                 }}
               >
-                收起小猫
+                继续阅读
               </button>
               <button
                 className="button button-primary"
@@ -187,6 +181,24 @@ export function ReadingCompanion({
             </div>
           </form>
           {error && <p role="alert">{error}</p>}
+          <small className="z-pet-credit">
+            <a
+              href="https://rive.app/marketplace/27136-51126-cat-pomodoro/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Cat Pomodoro · AnggaMotion
+            </a>{" "}
+            ·{" "}
+            <a
+              href="https://creativecommons.org/licenses/by/4.0/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              CC BY 4.0
+            </a>{" "}
+            · 知径交互改编
+          </small>
         </Modal>
       )}
     </>
