@@ -68,7 +68,10 @@ export function LessonView({
     initial.studyState,
   );
   const [medium, setMedium] = useState<StudyMode>(
-    initial.studyState?.mode || initial.formats[0] || "reading",
+    initial.studyState?.mode ||
+      initial.profile?.answers.primary ||
+      initial.formats[0] ||
+      "reading",
   );
   const [active, setActive] = useState(initial.studyState?.chapter || 0);
   const [dialog, setDialog] = useState<
@@ -340,25 +343,36 @@ export function LessonView({
       </header>
       {result && (
         <div className="z-lesson-toolbar z-container">
-          <label className="z-format-switch">
-            <span>切换形式</span>
-            <select
-              aria-label="学习形式"
-              value={medium}
-              onChange={(e) => switchMedium(e.target.value as StudyMode)}
-            >
-              {modes
-                .filter(
-                  (m) => study || !["overview", "practice"].includes(m.id),
-                )
-                .map((m) => (
-                  <option key={m.id} value={m.id}>
-                    {m.label}
-                  </option>
-                ))}
-            </select>
-            <ChevronDown size={16} aria-hidden="true" />
-          </label>
+          <span className="z-current-medium">
+            {modes.find((m) => m.id === medium)?.label}
+          </span>
+          <details className="z-other-formats">
+            <summary>
+              换一种方式看 <ChevronDown size={16} aria-hidden="true" />
+            </summary>
+            <label className="z-format-switch">
+              <span>学习形式</span>
+              <select
+                aria-label="学习形式"
+                value={medium}
+                onChange={(e) => {
+                  switchMedium(e.target.value as StudyMode);
+                  e.target.closest("details")?.removeAttribute("open");
+                }}
+              >
+                {modes
+                  .filter(
+                    (m) => study || !["overview", "practice"].includes(m.id),
+                  )
+                  .map((m) => (
+                    <option key={m.id} value={m.id}>
+                      {m.label}
+                    </option>
+                  ))}
+              </select>
+              <ChevronDown size={16} aria-hidden="true" />
+            </label>
+          </details>
           <div className="z-study-tools">
             <button
               type="button"

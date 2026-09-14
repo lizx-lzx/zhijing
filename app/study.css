@@ -1,6 +1,34 @@
 .z-lesson-toolbar {
   flex-wrap: wrap;
 }
+.z-current-medium {
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+.z-other-formats {
+  position: relative;
+}
+.z-other-formats > summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  cursor: pointer;
+  color: var(--muted);
+  list-style: none;
+}
+.z-other-formats > summary::-webkit-details-marker {
+  display: none;
+}
+.z-other-formats > summary:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+.z-other-formats[open] > .z-format-switch {
+  display: flex;
+  margin-top: 8px;
+  padding-bottom: 8px;
+}
 .z-format-switch {
   position: relative;
   display: inline-flex;

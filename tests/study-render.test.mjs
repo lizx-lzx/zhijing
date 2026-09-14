@@ -331,11 +331,7 @@ test("concise settings preserve the full questionnaire and explicit save boundar
       work.querySelectorAll(".z-composer .z-format-preview").length,
       0,
     );
-    for (const copy of [
-      "仅这次生效",
-      "修改读法笺",
-      "生成全部形式",
-    ])
+    for (const copy of ["仅这次生效", "修改读法笺", "生成全部形式"])
       assert.ok(workbench.includes(copy), copy);
     assert.equal(
       JSON.stringify(profile),
@@ -484,6 +480,33 @@ test("main product renders all seven study modes from a single private lesson", 
       );
       assert.doesNotMatch(html, /×\s*OpenMAIC/);
     }
+    const preferred = renderToStaticMarkup(
+      createElement(LessonView, {
+        initial: {
+          ...lesson,
+          studyState: {},
+          formats: ["video", "reading"],
+          profile: {
+            ...lesson.profile,
+            answers: { ...lesson.profile?.answers, primary: "reading" },
+          },
+        },
+        onBack() {},
+        onUpdate() {},
+        notify() {},
+      }),
+    );
+    const preferredDoc = parseHTML(preferred).document;
+    assert.equal(
+      preferredDoc.querySelector("option[selected]").value,
+      "reading",
+      "primary preference wins over generation order",
+    );
+    assert.equal(
+      preferredDoc.querySelector(".z-other-formats").hasAttribute("open"),
+      false,
+    );
+    assert.match(preferred, /换一种方式看/);
     const legacy = structuredClone(lesson);
     delete legacy.result.schemaVersion;
     delete legacy.result.study;

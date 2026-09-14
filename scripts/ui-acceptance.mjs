@@ -343,7 +343,9 @@ try {
     Math.abs((await p.locator("video").evaluate((v) => v.currentTime)) - 20) <
       1,
   );
+  await p.locator(".z-other-formats > summary").click();
   await p.getByRole("combobox", { name: "学习形式" }).selectOption("reading");
+  assert.equal(await p.locator(".z-other-formats").getAttribute("open"), null);
   await snapshot(p, "lesson-reading");
   await p.getByRole("button", { name: "查看对应原文" }).first().click();
   await p.getByRole("dialog").waitFor();
@@ -393,8 +395,10 @@ try {
     await p.locator(".z-chapter-nav button[aria-current='step']").textContent(),
     `02${content.chapters[1].title}`,
   );
+  await p.locator(".z-other-formats > summary").click();
   await p.getByRole("combobox", { name: "学习形式" }).selectOption("audio");
   await snapshot(p, "lesson-audio", [1440, 390, 320]);
+  await p.locator(".z-other-formats > summary").click();
   await p.getByRole("combobox", { name: "学习形式" }).selectOption("animation");
   await snapshot(p, "lesson-animation", [1440, 390, 320]);
   await p.getByRole("button", { name: "返回知藏" }).click();
